@@ -26,7 +26,7 @@ export default {
   methods: {
     logOut() {
       userService.logUserOut();
-      this.$router.push('/register');
+      this.$router.push('/usuario/login');
       this.$router.go();
     },
   },

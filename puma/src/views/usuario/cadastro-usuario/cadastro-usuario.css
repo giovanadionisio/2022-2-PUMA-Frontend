@@ -84,3 +84,24 @@ a {
   margin-bottom: 20px;
   text-align: center;
 }
+
+.alerta-preenchimento-obrigatorio {
+  color: #ff5b57;
+}
+
+.invalid {
+  border: 1px solid #EB0600;
+}
+
+.invalid, span {
+  color: #EB0600;
+}
+
+
+/*&.invalid*/
+/* input, span*/
+/*color: #EB0600*/
+/*input*/
+/*border: 1px #EB0600 solid*/
+
+

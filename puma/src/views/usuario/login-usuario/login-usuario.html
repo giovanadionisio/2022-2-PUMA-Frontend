@@ -1,0 +1,64 @@
+<body>
+<div class="container">
+  <div class="column">
+    <div class="card">
+      <div class="title-box"> Bem-vindo(a) ao PUMA </div>
+      <div>
+        <form id="register-form">
+          <ValidationProvider
+            rules="required|email"
+            v-slot="v"
+            :bails="false">
+            <input
+              v-model.trim="email"
+              type="text"
+              id="email"
+              placeholder="E-mail" />
+            <span v-for="erro in v.errors">
+              {{ erro }}
+            </span>
+          </ValidationProvider>
+
+          <ValidationProvider
+            rules="required"
+            v-slot="v"
+            :bails="false">
+            <input
+              type="password"
+              id="senha"
+              v-model="password"
+              placeholder="Senha" />
+            <span v-for="erro in v.errors">
+              {{ erro }}
+            </span>
+          </ValidationProvider>
+
+          <div class="clickable-text-left" v-on:click="goToRegister">
+            <router-link to="/usuario/cadastro">
+              Não possui uma conta? Cadastre-se
+            </router-link>
+          </div>
+
+          <div class="clickable-text-left">
+            <a href="#">
+              Esqueci minha senha
+            </a>
+          </div>
+
+
+          <input
+            type="submit"
+            class="submit-btn"
+            value = "Entrar"
+            @click.prevent="logar()" form="register-form" />
+
+          <Loading class="loading" v-if='isLoading' />
+
+
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
