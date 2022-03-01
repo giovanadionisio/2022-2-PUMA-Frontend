@@ -3,7 +3,10 @@ import axios from 'axios';
 import VueTheMask from 'vue-the-mask';
 // import * as VeeValidate from 'vee-validate';
 import {
-  localize, ValidationProvider, setInteractionMode,
+  localize,
+  ValidationProvider,
+  ValidationObserver,
+  setInteractionMode,
 } from 'vee-validate';
 import pt from 'vee-validate/dist/locale/pt_BR.json';
 import dotenv from 'dotenv';
@@ -17,6 +20,8 @@ dotenv.config();
 localize('pt_BR', pt);
 setInteractionMode('eager');
 Vue.component('ValidationProvider', ValidationProvider);
+Vue.component('ValidationObserver', ValidationObserver);
+
 // configure({
 //   classes: {
 //     valid: 'is-valid',

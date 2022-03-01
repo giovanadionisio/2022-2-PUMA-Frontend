@@ -1,4 +1,4 @@
-import { extend, ValidationObserver } from 'vee-validate';
+import { extend } from 'vee-validate';
 import {
   // eslint-disable-next-line camelcase
   alpha_spaces,
@@ -8,13 +8,12 @@ import {
   max,
 } from 'vee-validate/dist/rules';
 import Loading from '../../../components/Loading.vue';
-// import UserService from '../../../services/userService';
+import UserService from '../../../services/userService';
 
-// const userService = new UserService();
+const userService = new UserService();
 export default {
   name: 'CadastroUsuario',
   components: {
-    ValidationObserver,
     Loading,
   },
   mounted() {
@@ -44,11 +43,14 @@ export default {
   },
   methods: {
     async onSubmit() {
+      // console.log(min);
+      // console.log(email);
       const isValid = await this.$refs.observer.validate();
       if (isValid) {
         const newUser = {
           name: this.name,
           email: this.email,
+          phoneNumber: this.phoneNumber,
           password: this.password,
           repeatPassword: this.repeatPassword,
           matricula: this.matricula,
@@ -60,37 +62,17 @@ export default {
           socialReason: this.socialReason,
           cpf: this.cpf,
         };
-        console.log(newUser);
-      } else {
-        console.log('Data isnt valid');
+        this.isLoading = true;
+        userService.registerUser(newUser).then(() => {
+          this.$router.push('/usuario/login');
+          // eslint-disable-next-line no-alert
+          alert('Cadastro feito com sucesso!');
+        }).catch(() => {
+          this.isLoading = false;
+          // eslint-disable-next-line no-alert
+          alert('Uma falha ocorreu ao efetuar o cadastro. Tente novamente.');
+        });
       }
-      // if (false) {
-      //   this.isLoading = true;
-      //   userService.registerUser(newUser).then(() => {
-      //     this.isLoading = false;
-      //     // eslint-disable-next-line no-alert
-      //     alert('Cadastro feito com sucesso!');
-      //   }).catch(() => {
-      //     this.isLoading = false;
-      //     // eslint-disable-next-line no-alert
-      //     alert('Uma falha ocorreu ao efetuar o cadastro. Tente novamente.');
-      //   });
-      // }
-      // else if (evaluateLogin(newUser)) {
-      //   this.isLoading = true;
-      //   userService.logUserIn(newUser).then((userType) => {
-      //     this.isLoading = false;
-      //     console.log(userType);
-      //     if (userType === 'Agente Externo') {
-      //       this.$router.push({ name: 'My Proposals' });
-      //     } else {
-      //       this.$router.push('/');
-      //     }
-      //   }).catch(() => {
-      //     this.isLoading = false;
-      //     alert('Uma falha ocorreu ao fazer login. Tente novamente.');
-      //   });
-      // }
     },
     alterarTipoUsuario() {
       if (this.type === 'Aluno' || this.type === 'Professor') {
@@ -137,16 +119,17 @@ extend('required', {
   ...required,
   message: 'Preenchimento obrigatório',
 });
-// extend('min', {
-//   ...min,
-//   validate(value) {
-//     if (value) {
-//       return min.validate;
-//     }
-//     return '';
-//   },
-// });
+extend('min', {
+  ...min,
+  validate(value, { length }) {
+    if (value) {
+      return min.validate(value, length);
+    }
+    return '';
+  },
+  params: ['length'],
+  message: 'O campo {_field_} deve ter ao menos {length} caracteres',
+});
 extend('alpha_spaces', alpha_spaces);
 extend('max', max);
-extend('min', min);
-extend('required', required);
+// extend('min', min);
