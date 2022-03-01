@@ -3,39 +3,39 @@
   <div class="column">
     <div class="card">
       <div class="title-box">Cadastrar Usuário</div>
-      <div>
+      <div id ='formulary'>
         <ValidationObserver ref="observer" v-slot="{invalid}" @submit.prevent="onSubmit()">
         <form id="register-form" >
           <ValidationProvider rules="required|alpha_spaces" v-slot="v" :bails="false" name="nome">
-              <input v-model.trim="name" placeholder="Nome Completo" type="text" id="name" :class="v.classes"/>
+              <input v-model.trim="name" placeholder="Nome Completo" type="text" id="name" :class="v.classes"/><br>
               <span for="name" v-for="erro in v.errors">
                 {{ erro }}
               </span>
           </ValidationProvider>
 
           <ValidationProvider rules="required|email" v-slot="v" :bails="false" name="email">
-            <input v-model.trim="email" type="text" id="email" placeholder="E-mail" :class="v.classes"/>
+            <input v-model.trim="email" type="text" id="email" placeholder="E-mail" :class="v.classes"/><br>
             <span v-for="erro in v.errors">
               {{ erro }}
             </span>
           </ValidationProvider>
 
           <ValidationProvider rules="min:10" v-slot="v" :bails="false" mode="eager" name="telefone">
-            <the-mask :mask="['(##) ####-####', '(##) #####-####']" v-model="phoneNumber" id="phoneNumber" placeholder="Telefone"/>
+            <the-mask :mask="['(##) ####-####', '(##) #####-####']" v-model="phoneNumber" id="phoneNumber" placeholder="Telefone"/><br>
             <span v-for="erro in v.errors">
               {{ erro }}
             </span>
           </ValidationProvider>
 
           <ValidationProvider rules="required" v-slot="v" :bails="false">
-            <input type="password" v-model="password" id="senha" placeholder="Senha" :class="v.classes"/>
+            <input type="password" v-model="password" id="senha" placeholder="Senha" :class="v.classes"/><br>
             <span v-for="erro in v.errors">
               {{ erro }}
             </span>
           </ValidationProvider>
 
           <ValidationProvider rules="required" v-slot="v" :bails="false">
-            <input v-model="repeatPassword" name="repita sua senha" type="password" id="repeatPassword" placeholder="Repita sua senha" :class="v.classes"/>
+            <input v-model="repeatPassword" name="repita sua senha" type="password" id="repeatPassword" placeholder="Repita sua senha" :class="v.classes"/><br>
             <span v-for="erro in v.errors">
               {{ erro }}
             </span>
@@ -50,14 +50,14 @@
               <option value="Professor">Professor</option>
               <option value="Agente Externo">Agente Externo</option>
             </select>
-            <span v-for="erro in v.errors">
+            <br><span v-for="erro in v.errors">
               {{ erro }}
             </span>
           </ValidationProvider>
 
           <ValidationProvider v-if="hasMatricula" :rules="{required: hasMatricula, min: { length: 7 }}" v-slot="v" validate-on="blur" :bails="false" name="matrícula">
             <the-mask :mask="'##/#######'" v-model="matricula" id="matricula" placeholder="Digite sua matrícula"/>
-            <span v-for="erro in v.errors">
+            <br><span v-for="erro in v.errors">
               {{ erro }}
             </span>
           </ValidationProvider>
@@ -70,21 +70,21 @@
               <option value="Pessoa Fisica">Pessoa Física</option>
               <option value="Pessoa Juridica">Pessoa Jurídica</option>
             </select>
-            <span v-for="erro in v.errors">
+            <br><span v-for="erro in v.errors">
               {{ erro }}
             </span>
           </ValidationProvider>
 
           <ValidationProvider v-if="isJuridical" :rules="{required: isJuridical}" v-slot="v" :bails="false">
             <input v-model.trim="companyName" name="nome da empresa" id="companyName" type="name" placeholder="Digite o nome da empresa" />
-            <span v-for="erro in v.errors">
+            <br><span v-for="erro in v.errors">
               {{ erro }}
             </span>
           </ValidationProvider>
 
           <ValidationProvider v-if="isJuridical" :rules="{required: isJuridical}" v-slot="v" :bails="false">
             <the-mask :mask="['##.###.###/####-##']" id="cnpj" v-model.trim="cnpj" placeholder="Digite o CNPJ da empresa"/>
-            <span v-for="erro in v.errors">
+            <br><span v-for="erro in v.errors">
               {{ erro }}
             </span>
           </ValidationProvider>
@@ -92,7 +92,7 @@
 
           <ValidationProvider v-if="isJuridical" :rules="{required: isJuridical}" v-slot="v" :bails="false">
             <the-mask :mask="['#####-###']" v-model.trim="cep" id="cep" placeholder="Digite o CEP da empresa"/>
-            <span v-for="erro in v.errors">
+            <br><span v-for="erro in v.errors">
               {{ erro }}
             </span>
           </ValidationProvider>
@@ -100,7 +100,7 @@
 
           <ValidationProvider v-if="isJuridical" :rules="{required: isJuridical}" v-slot="v" :bails="false">
             <input v-model.trim="socialReason" type="name" id="socialReason" placeholder="Digite a razão social da empresa" />
-            <span v-for="erro in v.errors">
+            <br><span v-for="erro in v.errors">
               {{ erro }}
             </span>
           </ValidationProvider>
@@ -109,7 +109,7 @@
           <ValidationProvider v-if="isPhysical" :rules="{required: isPhysical}" v-slot="v" :bails="false">
 <!--            <the-mask :mask="['###.###.###-##', '##.###.###/####-##']" />-->
             <the-mask :mask="['###.###.###-##']" v-model="cpf" id="cpf" placeholder="Digite seu CPF"/>
-            <span v-for="erro in v.errors">
+            <br><span v-for="erro in v.errors">
               {{ erro }}
             </span>
           </ValidationProvider>
