@@ -69,6 +69,7 @@ export default {
         this.isExternalAgent = false;
         this.isJuridical = false;
         this.isPhysical = false;
+        this.externalAgentType = '';
       } else if (this.type === 'Agente Externo') {
         this.hasMatricula = false;
         this.isExternalAgent = true;

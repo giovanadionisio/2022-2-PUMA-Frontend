@@ -80,7 +80,7 @@
           <ValidationProvider v-if="isExternalAgent" :rules="{required: isExternalAgent}" v-slot="v" :bails="false">
             <div class="error-div">
               <select v-on:change="alterarTipoAgenteExterno()" v-model="externalAgentType" :class="v.classes">
-                <option value="" selected disabled class="disabled">
+                <option value="" selected class="disabled">
                   Tipo de Agente Externo
                 </option>
                 <option value="Pessoa Fisica">Pessoa Física</option>
