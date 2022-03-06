@@ -1,13 +1,3 @@
-import { extend } from 'vee-validate';
-import {
-  // eslint-disable-next-line camelcase
-  alpha_spaces,
-  min,
-  email,
-  confirmed,
-  required,
-  max,
-} from 'vee-validate/dist/rules';
 import Loading from '../../../components/Loading.vue';
 import UserService from '../../../services/userService';
 
@@ -114,42 +104,3 @@ export default {
     },
   },
 };
-
-extend('email', {
-  ...email,
-  validate(value) {
-    if (value) {
-      return email.validate(value);
-    }
-    return '';
-  },
-  message: 'Insira um email válido',
-});
-extend('required', {
-  ...required,
-  message: 'Preenchimento obrigatório',
-});
-extend('min', {
-  ...min,
-  validate(value, { length }) {
-    if (value) {
-      return !(value.length < length);
-    }
-    return '';
-  },
-  params: ['length'],
-  message: 'O campo {_field_} deve ter ao menos {length} caracteres',
-});
-extend('confirmed', {
-  ...confirmed,
-  validate(value, { target }) {
-    if (value) {
-      return value === target;
-    }
-    return '';
-  },
-  params: ['target'],
-  message: 'Os campos devem coincidir',
-});
-extend('alpha_spaces', alpha_spaces);
-extend('max', max);
