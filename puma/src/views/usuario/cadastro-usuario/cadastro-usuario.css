@@ -4,7 +4,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    padding: 1%;
 }
 .container {
   display: flex;
@@ -14,6 +14,8 @@ body {
 .card {
   background-color: #ffffff;
   border-radius: 20px;
+  /*margin-top: 30px;*/
+  max-height: 80%;
   margin: 20px;
   padding: 1px;
   width: 725px;
@@ -85,15 +87,20 @@ a {
   text-align: center;
 }
 
-.alerta-preenchimento-obrigatorio {
-  color: #ff5b57;
-}
-
 .invalid {
   border: 1px solid #EB0600;
 }
-
-.invalid, span {
+.error-span {
+  display: flex;
+  margin-top: 10px;
+  text-align: left;
+  flex-direction: column;
+  margin-left: 75px;
   color: #EB0600;
+}
+.error-div {
+  display: flex;
+  flex-direction: column;
+  width: 100%
 }
 

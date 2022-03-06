@@ -2,23 +2,27 @@
 <div class="container">
   <div class="column">
     <div class="card">
-      <div class="title-box"> Bem-vindo(a) ao PUMA </div>
+      <div class="title-box"> Bem-vindo(a) ao PUMA! </div>
       <div>
         <ValidationObserver ref="observer" v-slot="{invalid}" @submit.prevent="logar()">
           <form id="register-form">
 
             <ValidationProvider rules="required|email" v-slot="v" :bails="false">
-              <input v-model.trim="email" type="text" id="email" placeholder="E-mail" />
-              <span v-for="erro in v.errors">
-                {{ erro }}
-              </span>
+              <div class="error-div">
+                <input v-bind:class="{ invalid: v.errors.length }" v-model.trim="email" type="text" id="email" placeholder="E-mail" />
+                <span class="error-span" v-for="erro in v.errors">
+                  {{ erro }}
+                </span>
+              </div>
             </ValidationProvider>
 
             <ValidationProvider rules="required" v-slot="v" :bails="false">
-              <input type="password" id="senha" v-model="password" placeholder="Senha" />
-              <span v-for="erro in v.errors">
-                {{ erro }}
-              </span>
+              <div class="error-div">
+                <input v-bind:class="{ invalid: v.errors.length }" type="password" id="senha" v-model="password" placeholder="Senha" />
+                <span class="error-span" v-for="erro in v.errors">
+                  {{ erro }}
+                </span>
+              </div>
             </ValidationProvider>
 
             <div class="clickable-text-left">

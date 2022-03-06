@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import axios from 'axios';
-import VueTheMask from 'vue-the-mask';
-// import * as VeeValidate from 'vee-validate';
+import VueMask from 'v-mask';
 import {
   localize,
   ValidationProvider,
@@ -22,17 +21,9 @@ setInteractionMode('eager');
 Vue.component('ValidationProvider', ValidationProvider);
 Vue.component('ValidationObserver', ValidationObserver);
 
-// configure({
-//   classes: {
-//     valid: 'is-valid',
-//     invalid: 'is-invalid',
-//   },
-// });
-
+Vue.use(VueMask);
 Vue.config.productionTip = false;
 Vue.prototype.$http = axios;
-
-Vue.use(VueTheMask);
 
 environment.configUser();
 

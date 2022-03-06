@@ -4,6 +4,7 @@ import {
   alpha_spaces,
   min,
   email,
+  confirmed,
   required,
   max,
 } from 'vee-validate/dist/rules';
@@ -43,24 +44,22 @@ export default {
   },
   methods: {
     async onSubmit() {
-      // console.log(min);
-      // console.log(email);
       const isValid = await this.$refs.observer.validate();
       if (isValid) {
         const newUser = {
           name: this.name,
           email: this.email,
-          phoneNumber: this.phoneNumber,
+          phoneNumber: this.clearMask(this.phoneNumber),
           password: this.password,
           repeatPassword: this.repeatPassword,
-          matricula: this.matricula,
+          matricula: this.clearMask(this.matricula),
           type: this.type,
           externalAgentType: this.externalAgentType,
-          cnpj: this.cnpj,
-          cep: this.cep,
+          cnpj: this.clearMask(this.cnpj),
+          cpf: this.clearMask(this.cpf),
+          cep: this.clearMask(this.cep),
           companyName: this.companyName,
           socialReason: this.socialReason,
-          cpf: this.cpf,
         };
         this.isLoading = true;
         userService.registerUser(newUser).then(() => {
@@ -85,12 +84,11 @@ export default {
         this.isExternalAgent = true;
       }
       this.matricula = '';
-      this.socialReason = '';
-      this.cep = '';
-      this.cnpj = '';
-      this.companyName = '';
+      this.clearJuridicalAgentData();
     },
     alterarTipoAgenteExterno() {
+      this.clearJuridicalAgentData();
+      this.clearPhysicalAgentData();
       if (this.externalAgentType === 'Pessoa Fisica') {
         this.isPhysical = true;
         this.isJuridical = false;
@@ -101,6 +99,18 @@ export default {
         this.isPhysical = false;
         this.isJuridical = false;
       }
+    },
+    clearJuridicalAgentData() {
+      this.socialReason = '';
+      this.cep = '';
+      this.cnpj = '';
+      this.companyName = '';
+    },
+    clearPhysicalAgentData() {
+      this.cpf = '';
+    },
+    clearMask(maskedValue) {
+      return maskedValue.replace(/_|-|\(|\)|\.|\/|\s/g, '');
     },
   },
 };
@@ -123,13 +133,23 @@ extend('min', {
   ...min,
   validate(value, { length }) {
     if (value) {
-      return min.validate(value, length);
+      return !(value.length < length);
     }
     return '';
   },
   params: ['length'],
   message: 'O campo {_field_} deve ter ao menos {length} caracteres',
 });
+extend('confirmed', {
+  ...confirmed,
+  validate(value, { target }) {
+    if (value) {
+      return value === target;
+    }
+    return '';
+  },
+  params: ['target'],
+  message: 'Os campos devem coincidir',
+});
 extend('alpha_spaces', alpha_spaces);
 extend('max', max);
-// extend('min', min);

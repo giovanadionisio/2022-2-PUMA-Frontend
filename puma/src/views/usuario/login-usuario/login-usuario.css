@@ -84,7 +84,20 @@ a {
     margin-bottom: 20px;
     text-align: center;
 }
+.error-span {
+    display: flex;
+    margin-top: 10px;
+    text-align: left;
+    flex-direction: column;
+    margin-left: 75px;
+    color: #EB0600;
+}
+.error-div {
+    display: flex;
+    flex-direction: column;
+    width: 100%
+}
 
-.alerta-preenchimento-obrigatorio {
-    color: #ff5b57;
+.invalid {
+    border: 1px solid #EB0600;
 }
