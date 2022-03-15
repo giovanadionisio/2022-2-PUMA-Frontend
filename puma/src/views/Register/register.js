@@ -22,7 +22,7 @@ function evaluateRegister(newUser, hasMatricula, isJuridical, isPhysical) {
     && (newUser.matricula || !hasMatricula)
     && (newUser.cpf || !isPhysical)
     && ((newUser.cnpj && newUser.cep && newUser.companyName
-    && newUser.socialReason) || !isJuridical)
+      && newUser.socialReason) || !isJuridical)
   )) {
     alert('Preencha todos os campos');
     return false;
@@ -123,11 +123,21 @@ export default {
         }
       } else if (evaluateLogin(newUser)) {
         this.isLoading = true;
-        userService.logUserIn(newUser).then((userType) => {
+        userService.logUserIn(newUser).then((response) => {
           this.isLoading = false;
-          console.log(userType);
-          if (userType === 'Agente Externo') {
-            this.$router.push({ name: 'My Proposals' });
+
+          this.$store.commit('LOGIN_USER', {
+            userId: 11,
+            fullName: 'Testando',
+            email: 'Testando',
+            phoneNumber: 'Testando',
+            type: response.data.type,
+          });
+
+          this.$store.commit('SET_TOKEN', response.data.token);
+
+          if (response.data.type === 'Agente Externo') {
+            this.$router.push('/myProposals');
           } else {
             this.$router.push('/');
           }

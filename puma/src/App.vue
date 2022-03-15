@@ -4,7 +4,7 @@
       href='https://fonts.googleapis.com/css?family=Rubik:300,400,500,600,700,900'
       rel='stylesheet'
     />
-    <Navbar v-if='isloggedIn' />
+    <Navbar v-if='isAuthenticated' />
     <router-view />
   </div>
 </template>
@@ -12,9 +12,6 @@
 <script>
 // eslint-disable-next-line import/no-unresolved
 import Navbar from '@/components/Navbar.vue';
-import UserService from './services/userService';
-
-const userService = new UserService();
 
 export default {
   components: {
@@ -22,12 +19,12 @@ export default {
   },
   methods: {
     updateSessionStatus() {
-      this.isloggedIn = userService.isUserLoggedIn();
+      this.isAuthenticated = this.$store.getters.isAuthenticated;
     },
   },
   data() {
     return {
-      isloggedIn: false,
+      isAuthenticated: false,
     };
   },
   created() {
