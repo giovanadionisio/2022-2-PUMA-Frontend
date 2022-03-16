@@ -41,14 +41,13 @@
       "node": true
     },
     "extends": [
-      "plugin:vue/essential"
+      "plugin:vue/essential",
+      "eslint:recommended"
     ],
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {
-      "no-mixed-operators": 0
-    }
+    "rules": {}
   },
   "browserslist": [
     "> 1%",
