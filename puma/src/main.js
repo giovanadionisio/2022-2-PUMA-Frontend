@@ -23,6 +23,7 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import environment from './config/environment';
+import { validarCpf, validarCnpj } from '../utils/validators-puma';
 
 dotenv.config();
 
@@ -75,6 +76,24 @@ extend('confirmed', {
 });
 extend('alpha_spaces', alpha_spaces);
 extend('max', max);
+extend('cnpj', {
+  validate: (value) => {
+    if (value) {
+      return validarCnpj(value);
+    }
+    return '';
+  },
+  message: 'CNPJ inválido',
+});
+extend('cpf', {
+  validate: (value) => {
+    if (value) {
+      return validarCpf(value);
+    }
+    return '';
+  },
+  message: 'CPF inválido',
+});
 
 new Vue({
   router,

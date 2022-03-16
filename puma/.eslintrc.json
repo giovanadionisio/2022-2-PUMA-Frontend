@@ -15,5 +15,7 @@
         "vue"
     ],
     "rules": {
+        "no-plusplus": "off"
+
     }
 }

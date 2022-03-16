@@ -19,7 +19,6 @@ export default {
       password: '',
       repeatPassword: '',
       cnpj: '',
-      cep: ' ',
       companyName: '',
       socialReason: '',
       cpf: '',
@@ -47,7 +46,6 @@ export default {
           externalAgentType: this.externalAgentType,
           cnpj: this.clearMask(this.cnpj),
           cpf: this.clearMask(this.cpf),
-          cep: this.clearMask(this.cep),
           companyName: this.companyName,
           socialReason: this.socialReason,
         };
@@ -93,7 +91,6 @@ export default {
     },
     clearJuridicalAgentData() {
       this.socialReason = '';
-      this.cep = '';
       this.cnpj = '';
       this.companyName = '';
     },
