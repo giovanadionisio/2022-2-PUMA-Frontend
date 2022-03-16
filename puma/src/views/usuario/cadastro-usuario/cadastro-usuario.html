@@ -103,7 +103,7 @@
 
           <ValidationProvider v-if="isJuridical" :rules="{required: isJuridical, min : {length: 18}, cnpj: true}" v-slot="v" :bails="false">
             <div class="error-div">
-              <input v-mask="['##.###.###/####-##']" :class="v.classes" id="cnpj" v-model.trim="cnpj" placeholder="Digite o CNPJ da empresa"/>
+              <input v-mask="'##.###.###/####-##'" :class="v.classes" id="cnpj" v-model="cnpj" placeholder="Digite o CNPJ da empresa"/>
               <span class="error-span" v-for="erro in v.errors">
                 {{ erro }}
               </span>
@@ -123,7 +123,7 @@
 
           <ValidationProvider v-if="isPhysical" :rules="{required: isPhysical, min : {length: 14}, cpf: true}" v-slot="v" :bails="false">
             <div class="error-div">
-              <input v-mask="['###.###.###-##']" :class="v.classes" v-model="cpf" id="cpf" placeholder="Digite seu CPF"/>
+              <input v-mask="'###.###.###-##'" :class="v.classes" v-model="cpf" id="cpf" placeholder="Digite seu CPF"/>
               <span class="error-span" v-for="erro in v.errors">
                 {{ erro }}
               </span>
