@@ -78,7 +78,7 @@ extend('alpha_spaces', alpha_spaces);
 extend('max', max);
 extend('cnpj', {
   validate: (value) => {
-    if (value) {
+    if (value.length === 18) {
       return validarCnpj(value);
     }
     return '';
@@ -87,7 +87,7 @@ extend('cnpj', {
 });
 extend('cpf', {
   validate: (value) => {
-    if (value) {
+    if (value.length === 14) {
       return validarCpf(value);
     }
     return '';
