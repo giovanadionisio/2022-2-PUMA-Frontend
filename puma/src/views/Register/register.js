@@ -127,10 +127,9 @@ export default {
           this.isLoading = false;
 
           this.$store.commit('LOGIN_USER', {
-            userId: 11,
-            fullName: 'Testando',
-            email: 'Testando',
-            phoneNumber: 'Testando',
+            userId: response.data.userId,
+            fullName: response.data.fullName,
+            email: response.data.email,
             type: response.data.type,
           });
 
