@@ -9,13 +9,10 @@
 </template>
 
 <script>
-import UserService from '../services/userService';
-
-const userService = new UserService();
 
 export default {
   created() {
-    if (userService.getUserType() === 'Agente Externo') {
+    if (this.$store.getters.user.type === 'Agente Externo') {
       this.$router.push({ name: 'My Proposals' });
     }
   },

@@ -1,8 +1,7 @@
-/* eslint-disable prefer-promise-reject-errors */
-/* eslint-disable class-methods-use-this */
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
-import * as Cookie from 'js-cookie';
+/* eslint-disable class-methods-use-this */
+/* eslint-disable prefer-promise-reject-errors */
 import axios from '@/main.js';
 
 export default class UserService {
@@ -20,9 +19,7 @@ export default class UserService {
     return new Promise((resolve, reject) => {
       axios.post(`${global.URL_GATEWAY}/user/login`, newUser).then((response) => {
         if (response.data.auth) {
-          Cookie.set('PUMA_USER_TYPE', response.data.type, { expires: 7, path: '/' });
-          Cookie.set('PUMA_USER_SESSION', response.data.token, { expires: 7, path: '/' });
-          resolve(response.data.type);
+          resolve(response);
         } else {
           reject(`/login reject: ${response}`);
         }
@@ -30,18 +27,5 @@ export default class UserService {
         reject(`/login reject: ${response}`);
       });
     });
-  }
-
-  logUserOut() {
-    Cookie.remove('PUMA_USER_TYPE');
-    Cookie.remove('PUMA_USER_SESSION');
-  }
-
-  isUserLoggedIn() {
-    return Cookie.get('PUMA_USER_SESSION') !== undefined;
-  }
-
-  getUserType() {
-    return Cookie.get('PUMA_USER_TYPE');
   }
 }
