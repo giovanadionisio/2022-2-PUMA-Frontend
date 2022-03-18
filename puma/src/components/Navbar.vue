@@ -23,7 +23,7 @@ export default {
   methods: {
     logout() {
       this.$store.commit('RESET_USER_STATE');
-      this.$router.push('/register');
+      this.$router.push('/usuario/login');
       this.$router.go();
     },
   },

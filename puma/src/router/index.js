@@ -24,20 +24,28 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
   },
   {
-    path: '/register',
-    name: 'Register',
+    path: '/usuario/cadastro',
+    name: 'Cadastro Usuário',
     // eslint-disable-next-line import/no-unresolved
-    component: () => import('@/views/Register/Register.vue'),
+    component: () => import('../views/usuario/cadastro-usuario/CadastroUsuario.vue'),
     meta: {
       guest: true,
     },
-
+  },
+  {
+    path: '/usuario/login',
+    name: 'Entrar',
+    // eslint-disable-next-line import/no-unresolved
+    component: () => import('../views/usuario/login-usuario/LoginUsuario.vue'),
+    meta: {
+      guest: true,
+    },
   },
   {
     path: '/evaluate/:subjectId',
     name: 'Evaluate',
     // eslint-disable-next-line import/no-unresolved
-    component: () => import('@/views/Evaluate/Evaluate.vue'),
+    component: () => import('../views/Evaluate/Evaluate.vue'),
     meta: {
       requiresAuth: true,
     },
@@ -47,7 +55,7 @@ const routes = [
     name: 'Approval',
     props: true,
     // eslint-disable-next-line import/no-unresolved
-    component: () => import('@/views/Approval/Approval.vue'),
+    component: () => import('../views/Approval/Approval.vue'),
     meta: {
       requiresAuth: true,
     },
@@ -80,7 +88,7 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
     if (!store.getters.isAuthenticated) {
       next({
-        path: '/register',
+        path: '/usuario/cadastro',
         params: { nextUrl: to.fullPath },
       });
     } else {

@@ -12,10 +12,15 @@
     "core-js": "^3.6.5",
     "dotenv": "^10.0.0",
     "js-cookie": "^3.0.1",
+    "npmm": "^1.0.6",
     "v-click-outside": "^3.1.2",
+    "v-mask": "^2.3.0",
+    "vee-validate": "^3.4.14",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
+    "vue-the-mask": "^0.11.1",
     "vuex": "^3.4.0",
+    "yup": "^0.32.11",
     "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {
