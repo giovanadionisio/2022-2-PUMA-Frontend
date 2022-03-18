@@ -24,17 +24,23 @@ export default {
     async logar() {
       const isValid = await this.$refs.observer.validate();
       if (isValid) {
-        const user = {
-          email: this.email,
-          password: this.password,
-        };
+        const user = { email: this.email, password: this.password };
         this.isLoading = true;
-        userService.logUserIn(user).then((userType) => {
+
+        userService.logUserIn(user).then((response) => {
           this.isLoading = false;
-          // eslint-disable-next-line no-alert
-          alert('Login realizado com sucesso!');
-          if (userType === 'Agente Externo') {
-            this.$router.push({ name: 'My Proposals' });
+
+          this.$store.commit('LOGIN_USER', {
+            userId: response.data.userId,
+            fullName: response.data.fullName,
+            email: response.data.email,
+            type: response.data.type,
+          });
+
+          this.$store.commit('SET_TOKEN', response.data.token);
+
+          if (response.data.type === 'Agente Externo') {
+            this.$router.push('/myProposals');
           } else {
             this.$router.push('/');
           }

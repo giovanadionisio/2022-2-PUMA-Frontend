@@ -10,22 +10,19 @@
     <div id='dropdown'>
       <img class='nav-item' id='menu-button' src='../assets/navbarMenu.svg' alt='|||' />
       <div class="dropdown-content">
-        <a v-on:click='logOut()'>Sair</a>
+        <a v-on:click='logout()'>Sair</a>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import UserService from '../services/userService';
-
-const userService = new UserService();
 
 export default {
   name: 'Navbar',
   methods: {
-    logOut() {
-      userService.logUserOut();
+    logout() {
+      this.$store.commit('RESET_USER_STATE');
       this.$router.push('/usuario/login');
       this.$router.go();
     },

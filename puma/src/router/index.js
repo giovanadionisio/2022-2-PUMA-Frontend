@@ -1,9 +1,8 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
-import UserService from '../services/userService';
 
-const userService = new UserService();
+import store from '../store';
 
 Vue.use(VueRouter);
 
@@ -87,7 +86,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
-    if (!userService.isUserLoggedIn()) {
+    if (!store.getters.isAuthenticated) {
       next({
         path: '/usuario/cadastro',
         params: { nextUrl: to.fullPath },
@@ -96,7 +95,7 @@ router.beforeEach((to, from, next) => {
       next();
     }
   } else if (to.matched.some((record) => record.meta.guest)) {
-    if (!userService.isUserLoggedIn()) {
+    if (!store.getters.isAuthenticated) {
       next();
     } else {
       next({ path: '/' });

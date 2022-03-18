@@ -2,12 +2,12 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
-import * as Cookie from 'js-cookie';
 import axios from '@/main.js';
+import store from '../store';
 
 export default class ProjectService {
   async getAllocatedProjects(subjctId) {
-    const auth = Cookie.get('PUMA_USER_SESSION');
+    const auth = store.getters.token;
     const allocatedArray = await axios.get(`${global.URL_GATEWAY}/project/alocated/${subjctId}`, {
       headers: {
         auth,
@@ -17,7 +17,7 @@ export default class ProjectService {
   }
 
   async getMyProposals() {
-    const auth = Cookie.get('PUMA_USER_SESSION');
+    const auth = store.getters.token;
     const myProposals = await axios.get(`${global.URL_GATEWAY}/project/myProposals`, {
       headers: {
         auth,
@@ -27,7 +27,7 @@ export default class ProjectService {
   }
 
   async getProjById(projId) {
-    const auth = Cookie.get('PUMA_USER_SESSION');
+    const auth = store.getters.token;
     const projInfos = await axios.get(`${global.URL_GATEWAY}/project/project/${projId}`, {
       headers: {
         auth,
@@ -37,7 +37,7 @@ export default class ProjectService {
   }
 
   async getAllSubjects() {
-    const auth = Cookie.get('PUMA_USER_SESSION');
+    const auth = store.getters.token;
     const subjects = await axios.get(`${global.URL_GATEWAY}/project/subject`, {
       headers: {
         auth,
@@ -47,7 +47,7 @@ export default class ProjectService {
   }
 
   async putProposal(projectId, subjId) {
-    const auth = Cookie.get('PUMA_USER_SESSION');
+    const auth = store.getters.token;
     const subjects = await axios.put(`${global.URL_GATEWAY}/project/proposal/${projectId}`,
       { subjectId: subjId },
       {
@@ -59,7 +59,7 @@ export default class ProjectService {
   }
 
   async putProposalStatus(id, status) {
-    const auth = Cookie.get('PUMA_USER_SESSION');
+    const auth = store.getters.token;
     const subjects = await axios.put(`${global.URL_GATEWAY}/project/alocate/${id}/status`,
       { proposal: { approved: status } },
       {
@@ -72,7 +72,7 @@ export default class ProjectService {
 
   addProject(project) {
     return new Promise((resolve, reject) => {
-      const auth = Cookie.get('PUMA_USER_SESSION');
+      const auth = store.getters.token;
       console.log(project);
       axios.post(`${global.URL_GATEWAY}/project`, project, { headers: { auth } }).then((response) => {
         resolve(response);
@@ -84,7 +84,7 @@ export default class ProjectService {
 
   addFile(file) {
     return new Promise((resolve, reject) => {
-      const auth = Cookie.get('PUMA_USER_SESSION');
+      const auth = store.getters.token;
       axios.post(`${global.URL_GATEWAY}/project/upload`, file, { headers: { auth } }).then((response) => {
         resolve(response);
       }).catch(() => {

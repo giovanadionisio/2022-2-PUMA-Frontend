@@ -20,7 +20,8 @@
     "vue-router": "^3.2.0",
     "vue-the-mask": "^0.11.1",
     "vuex": "^3.4.0",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
