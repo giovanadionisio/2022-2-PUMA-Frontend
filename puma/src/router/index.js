@@ -88,7 +88,7 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
     if (!store.getters.isAuthenticated) {
       next({
-        path: '/usuario/cadastro',
+        path: '/usuario/login',
         params: { nextUrl: to.fullPath },
       });
     } else {
