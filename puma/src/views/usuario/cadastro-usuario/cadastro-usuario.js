@@ -1,4 +1,5 @@
 import Loading from '../../../components/Loading.vue';
+import Navbar from '../../../components/Navbar.vue';
 import UserService from '../../../services/userService';
 
 const userService = new UserService();
@@ -6,6 +7,7 @@ export default {
   name: 'CadastroUsuario',
   components: {
     Loading,
+    Navbar,
   },
   mounted() {
     document.title = 'PUMA | Cadastro Usuário';
@@ -24,6 +26,9 @@ export default {
       cpf: '',
       type: '',
       externalAgentType: '',
+      passwordTypeText: false,
+      repeatPasswordTypeText: false,
+      isFirstPage: true,
       isLoading: false,
       hasMatricula: false,
       isJuridical: false,

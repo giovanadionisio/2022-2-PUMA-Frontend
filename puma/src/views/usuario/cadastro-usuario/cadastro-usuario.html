@@ -1,13 +1,32 @@
 <body>
+<Navbar></Navbar>
+
+<div id='nav'>
+  <img
+    v-on:click='$router.push({ name: `Entrar` })'
+    class='nav-item'
+    id='logo'
+    src='../../../assets/moca.jpg'
+    alt='PUMA'
+  />
+
+</div>
+
+
 <div class="container">
   <div class="column">
     <div class="card">
-      <div class="title-box">Cadastrar Usuário</div>
-      <div>
+      <div class="title-box">
+        <div style="color: white">
+          CADASTRO DE USUÁRIO
+        </div>
+      </div>
+      <div class="border-card">
         <ValidationObserver ref="observer" v-slot="{invalid}" @submit.prevent="onSubmit()">
         <form id="register-form" >
 
-          <ValidationProvider rules="required|alpha_spaces" v-slot="v" :bails="false" name="nome">
+          <ValidationProvider rules="required|alpha_spaces" v-slot="v" :bails="false" name="nome" v-if="isFirstPage">
+            <span class="label">Nome</span>
             <div class="error-div">
               <input v-model.trim="name" placeholder="Nome Completo" type="text" id="name" :class="v.classes"/>
               <span class="error-span" for="name" v-for="erro in v.errors">
@@ -16,7 +35,9 @@
             </div>
           </ValidationProvider>
 
-          <ValidationProvider rules="required|email" v-slot="v" :bails="false" name="email">
+          <ValidationProvider rules="required|email" v-slot="v" :bails="false" name="email" v-if="isFirstPage">
+            <span class="label">E-mail</span>
+
             <div class="error-div">
               <input v-model.trim="email" type="text" id="email" placeholder="E-mail" :class="v.classes"/>
               <span class="error-span" v-for="erro in v.errors">
@@ -25,7 +46,9 @@
             </div>
           </ValidationProvider>
 
-          <ValidationProvider rules="required|min:14" v-slot="v" :bails="false" mode="eager" name="telefone">
+          <ValidationProvider rules="required|min:14" v-slot="v" :bails="false" mode="eager" name="telefone" v-if="isFirstPage">
+            <span class="label">Telefone</span>
+
             <div class="error-div">
               <input v-mask=" phoneNumber.length <= 14 ? '(##) ####-####' : '(##) #####-####'" v-model="phoneNumber" id="phoneNumber" placeholder="Telefone" :class="v.classes"/>
               <span class="error-span" v-for="erro in v.errors">
@@ -34,29 +57,42 @@
             </div>
           </ValidationProvider>
 
-          <ValidationProvider rules="required" v-slot="v" :bails="false">
+          <ValidationProvider rules="required" v-slot="v" :bails="false" v-if="isFirstPage">
+            <span class="label">Senha</span>
+
             <div class="error-div">
-              <input type="password" v-model="password" id="senha" placeholder="Senha" :class="v.classes"/>
+              <div>
+                <input :type="passwordTypeText ? 'text' : 'password'" v-model="password" id="senha" placeholder="Senha" :class="v.classes" class="password-input"/>
+                <font-awesome-icon v-if="!passwordTypeText" @click="passwordTypeText = true"  icon="fa-solid fa-eye" size="lg" class="password-img"></font-awesome-icon>
+                <font-awesome-icon v-if="passwordTypeText" @click="passwordTypeText = false" icon="fa-solid fa-eye-slash" size="lg" class="password-img"></font-awesome-icon>
+              </div>
               <span class="error-span" v-for="erro in v.errors">
                 {{ erro }}
               </span>
             </div>
           </ValidationProvider>
 
-          <ValidationProvider :rules="{required: true, confirmed: { target: password}}" v-slot="v" :bails="false">
+          <ValidationProvider :rules="{required: true, confirmed: {target: password}}" v-slot="v" :bails="false" v-if="isFirstPage">
+            <span class="label">Repita sua senha</span>
+
             <div class="error-div">
-              <input v-model="repeatPassword" name="repita sua senha" type="password" id="repeatPassword" placeholder="Repita sua senha" :class="v.classes"/>
+              <div>
+                <input :type="repeatPasswordTypeText ? 'text' : 'password'" v-model="repeatPassword" name="repita sua senha" type="password" id="repeatPassword" placeholder="Repita sua senha" :class="v.classes" class="password-input"/>
+                <font-awesome-icon v-if="!repeatPasswordTypeText" @click="repeatPasswordTypeText = true"  icon="fa-solid fa-eye" size="lg" class="password-img"></font-awesome-icon>
+                <font-awesome-icon v-if="repeatPasswordTypeText" @click="repeatPasswordTypeText = false" icon="fa-solid fa-eye-slash" size="lg" class="password-img"></font-awesome-icon>
+              </div>
               <span class="error-span" v-for="erro in v.errors">
                 {{ erro }}
               </span>
             </div>
           </ValidationProvider>
 
-          <ValidationProvider rules="required" v-slot="v" :bails="false">
+          <ValidationProvider rules="required" v-slot="v" :bails="false" v-if="!isFirstPage">
+            <span class="label">Tipo de usuário</span>
             <div class="error-div">
               <select v-on:change="alterarTipoUsuario()" :class="v.classes" v-model="type" name="tipo" id="tipo">
-                <option value="" selected disabled class="disabled">
-                  Tipo de usuário
+                <option value="" selected class="disabled">
+                  Selecione
                 </option>
                 <option value="Aluno">Aluno</option>
                 <option value="Professor">Professor</option>
@@ -68,7 +104,8 @@
             </div>
           </ValidationProvider>
 
-          <ValidationProvider v-if="hasMatricula" :rules="{required: hasMatricula, min: { length: type === 'Aluno' ? 10 : 7 }}" v-slot="v" validate-on="blur" :bails="false" name="matrícula">
+          <ValidationProvider v-if="hasMatricula && !isFirstPage" :rules="{required: hasMatricula, min: { length: type === 'Aluno' ? 10 : 7 }}" v-slot="v" validate-on="blur" :bails="false" name="matrícula">
+            <span class="label">Matrícula</span>
             <div class="error-div">
               <input v-mask="type === 'Aluno' ? '##/#######' : '#######'" v-model="matricula" :class="v.classes" id="matricula" placeholder="Digite sua matrícula"/>
               <span class="error-span" v-for="erro in v.errors">
@@ -77,11 +114,12 @@
             </div>
           </ValidationProvider>
 
-          <ValidationProvider v-if="isExternalAgent" :rules="{required: isExternalAgent}" v-slot="v" :bails="false">
+          <ValidationProvider v-if="isExternalAgent && !isFirstPage" :rules="{required: isExternalAgent}" v-slot="v" :bails="false">
+            <span class="label">Tipo de Agente Externo</span>
             <div class="error-div">
               <select v-on:change="alterarTipoAgenteExterno()" v-model="externalAgentType" :class="v.classes">
-                <option value="" selected class="disabled">
-                  Tipo de Agente Externo
+                <option value="" class="disabled">
+                  Selecione
                 </option>
                 <option value="Pessoa Fisica">Pessoa Física</option>
                 <option value="Pessoa Juridica">Pessoa Jurídica</option>
@@ -92,7 +130,7 @@
             </div>
           </ValidationProvider>
 
-          <ValidationProvider v-if="isJuridical" :rules="{required: isJuridical}" v-slot="v" :bails="false">
+          <ValidationProvider v-if="isJuridical && !isFirstPage" :rules="{required: isJuridical}" v-slot="v" :bails="false">
             <div class="error-div">
               <input v-model.trim="companyName" :class="v.classes" name="nome da empresa" id="companyName" type="name" placeholder="Digite o nome da empresa" />
               <span class="error-span" v-for="erro in v.errors">
@@ -101,7 +139,7 @@
             </div>
           </ValidationProvider>
 
-          <ValidationProvider v-if="isJuridical" :rules="{required: isJuridical, min : {length: 18}, cnpj: true}" v-slot="v" :bails="false">
+          <ValidationProvider v-if="isJuridical && !isFirstPage" :rules="{required: isJuridical, min : {length: 18}, cnpj: true}" v-slot="v" :bails="false">
             <div class="error-div">
               <input v-mask="'##.###.###/####-##'" :class="v.classes" id="cnpj" v-model="cnpj" placeholder="Digite o CNPJ da empresa"/>
               <span class="error-span" v-for="erro in v.errors">
@@ -111,7 +149,7 @@
           </ValidationProvider>
 
 
-          <ValidationProvider v-if="isJuridical" :rules="{required: isJuridical}" v-slot="v" :bails="false">
+          <ValidationProvider v-if="isJuridical && !isFirstPage" :rules="{required: isJuridical}" v-slot="v" :bails="false">
             <div class="error-div">
               <input v-model.trim="socialReason" :class="v.classes" type="name" id="socialReason" placeholder="Digite a razão social da empresa" />
               <span class="error-span" v-for="erro in v.errors">
@@ -121,7 +159,7 @@
           </ValidationProvider>
 
 
-          <ValidationProvider v-if="isPhysical" :rules="{required: isPhysical, min : {length: 14}, cpf: true}" v-slot="v" :bails="false">
+          <ValidationProvider v-if="isPhysical && !isFirstPage" :rules="{required: isPhysical, min : {length: 14}, cpf: true}" v-slot="v" :bails="false">
             <div class="error-div">
               <input v-mask="'###.###.###-##'" :class="v.classes" v-model="cpf" id="cpf" placeholder="Digite seu CPF"/>
               <span class="error-span" v-for="erro in v.errors">
@@ -130,15 +168,34 @@
             </div>
           </ValidationProvider>
 
+          <div style="margin-top: 20px; margin-bottom: 10px" v-if="isFirstPage">
+            <font-awesome-icon  icon="fa-solid fa-circle" size="2x" class=""></font-awesome-icon>
+            <font-awesome-icon  @click="isFirstPage = false" style="margin-left: 20px; cursor: pointer" icon="fa-regular fa-circle" size="2x" class=""></font-awesome-icon>
+            <i style="position: absolute; margin-left: 230px; cursor: pointer" @click="isFirstPage = false">
+              <font-awesome-icon icon="fa-solid fa-angle-right" size="2x"></font-awesome-icon>
+            </i>
+          </div>
 
-          <input v-if="!isLoading" type="submit" class="submit-btn" value="Cadastrar" @click.prevent="onSubmit" form="register-form" />
+          <div style="margin-top: 20px; margin-bottom: 10px" v-if="!isFirstPage">
+            <i style="position: absolute; margin-right: 400px; cursor: pointer; display: flex" @click="isFirstPage = true">
+              <font-awesome-icon icon="fa-solid fa-angle-left" size="2x"></font-awesome-icon>
+            </i>
+            <i>
+              <font-awesome-icon  @click="isFirstPage = true" style="margin-right: 20px;  cursor: pointer" icon="fa-regular fa-circle" size="2x" class=""></font-awesome-icon>
+
+            </i>
+            <font-awesome-icon  icon="fa-solid fa-circle" size="2x" class=""></font-awesome-icon>
+
+          </div>
+
+<!--          <input v-if="!isLoading" type="submit" class="submit-btn" value="Cadastrar" @click.prevent="onSubmit" form="register-form" />-->
           <Loading class="loading" v-if='isLoading' />
 
-          <div class="clickable-text-center">
-            <router-link to="/usuario/login">
-              Voltar ao login
-            </router-link>
-          </div>
+<!--          <div class="clickable-text-center">-->
+<!--            <router-link to="/usuario/login">-->
+<!--              Voltar ao login-->
+<!--            </router-link>-->
+<!--          </div>-->
         </form>
         </ValidationObserver>
       </div>
@@ -146,3 +203,4 @@
   </div>
 </div>
 </body>
+

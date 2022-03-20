@@ -1,12 +1,22 @@
 <template>
   <div id='nav'>
     <img
-      v-on:click='$router.push({ name: `Home` })'
+      v-on:click='$router.push({ name: `Entrar` })'
       class='nav-item'
       id='logo'
       src='../assets/navbarLogo.svg'
       alt='PUMA'
     />
+
+    <div style="color: #010203; margin-left: -150px; margin-right: -600px">
+      {{ leftValue }}
+    </div>
+    <div style="color:#010203; margin-left: 101px; margin-right: 20px">
+      >
+    </div>
+    <div style="color: #010203; margin-left: -500px">
+      CADASTRO
+    </div>
     <div id='dropdown'>
       <img class='nav-item' id='menu-button' src='../assets/navbarMenu.svg' alt='|||' />
       <div class="dropdown-content">
@@ -20,6 +30,12 @@
 
 export default {
   name: 'Navbar',
+  data() {
+    return {
+      leftValue: 'HOME',
+      rightValue: 'CADASTRO',
+    };
+  },
   methods: {
     logout() {
       this.$store.commit('RESET_USER_STATE');
@@ -38,7 +54,6 @@ div {
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #15355e;
   width: 300px;
   transform: translate(-180px);
   z-index: 1;
@@ -69,8 +84,7 @@ div {
 }
 
 #nav {
-  padding: 7 px;
-  background-color: #15355e;
+  padding: 7px;
   width: 100%;
   display: flex;
   justify-content: space-between;

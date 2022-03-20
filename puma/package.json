@@ -8,11 +8,16 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.1.0",
+    "@fortawesome/free-regular-svg-icons": "^6.1.0",
+    "@fortawesome/free-solid-svg-icons": "^6.1.0",
+    "@fortawesome/vue-fontawesome": "^2.0.6",
     "axios": "^0.21.4",
     "core-js": "^3.6.5",
     "dotenv": "^10.0.0",
     "js-cookie": "^3.0.1",
     "npmm": "^1.0.6",
+    "uuid": "^8.3.2",
     "v-click-outside": "^3.1.2",
     "v-mask": "^2.3.0",
     "vee-validate": "^3.4.14",
@@ -20,8 +25,8 @@
     "vue-router": "^3.2.0",
     "vue-the-mask": "^0.11.1",
     "vuex": "^3.4.0",
-    "yup": "^0.32.11",
-    "vuex-persistedstate": "^4.1.0"
+    "vuex-persistedstate": "^4.1.0",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
