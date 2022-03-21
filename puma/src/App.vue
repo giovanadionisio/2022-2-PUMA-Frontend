@@ -49,9 +49,7 @@ body {
   color: #15355e;
 }
 
-input,
-textarea,
-select {
+.input-field {
   border-radius: 7px;
   font-size: 1.1em;
   background-color: #ffffff;
