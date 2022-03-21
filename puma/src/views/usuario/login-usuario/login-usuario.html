@@ -1,49 +1,64 @@
 <body>
-<div class="container">
-  <div class="column">
-    <div class="card">
-      <div class="title-box"> Bem-vindo(a) ao PUMA! </div>
-      <div>
-        <ValidationObserver ref="observer" v-slot="{invalid}" @submit.prevent="logar()">
-          <form id="register-form">
+  <div class="container">
+    <div class="column">
+      <div class="card">
+        <div class="title-box"> Bem-vindo(a) ao PUMA! </div>
+        <div>
+          <ValidationObserver ref="observer" v-slot="{invalid}" @submit.prevent="logar()">
+            <form id="register-form">
 
-            <ValidationProvider rules="required|email" v-slot="v" :bails="false">
-              <div class="error-div">
-                <input v-bind:class="{ invalid: v.errors.length }" v-model.trim="email" type="text" id="email" placeholder="E-mail" />
-                <span class="error-span" v-for="erro in v.errors">
-                  {{ erro }}
-                </span>
+              <!--
+              <b-container fluid>
+                <b-row class="my-1">
+                  <b-col sm="3">
+                    <label for="input-invalid">Invalid State:</label>
+                  </b-col>
+                  <b-col sm="9">
+                    <b-form-input id="input-invalid" :state="false" placeholder="Invalid input" size="lg">
+                    </b-form-input>
+                  </b-col>
+                </b-row>
+              </b-container> -->
+
+              <ValidationProvider rules="required|email" v-slot="v" :bails="false">
+                <div class="error-div">
+                  <input v-bind:class="{ invalid: v.errors.length }" v-model.trim="email" type="text" id="email"
+                    class="input-field" placeholder="E-mail" />
+                  <span class="error-span" v-for="erro in v.errors">
+                    {{ erro }}
+                  </span>
+                </div>
+              </ValidationProvider>
+
+              <ValidationProvider rules="required" v-slot="v" :bails="false">
+                <div class="error-div">
+                  <input v-bind:class="{ invalid: v.errors.length }" type="password" id="senha" class="input-field"
+                    v-model="password" placeholder="Senha" />
+                  <span class="error-span" v-for="erro in v.errors">
+                    {{ erro }}
+                  </span>
+                </div>
+              </ValidationProvider>
+
+              <div class="clickable-text-left">
+                <router-link to="/usuario/cadastro">
+                  Não possui uma conta? Cadastre-se
+                </router-link>
               </div>
-            </ValidationProvider>
 
-            <ValidationProvider rules="required" v-slot="v" :bails="false">
-              <div class="error-div">
-                <input v-bind:class="{ invalid: v.errors.length }" type="password" id="senha" v-model="password" placeholder="Senha" />
-                <span class="error-span" v-for="erro in v.errors">
-                  {{ erro }}
-                </span>
+              <div class="clickable-text-left">
+                <router-link to="#">
+                  Esqueci minha senha
+                </router-link>
               </div>
-            </ValidationProvider>
 
-            <div class="clickable-text-left">
-              <router-link to="/usuario/cadastro">
-                Não possui uma conta? Cadastre-se
-              </router-link>
-            </div>
+              <input type="submit" class="submit-btn" value="Entrar" @click.prevent="logar()" form="register-form" />
 
-            <div class="clickable-text-left">
-              <router-link to="#">
-                Esqueci minha senha
-              </router-link>
-            </div>
-
-            <input type="submit" class="submit-btn" value = "Entrar" @click.prevent="logar()" form="register-form" />
-
-            <Loading class="loading" v-if='isLoading' />
-        </form>
-      </ValidationObserver>
+              <Loading class="loading" v-if='isLoading' />
+            </form>
+          </ValidationObserver>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </body>
