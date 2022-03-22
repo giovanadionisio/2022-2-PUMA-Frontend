@@ -7,16 +7,14 @@
       src='../assets/navbarLogo.svg'
       alt='PUMA'
     />
+    <div id="description" style="color: #010203;">
+      <ul>
+        <li>{{ leftValue }}</li>
+      <li>></li>
+      <li><span id="currentPage">{{ rightValue }}</span></li>
+      </ul>
+  </div>
 
-    <div style="color: #010203; margin-left: -150px; margin-right: -600px">
-      {{ leftValue }}
-    </div>
-    <div style="color:#010203; margin-left: 101px; margin-right: 20px">
-      >
-    </div>
-    <div style="color: #010203; margin-left: -500px">
-      CADASTRO
-    </div>
     <div id='dropdown'>
       <img class='nav-item' id='menu-button' src='../assets/navbarMenu.svg' alt='|||' />
       <div class="dropdown-content">
@@ -47,10 +45,15 @@ export default {
 </script>
 
 <style scope>
-div {
-  position: relative;
+ul{list-style-type: none;}
+ul li{display: inline-block; padding: 0 2%;}
+#description{
+  letter-spacing: 4%;
+  width: 50%;
 }
-
+#currentPage{
+  text-decoration: underline;
+}
 .dropdown-content {
   display: none;
   position: absolute;

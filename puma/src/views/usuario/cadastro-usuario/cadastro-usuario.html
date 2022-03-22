@@ -1,20 +1,12 @@
 <body>
 <Navbar></Navbar>
 
-<div id='nav'>
-  <img
-    v-on:click='$router.push({ name: `Entrar` })'
-    class='nav-item'
-    id='logo'
-    src='../../../assets/moca.jpg'
-    alt='PUMA'
-  />
-
-</div>
-
-
 <div class="container">
   <div class="column">
+    <div id='moca_img_div'>
+      <img v-on:click='$router.push({ name: `Entrar` })' class='nav-item' id='moca_img' src='../../../assets/moca.svg'
+        alt='PUMA' />
+    </div>
     <div class="card">
       <div class="title-box">
         <div style="color: white">
@@ -177,7 +169,7 @@
           </div>
 
           <div style="margin-top: 20px; margin-bottom: 10px" v-if="!isFirstPage">
-            <i style="position: absolute; margin-right: 400px; cursor: pointer; display: flex" @click="isFirstPage = true">
+            <i style="position: absolute; margin-left: 3.7%; cursor: pointer; display: flex" @click="isFirstPage = true">
               <font-awesome-icon icon="fa-solid fa-angle-left" size="2x"></font-awesome-icon>
             </i>
             <i>
