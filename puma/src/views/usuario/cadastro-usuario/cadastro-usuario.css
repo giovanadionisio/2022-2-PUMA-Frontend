@@ -6,6 +6,7 @@ body {
     align-items: center;
     padding: 1%;
 }
+.pagina{width: 100%;}
 .column{display: contents;}
 .container {
   display: flex;
@@ -140,7 +141,7 @@ input, select {
 }
 
 #nav {
-  padding: 7px;
+  padding: 1%;
   width: 100%;
   display: flex;
   justify-content: space-between;
