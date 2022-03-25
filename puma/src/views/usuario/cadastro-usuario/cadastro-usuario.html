@@ -137,8 +137,8 @@
               </div>
             </ValidationProvider>
 
-            <ValidationProvider v-if="isJuridical && !isFirstPage" :rules="{required: isJuridical}" v-slot="v"
-              :bails="false">
+            <ValidationProvider v-if="isJuridical && !isFirstPage" :rules="{required: isJuridical}" v-slot="v" :bails="false">
+              <span class="label">Noma da empresa</span>
               <div class="error-div">
                 <input v-model.trim="companyName" :class="v.classes" name="nome da empresa" id="companyName" type="name"
                   placeholder="Digite o nome da empresa" />
@@ -148,8 +148,8 @@
               </div>
             </ValidationProvider>
 
-            <ValidationProvider v-if="isJuridical && !isFirstPage"
-              :rules="{required: isJuridical, min : {length: 18}, cnpj: true}" v-slot="v" :bails="false">
+            <ValidationProvider v-if="isJuridical && !isFirstPage" :rules="{required: isJuridical, min : {length: 18}, cnpj: true}" v-slot="v" :bails="false">
+              <span class="label">CNPJ</span>
               <div class="error-div">
                 <input v-mask="'##.###.###/####-##'" :class="v.classes" id="cnpj" v-model="cnpj"
                   placeholder="Digite o CNPJ da empresa" />
@@ -160,8 +160,8 @@
             </ValidationProvider>
 
 
-            <ValidationProvider v-if="isJuridical && !isFirstPage" :rules="{required: isJuridical}" v-slot="v"
-              :bails="false">
+            <ValidationProvider v-if="isJuridical && !isFirstPage" :rules="{required: isJuridical}" v-slot="v" :bails="false">
+              <span class="label">Razão social</span>
               <div class="error-div">
                 <input v-model.trim="socialReason" :class="v.classes" type="name" id="socialReason"
                   placeholder="Digite a razão social da empresa" />
@@ -172,8 +172,8 @@
             </ValidationProvider>
 
 
-            <ValidationProvider v-if="isPhysical && !isFirstPage"
-              :rules="{required: isPhysical, min : {length: 14}, cpf: true}" v-slot="v" :bails="false">
+            <ValidationProvider v-if="isPhysical && !isFirstPage" :rules="{required: isPhysical, min : {length: 14}, cpf: true}" v-slot="v" :bails="false">
+              <span class="label">CPF</span>
               <div class="error-div">
                 <input v-mask="'###.###.###-##'" :class="v.classes" v-model="cpf" id="cpf"
                   placeholder="Digite seu CPF" />
@@ -206,7 +206,8 @@
 
             </div>
 
-            <!--          <input v-if="!isLoading" type="submit" class="submit-btn" value="Cadastrar" @click.prevent="onSubmit" form="register-form" />-->
+            <input v-if="!isLoading && !isFirstPage" type="submit" class="submit-btn" value="Cadastrar" @click.prevent="onSubmit" form="register-form" />
+
             <Loading class="loading" v-if='isLoading' />
 
             <!--          <div class="clickable-text-center">-->
