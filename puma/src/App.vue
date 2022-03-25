@@ -1,4 +1,4 @@
-  <template>
+<template>
   <div id='app'>
     <link
       href='https://fonts.googleapis.com/css?family=Rubik:300,400,500,600,700,900'
@@ -106,6 +106,7 @@ html, body {
   margin-top: 1.7em;
   margin-left: 3.5em;
 }
+
 .logo-puma {
   width: 184px;
   height: 56px;
@@ -114,49 +115,5 @@ html, body {
   line-height: 56px;
   letter-spacing: 0.3em;
   color: #15355e;
-}
-.title-page-home {
-  width: 71px;
-  height: 28px;
-  left: 845px;
-  top: 170px;
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 28px;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  color: #15355E;
-  background-color: #ffffff;
-}
-.title-page {
-  width: 13px;
-  height: 28px;
-  left: 946px;
-  top: 170px;
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 28px;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  color: #15355E;
-}
-.title-page-local {
-  width: 72px;
-  height: 28px;
-  left: 989px;
-  top: 170px;
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 28px;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  color: #15355E;
-}
-.line-title-page {
-  width: 72px;
-  height: 0px;
-  left: 989px;
-  top: 195px;
-  border: 3px solid #15355E;
 }
 </style>

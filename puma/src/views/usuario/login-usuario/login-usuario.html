@@ -49,6 +49,12 @@
                       </div>
                     </ValidationProvider>
 
+                    <div class="error" v-if='hasAuthError'>
+                      <span class="error-span">
+                        Email ou senha incorretos
+                      </span>
+                    </div>
+
                     <div class="clickable-text-left">
                       <router-link to="#">
                         Esqueci minha senha

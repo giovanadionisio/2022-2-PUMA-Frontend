@@ -7,16 +7,13 @@ body {
     height: 100vh;
     background-color: #ffffff;
 }
-.container-top {
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
-}
+
 .container {
     display: flex;
     justify-content: center; 
     align-items: center; 
 }
+
 .card {
     background-color: #ffffff;
     padding: 1px;
@@ -28,6 +25,7 @@ body {
     flex-direction: column;
     justify-content: space-around;*/
 }
+
 .title-box {
     font-size: 32px;
     height: 46px;
@@ -37,6 +35,7 @@ body {
     color: #ffffff;
     text-align: center;
 }
+
 .title-slot {
     font-size: 24px;
     text-align: left;
@@ -49,6 +48,7 @@ body {
     font-size: 24px;
     line-height: 28px;
 }
+
 #register-form {
     display: flex;
     flex-direction: column;
@@ -57,9 +57,11 @@ body {
 select:required:invalid {
     color: gray;
 }
+
 option[value=""][disabled] {
     display: none;
 }
+
 option {
     color: black;
 }
@@ -103,6 +105,7 @@ a {
     margin-bottom: 20px;
     text-align: center;
 }
+
 .error-span {
     display: flex;
     margin-top: 10px;
@@ -111,6 +114,7 @@ a {
     margin-left: 75px;
     color: #EB0600;
 }
+
 .error-div {
     display: flex;
     flex-direction: column;
@@ -119,4 +123,57 @@ a {
 
 .invalid {
     border: 1px solid #EB0600;
+}
+
+.error{
+    display: flex;
+    margin-top: 10px;
+    text-align: left;
+    flex-direction: column;
+    color: #EB0600;
+}
+
+.title-page-home {
+    width: 71px;
+    height: 28px;
+    left: 845px;
+    top: 170px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 28px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: #15355E;
+    background-color: #ffffff;
+    padding: 5px;
+}
+
+.title-page {
+    width: 13px;
+    height: 28px;
+    left: 946px;
+    top: 170px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 28px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: #15355E;
+    padding: 5px;
+}
+
+.title-page-local {
+    width: 72px;
+    height: 28px;
+    left: 989px;
+    top: 170px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 28px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: #15355E;
+    padding: 5px;
+    padding-bottom: 0px;
+    border-bottom: 5px solid #15355E;
 }
