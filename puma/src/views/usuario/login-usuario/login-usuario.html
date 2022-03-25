@@ -47,14 +47,13 @@
                           {{ erro }}
                         </span>
                       </div>
-
-                      <div class="error" v-if='hasAuthError' >
-                        <span class="error-span" >
-                          {{ erro }}
-                          Email ou senha incorretos
-                        </span>
-                      </div>
                     </ValidationProvider>
+
+                    <div class="error" v-if='hasAuthError'>
+                      <span class="error-span">
+                        Email ou senha incorretos
+                      </span>
+                    </div>
 
                     <div class="clickable-text-left">
                       <router-link to="#">
@@ -80,7 +79,7 @@
         </b-row>
       </b-col>
       <b-col sm="3" align-self="end">
-      <img src="../../../assets/vetor-login.png" />
+        <img src="../../../assets/vetor-login.png" />
       </b-col>
     </b-row>
   </b-container>

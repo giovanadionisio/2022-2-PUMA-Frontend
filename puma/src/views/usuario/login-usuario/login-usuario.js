@@ -27,7 +27,7 @@ export default {
       if (isValid) {
         const user = { email: this.email, password: this.password };
         this.isLoading = true;
-        // this.hasAuthError = false ;
+        // this.hasAuthError = false;
 
         userService.logUserIn(user).then((response) => {
           this.isLoading = false;
@@ -50,8 +50,6 @@ export default {
         }).catch(() => {
           this.hasAuthError = true;
           this.isLoading = false;
-          // eslint-disable-next-line no-alert
-          // alert('Uma falha ocorreu ao fazer login. Tente novamente.');
         });
       }
     },
