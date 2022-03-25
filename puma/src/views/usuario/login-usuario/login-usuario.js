@@ -15,6 +15,7 @@ export default {
       password: '',
       email: '',
       isLoading: false,
+      hasAuthError: false,
     };
   },
   mounted() {
@@ -26,9 +27,11 @@ export default {
       if (isValid) {
         const user = { email: this.email, password: this.password };
         this.isLoading = true;
+        // this.hasAuthError = false;
 
         userService.logUserIn(user).then((response) => {
           this.isLoading = false;
+          // this.hasAuthError = false;
 
           this.$store.commit('LOGIN_USER', {
             userId: response.data.userId,
@@ -45,9 +48,8 @@ export default {
             this.$router.push('/');
           }
         }).catch(() => {
+          this.hasAuthError = true;
           this.isLoading = false;
-          // eslint-disable-next-line no-alert
-          alert('Uma falha ocorreu ao fazer login. Tente novamente.');
         });
       }
     },
@@ -66,5 +68,5 @@ extend('email', {
 });
 extend('required', {
   ...required,
-  message: 'Preenchimento obrigatório',
+  message: 'Campo obrigatório ',
 });
