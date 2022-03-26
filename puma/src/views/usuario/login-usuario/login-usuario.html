@@ -1,49 +1,86 @@
-<body>
-<div class="container">
-  <div class="column">
-    <div class="card">
-      <div class="title-box"> Bem-vindo(a) ao PUMA! </div>
-      <div>
-        <ValidationObserver ref="observer" v-slot="{invalid}" @submit.prevent="logar()">
-          <form id="register-form">
+<div class="h-100">
+  <b-container fluid class="h-100">
+    <b-row style="height: 5%;" />
+    <b-row style="height: 95%;">
+      <b-col sm="3">
+        <b-row align-h="center">
+          <span class="logo-puma">PUMA</span>
+        </b-row>
+      </b-col>
+      <b-col sm="6">
+        <b-row align-h="center">
+          <div>
+            <span class="title-page-home">HOME</span>
+            <span class="title-page">></span>
+            <span class="title-page-local">LOGIN</span>
+          </div>
+        </b-row>
+        <b-row style="height: 10%;" />
+        <b-row align-h="center" align-v="center">
+          <div style="width:725px;">
+            <b-col class="title-box"> Bem-vindo(a) ao PUMA! </b-col>
+            <b-col class="card">
+              <div>
+                <ValidationObserver ref="observer" v-slot="{invalid}" @submit.prevent="logar()">
+                  <form id="register-form">
+                    <ValidationProvider rules="required|email" v-slot="v" :bails="false">
+                      <div class="title-slot">
+                        E-mail
+                      </div>
+                      <div class="error-div">
+                        <input v-bind:class="{ invalid: v.errors.length }" v-model.trim="email" type="text" id="email"
+                          class="input-field" placeholder="E-mail" />
+                        <span class="error-span" v-for="erro in v.errors">
+                          {{ erro }}
+                        </span>
+                      </div>
+                    </ValidationProvider>
 
-            <ValidationProvider rules="required|email" v-slot="v" :bails="false">
-              <div class="error-div">
-                <input v-bind:class="{ invalid: v.errors.length }" v-model.trim="email" type="text" id="email" placeholder="E-mail" />
-                <span class="error-span" v-for="erro in v.errors">
-                  {{ erro }}
-                </span>
+                    <ValidationProvider rules="required" v-slot="v" :bails="false">
+                      <div class="title-slot">
+                        Senha
+                      </div>
+                      <div class="error-div">
+                        <input v-bind:class="{ invalid: v.errors.length }" type="password" id="senha"
+                          class="input-field" v-model="password" placeholder="Senha" />
+                        <span class="error-span" v-for="erro in v.errors">
+                          {{ erro }}
+                        </span>
+                      </div>
+                    </ValidationProvider>
+
+                    <div class="error" v-if='hasAuthError'>
+                      <span class="error-span">
+                        Email ou senha incorretos
+                      </span>
+                    </div>
+
+                    <div class="clickable-text-left">
+                      <router-link to="#">
+                        Esqueci minha senha
+                      </router-link>
+                    </div>
+
+                    <div class="clickable-text-left">
+                      <router-link to="/usuario/cadastro">
+                        Primeiro acesso? Clique aqui
+                      </router-link>
+                    </div>
+
+                    <input type="submit" class="submit-btn" value="Entrar" @click.prevent="logar()"
+                      form="register-form" />
+
+                    <Loading class="loading" v-if='isLoading' />
+                  </form>
+                </ValidationObserver>
               </div>
-            </ValidationProvider>
-
-            <ValidationProvider rules="required" v-slot="v" :bails="false">
-              <div class="error-div">
-                <input v-bind:class="{ invalid: v.errors.length }" type="password" id="senha" v-model="password" placeholder="Senha" />
-                <span class="error-span" v-for="erro in v.errors">
-                  {{ erro }}
-                </span>
-              </div>
-            </ValidationProvider>
-
-            <div class="clickable-text-left">
-              <router-link to="/usuario/cadastro">
-                Não possui uma conta? Cadastre-se
-              </router-link>
-            </div>
-
-            <div class="clickable-text-left">
-              <router-link to="#">
-                Esqueci minha senha
-              </router-link>
-            </div>
-
-            <input type="submit" class="submit-btn" value = "Entrar" @click.prevent="logar()" form="register-form" />
-
-            <Loading class="loading" v-if='isLoading' />
-        </form>
-      </ValidationObserver>
-      </div>
-    </div>
-  </div>
+            </b-col>
+          </div>
+        </b-row>
+      </b-col>
+      <b-col sm="3" align-self="end">
+        <img src="../../../assets/vetor-login.png" />
+      </b-col>
+    </b-row>
+  </b-container>
 </div>
-</body>
