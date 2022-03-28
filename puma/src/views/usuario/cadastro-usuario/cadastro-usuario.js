@@ -1,13 +1,13 @@
 import Loading from '../../../components/Loading.vue';
-import Navbar from '../../../components/Navbar.vue';
 import UserService from '../../../services/userService';
+import VisitorNav from '../../../components/VisitorNav/VisitorNav.vue';
 
 const userService = new UserService();
 export default {
   name: 'CadastroUsuario',
   components: {
     Loading,
-    Navbar,
+    VisitorNav,
   },
   mounted() {
     document.title = 'PUMA | Cadastro Usuário';
@@ -34,6 +34,7 @@ export default {
       isJuridical: false,
       isPhysical: false,
       isExternalAgent: false,
+      navs: [{ title: 'HOME' }, { title: 'CADASTRO' }],
     };
   },
   methods: {

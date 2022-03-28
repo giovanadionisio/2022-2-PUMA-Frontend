@@ -47,7 +47,7 @@ html, body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* text-align: center; */
-  color: #15355e;
+  /* color: #15355e; */
   height:100%;
 }
 
