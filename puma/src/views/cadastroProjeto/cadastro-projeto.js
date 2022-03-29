@@ -1,7 +1,11 @@
+/* eslint-disable no-alert */
+/* eslint-disable no-console */
+/* eslint-disable no-tabs */
+/* eslint-disable comma-spacing */
+/* eslint-disable key-spacing */
+/* eslint-disable prefer-template */
 import ProjectService from '../../services/projectService';
-
-const projectService = new ProjectService();
-let selectedAreasConhecimento = [];
+import AlocateService from '../../services/AlocateService';
 
 export default {
   name: 'ProjectRegister',
@@ -13,59 +17,31 @@ export default {
       resultadoEsperado: { val: '', isValid: true },
       operacao: { val: '', isValid: true },
       formIsValid: '',
-      file: { val: '', isValid: true },
+      projectService: new ProjectService(),
+      alocateService: new AlocateService(),
+      multiSelectPlaceholder: 'Carregando opções...',
       isLoading: false,
-      areasConhecimento: [],
-      selectedAreasConhecimento,
-      areasConhecimentoSelecionadas: { val: selectedAreasConhecimento, isValid: true },
-      areasConhecimentoObject: [],
+      isLoadingKeywords: false,
+      isMultiselectOpen: false,
+      keywords: [],
+      keywordsSelected: [],
+      value: [],
+      options: [
+        { language: 'JavaScript', library: 'Vue.js' },
+        { language: 'JavaScript', library: 'Vue-Multiselect' },
+        { language: 'JavaScript', library: 'ffff' },
+        { language: 'JavaScript', library: 'ggggg' },
+        { language: 'JavaScript', library: 'hhhhhh' },
+        { language: 'JavaScript', library: 'nnnnnnnn' },
+        { language: 'JavaScript', library: 'kkkkkkkkk' },
+      ],
     };
   },
-  beforeCreate() {
-    projectService.getKnowledgeAreas().then((response) => {
-      response.data.response.forEach((areaConhecimento) => {
-        this.areasConhecimento.push(areaConhecimento);
-      });
-    });
+  beforeMount() {
+    this.fillKeywords();
   },
   methods: {
-    beGay(lel) {
-      if (selectedAreasConhecimento.includes(lel)) {
-        selectedAreasConhecimento = selectedAreasConhecimento
-          .filter((value) => value !== lel);
-      } else {
-        selectedAreasConhecimento.push(lel);
-      }
-      this.areasConhecimentoSelecionadas.val = selectedAreasConhecimento;
-    },
-    whoAmI(lel) {
-      if (this.areasConhecimentoSelecionadas.val.includes(lel)) {
-        return ('fuck');
-      }
-      return ('notfuck');
-    },
     submitForm() {
-      if (!this.validateFormData()) {
-        alert('Preencha todos os campos, selecione pelo menos uma área de conhecimento e submeta um arquivo.');
-        return;
-      }
-      this.areasConhecimentoObject = [];
-      this.areasConhecimentoSelecionadas.val.forEach((areaConhecimento) => {
-        this.areasConhecimento.forEach((area) => {
-          if (area.knowledgeareaid === areaConhecimento) {
-            this.areasConhecimentoObject.push({
-              knowledgearea: area.knowledgearea,
-              knowledgeareaid: area.knowledgeareaid,
-              selected: false,
-            });
-          }
-        });
-      });
-      const aux = [];
-      this.areasConhecimentoObject.forEach((area) => {
-        aux.push({ knowledgearea: area.knowledgearea, knowledgeareaid: area.knowledgeareaid });
-      });
-      console.log(this.titulo.val);
       const projectObject = {
         name: this.titulo.val,
         problem: this.descricao.val,
@@ -74,88 +50,33 @@ export default {
         subjectid: 1,
         userid: 1,
         isLoading: false,
-        knowledgeareas: aux,
+        keywords: this.keywordsSelected,
       };
-      projectService.addProject(projectObject).then(async (response) => {
-        this.isLoading = true;
-        const projectId = response.data.data.response;
-        if (this.file.val) {
-          const fileByteArray = await this.getFileByteContent();
-          const file = {
-            filename: this.file.val.name,
-            bytecontent: fileByteArray,
-            projectid: projectId,
-          };
-          projectService.addFile(file).then(() => {
-            this.isLoading = false;
-            this.$router.push({ name: 'My Proposals' });
-          }).catch(() => {
-            this.isLoading = false;
-            alert('erro no cadastro de arquivo');
-          });
-        } else {
-          this.isLoading = false;
-          this.$router.push({ name: 'My Proposals' });
-        }
-      }).catch((asdasd) => {
+      console.log(projectObject);
+      console.log(this.keywords);
+      // this.value = [{ language: 'JavaScript', library: 'Vue-Multiselect', checked: false }];
+      this.projectService.addProject(projectObject).then(async (response) => {
+        console.log(response);
         this.isLoading = false;
-        console.log(asdasd);
-        alert('Uma falha ocorreu ao efetuar o cadastro. Tente novamente.');
+        this.$router.push({ name: 'My Proposals' });
+      }).catch((error) => {
+        this.isLoading = false;
+        alert(error);
       });
     },
-    updateFile(event) {
-      if (!event.target.files[0]) {
-        this.file.val = null;
-        this.file.isValid = false;
-      } else {
-        // eslint-disable-next-line prefer-destructuring
-        this.file.val = event.target.files[0];
-        this.file.isValid = true;
-      }
+    sortLabels() {
+      this.keywordsSelected.sort((a, b) => b.keyword.length - a.keyword.length);
     },
-    getFileByteContent() {
-      return new Promise((resolve) => {
-        const reader = new FileReader();
-        const fileByteArray = [];
-        reader.readAsArrayBuffer(this.file.val);
-        // eslint-disable-next-line consistent-return
-        reader.onloadend = (evt) => {
-          if (evt.target.readyState === FileReader.DONE) {
-            const arrayBuffer = evt.target.result;
-            const array = new Uint8Array(arrayBuffer);
-            // eslint-disable-next-line no-plusplus
-            for (let i = 0; i < array.length; i++) {
-              fileByteArray.push(array[i]);
-            }
-            resolve(fileByteArray);
-          }
-        };
+    isChecked(option) {
+      return this.keywordsSelected.some((op) => op.keywordid === option.keywordid);
+    },
+    fillKeywords() {
+      this.isLoadingKeywords = true;
+      this.alocateService.getKeywords().then((response) => {
+        this.keywords = response.data;
+        this.isLoadingKeywords = false;
+        this.multiSelectPlaceholder = this.keywords.length ? 'Selecione' : 'Sem resultados';
       });
-    },
-    validateFormData() {
-      this.formIsValid = true;
-      this.titulo.isValid = this.titulo.val;
-      this.titulo.isValid = true;
-      this.descricao.isValid = this.descricao.val;
-      this.resultadoEsperado.isValid = this.resultadoEsperado.val;
-      this.file.isValid = this.file.val;
-      this.areasConhecimentoSelecionadas.isValid = this.areasConhecimentoSelecionadas.val.length;
-      if (!this.titulo.isValid
-        || !this.descricao.isValid
-        || !this.resultadoEsperado.isValid
-        || !this.areasConhecimentoSelecionadas.isValid
-      ) {
-        this.formIsValid = false;
-      }
-      return this.formIsValid;
-    },
-    validateFormInput(input) {
-      if (input === 'areaConhecimento') {
-        // eslint-disable-next-line max-len
-        this.areasConhecimentoSelecionadas.isValid = !!this.areasConhecimentoSelecionadas.val.length;
-      } else {
-        this[input].isValid = this[input].val;
-      }
     },
   },
 };

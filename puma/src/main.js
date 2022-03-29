@@ -1,4 +1,6 @@
 import BootstrapVue from 'bootstrap-vue';
+import Multiselect from 'vue-multiselect';
+import 'vue-multiselect/dist/vue-multiselect.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 
@@ -36,6 +38,7 @@ setInteractionMode('eager');
 
 Vue.component('ValidationProvider', ValidationProvider);
 Vue.component('ValidationObserver', ValidationObserver);
+Vue.component('multiselect', Multiselect);
 
 Vue.use(VueMask);
 Vue.use(BootstrapVue);

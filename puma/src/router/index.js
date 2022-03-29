@@ -64,9 +64,9 @@ const routes = [
     path: '/projeto/cadastro',
     name: 'Cadastro de Projeto',
     component: () => import('../views/cadastroProjeto/cadastro-projeto.vue'),
-    meta: {
-      requiresAuth: true,
-    },
+    // meta: {
+    //   requiresAuth: true,
+    // },
   },
   {
     path: '/myProposals',

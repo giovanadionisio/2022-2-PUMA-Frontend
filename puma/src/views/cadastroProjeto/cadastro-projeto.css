@@ -29,7 +29,7 @@ textarea{
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  
+
 }
 
 input[type="text"] {
@@ -134,4 +134,13 @@ form label {
 
 .submit-btn {
   margin: 0 auto;
+}
+
+.checkbox-label {
+  display: inline-block;
+}
+
+.test {
+  position: absolute;
+  right: 1vw;
 }
