@@ -20,7 +20,7 @@ export default {
     };
   },
   beforeMount() {
-    this.fillKeywords();
+    this.getKeywords();
   },
   methods: {
     submitForm() {
@@ -39,7 +39,7 @@ export default {
         this.$router.push({ name: 'My Proposals' });
       }).catch((error) => {
         this.isLoading = false;
-        alert(error);
+        alert(`Infelizmente houve um erro ao cadastrar a proposta: ${error}`);
       });
     },
     sortMultiselectLabels() {
@@ -48,7 +48,7 @@ export default {
     isChecked(option) {
       return this.keywordsSelected.some((op) => op.keywordid === option.keywordid);
     },
-    fillKeywords() {
+    getKeywords() {
       this.isLoadingKeywords = true;
       this.alocateService.getKeywords().then((response) => {
         this.keywords = response.data;
@@ -56,7 +56,7 @@ export default {
         this.multiSelectPlaceholder = this.keywords.length ? 'Selecione' : 'Sem palavras disponíveis';
       }).catch((error) => {
         this.isLoadingKeywords = false;
-        alert(error);
+        alert(`Infelizmente houve um erro ao recuperar as palavras-chave: ${error}`);
       });
     },
   },
