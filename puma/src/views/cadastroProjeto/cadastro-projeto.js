@@ -11,7 +11,6 @@ export default {
   name: 'ProjectRegister',
   data() {
     return {
-      fonk: '',
       titulo: { val: '', isValid: true },
       descricao: { val: '', isValid: true },
       resultadoEsperado: { val: '', isValid: true },
@@ -22,19 +21,8 @@ export default {
       multiSelectPlaceholder: 'Carregando opções...',
       isLoading: false,
       isLoadingKeywords: false,
-      isMultiselectOpen: false,
       keywords: [],
       keywordsSelected: [],
-      value: [],
-      options: [
-        { language: 'JavaScript', library: 'Vue.js' },
-        { language: 'JavaScript', library: 'Vue-Multiselect' },
-        { language: 'JavaScript', library: 'ffff' },
-        { language: 'JavaScript', library: 'ggggg' },
-        { language: 'JavaScript', library: 'hhhhhh' },
-        { language: 'JavaScript', library: 'nnnnnnnn' },
-        { language: 'JavaScript', library: 'kkkkkkkkk' },
-      ],
     };
   },
   beforeMount() {
@@ -52,11 +40,7 @@ export default {
         isLoading: false,
         keywords: this.keywordsSelected,
       };
-      console.log(projectObject);
-      console.log(this.keywords);
-      // this.value = [{ language: 'JavaScript', library: 'Vue-Multiselect', checked: false }];
-      this.projectService.addProject(projectObject).then(async (response) => {
-        console.log(response);
+      this.projectService.addProject(projectObject).then(async () => {
         this.isLoading = false;
         this.$router.push({ name: 'My Proposals' });
       }).catch((error) => {
@@ -75,7 +59,7 @@ export default {
       this.alocateService.getKeywords().then((response) => {
         this.keywords = response.data;
         this.isLoadingKeywords = false;
-        this.multiSelectPlaceholder = this.keywords.length ? 'Selecione' : 'Sem resultados';
+        this.multiSelectPlaceholder = this.keywords.length ? 'Selecione' : 'Sem palavras disponíveis';
       });
     },
   },
