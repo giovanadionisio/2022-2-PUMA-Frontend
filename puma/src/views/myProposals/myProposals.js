@@ -1,6 +1,5 @@
 import ProjectService from '../../services/projectService';
-// eslint-disable-next-line import/no-unresolved
-import ProjectCard from '@/components/ProjectCard.vue';
+import ProjectCard from '../../components/ProjectCard.vue';
 
 const projectService = new ProjectService();
 
@@ -18,16 +17,12 @@ export default {
     goToNewProposal() {
       this.$router.push({ name: 'Cadastro de Projeto' });
     },
-    doNothing() {
-      // pass
-    },
   },
   created() {
-    projectService.getMyProposals().then((proposals) => {
-      proposals.data.forEach((element) => {
-        this.projs.push({ ...element, is_last: false, submit: this.doNothing });
+    projectService.getMyProposals().then((response) => {
+      response.data.forEach((project) => {
+        this.projs.push({ ...project, is_last: false, submit: this.doNothing });
       });
-      // this.projs = proposals.data;
       this.projs.push({ is_last: true, submit: this.goToNewProposal });
     });
   },

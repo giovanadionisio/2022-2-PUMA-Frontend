@@ -1,11 +1,11 @@
 <body>
   <div class='title'>
-    {{operacao === 'visualizar'?'Visualização de Projeto':'Nova proposta'}}
+    {{operacao === 'visualizar' ? 'Visualização de Projeto' :'Cadastro de Projeto'}}
   </div>
 
-  <div class='forms'>
-    <input type="text" id="titulo" v-model="titulo.val" placeholder="Qual é o título da proposta de projeto?"
-      :disabled=isLoading class="input-field">
+  <div class='forms' id="form-div">
+
+    <input type="text" id="titulo" v-model="titulo.val" placeholder="Qual é o título da proposta de projeto?" class="input-field">
 
     <textarea id="descricao" placeholder="Qual a proposta do projeto?" rows="7" v-model="descricao.val"
       maxlength="10000" :disabled=isLoading class="input-field">
@@ -30,7 +30,7 @@
         :options="keywords"
         :max="3"
         :loading="isLoadingKeywords"
-        :disabled="isLoadingKeywords || !keywords.length"
+        :disabled="isLoadingKeywords || !keywords.length || operacao === 'visualizar'"
         :multiple="true"
         :searchable="true"
         :closeOnSelect="false">
@@ -39,10 +39,8 @@
           <input class="test" type="checkbox" :checked="isChecked(scope.option)" @focus.prevent :key="scope.option.keywordid"/>
         </span>
       </multiselect>
-      <pre>{{ this.keywordsSelected }}</pre>
+<!--      <pre>{{ this.keywordsSelected }}</pre>-->
     </div>
-
-
   </div>
   <div class="form-row" v-if="operacao !== 'visualizar'">
     <input value="Submeter" v-if="!isLoading" type="submit" class="btn btn-warning submit-btn" @click="submitForm"/>

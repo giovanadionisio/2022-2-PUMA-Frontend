@@ -14,12 +14,18 @@
   <img class='picture' alt='projPicture' :src='picture'>
     <div class='text'>
       <div class='cardTitle'>
-        {{ title }}
+        Título: {{ project.name }}
+        ( <router-link :to="{ path: `projetos/visualizar/${project.projectid}`}" >
+          Consultar
+        </router-link>
+        )
       </div>
       <div class='expectedResult'>
-        {{ expectedResult }}
+        Status: {{ project.expectedresult }}
       </div>
-
+      <div class='expectedResult'>
+        Disciplina: {{ project.subject }}
+      </div>
     </div>
   </div>
 </template>
@@ -27,13 +33,13 @@
 <script>
 export default {
   name: 'ProjectCard',
-  props: ['picture', 'title', 'expectedResult', 'font-family', 'is_last'],
+  props: ['picture', 'project', 'font-family', 'is_last'],
 };
 </script>
 
 <style>
 .projectCard {
-  height: 225px;
+  height: 250px;
   width: 349px;
   border: 0.1em solid black;
   border-radius: 0.8em;
@@ -75,7 +81,7 @@ export default {
   text-align: left;
 
   overflow: hidden;
-  max-height: 60px;
+  max-height: 90px;
 }
 
 .cardTitle {
