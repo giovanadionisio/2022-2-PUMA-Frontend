@@ -73,7 +73,6 @@ export default class ProjectService {
   addProject(project) {
     return new Promise((resolve, reject) => {
       const auth = store.getters.token;
-      console.log(project);
       axios.post(`${global.URL_GATEWAY}/project`, project, { headers: { auth } }).then((response) => {
         resolve(response);
       }).catch((response) => {

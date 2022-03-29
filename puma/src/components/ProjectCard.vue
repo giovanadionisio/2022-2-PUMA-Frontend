@@ -28,9 +28,6 @@
 export default {
   name: 'ProjectCard',
   props: ['picture', 'title', 'expectedResult', 'font-family', 'is_last'],
-  created() {
-    console.log(this.picture);
-  },
 };
 </script>
 

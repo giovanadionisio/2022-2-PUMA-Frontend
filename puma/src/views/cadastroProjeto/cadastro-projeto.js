@@ -24,17 +24,15 @@ export default {
   },
   methods: {
     submitForm() {
-      const projectObject = {
+      const project = {
         name: this.titulo.val,
         problem: this.descricao.val,
         expectedresult: this.resultadoEsperado.val,
-        status: 'Em alocacao',
-        subjectid: 1,
-        userid: 1,
-        isLoading: false,
         keywords: this.keywordsSelected,
+        status: 'SB',
+        createdat: new Date().toISOString(),
       };
-      this.projectService.addProject(projectObject).then(async () => {
+      this.projectService.addProject(project).then(async () => {
         this.isLoading = false;
         this.$router.push({ name: 'My Proposals' });
       }).catch((error) => {
