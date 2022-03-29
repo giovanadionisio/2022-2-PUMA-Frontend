@@ -42,6 +42,24 @@ const routes = [
     },
   },
   {
+    path: '/usuario/recoveryPassword',
+    name: 'Recuperação Senha',
+    // eslint-disable-next-line import/no-unresolved
+    component: () => import('../views/usuario/recovery-password/RecoveryPassword.vue'),
+    meta: {
+      guest: true,
+    },
+  },
+  {
+    path: '/usuario/newPassword',
+    name: 'Nova Senha',
+    // eslint-disable-next-line import/no-unresolved
+    component: () => import('../views/usuario/new-password/NewPassword.vue'),
+    meta: {
+      guest: true,
+    },
+  },
+  {
     path: '/evaluate/:subjectId',
     name: 'Evaluate',
     // eslint-disable-next-line import/no-unresolved

@@ -1,20 +1,12 @@
 <template>
   <div id='nav'>
     <img
-      v-on:click='$router.push({ name: `Entrar` })'
+      v-on:click='$router.push({ name: `Home` })'
       class='nav-item'
       id='logo'
       src='../assets/navbarLogo.svg'
       alt='PUMA'
     />
-    <div id="description" style="color: #010203;">
-      <ul>
-        <li>{{ leftValue }}</li>
-      <li>></li>
-      <li><span id="currentPage">{{ rightValue }}</span></li>
-      </ul>
-  </div>
-
     <div id='dropdown'>
       <img class='nav-item' id='menu-button' src='../assets/navbarMenu.svg' alt='|||' />
       <div class="dropdown-content">
@@ -28,12 +20,6 @@
 
 export default {
   name: 'Navbar',
-  data() {
-    return {
-      leftValue: 'HOME',
-      rightValue: 'CADASTRO',
-    };
-  },
   methods: {
     logout() {
       this.$store.commit('RESET_USER_STATE');
@@ -45,18 +31,14 @@ export default {
 </script>
 
 <style scope>
-ul{list-style-type: none;}
-ul li{display: inline-block; padding: 0 2%;}
-#description{
-  letter-spacing: 4%;
-  width: 50%;
+div {
+  position: relative;
 }
-#currentPage{
-  text-decoration: underline;
-}
+
 .dropdown-content {
   display: none;
   position: absolute;
+  background-color: #15355e;
   width: 300px;
   transform: translate(-180px);
   z-index: 1;
@@ -87,7 +69,8 @@ ul li{display: inline-block; padding: 0 2%;}
 }
 
 #nav {
-  padding: 7px;
+  padding: 7 px;
+  background-color: #15355e;
   width: 100%;
   display: flex;
   justify-content: space-between;

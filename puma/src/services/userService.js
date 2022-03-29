@@ -28,4 +28,18 @@ export default class UserService {
       });
     });
   }
+
+  sendEmail(emaill, callback) {
+    return axios({
+      method: 'post',
+      url: `${global.URL_GATEWAY}/user/recover`,
+      data: {
+        email: emaill,
+      },
+    }).then((res) => {
+      callback(res);
+    }).catch((error) => {
+      callback(error.response);
+    });
+  }
 }

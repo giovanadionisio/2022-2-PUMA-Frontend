@@ -6,16 +6,6 @@ import Vue from 'vue';
 import axios from 'axios';
 import VueMask from 'v-mask';
 import {
-  faEye,
-  faEyeSlash,
-  faCircle,
-  faAngleRight,
-  faAngleLeft,
-} from '@fortawesome/free-solid-svg-icons';
-import { faCircle as faCircleRegular } from '@fortawesome/free-regular-svg-icons';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import {
   localize,
   extend,
   ValidationProvider,
@@ -41,14 +31,11 @@ import { validarCpf, validarCnpj } from '../utils/validators-puma';
 
 dotenv.config();
 
-library.add(faEye, faEyeSlash, faCircle, faCircleRegular, faAngleRight, faAngleLeft);
-
 localize('pt_BR', pt);
 setInteractionMode('eager');
 
 Vue.component('ValidationProvider', ValidationProvider);
 Vue.component('ValidationObserver', ValidationObserver);
-Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 Vue.use(VueMask);
 Vue.use(BootstrapVue);
