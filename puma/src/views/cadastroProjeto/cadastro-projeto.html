@@ -24,7 +24,7 @@
         label="keyword"
         :placeholder="multiSelectPlaceholder"
         v-model="keywordsSelected"
-        @input="sortLabels()"
+        @input="sortMultiselectLabels()"
         @open="multiSelectPlaceholder = 'Pesquisar'"
         @close="multiSelectPlaceholder = 'Selecione'"
         :options="keywords"

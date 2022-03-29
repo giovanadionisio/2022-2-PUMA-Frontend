@@ -1,9 +1,3 @@
-/* eslint-disable no-alert */
-/* eslint-disable no-console */
-/* eslint-disable no-tabs */
-/* eslint-disable comma-spacing */
-/* eslint-disable key-spacing */
-/* eslint-disable prefer-template */
 import ProjectService from '../../services/projectService';
 import AlocateService from '../../services/AlocateService';
 
@@ -48,7 +42,7 @@ export default {
         alert(error);
       });
     },
-    sortLabels() {
+    sortMultiselectLabels() {
       this.keywordsSelected.sort((a, b) => b.keyword.length - a.keyword.length);
     },
     isChecked(option) {
@@ -60,6 +54,9 @@ export default {
         this.keywords = response.data;
         this.isLoadingKeywords = false;
         this.multiSelectPlaceholder = this.keywords.length ? 'Selecione' : 'Sem palavras disponíveis';
+      }).catch((error) => {
+        this.isLoadingKeywords = false;
+        alert(error);
       });
     },
   },

@@ -3,7 +3,6 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
 import axios from '@/main.js';
-// import store from '../store';
 
 export default class AlocateService {
   getKeywords() {
