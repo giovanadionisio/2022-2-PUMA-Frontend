@@ -54,6 +54,7 @@ export default {
         this.multiSelectPlaceholder = this.keywords.length ? 'Selecione' : 'Sem palavras disponíveis';
       }).catch((error) => {
         this.isLoadingKeywords = false;
+        this.multiSelectPlaceholder = 'Sem palavras disponíveis';
         alert(`Infelizmente houve um erro ao recuperar as palavras-chave: ${error}`);
       });
     },

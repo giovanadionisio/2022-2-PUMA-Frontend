@@ -76,7 +76,7 @@ export default class ProjectService {
       axios.post(`${global.URL_GATEWAY}/project`, project, { headers: { auth } }).then((response) => {
         resolve(response);
       }).catch((response) => {
-        reject(`/projeto/cadastro reject: ${response}`);
+        reject(`/projetos/cadastrar reject: ${response}`);
       });
     });
   }
