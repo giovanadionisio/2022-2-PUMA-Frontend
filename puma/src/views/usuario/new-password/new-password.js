@@ -1,5 +1,9 @@
+/* eslint-disable camelcase */
 import { extend } from 'vee-validate';
-import { email, required } from 'vee-validate/dist/rules';
+// eslint-disable-next-line camelcase
+import {
+  email, required, min, regex,
+} from 'vee-validate/dist/rules';
 import UserService from '../../../services/userService';
 import Loading from '../../../components/Loading.vue';
 
@@ -14,48 +18,32 @@ export default {
     return {
       email: '',
       isLoading: false,
-      hasAuthError: false,
+      isEqualsToNewPassword: true,
       newPassword: '',
       confirmNewPassword: '',
       passwordRedefined: false,
-
     };
   },
+
   created() {
     this.email = localStorage.email;
   },
-  mounted() {
-    document.title = 'PUMA | Login';
-  },
+
   methods: {
-    async logar() {
-      const isValid = await this.$refs.observer.validate();
-      if (isValid) {
-        const user = { email: this.email, password: this.password };
-        this.isLoading = true;
-        // this.hasAuthError = false;
+    verifyConfirmPassword() {
+      if (this.confirmNewPassword === this.newPassword) {
+        this.isEqualsToNewPassword = true;
+      } else {
+        this.isEqualsToNewPassword = false;
+      }
+    },
 
-        userService.logUserIn(user).then((response) => {
-          this.isLoading = false;
-          // this.hasAuthError = false;
-
-          this.$store.commit('LOGIN_USER', {
-            userId: response.data.userId,
-            fullName: response.data.fullName,
-            email: response.data.email,
-            type: response.data.type,
-          });
-
-          this.$store.commit('SET_TOKEN', response.data.token);
-
-          if (response.data.type === 'Agente Externo') {
-            this.$router.push('/myProposals');
-          } else {
-            this.$router.push('/');
+    updatePassword() {
+      if (this.isEqualsToNewPassword && this.newPassword.length) {
+        userService.updatePassword(this.email, this.newPassword, (res) => {
+          if (res.status === 200) {
+            this.passwordRedefined = true;
           }
-        }).catch(() => {
-          this.hasAuthError = true;
-          this.isLoading = false;
         });
       }
     },
@@ -72,7 +60,20 @@ extend('email', {
   },
   message: 'Insira um email válido',
 });
+
 extend('required', {
   ...required,
-  message: 'Campo obrigatório ',
+  message: 'Campo obrigatório',
+});
+
+extend('min', {
+  // eslint-disable-next-line camelcase
+  ...min,
+  message: 'Mínimo 6 caracteres',
+});
+
+extend('regex', {
+  // eslint-disable-next-line camelcase
+  ...regex,
+  message: 'Precisa ter letras e números',
 });

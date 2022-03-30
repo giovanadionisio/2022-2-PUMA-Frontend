@@ -29,12 +29,26 @@ export default class UserService {
     });
   }
 
-  sendEmail(emaill, callback) {
+  sendEmail(email, callback) {
     return axios({
       method: 'post',
       url: `${global.URL_GATEWAY}/user/recover`,
       data: {
-        email: emaill,
+        email,
+      },
+    }).then((res) => {
+      callback(res);
+    }).catch((error) => {
+      callback(error.response);
+    });
+  }
+
+  updatePassword(email, password, callback) {
+    return axios({
+      method: 'put',
+      url: `${global.URL_GATEWAY}/user/password/${email}`,
+      data: {
+        password,
       },
     }).then((res) => {
       callback(res);
