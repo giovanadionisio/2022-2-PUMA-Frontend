@@ -21,7 +21,7 @@ export default {
   created() {
     projectService.getMyProposals().then((response) => {
       response.data.forEach((project) => {
-        this.projs.push({ ...project, is_last: false, submit: {} });
+        this.projs.push({ ...project, is_last: false, submit: { apply() {} } });
       });
       this.projs.push({ is_last: true, submit: this.goToNewProposal });
     });
