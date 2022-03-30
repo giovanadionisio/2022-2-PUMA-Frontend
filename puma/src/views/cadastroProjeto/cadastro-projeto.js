@@ -44,7 +44,7 @@ export default {
       };
       this.projectService.addProject(project).then(async () => {
         this.isLoading = false;
-        this.$router.push({ name: 'Consuta de Projetos' });
+        this.$router.push({ name: 'Consulta de Projetos' });
       }).catch((error) => {
         this.isLoading = false;
         alert(`Infelizmente houve um erro ao cadastrar a proposta: ${error}`);

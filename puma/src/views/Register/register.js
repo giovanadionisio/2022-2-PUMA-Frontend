@@ -136,7 +136,7 @@ export default {
           this.$store.commit('SET_TOKEN', response.data.token);
 
           if (response.data.type === 'Agente Externo') {
-            this.$router.push('/projeto');
+            this.$router.push('/projetos');
           } else {
             this.$router.push('/');
           }
