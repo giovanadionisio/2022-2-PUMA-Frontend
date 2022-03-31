@@ -1,0 +1,14 @@
+.root {
+    width: 250px;
+    height: 100%;
+    background-color: #15355E;
+    display: inline-block;
+}
+
+.logo {
+    height: 10%;
+}
+
+.menu-container {
+    height: 90%;
+}

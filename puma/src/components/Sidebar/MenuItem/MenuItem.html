@@ -1,0 +1,27 @@
+<div v-if='hasAccess' v-on:click="props.onclick()" class="item" v-bind:class="{ selected: selected }">
+    <b-container fluid class="h-100">
+        <b-row align-v="center" class="h-100">
+            <b-col cols="2">
+                <img :src="props.iconUrl" draggable="false" width="32">
+            </b-col>
+            <b-col cols="10">
+                <span class="item-title">
+                    {{ props.title }}
+                </span>
+            </b-col>
+        </b-row>
+    </b-container>
+</div>
+
+<!-- <div v-on:click="props.onclick()" class="item">
+    <b-container fluid>
+        <b-row align-h="center">
+            <img :src="props.iconUrl" draggable="false">
+        </b-row>
+        <b-row align-h="center">
+            <span class="item-title">
+                {{ props.title }}
+            </span>
+        </b-row>
+    </b-container>
+</div> -->

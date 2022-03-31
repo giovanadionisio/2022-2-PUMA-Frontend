@@ -1,8 +1,10 @@
+/* eslint-disable */
 import { extend } from 'vee-validate';
 import { email, required } from 'vee-validate/dist/rules';
 import UserService from '../../../services/userService';
 import Loading from '../../../components/Loading.vue';
 import VisitorNav from '../../../components/VisitorNav/VisitorNav.vue';
+import NAV_CONST from '@/constants/navigations.js';
 
 const userService = new UserService();
 
@@ -44,12 +46,8 @@ export default {
           });
 
           this.$store.commit('SET_TOKEN', response.data.token);
-
-          if (response.data.type === 'Agente Externo') {
-            this.$router.push('/myProposals');
-          } else {
-            this.$router.push('/');
-          }
+          this.$store.commit('SET_CURRENT_NAVIGATION', NAV_CONST.MY_PROJECTS.KEY);
+          this.$router.push('/meus-projetos/listar');
         }).catch(() => {
           this.hasAuthError = true;
           this.isLoading = false;

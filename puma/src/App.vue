@@ -4,18 +4,19 @@
       href='https://fonts.googleapis.com/css?family=Rubik:300,400,500,600,700,900'
       rel='stylesheet'
     />
-    <Navbar v-if='isAuthenticated' />
+    <Sidebar v-if='isAuthenticated' />
     <router-view />
   </div>
 </template>
 
 <script>
+/* eslint-disable */
 // eslint-disable-next-line import/no-unresolved
-import Navbar from '@/components/Navbar.vue';
+import Sidebar from '@/components/Sidebar/Sidebar.vue';
 
 export default {
   components: {
-    Navbar,
+    Sidebar,
   },
   methods: {
     updateSessionStatus() {
@@ -49,6 +50,16 @@ html, body {
   /* text-align: center; */
   /* color: #15355e; */
   height:100%;
+}
+
+.main-content {
+  display: block;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: calc(100% - 250px);
+  margin-left: 250px;
+  padding: 10px; 
 }
 
 .input-field {
