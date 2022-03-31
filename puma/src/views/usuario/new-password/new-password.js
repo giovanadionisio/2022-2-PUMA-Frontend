@@ -6,6 +6,7 @@ import {
 } from 'vee-validate/dist/rules';
 import UserService from '../../../services/userService';
 import Loading from '../../../components/Loading.vue';
+import VisitorNav from '../../../components/VisitorNav/VisitorNav.vue';
 
 const userService = new UserService();
 
@@ -13,6 +14,7 @@ export default {
   name: 'LoginUsuario',
   components: {
     Loading,
+    VisitorNav,
   },
   data() {
     return {
@@ -22,6 +24,7 @@ export default {
       newPassword: '',
       confirmNewPassword: '',
       passwordRedefined: false,
+      navs: [{ title: 'HOME' }, { title: 'RECUPERAÇÃO DE SENHA' }],
     };
   },
 

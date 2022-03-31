@@ -5,6 +5,18 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 import Vue from 'vue';
 import axios from 'axios';
 import VueMask from 'v-mask';
+
+import {
+  faEye,
+  faEyeSlash,
+  faCircle,
+  faAngleRight,
+  faAngleLeft,
+} from '@fortawesome/free-solid-svg-icons';
+import { faCircle as faCircleRegular } from '@fortawesome/free-regular-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+
 import {
   localize,
   extend,
@@ -21,12 +33,14 @@ import {
   required,
   max,
 } from 'vee-validate/dist/rules';
+
 import pt from 'vee-validate/dist/locale/pt_BR.json';
 import dotenv from 'dotenv';
 import App from './App.vue';
 import router from './router';
 import store from './store';
 import environment from './config/environment';
+
 import { validarCpf, validarCnpj } from '../utils/validators-puma';
 
 dotenv.config();
@@ -34,8 +48,11 @@ dotenv.config();
 localize('pt_BR', pt);
 setInteractionMode('eager');
 
+library.add(faEye, faEyeSlash, faCircle, faCircleRegular, faAngleRight, faAngleLeft);
+
 Vue.component('ValidationProvider', ValidationProvider);
 Vue.component('ValidationObserver', ValidationObserver);
+Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 Vue.use(VueMask);
 Vue.use(BootstrapVue);

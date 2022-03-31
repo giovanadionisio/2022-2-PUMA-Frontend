@@ -16,14 +16,6 @@ const routes = [
     },
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
-  },
-  {
     path: '/usuario/cadastro',
     name: 'Cadastro Usuário',
     // eslint-disable-next-line import/no-unresolved
@@ -60,36 +52,41 @@ const routes = [
     },
   },
   {
-    path: '/evaluate/:subjectId',
-    name: 'Evaluate',
-    // eslint-disable-next-line import/no-unresolved
-    component: () => import('../views/Evaluate/Evaluate.vue'),
+    path: '/meus-projetos/listar',
+    name: 'Meus Projetos',
+    component: () => import('../views/MyProjects/MyProjects.vue'),
     meta: {
       requiresAuth: true,
     },
   },
   {
-    path: '/approval/:projId',
-    name: 'Approval',
-    props: true,
-    // eslint-disable-next-line import/no-unresolved
-    component: () => import('../views/Approval/Approval.vue'),
+    path: '/meus-projetos/consultar', // consultar:id
+    name: 'Consultar Projeto',
+    component: () => import('../views/MyProjects/MyProjects.vue'),
     meta: {
       requiresAuth: true,
     },
   },
   {
-    path: '/projeto/cadastro',
-    name: 'Cadastro de Projeto',
+    path: '/projetos/cadastrar',
+    name: 'Cadastrar de Projeto',
     component: () => import('../views/cadastroProjeto/cadastro-projeto.vue'),
     meta: {
       requiresAuth: true,
     },
   },
   {
-    path: '/myProposals',
-    name: 'My Proposals',
-    component: () => import('../views/myProposals/myProposals.vue'),
+    path: '/projetos/listar',
+    name: 'Projetos',
+    component: () => import('../views/SubjectProjects/SubjectProjects.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/projetos/consultar', // consultar:id
+    name: 'Projetos',
+    component: () => import('../views/MyProjects/MyProjects.vue'),
     meta: {
       requiresAuth: true,
     },

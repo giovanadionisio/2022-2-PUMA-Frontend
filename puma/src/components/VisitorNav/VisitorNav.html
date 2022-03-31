@@ -1,0 +1,22 @@
+<div class="h-100">
+    <b-container fluid class="h-100">
+        <b-row align-v="center" class="h-100">
+            <b-col cols="2">
+                <b-row align-h="center">
+                    <img v-on:click='$router.push({ name: `Entrar` })' class='nav-item' id='logo'
+                        src='../../assets/navbarLogo.svg' alt='PUMA' />
+                </b-row>
+            </b-col>
+            <b-col cols="8">
+                <b-row align-h="center">
+                    <span v-for="(nav, i) in navs" :key="nav.name">
+                        <span v-if="i === navs.length - 1" class="nav-item-cc">{{ nav.title }}</span>
+                        <span v-if="i !== navs.length - 1" class="nav-item">{{ nav.title }}</span>
+                        <span v-if="i !== navs.length - 1" class="nav-item">></span>
+                    </span>
+                </b-row>
+            </b-col>
+            <b-col cols="2" />
+        </b-row>
+    </b-container>
+</div>
