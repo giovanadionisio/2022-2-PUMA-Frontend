@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Loading from '../../../components/Loading.vue';
 import UserService from '../../../services/userService';
 import VisitorNav from '../../../components/VisitorNav/VisitorNav.vue';

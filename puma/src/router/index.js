@@ -16,11 +16,6 @@ const routes = [
     },
   },
   {
-    path: '/sobre',
-    name: 'Sobre',
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
-  },
-  {
     path: '/usuario/cadastro',
     name: 'Cadastro Usuário',
     // eslint-disable-next-line import/no-unresolved
@@ -34,6 +29,24 @@ const routes = [
     name: 'Entrar',
     // eslint-disable-next-line import/no-unresolved
     component: () => import('../views/usuario/login-usuario/LoginUsuario.vue'),
+    meta: {
+      guest: true,
+    },
+  },
+  {
+    path: '/usuario/recoveryPassword',
+    name: 'Recuperação Senha',
+    // eslint-disable-next-line import/no-unresolved
+    component: () => import('../views/usuario/recovery-password/RecoveryPassword.vue'),
+    meta: {
+      guest: true,
+    },
+  },
+  {
+    path: '/usuario/newPassword',
+    name: 'Nova Senha',
+    // eslint-disable-next-line import/no-unresolved
+    component: () => import('../views/usuario/new-password/NewPassword.vue'),
     meta: {
       guest: true,
     },
