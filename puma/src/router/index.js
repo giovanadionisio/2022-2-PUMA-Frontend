@@ -16,14 +16,6 @@ const routes = [
     },
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
-  },
-  {
     path: '/usuario/cadastro',
     name: 'Cadastro Usuário',
     // eslint-disable-next-line import/no-unresolved
@@ -42,22 +34,21 @@ const routes = [
     },
   },
   {
-    path: '/evaluate/:subjectId',
-    name: 'Evaluate',
+    path: '/usuario/recoveryPassword',
+    name: 'Recuperação Senha',
     // eslint-disable-next-line import/no-unresolved
-    component: () => import('../views/Evaluate/Evaluate.vue'),
+    component: () => import('../views/usuario/recovery-password/RecoveryPassword.vue'),
     meta: {
-      requiresAuth: true,
+      guest: true,
     },
   },
   {
-    path: '/approval/:projId',
-    name: 'Approval',
-    props: true,
+    path: '/usuario/newPassword',
+    name: 'Nova Senha',
     // eslint-disable-next-line import/no-unresolved
-    component: () => import('../views/Approval/Approval.vue'),
+    component: () => import('../views/usuario/new-password/NewPassword.vue'),
     meta: {
-      requiresAuth: true,
+      guest: true,
     },
   },
   {
@@ -69,8 +60,16 @@ const routes = [
     },
   },
   {
+    path: '/projetos/visualizar/:id',
+    name: 'Visualização de Projeto',
+    component: () => import('../views/cadastroProjeto/cadastro-projeto.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
     path: '/projetos/cadastrar',
-    name: 'Cadastro de Projeto',
+    name: 'Cadastrar de Projeto',
     component: () => import('../views/cadastroProjeto/cadastro-projeto.vue'),
     meta: {
       requiresAuth: true,
@@ -79,14 +78,6 @@ const routes = [
   {
     path: '/projetos/editar/:id',
     name: 'Edição de Projeto',
-    component: () => import('../views/cadastroProjeto/cadastro-projeto.vue'),
-    meta: {
-      requiresAuth: true,
-    },
-  },
-  {
-    path: '/projetos/visualizar/:id',
-    name: 'Visualização de Projeto',
     component: () => import('../views/cadastroProjeto/cadastro-projeto.vue'),
     meta: {
       requiresAuth: true,

@@ -1,11 +1,14 @@
+/* eslint-disable */
 import Loading from '../../../components/Loading.vue';
 import UserService from '../../../services/userService';
+import VisitorNav from '../../../components/VisitorNav/VisitorNav.vue';
 
 const userService = new UserService();
 export default {
   name: 'CadastroUsuario',
   components: {
     Loading,
+    VisitorNav,
   },
   mounted() {
     document.title = 'PUMA | Cadastro Usuário';
@@ -24,11 +27,15 @@ export default {
       cpf: '',
       type: '',
       externalAgentType: '',
+      passwordTypeText: false,
+      repeatPasswordTypeText: false,
+      isFirstPage: true,
       isLoading: false,
       hasMatricula: false,
       isJuridical: false,
       isPhysical: false,
       isExternalAgent: false,
+      navs: [{ title: 'HOME' }, { title: 'CADASTRO' }],
     };
   },
   methods: {

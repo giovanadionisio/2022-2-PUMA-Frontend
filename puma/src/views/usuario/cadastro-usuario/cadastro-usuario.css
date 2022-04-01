@@ -1,16 +1,22 @@
-body {
-    background-color: #15355e;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 1%;
+.root {
+  background-color: white;
+  height: 100%;
 }
+
+.column {display: contents;}
+
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
+.border-card {
+  border: 2px solid rgba(21,53,94,1);
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
 .card {
   background-color: #ffffff;
   border-radius: 20px;
@@ -24,12 +30,15 @@ body {
   flex-direction: column;
   justify-content: space-around;
 }
+
 .title-box {
-  font-size: 2.5em;
+  font-size: 20px;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-  background-color: #f7db36;
-  padding: 20px;
+  background: rgba(21,53,94,1);
+  padding: 10px;
+  font-weight: bold;
+  color: white;
 }
 
 #register-form {
@@ -40,19 +49,18 @@ body {
 select:required:invalid {
   color: gray;
 }
+
 option[value=""][disabled] {
   display: none;
 }
+
 option {
   color: black;
 }
 
-label {
+.label {
   font-weight: bold;
-  margin-bottom: 15px;
   color: #222;
-  padding: 5px 10px;
-  border-left: 4px solid #0060df;
 }
 
 .loading {
@@ -90,17 +98,64 @@ a {
 .invalid {
   border: 1px solid #EB0600;
 }
+
 .error-span {
   display: flex;
   margin-top: 10px;
   text-align: left;
   flex-direction: column;
-  margin-left: 75px;
+  margin-left: 70px;
   color: #EB0600;
 }
+
+.label{
+  color: rgba(21,53,94,1);
+  display: flex;
+  text-align: left;
+  flex-direction: column;
+  margin-left: 70px;
+  margin-top: 20px;
+  margin-bottom: -20px;
+}
+
 .error-div {
   display: flex;
   flex-direction: column;
-  width: 100%
+  width: 100%;
 }
 
+.password-input {
+  /* width: 577px; */
+  font-size: 1.1em;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  margin-left: 70px;
+  margin-right: 70px;
+  border-radius: 7px; 
+  padding: 15px; 
+}
+
+.password-img {
+  position: absolute;
+  margin-top: -40px;
+  margin-left: 605px;
+  cursor: pointer;
+}
+
+#nav {
+  padding: 1%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  font-weight: bold;
+  color: white;
+  align-items: center;
+}
+
+.nav-item {
+  margin-left: 45px;
+  margin-right: 20px;
+}
