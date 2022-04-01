@@ -26,7 +26,7 @@ export default {
                     onclick: () => {
                         this.$store.commit('SET_CURRENT_NAVIGATION',
                             NAV_CONST.MY_PROJECTS.KEY);
-                        this.$router.push('/meus-projetos/listar');
+                        this.$router.push('/projetos');
                     },
                 },
                 projects: {

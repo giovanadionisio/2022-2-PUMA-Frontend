@@ -13,7 +13,7 @@
 export default {
   created() {
     if (this.$store.getters.user.type === 'Agente Externo') {
-      this.$router.push({ name: 'My Proposals' });
+      this.$router.push({ name: 'Consulta de Projetos' });
     }
   },
   name: 'Home',

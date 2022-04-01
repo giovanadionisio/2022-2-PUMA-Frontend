@@ -16,7 +16,6 @@ export default class UserService {
   }
 
   logUserIn(newUser) {
-    console.log(newUser);
     return new Promise((resolve, reject) => {
       axios.post(`${global.URL_GATEWAY}/user/login`, newUser).then((response) => {
         if (response.data.auth) {
