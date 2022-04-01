@@ -13,8 +13,8 @@ export default {
       alocateService: new AlocateService(),
       multiSelectPlaceholder: 'Carregando opções...',
       isLoading: false,
-      isDisable: false,
       isLoadingKeywords: false,
+      isMultiselectTouched: false,
       operacao: 'cadastrar',
       keywords: [],
       keywordsSelected: [],
@@ -33,25 +33,33 @@ export default {
     }
   },
   methods: {
-    submitForm() {
-      const project = {
-        name: this.titulo.val,
-        problem: this.descricao.val,
-        expectedresult: this.resultadoEsperado.val,
-        keywords: this.keywordsSelected,
-        status: 'SB',
-        createdat: new Date().toISOString(),
-      };
-      this.projectService.addProject(project).then(async () => {
-        this.isLoading = false;
-        this.$router.push({ name: 'Consulta de Projetos' });
-      }).catch((error) => {
-        this.isLoading = false;
-        alert(`Infelizmente houve um erro ao cadastrar a proposta: ${error}`);
-      });
+    async onSubmit() {
+      const isFormValid = await this.$refs.observer.validate();
+      const isMultiselectValid = this.validateMultiselect();
+      if (isFormValid && isMultiselectValid) {
+        const project = {
+          name: this.titulo.val,
+          problem: this.descricao.val,
+          expectedresult: this.resultadoEsperado.val,
+          keywords: this.keywordsSelected,
+          status: 'SB',
+          createdat: new Date().toISOString(),
+        };
+        this.projectService.addProject(project).then(async () => {
+          this.isLoading = false;
+          this.$router.push({ name: 'Consulta de Projetos' });
+        }).catch((error) => {
+          this.isLoading = false;
+          alert(`Infelizmente houve um erro ao cadastrar a proposta: ${error}`);
+        });
+      }
     },
     sortMultiselectLabels() {
       this.keywordsSelected.sort((a, b) => b.keyword.length - a.keyword.length);
+    },
+    validateMultiselect() {
+      this.isMultiselectTouched = true;
+      return !!this.keywordsSelected.length;
     },
     isChecked(option) {
       return this.keywordsSelected.some((op) => op.keywordid === option.keywordid);

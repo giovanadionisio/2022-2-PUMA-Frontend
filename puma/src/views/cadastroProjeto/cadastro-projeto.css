@@ -1,11 +1,16 @@
 .title {
-  justify-content: center;
-  font-weight: 400;
-  margin-left: 0px;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 56px;
+  letter-spacing: -0.02em;
+  margin-left: 10%;
+  margin-bottom: 2.5%;
+  color: #15355e;
 }
 
 .forms {
-  align-items: center;
   display: flex;
   flex-direction: column;
   min-width: 100%;
@@ -20,8 +25,16 @@ form {
 
 input[type="text"],
 textarea{
-  width: 400px;
+  width: 85%;
   font-size: 14px;
+  border:2px solid #15355e;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  margin-right: 10%;
+  margin-left: 2.5%;
+  padding: 15px;
 }
 
 .bubblesContainer {
@@ -128,19 +141,113 @@ form label {
 }
 
 .btn{
-  color: black;
-  margin-left: 3%;
+  color: #15355E;;
+  margin-left: 15%;
 }
 
 .submit-btn {
-  margin: 0 auto;
+  margin:20;
+}
+
+.card {
+  background-color: white;
+  border: 2px solid #15355e;
+  border-radius: 32px;
+  box-sizing: border-box;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 20%;
+}
+.title-textarea {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  margin-bottom: -20px;
+  margin-top: 10%;
+  margin-left: 2.5%;
+}
+
+.text-description {
+  color:#15355e;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  letter-spacing: 0.035em;
+  margin-top: 10px;
+  margin-left: 2.5%;
+  width: 85%;
+}
+.text-example {
+  color:#15355e;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 140%;
+  margin-top: 10px;
+  margin-left: 2.5%;
+  margin-bottom: 5%;
+  width: 85%;
+}
+.title-slot {
+  font-size: 24px;
+  text-align: left;
+  color: #15355E;
+  letter-spacing: 00.035em;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 28px;
+  margin-top: 30px;
+  margin-bottom: -10px;
+}
+
+.title-keywords{
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  margin-bottom: 5%;
+  margin-top: 10%;
+}
+
+.text-keywords{
+  font-size: 1.1em;
+  text-align: left;
+  color: #EB0600;
+}
+
+.inputFieldRegisterProject:hover{
+  border-radius: 7px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  margin-right: 70px;
+  padding: 15px;
+  border:2px solid #f7db36;
+}
+
+.error-span {
+  display: flex;
+  margin-top: 10px;
+  text-align: left;
+  flex-direction: column;
+  margin-left: 2.5%;
+  color: #EB0600;
+}
+
+.error-div {
+  display: flex;
+  flex-direction: column;
+  width: 100%
 }
 
 .checkbox-label {
   display: inline-block;
 }
 
-.test {
-  position: absolute;
-  right: 1vw;
+.multiselect.invalid .multiselect__tags {
+  border: 1px solid #f86c6b !important;
 }
+

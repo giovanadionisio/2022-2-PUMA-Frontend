@@ -71,7 +71,8 @@ extend('min', {
     return '';
   },
   params: ['length'],
-  message: 'O campo {_field_} deve ter ao menos {length} caracteres',
+  /* eslint-disable max-len */
+  message: (fieldName, placeholders) => (fieldName.slice(-1).toLowerCase() === 'a' ? `A ${fieldName} deve ter ao menos ${placeholders.length} caracteres` : `O ${fieldName} deve ter ao menos ${placeholders.length} caracteres`),
 });
 extend('confirmed', {
   ...confirmed,
@@ -94,6 +95,14 @@ extend('cnpj', {
     return '';
   },
   message: 'CNPJ inválido',
+});
+extend('multiselect', {
+  validate(value) {
+    console.log(value);
+    // console.log(args);
+    // const length = value.length;
+    return '';
+  },
 });
 extend('cpf', {
   validate: (value) => {
