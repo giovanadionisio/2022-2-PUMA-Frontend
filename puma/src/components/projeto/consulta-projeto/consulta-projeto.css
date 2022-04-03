@@ -1,0 +1,42 @@
+/*.table-striped>tbody>tr:nth-child(odd)>td,*/
+/*.table-striped>tbody>tr:nth-child(odd)>th {*/
+/*    background-color: red;*/
+/*}*/
+thead{
+    font-size: 25px;
+    color: #15355e;
+}
+
+table {
+    border-spacing: 30px;
+    border-collapse: separate;
+}
+
+tr {
+    border-top: hidden;
+}
+
+svg {
+    cursor: pointer;
+}
+
+.btn {
+    background-color: white;
+    color: #15355e;
+    border-color: #15355e;
+}
+
+.search-input {
+    height: 40px;
+    padding-left: 30px;
+}
+
+.search-icon {
+    cursor: auto;
+    position: absolute;
+    z-index: 3;
+    margin-left: 10px;
+    padding-top: 12px;
+}
+
+

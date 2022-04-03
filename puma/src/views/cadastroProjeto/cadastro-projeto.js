@@ -25,6 +25,7 @@ export default {
   },
   mounted() {
     this.operacao = this.$route.path.split('/', 3)[2];
+    console.log(this.operacao);
     if (this.operacao !== 'cadastrar') {
       if (this.operacao === 'visualizar') {
         this.disableForm();

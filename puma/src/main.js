@@ -1,4 +1,5 @@
 import BootstrapVue from 'bootstrap-vue';
+import { mdbDatatable } from 'mdbvue';
 import Multiselect from 'vue-multiselect';
 import 'vue-multiselect/dist/vue-multiselect.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -18,6 +19,8 @@ import {
 import { faCircle as faCircleRegular } from '@fortawesome/free-regular-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import '@fortawesome/fontawesome-free/css/all.css';
+import '@fortawesome/fontawesome-free/js/all';
 
 import {
   localize,
@@ -56,6 +59,7 @@ Vue.component('ValidationProvider', ValidationProvider);
 Vue.component('ValidationObserver', ValidationObserver);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.component('multiselect', Multiselect);
+Vue.component('mdbDatatable', mdbDatatable);
 
 Vue.use(VueMask);
 Vue.use(BootstrapVue);

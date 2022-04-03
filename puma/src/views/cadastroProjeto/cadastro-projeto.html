@@ -81,6 +81,7 @@
               @input="sortMultiselectLabels()"
               @close="isMultiselectTouched = true"
               :options="keywords"
+              :max-height="150"
               :max="3"
               :loading="isLoadingKeywords"
               :disabled="isLoadingKeywords || !keywords.length || operacao === 'visualizar'"
@@ -97,7 +98,7 @@
           <span v-if="isMultiselectTouched && !keywordsSelected.length" style="" class="text-keywords">Escolha no mínimo uma palavra-chave</span>
           <div class="btn-toolbar">
             <div class="form-row" v-if="operacao !== 'visualizar'">
-              <input :value="operacao === 'alterar' ? 'Alterar' : 'Enviar'" v-if="!isLoading && operacao !== 'visualizar'" type="submit" class="btn btn-warning submit-btn" @click="onSubmit"/>
+              <input :value="operacao === 'editar' ? 'Editar' : 'Enviar'" v-if="!isLoading && operacao !== 'visualizar'" type="submit" class="btn btn-warning submit-btn" @click="onSubmit"/>
             </div>
             <b-button v-if="operacao !== 'visualizar'" href="/projetos" class="btn btn-warning submit-btn">CANCELAR</b-button>
           </div>

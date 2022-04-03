@@ -54,7 +54,7 @@ const routes = [
   {
     path: '/projetos',
     name: 'Consulta de Projetos',
-    component: () => import('../views/myProposals/myProposals.vue'),
+    component: () => import('../components/projeto/consulta-projeto/consulta-projeto.vue'),
     meta: {
       requiresAuth: true,
     },
