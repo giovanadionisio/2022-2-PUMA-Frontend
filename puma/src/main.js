@@ -1,6 +1,8 @@
 import BootstrapVue from 'bootstrap-vue';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
+import Multiselect from 'vue-multiselect';
+import 'vue-multiselect/dist/vue-multiselect.min.css';
 
 import Vue from 'vue';
 import axios from 'axios';
@@ -53,6 +55,7 @@ library.add(faEye, faEyeSlash, faCircle, faCircleRegular, faAngleRight, faAngleL
 Vue.component('ValidationProvider', ValidationProvider);
 Vue.component('ValidationObserver', ValidationObserver);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
+Vue.component('multiselect', Multiselect);
 
 Vue.use(VueMask);
 Vue.use(BootstrapVue);

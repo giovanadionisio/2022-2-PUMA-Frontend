@@ -34,8 +34,13 @@ export default {
   updated() {
     this.updateSessionStatus();
   },
+  mounted() {
+    document.title = 'PUMA';
+  },
 };
 </script>
+
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 
 <style>
 html, body {
@@ -56,10 +61,10 @@ html, body {
   display: block;
   position: absolute;
   top: 0;
-  height: 100%;
   width: calc(100% - 250px);
   margin-left: 250px;
-  padding: 10px; 
+  padding: 30px 10px; 
+  margin-bottom: 50px;
 }
 
 .input-field {

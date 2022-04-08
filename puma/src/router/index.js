@@ -60,9 +60,9 @@ const routes = [
     },
   },
   {
-    path: '/meus-projetos/consultar', // consultar:id
+    path: '/meus-projetos/consultar', // consultar/id
     name: 'Consultar Projeto',
-    component: () => import('../views/MyProjects/MyProjects.vue'),
+    component: () => import('../views/Projects/MyProject/MyProject.vue'),
     meta: {
       requiresAuth: true,
     },
@@ -84,7 +84,7 @@ const routes = [
     },
   },
   {
-    path: '/projetos/consultar', // consultar:id
+    path: '/projetos/consultar', // ADM E PROF - consultar:id
     name: 'Projetos',
     component: () => import('../views/MyProjects/MyProjects.vue'),
     meta: {
