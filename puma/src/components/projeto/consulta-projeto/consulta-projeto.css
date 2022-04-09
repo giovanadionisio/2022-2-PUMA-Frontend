@@ -1,3 +1,7 @@
+/*.table-striped>tbody>tr:nth-child(odd)>td,*/
+/*.table-striped>tbody>tr:nth-child(odd)>th {*/
+/*    background-color: red;*/
+/*}*/
 thead{
     font-size: 25px;
     color: #15355e;
