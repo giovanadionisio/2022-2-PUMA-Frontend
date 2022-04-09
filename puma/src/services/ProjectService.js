@@ -30,7 +30,6 @@ export default class ProjectService {
   }
 
   async getProjById(projId) {
-    console.log(projId);
     const auth = store.getters.token;
     const projInfos = await axios.get(`${global.URL_GATEWAY}/project/project/${projId}`, { headers: { auth } });
     return projInfos;
@@ -98,6 +97,17 @@ export default class ProjectService {
         resolve(response);
       }).catch(() => {
         reject('erro na deleção do arquivo');
+      });
+    });
+  }
+
+  getKeywords() {
+    return new Promise((resolve, reject) => {
+      axios.get(`${global.URL_GATEWAY}/project/palavra-chave`).then((response) => {
+        resolve(response);
+      }).catch((error) => {
+        alert(error);
+        reject('Erro ao recuperar as palavras-chave');
       });
     });
   }

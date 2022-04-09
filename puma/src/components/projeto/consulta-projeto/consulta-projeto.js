@@ -78,8 +78,8 @@ export default {
         this.setSvgStyles();
         this.isLoading = false;
       }).catch((error) => {
-        this.isLoading = false;
         alert(`Infelizmente houve um erro ao recuperar os projetos: ${error}`);
+        this.isLoading = false;
       });
     },
     configTableRows() {
@@ -103,10 +103,13 @@ export default {
       this.addTdListener();
     },
     configSearchDiv() {
-      const inputDiv = document.getElementsByClassName('dataTables_filter float-right pb-2 mt-4 pt-2')[0];
+      const inputDiv = document.getElementsByClassName('dataTables_filter')[0];
       inputDiv.classList.remove('float-right');
       inputDiv.classList.add('ml-4');
       inputDiv.classList.add('input-group');
+      inputDiv.style.flexDirection = 'column';
+
+      this.configAddProjectButton(document.getElementsByTagName('input')[0]);
     },
     configSearchInput() {
       const searchInput = document.getElementsByTagName('input')[0];
@@ -114,10 +117,11 @@ export default {
       // searchInput.setAttribute('value', 'math');
       // searchInput.dispatchEvent(new Event('input'));
       searchInput.classList.add('search-input');
+      searchInput.style.width = '100%';
       return searchInput;
     },
     configSearchIcon() {
-      const searchIcon = document.createElement("i");
+      const searchIcon = document.createElement('i');
       searchIcon.classList.add('fas');
       searchIcon.classList.add('fa-search');
       searchIcon.classList.add('input-group-prepend');
@@ -127,11 +131,25 @@ export default {
     configSearch(searchInput, searchIcon) {
       searchInput.after(searchIcon);
     },
+    configAddProjectButton(searchInput) {
+      const addProjectButton = document.createElement('button');
+      addProjectButton.classList.add('btn', 'mt-3', 'col-md-8');
+      addProjectButton.innerHTML = '<i class="fa-solid fa-plus-circle mr-2 aux"></i>ADICIONAR PROJETO';
+      addProjectButton.name = 'cadastrar';
+      addProjectButton.addEventListener('click', () => {
+        let routeData = this.$router.resolve({path: `/projetos/cadastrar`});
+        window.open(routeData.href, '_blank');
+      });
+      searchInput.after(addProjectButton);
+    },
     addTdListener() {
       document.querySelector("#projects-table tbody").addEventListener("click", (event) => {
         const button = event.target;
         const operacao = button.name;
-        if (button.id && operacao !== 'excluir') {
+        if (operacao === 'cadastrar') {
+          let routeData = this.$router.resolve({path: `/projetos/cadastrar`});
+          window.open(routeData.href, '_blank');
+        } else if (button.id && operacao !== 'excluir') {
           let routeData = this.$router.resolve({path: `/projetos/${operacao}/${button.id}`});
           window.open(routeData.href, '_blank');
         }
@@ -150,9 +168,9 @@ export default {
     },
     setSvgStyles() {
       const svgs = document.getElementsByTagName('svg');
-      if (svgs.item(2) && svgs.item(6)) {
-        svgs.item(2).style.marginLeft = '15px';
-        svgs.item(6).style.marginLeft = '15px';
+      if (svgs.item(3) && svgs.item(7)) {
+        svgs.item(3).style.marginLeft = '15px';
+        svgs.item(7).style.marginLeft = '15px';
       }
     },
   },

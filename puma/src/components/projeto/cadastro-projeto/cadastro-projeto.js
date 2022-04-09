@@ -2,7 +2,7 @@ import ProjectService from '../../../services/ProjectService';
 import AlocateService from '../../../services/AlocateService';
 /* eslint-disable prefer-destructuring */
 export default {
-  name: 'Cadastro de Projeto',
+  name: 'CadastroProjeto',
   data() {
     return {
       titulo: { val: '', isValid: true },
@@ -73,7 +73,7 @@ export default {
     },
     getKeywords() {
       this.isLoadingKeywords = true;
-      this.alocateService.getKeywords().then((response) => {
+      this.projectService.getKeywords().then((response) => {
         this.keywords = response.data;
         this.isLoadingKeywords = false;
         this.multiSelectPlaceholder = this.keywords.length ? 'Selecione' : 'Sem palavras disponíveis';
@@ -84,7 +84,6 @@ export default {
       });
     },
     getProject(projectId) {
-      console.log(projectId);
       this.projectService.getProjById(projectId).then((response) => {
         const project = response.data;
         this.keywordsSelected = project.keywords;
