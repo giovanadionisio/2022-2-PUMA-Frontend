@@ -1,5 +1,4 @@
 /* eslint-disable */
-
 export default {
     TYPES: {
         PHYSICAL_AGENT: { KEY: 'Agente Externo' },

@@ -1,5 +1,4 @@
 /* eslint-disable */
-
 export default {
     ADMIN_PROJECTS: {KEY: 0},
     MY_PROJECTS: { KEY: 1 },
