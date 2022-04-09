@@ -1,4 +1,4 @@
-import ProjectService from '../../../services/projectService';
+import ProjectService from '../../../services/ProjectService';
 
 const statusProjetoEnum = require('../../../../utils/enums/status-projeto.enum');
 
@@ -12,7 +12,7 @@ export default {
           {
             label: 'ITEM',
             field: 'projectid',
-            sort: 'desc',
+            sort: 'asc',
           },
           {
             label: 'TÍTULO',
@@ -42,50 +42,64 @@ export default {
         rows: [],
       },
       isLoading: false,
+      wasLoaded: false,
       projects: [],
-      aux: [],
       projectService: new ProjectService(),
     };
+  },
+  watch: {
+    '$route': {
+      handler: 'getProjects',
+      immediate: true,
+    }
   },
   beforeMount() {
     this.getProjects();
   },
   mounted() {
-    console.log(this.$route);
-    console.log(statusProjetoEnum('SB'));
+    document.title = 'PUMA | Consulta Projetos';
   },
   methods: {
     getProjects() {
       this.isLoading = true;
-      this.projectService.getMyProposals().then((response) => {
-        console.log(response.data);
-        this.projects  = response.data;
-        this.configProjectButtons();
-        this.configSearchDiv();
-        this.configSearch(this.configSearchInput(), this.configSearchIcon());
-        this.configTable();
+      let user = this.$store.getters.user;
+      user.operation = this.$route.path.slice(1);
+      this.projectService.getMyProposals(user).then((response) => {
+        this.projects = response.data;
+        this.data.rows.splice(0);
+        this.configTableRows();
+        if (!this.wasLoaded) {
+          this.configSearchDiv();
+          this.configSearch(this.configSearchInput(), this.configSearchIcon());
+          this.configTable();
+          this.wasLoaded = true;
+        }
+        this.markThsAsTouched();
+        this.setSvgStyles();
         this.isLoading = false;
       }).catch((error) => {
+        this.isLoading = false;
         alert(`Infelizmente houve um erro ao recuperar os projetos: ${error}`);
       });
     },
-    configProjectButtons() {
+    configTableRows() {
       this.projects.forEach((project) => {
         const row = project;
         row.etapa = project.status === 'IC' || project.status === 'EX' || project.status === 'EC' ? 'Projeto' : 'Proposta';
         row.status = statusProjetoEnum(project.status);
         row.name = project.name.slice(0,20);
-        row.buttons = '<button name="visualizar" class="btn  mr-2" id='+ project.projectid +'><i class="fa-solid fa-circle-info mr-2"></i>VER DETALHES</button> <button name="excluir" class="btn mr-2"><i class="fa-solid fa-trash mr-2"></i>EXCLUIR</button><button name="editar" class="btn" id='+ project.projectid +'><i class="fa-solid fa-edit mr-2"></i>EDITAR</button>';
+        row.buttons = '<button name="visualizar" class="btn mr-2" id='+ project.projectid +'><i class="fa-solid fa-circle-info mr-2"></i>VER DETALHES</button>';
         this.data.rows.push(row);
       });
     },
     configTable() {
-      const table = document.getElementsByTagName('table');
+      const table = document.getElementsByTagName('table')[0];
+      table.deleteTFoot();
+      table.id = 'projects-table';
+
       const headerDiv = document.getElementsByClassName('col-sm-6 col-md-8')[0];
       headerDiv.remove();
-      table[0].deleteTFoot();
-      table[0].style.textAlign = 'center';
-      table[0].id = 'projects-table';
+
       this.addTdListener();
     },
     configSearchDiv() {
@@ -117,9 +131,29 @@ export default {
       document.querySelector("#projects-table tbody").addEventListener("click", (event) => {
         const button = event.target;
         const operacao = button.name;
-        console.log(button.name);
-        if (button.id && operacao !== 'excluir') { this.$router.push(`/projetos/${operacao}/${button.id}`); }
+        if (button.id && operacao !== 'excluir') {
+          let routeData = this.$router.resolve({path: `/projetos/${operacao}/${button.id}`});
+          window.open(routeData.href, '_blank');
+        }
       });
+    },
+    markThsAsTouched() {
+      if (document.getElementsByTagName('td')[0] && document.getElementsByTagName('td')[6]) {
+          const firstValue = Number(document.getElementsByTagName('td')[0].textContent);
+          const secondValue = Number(document.getElementsByTagName('td')[6].textContent);
+          if (firstValue > secondValue) {
+            document.getElementsByTagName('th')[0].dispatchEvent(new MouseEvent("dblclick"));
+          } else {
+            document.getElementsByTagName('th')[0].click();
+          }
+      }
+    },
+    setSvgStyles() {
+      const svgs = document.getElementsByTagName('svg');
+      if (svgs.item(2) && svgs.item(6)) {
+        svgs.item(2).style.marginLeft = '15px';
+        svgs.item(6).style.marginLeft = '15px';
+      }
     },
   },
 };

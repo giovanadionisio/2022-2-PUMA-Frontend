@@ -6,6 +6,5 @@ export default {
         JURIDICAL_AGENT: { KEY: 'Agente Externo' },
         PROFESSOR: { KEY: 'Professor' },
         STUDENT: { KEY: 'Aluno' },
-        ADMIN: { KEY: 'Administrador' },
     },
 }

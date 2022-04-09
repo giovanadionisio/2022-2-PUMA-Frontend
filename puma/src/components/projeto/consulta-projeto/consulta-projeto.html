@@ -1,16 +1,11 @@
-<mdbDatatable ref="table" borderless color="blue" :data="data" :pagination="false" v-show="!isLoading"/>
-
-<!--<div   @click="aux">-->
-<!--  <b-row align-h="start">-->
-<!--  </b-row>-->
-<!--  <div >-->
-<!--&lt;!&ndash;    <router-link :to="{ path: `projetos/visualizar/${projects[0].projectid}`}" >&ndash;&gt;-->
-<!--&lt;!&ndash;      Consultar&ndash;&gt;-->
-<!--&lt;!&ndash;    </router-link>&ndash;&gt;-->
-<!--  </div>-->
-<!--&lt;!&ndash;  <div id="22">&ndash;&gt;-->
-<!--&lt;!&ndash;    <font-awesome-icon icon="fa-solid fa-circle"></font-awesome-icon>&ndash;&gt;-->
-<!--&lt;!&ndash;  </div>&ndash;&gt;-->
-<!--</div>-->
+<div style="display: inline-table">
+    <div v-show="isLoading" style="margin-left: 38vw">
+      <i class="fa-solid fa-circle-notch fa-spin fa-3x"></i>
+    </div>
+    <div v-show="!isLoading && !projects.length" class="no-results">
+      Sem resultados disponíveis
+    </div>
+    <mdbDatatable v-show="!isLoading && projects.length" ref="table" borderless color="blue" :data="data" :pagination="false" />
+</div>
 
 

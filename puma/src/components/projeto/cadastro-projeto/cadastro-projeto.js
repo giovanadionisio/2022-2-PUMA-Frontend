@@ -1,8 +1,8 @@
-import ProjectService from '../../services/projectService';
-import AlocateService from '../../services/AlocateService';
+import ProjectService from '../../../services/ProjectService';
+import AlocateService from '../../../services/AlocateService';
 /* eslint-disable prefer-destructuring */
 export default {
-  name: 'ProjectRegister',
+  name: 'Cadastro de Projeto',
   data() {
     return {
       titulo: { val: '', isValid: true },
@@ -25,7 +25,6 @@ export default {
   },
   mounted() {
     this.operacao = this.$route.path.split('/', 3)[2];
-    console.log(this.operacao);
     if (this.operacao !== 'cadastrar') {
       if (this.operacao === 'visualizar') {
         this.disableForm();
@@ -45,10 +44,11 @@ export default {
           keywords: this.keywordsSelected,
           status: 'SB',
           createdat: new Date().toISOString(),
+          userid: this.$store.getters.user.userId,
         };
         this.projectService.addProject(project).then(async () => {
           this.isLoading = false;
-          this.$router.push({ name: 'Consulta de Projetos' });
+          this.$router.push({ name: 'Consulta de Projetos' }).catch(() => {});
         }).catch((error) => {
           this.isLoading = false;
           alert(`Infelizmente houve um erro ao cadastrar a proposta: ${error}`);
@@ -84,6 +84,7 @@ export default {
       });
     },
     getProject(projectId) {
+      console.log(projectId);
       this.projectService.getProjById(projectId).then((response) => {
         const project = response.data;
         this.keywordsSelected = project.keywords;

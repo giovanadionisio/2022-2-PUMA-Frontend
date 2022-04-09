@@ -5,7 +5,7 @@
   font-size: 48px;
   line-height: 56px;
   letter-spacing: -0.02em;
-  margin-left: 10%;
+  margin-left: 5%;
   margin-bottom: 2.5%;
   color: #15355e;
 }
@@ -154,8 +154,8 @@ form label {
   border: 2px solid #15355e;
   border-radius: 32px;
   box-sizing: border-box;
-  width: 80%;
-  margin-left: 10%;
+  width: 135%;
+  margin-left: 5%;
   margin-right: 20%;
 }
 .title-textarea {

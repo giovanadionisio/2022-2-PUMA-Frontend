@@ -4,11 +4,9 @@ import { extend } from 'vee-validate';
 import {
   email, required, min, regex,
 } from 'vee-validate/dist/rules';
-import UserService from '../../../services/userService';
-import Loading from '../../../components/Loading.vue';
-import VisitorNav from '../../../components/VisitorNav/VisitorNav.vue';
-
-const userService = new UserService();
+import UserService from '../../../services/UserService';
+import Loading from '../../shared/loading/Loading.vue';
+import VisitorNav from '../../VisitorNav/VisitorNav.vue';
 
 export default {
   name: 'LoginUsuario',
@@ -16,8 +14,12 @@ export default {
     Loading,
     VisitorNav,
   },
+  mounted() {
+    document.title = 'PUMA | Atualizar Senha';
+  },
   data() {
     return {
+      userService: new UserService(),
       email: '',
       isLoading: false,
       isEqualsToNewPassword: true,
@@ -27,7 +29,6 @@ export default {
       navs: [{ title: 'HOME' }, { title: 'RECUPERAÇÃO DE SENHA' }],
     };
   },
-
   created() {
     this.email = localStorage.email;
   },
@@ -43,7 +44,7 @@ export default {
 
     updatePassword() {
       if (this.isEqualsToNewPassword && this.newPassword.length) {
-        userService.updatePassword(this.email, this.newPassword, (res) => {
+        this.userService.updatePassword(this.email, this.newPassword, (res) => {
           if (res.status === 200) {
             this.passwordRedefined = true;
           }
@@ -66,7 +67,7 @@ extend('email', {
 
 extend('required', {
   ...required,
-  message: 'Campo obrigatório',
+  message: 'Preenchimento obrigatório',
 });
 
 extend('min', {

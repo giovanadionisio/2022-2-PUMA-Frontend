@@ -1,4 +1,4 @@
-import ProjectService from '../../services/projectService';
+import ProjectService from '../../services/ProjectService';
 // eslint-disable-next-line import/no-unresolved
 import ProjectCard from '@/components/ProjectCard.vue';
 

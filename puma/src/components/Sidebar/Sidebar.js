@@ -1,7 +1,7 @@
 /* eslint-disable */
 import MenuItem from "./MenuItem/MenuItem.vue";
-import USER_CONST from '@/constants/users.js';
-import NAV_CONST from '@/constants/navigations.js';
+import USER_CONST from '../../../utils/enums/users.enum.js';
+import NAV_CONST from '../../../utils/enums/navigations.enum.js';
 
 export default {
     name: 'Sidebar',
@@ -11,52 +11,46 @@ export default {
     props: {},
     data() {
         return {
+            user: this.$store.getters.user,
             menuItems: {
-                myprojects: {
+                adminProjects: {
+                    key: NAV_CONST.ADMIN_PROJECTS,
+                    title: 'Projetos',
+                    iconUrl: require('@/assets/menu-2.svg'),
+                    show: () => { return this.user.isAdmin },
+                    onclick: () => {
+                        this.$store.commit('SET_CURRENT_NAVIGATION', NAV_CONST.ADMIN_PROJECTS);
+                        this.$router.push('/projetos').catch(() => {});
+                    },
+                },
+                subjectProjects: {
+                    key: NAV_CONST.SUBJECT_PROJECTS,
+                    title: 'Projetos das Disciplinas',
+                    iconUrl: require('@/assets/menu-2.svg'),
+                    show: () => { return [USER_CONST.TYPES.PROFESSOR.KEY].some((type) => type === this.user.type); },
+                    onclick: () => {
+                        this.$store.commit('SET_CURRENT_NAVIGATION', NAV_CONST.SUBJECT_PROJECTS);
+                        this.$router.push({path: '/projetos-disciplina'}).catch(() => {});
+                    },
+                },
+                myProjects: {
                     key: NAV_CONST.MY_PROJECTS.KEY,
                     title: 'Meus Projetos',
                     iconUrl: require('@/assets/menu-1.png'),
-                    userTypes: [
-                        USER_CONST.TYPES.PHYSICAL_AGENT.KEY,
-                        USER_CONST.TYPES.JURIDICAL_AGENT.KEY,
-                        USER_CONST.TYPES.PROFESSOR.KEY,
-                        USER_CONST.TYPES.STUDENT.KEY,
-                        USER_CONST.TYPES.ADMIN.KEY
-                    ],
+                    show: () => { return true },
                     onclick: () => {
-                        this.$store.commit('SET_CURRENT_NAVIGATION',
-                            NAV_CONST.MY_PROJECTS.KEY);
-                        this.$router.push('/projetos');
-                    },
-                },
-                projects: {
-                    key: NAV_CONST.PROJECTS.KEY,
-                    title: 'Projetos das Disciplinas',
-                    iconUrl: require('@/assets/menu-2.svg'),
-                    userTypes: [
-                        USER_CONST.TYPES.PROFESSOR.KEY,
-                        USER_CONST.TYPES.ADMIN.KEY
-                    ],
-                    onclick: () => {
-                        this.$store.commit('SET_CURRENT_NAVIGATION',
-                            NAV_CONST.PROJECTS.KEY);
-                        this.$router.push('/projetos/listar');
+                        this.$store.commit('SET_CURRENT_NAVIGATION', NAV_CONST.MY_PROJECTS.KEY);
+                        this.$router.push({ path: '/meus-projetos'}).catch(() => {});
                     },
                 },
                 logout: {
                     title: 'Sair',
                     iconUrl: require('@/assets/menu-3.svg'),
-                    userTypes: [
-                        USER_CONST.TYPES.PHYSICAL_AGENT.KEY,
-                        USER_CONST.TYPES.JURIDICAL_AGENT.KEY,
-                        USER_CONST.TYPES.PROFESSOR.KEY,
-                        USER_CONST.TYPES.STUDENT.KEY,
-                        USER_CONST.TYPES.ADMIN.KEY
-                    ],
+                    show: () => { return true },
                     onclick: () => {
                         this.$store.commit('RESET_NAVIGATION_STATE');
                         this.$store.commit('RESET_USER_STATE');
-                        this.$router.push('/usuario/login');
+                        this.$router.push({path: '/usuario/login'}).catch(() => {});
                     },
                 }
             }

@@ -16,37 +16,37 @@ const routes = [
     },
   },
   {
-    path: '/usuario/cadastro',
-    name: 'Cadastro Usuário',
-    // eslint-disable-next-line import/no-unresolved
-    component: () => import('../views/usuario/cadastro-usuario/CadastroUsuario.vue'),
-    meta: {
-      guest: true,
-    },
-  },
-  {
     path: '/usuario/login',
     name: 'Entrar',
     // eslint-disable-next-line import/no-unresolved
-    component: () => import('../views/usuario/login-usuario/LoginUsuario.vue'),
+    component: () => import('../components/usuario/login-usuario/LoginUsuario.vue'),
     meta: {
       guest: true,
     },
   },
   {
-    path: '/usuario/recoveryPassword',
+    path: '/usuario/cadastro',
+    name: 'Cadastro Usuário',
+    // eslint-disable-next-line import/no-unresolved
+    component: () => import('../components/usuario/cadastro-usuario/CadastroUsuario.vue'),
+    meta: {
+      guest: true,
+    },
+  },
+  {
+    path: '/usuario/recuperacao-senha',
     name: 'Recuperação Senha',
     // eslint-disable-next-line import/no-unresolved
-    component: () => import('../views/usuario/recovery-password/RecoveryPassword.vue'),
+    component: () => import('../components/usuario/recovery-password/RecoveryPassword.vue'),
     meta: {
       guest: true,
     },
   },
   {
-    path: '/usuario/newPassword',
+    path: '/usuario/atualizar-senha',
     name: 'Nova Senha',
     // eslint-disable-next-line import/no-unresolved
-    component: () => import('../views/usuario/new-password/NewPassword.vue'),
+    component: () => import('../components/usuario/new-password/NewPassword.vue'),
     meta: {
       guest: true,
     },
@@ -60,9 +60,25 @@ const routes = [
     },
   },
   {
+    path: '/projetos-disciplina',
+    name: 'Consulta por Disciplina',
+    component: () => import('../components/projeto/consulta-projeto/consulta-projeto.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/meus-projetos',
+    name: 'Meus Projetos',
+    component: () => import('../components/projeto/consulta-projeto/consulta-projeto.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
     path: '/projetos/visualizar/:id',
     name: 'Visualização de Projeto',
-    component: () => import('../views/cadastroProjeto/cadastro-projeto.vue'),
+    component: () => import('../components/projeto/cadastro-projeto/cadastro-projeto.vue'),
     meta: {
       requiresAuth: true,
     },
@@ -70,7 +86,7 @@ const routes = [
   {
     path: '/projetos/cadastrar',
     name: 'Cadastro de Projeto',
-    component: () => import('../views/cadastroProjeto/cadastro-projeto.vue'),
+    component: () => import('../components/projeto/cadastro-projeto/cadastro-projeto.vue'),
     meta: {
       requiresAuth: true,
     },
@@ -78,7 +94,7 @@ const routes = [
   {
     path: '/projetos/editar/:id',
     name: 'Edição de Projeto',
-    component: () => import('../views/cadastroProjeto/cadastro-projeto.vue'),
+    component: () => import('../components/projeto/cadastro-projeto/cadastro-projeto.vue'),
     meta: {
       requiresAuth: true,
     },

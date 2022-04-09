@@ -1,9 +1,8 @@
 /* eslint-disable */
-import Loading from '../../../components/Loading.vue';
-import UserService from '../../../services/userService';
+import Loading from '../../shared/loading/Loading.vue';
+import UserService from '../../../services/UserService';
 import VisitorNav from '../../../components/VisitorNav/VisitorNav.vue';
 
-const userService = new UserService();
 export default {
   name: 'CadastroUsuario',
   components: {
@@ -15,6 +14,7 @@ export default {
   },
   data() {
     return {
+      userService: new UserService(),
       name: '',
       email: '',
       phoneNumber: '',
@@ -57,8 +57,8 @@ export default {
           socialReason: this.socialReason,
         };
         this.isLoading = true;
-        userService.registerUser(newUser).then(() => {
-          this.$router.push('/usuario/login');
+        this.userService.registerUser(newUser).then(() => {
+          this.$router.push('/usuario/login').catch(()=>{});
           // eslint-disable-next-line no-alert
           alert('Cadastro feito com sucesso!');
         }).catch(() => {

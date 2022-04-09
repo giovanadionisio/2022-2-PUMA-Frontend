@@ -1,16 +1,17 @@
 import { extend } from 'vee-validate';
 import { email, required } from 'vee-validate/dist/rules';
-import UserService from '../../../services/userService';
-import Loading from '../../../components/Loading.vue';
-import VisitorNav from '../../../components/VisitorNav/VisitorNav.vue';
-
-const userService = new UserService();
+import UserService from '../../../services/UserService';
+import Loading from '../../shared/loading/Loading.vue';
+import VisitorNav from '../../VisitorNav/VisitorNav.vue';
 
 export default {
   name: 'LoginUsuario',
   components: {
     Loading,
     VisitorNav,
+  },
+  mounted() {
+    document.title = 'PUMA | Recuperar Senha';
   },
   data() {
     return {
@@ -20,14 +21,12 @@ export default {
       successEmailReceived: false,
       emailWrongFormat: false,
       emailNotfound: false,
+      userService: new UserService(),
       navs: [{ title: 'HOME' }, { title: 'RECUPERAÇÃO DE SENHA' }],
     };
   },
   created() {
     localStorage.email = '';
-  },
-  mounted() {
-    document.title = 'PUMA | Login';
   },
   methods: {
     ok() {
@@ -41,7 +40,7 @@ export default {
 
     enviarEmail() {
       if (this.email.length) {
-        userService.sendEmail(this.email, (res) => {
+        this.userService.sendEmail(this.email, (res) => {
           if (res.status === 200) {
             localStorage.email = this.email;
             this.emailNotfound = false;
@@ -68,5 +67,5 @@ extend('email', {
 });
 extend('required', {
   ...required,
-  message: 'Campo obrigatório ',
+  message: 'Preenchimento obrigatório ',
 });

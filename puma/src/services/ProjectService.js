@@ -2,7 +2,9 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
-import axios from '@/main.js';
+/* eslint-disable object-shorthand */
+
+import axios from '../main.js';
 import store from '../store';
 
 export default class ProjectService {
@@ -16,23 +18,21 @@ export default class ProjectService {
     return allocatedArray;
   }
 
-  async getMyProposals() {
+  async getMyProposals(user) {
     const auth = store.getters.token;
     const myProposals = await axios.get(`${global.URL_GATEWAY}/project/myProposals`, {
       headers: {
         auth,
       },
+      params: user,
     });
     return myProposals;
   }
 
   async getProjById(projId) {
+    console.log(projId);
     const auth = store.getters.token;
-    const projInfos = await axios.get(`${global.URL_GATEWAY}/project/project/${projId}`, {
-      headers: {
-        auth,
-      },
-    });
+    const projInfos = await axios.get(`${global.URL_GATEWAY}/project/project/${projId}`, { headers: { auth } });
     return projInfos;
   }
 

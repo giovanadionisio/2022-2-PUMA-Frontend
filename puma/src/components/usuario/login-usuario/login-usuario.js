@@ -1,12 +1,10 @@
 /* eslint-disable */
 import { extend } from 'vee-validate';
 import { email, required } from 'vee-validate/dist/rules';
-import UserService from '../../../services/userService';
-import Loading from '../../../components/Loading.vue';
+import UserService from '../../../services/UserService';
+import Loading from '../../shared/loading/Loading.vue';
 import VisitorNav from '../../../components/VisitorNav/VisitorNav.vue';
-import NAV_CONST from '@/constants/navigations.js';
-
-const userService = new UserService();
+import NAV_CONST from '../../../../utils/enums/navigations.enum.js';
 
 export default {
   name: 'LoginUsuario',
@@ -18,6 +16,7 @@ export default {
     return {
       password: '',
       email: '',
+      userService: new UserService(),
       isLoading: false,
       hasAuthError: false,
       navs: [{ title: 'HOME' }, { title: 'LOGIN' }],
@@ -34,20 +33,21 @@ export default {
         this.isLoading = true;
         // this.hasAuthError = false;
 
-        userService.logUserIn(user).then((response) => {
+        this.userService.logUserIn(user).then((response) => {
           this.isLoading = false;
           // this.hasAuthError = false;
 
           this.$store.commit('LOGIN_USER', {
             userId: response.data.userId,
             fullName: response.data.fullName,
+            isAdmin: response.data.isAdmin,
             email: response.data.email,
             type: response.data.type,
           });
 
           this.$store.commit('SET_TOKEN', response.data.token);
           this.$store.commit('SET_CURRENT_NAVIGATION', NAV_CONST.MY_PROJECTS.KEY);
-          this.$router.push('/projetos');
+          this.$router.push('/meus-projetos').catch(()=>{});
         }).catch(() => {
           this.hasAuthError = true;
           this.isLoading = false;
@@ -69,5 +69,5 @@ extend('email', {
 });
 extend('required', {
   ...required,
-  message: 'Campo obrigatório ',
+  message: 'Preenchimento obrigatório ',
 });
