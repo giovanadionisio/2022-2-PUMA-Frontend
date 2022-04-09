@@ -134,7 +134,7 @@ export default {
     configAddProjectButton(searchInput) {
       const addProjectButton = document.createElement('button');
       addProjectButton.classList.add('btn', 'mt-3', 'col-md-8');
-      addProjectButton.innerHTML = '<i class="fa-solid fa-plus-circle mr-2 aux"></i>ADICIONAR PROJETO';
+      addProjectButton.innerHTML = '<i class="fa-solid fa-plus-circle mr-2 add-project"></i>ADICIONAR PROJETO';
       addProjectButton.name = 'cadastrar';
       addProjectButton.addEventListener('click', () => {
         let routeData = this.$router.resolve({path: `/projetos/cadastrar`});
