@@ -1,8 +1,9 @@
 .root {
     width: 250px;
-    height: 100%;
+    height: 100vh;
     background-color: #15355E;
     display: inline-block;
+    position: fixed;
 }
 
 .logo {

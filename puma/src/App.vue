@@ -56,10 +56,11 @@ html, body {
   display: block;
   position: absolute;
   top: 0;
-  height: 100%;
   width: calc(100% - 250px);
   margin-left: 250px;
-  padding: 10px; 
+  padding: 30px 10px; 
+  margin-bottom: 50px;
+  /* height: 100%; */
 }
 
 .input-field {

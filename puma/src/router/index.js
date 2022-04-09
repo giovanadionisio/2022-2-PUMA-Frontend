@@ -54,7 +54,8 @@ const routes = [
   {
     path: '/meus-projetos/listar',
     name: 'Meus Projetos',
-    component: () => import('../views/MyProjects/MyProjects.vue'),
+    // component: () => import('../views/MyProjects/MyProjects.vue'),
+    component: () => import('../components/MultiselectExample/MultiselectExample.vue'),
     meta: {
       requiresAuth: true,
     },

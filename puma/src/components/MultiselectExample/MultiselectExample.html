@@ -1,0 +1,14 @@
+<div class="main-content">
+    <div role="group">
+        <label for="keywords">PALAVRAS-CHAVE</label>
+        <multiselect v-model="value" :options="options" :disabled="disabled" :multiple="true" track-by="code"
+            label="name" :taggable="true" @tag="addTag" tagPosition="bottom" class="multiselect-custom"
+            selectLabel="Clique para selecionar" deselectLabel="Clique para remover"
+            tag-placeholder="Adicione essa palavra-chave" selectedLabel="Selecionada"
+            placeholder="Pesquise ou adicione uma palavra-chave">
+            <!--
+            <span slot="noResult">Oops! Nenhuma palavra-chave encontrada.</span>
+            <span slot="noOptions">Oops! Nenhuma palavra-chave cadastrada.</span> -->
+        </multiselect>
+    </div>
+</div>
