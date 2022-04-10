@@ -1,6 +1,6 @@
 import ProjectService from '../../../services/ProjectService';
 
-const statusProjetoEnum = require('../../../../utils/enums/status-projeto.enum');
+const statusProjetoEnum = require('../../../utils/enums/status-projeto.enum');
 
 /* eslint-disable*/
 export default {

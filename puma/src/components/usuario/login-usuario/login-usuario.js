@@ -4,7 +4,7 @@ import { email, required } from 'vee-validate/dist/rules';
 import UserService from '../../../services/UserService';
 import Loading from '../../shared/loading/Loading.vue';
 import VisitorNav from '../../../components/VisitorNav/VisitorNav.vue';
-import NAV_CONST from '../../../../utils/enums/navigations.enum.js';
+import NAV_CONST from '../../../utils/enums/navigations.enum.js';
 
 export default {
   name: 'LoginUsuario',

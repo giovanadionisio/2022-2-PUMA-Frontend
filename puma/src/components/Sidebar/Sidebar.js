@@ -1,7 +1,7 @@
 /* eslint-disable */
 import MenuItem from "./MenuItem/MenuItem.vue";
-import USER_CONST from '../../../utils/enums/users.enum.js';
-import NAV_CONST from '../../../utils/enums/navigations.enum.js';
+import USER_CONST from '../../utils/enums/users.enum.js';
+import NAV_CONST from '../../utils/enums/navigations.enum.js';
 
 export default {
     name: 'Sidebar',
