@@ -2,4 +2,4 @@
 
 <script src="./modal-aviso.js"></script>
 
-<style src="./modal-aviso.css"></style>
+<style src="./modal-aviso.css" scoped></style>

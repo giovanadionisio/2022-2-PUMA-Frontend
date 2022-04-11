@@ -2,6 +2,10 @@
 /*.table-striped>tbody>tr:nth-child(odd)>th {*/
 /*    background-color: red;*/
 /*}*/
+.hidden-scroll-bar {
+    overflow-x: hidden;
+}
+  
 thead{
     font-size: 25px;
     color: #15355e;

@@ -1,11 +1,10 @@
-<div style="display: inline-table">
-    <div v-show="isLoading" style="margin-left: 38vw">
-      <i class="fa-solid fa-circle-notch fa-spin fa-3x"></i>
-    </div>
-    <div v-show="!isLoading && !projects.length" class="no-results">
-      Sem resultados disponíveis
-    </div>
-    <mdbDatatable v-show="!isLoading && projects.length" ref="table" borderless color="blue" :data="data" :pagination="false" />
+<div class="main-content hidden-scroll-bar">
+  <div v-show="isLoading" style="margin-left: 38vw">
+    <i class="fa-solid fa-circle-notch fa-spin fa-3x"></i>
+  </div>
+  <div v-show="!isLoading && !projects.length" class="no-results">
+    Sem resultados disponíveis
+  </div>
+  <mdbDatatable v-show="!isLoading && projects.length" ref="table" borderless color="blue" :data="data"
+    :pagination="false" />
 </div>
-
-

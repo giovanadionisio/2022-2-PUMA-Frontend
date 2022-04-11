@@ -7,6 +7,15 @@ Vue.use(VueRouter);
 
 const routes = [
   {
+    path: '/',
+    name: 'Home',
+    // eslint-disable-next-line import/no-unresolved
+    component: () => import('../components/usuario/login-usuario/LoginUsuario.vue'),
+    meta: {
+      guest: true,
+    },
+  },
+  {
     path: '/usuario/login',
     name: 'Entrar',
     // eslint-disable-next-line import/no-unresolved
@@ -54,6 +63,15 @@ const routes = [
     path: '/projetos-disciplina',
     name: 'Consulta por Disciplina',
     component: () => import('../components/projeto/consulta-projeto/ConsultaProjeto.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/meus-projetos/listar',
+    name: 'Meus Projetos',
+    // component: () => import('../views/MyProjects/MyProjects.vue'),
+    component: () => import('../components/MultiselectExample/MultiselectExample.vue'),
     meta: {
       requiresAuth: true,
     },

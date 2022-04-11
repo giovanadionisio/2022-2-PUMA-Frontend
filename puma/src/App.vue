@@ -34,6 +34,9 @@ export default {
   updated() {
     this.updateSessionStatus();
   },
+  mounted() {
+    document.title = 'PUMA';
+  },
 };
 </script>
 
