@@ -133,19 +133,19 @@ export default {
       searchInput.after(searchIcon);
     },
     configAddProjectButton(searchInput) {
-      if (!document.getElementById('add-project') && this.operacao === 'meus-projetos') {
+      if (!document.getElementById('btn-add-project') && this.operacao === 'meus-projetos') {
         const addProjectButton = document.createElement('button');
         addProjectButton.classList.add('btn', 'mt-3', 'col-md-8');
         addProjectButton.innerHTML = '<i class="fa-solid fa-plus-circle mr-2 add-project"></i>ADICIONAR PROJETO';
         addProjectButton.name = 'cadastrar';
-        addProjectButton.id = 'add-project';
+        addProjectButton.id = 'btn-add-project';
         addProjectButton.addEventListener('click', () => {
           this.$router.push({path: `/projetos/cadastrar`}).catch(() => {});
         });
         searchInput.after(addProjectButton);
       }
-      if (document.getElementById('add-project') && this.operacao !== 'meus-projetos') {
-        document.getElementById('add-project').remove();
+      if (document.getElementById('btn-add-project') && this.operacao !== 'meus-projetos') {
+        document.getElementById('btn-add-project').remove();
       }
     },
     addTdListener() {
