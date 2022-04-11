@@ -7,6 +7,15 @@ Vue.use(VueRouter);
 
 const routes = [
   {
+    path: '/',
+    name: 'Home',
+    // eslint-disable-next-line import/no-unresolved
+    component: () => import('../components/usuario/login-usuario/LoginUsuario.vue'),
+    meta: {
+      guest: true,
+    },
+  },
+  {
     path: '/usuario/login',
     name: 'Entrar',
     // eslint-disable-next-line import/no-unresolved

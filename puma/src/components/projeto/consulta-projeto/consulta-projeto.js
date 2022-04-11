@@ -45,6 +45,7 @@ export default {
       wasLoaded: false,
       projects: [],
       projectService: new ProjectService(),
+      operacao: '',
     };
   },
   watch: {
@@ -62,8 +63,9 @@ export default {
   methods: {
     getProjects() {
       this.isLoading = true;
+      this.operacao = this.$route.path.slice(1);
       let user = this.$store.getters.user;
-      user.operation = this.$route.path.slice(1);
+      user.operation = this.operacao;
       this.projectService.getMyProposals(user).then((response) => {
         this.projects = response.data;
         this.data.rows.splice(0);
@@ -113,7 +115,7 @@ export default {
     },
     configSearchInput() {
       const searchInput = document.getElementsByTagName('input')[0];
-      searchInput.placeholder = 'Pesquise por item, título do projeto, status...';
+      searchInput.placeholder = 'Pesquise por item, disciplina, status...';
       // searchInput.setAttribute('value', 'math');
       // searchInput.dispatchEvent(new Event('input'));
       searchInput.classList.add('search-input');
@@ -137,8 +139,7 @@ export default {
       addProjectButton.innerHTML = '<i class="fa-solid fa-plus-circle mr-2 add-project"></i>ADICIONAR PROJETO';
       addProjectButton.name = 'cadastrar';
       addProjectButton.addEventListener('click', () => {
-        let routeData = this.$router.resolve({path: `/projetos/cadastrar`});
-        window.open(routeData.href, '_blank');
+        this.$router.push({path: `/projetos/cadastrar`}).catch(() => {});
       });
       searchInput.after(addProjectButton);
     },
@@ -146,12 +147,8 @@ export default {
       document.querySelector("#projects-table tbody").addEventListener("click", (event) => {
         const button = event.target;
         const operacao = button.name;
-        if (operacao === 'cadastrar') {
-          let routeData = this.$router.resolve({path: `/projetos/cadastrar`});
-          window.open(routeData.href, '_blank');
-        } else if (button.id && operacao !== 'excluir') {
-          let routeData = this.$router.resolve({path: `/projetos/${operacao}/${button.id}`});
-          window.open(routeData.href, '_blank');
+        if (button.id && operacao !== 'excluir') {
+          this.$router.push({path: `/projetos/${operacao}/${button.id}`}).catch(() => {});
         }
       });
     },
@@ -168,9 +165,6 @@ export default {
     },
     setSvgStyles() {
       const svgs = document.getElementsByTagName('svg');
-      // if (this.isLoading && svgs.item(0)) {
-      //   svgs.item(0).style.marginTop = '20px';
-      // }
       if (svgs.item(3) && svgs.item(7)) {
         svgs.item(3).style.marginLeft = '15px';
         svgs.item(7).style.marginLeft = '15px';

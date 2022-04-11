@@ -2,6 +2,10 @@
 /*.table-striped>tbody>tr:nth-child(odd)>th {*/
 /*    background-color: red;*/
 /*}*/
+.hidden-scroll-bar {
+    overflow-x: hidden;
+}
+
 thead{
     font-size: 25px;
     color: #15355e;
@@ -52,5 +56,18 @@ svg {
 .add-project {
     margin-left: 0px !important;
 }
+
+.tittle {
+    color: #15355E;
+    font-weight: bold;
+    font-size: 40px;
+    text-transform: uppercase
+}
+
+.sub-tittle {
+    font-size: 20px !important;
+    font-weight: normal !important;
+}
+
 
 

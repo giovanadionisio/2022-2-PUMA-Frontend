@@ -1,11 +1,15 @@
-<div v-bind:style="{ float: !isLoading && projects.length ? 'right' : ''}">
-    <div v-show="isLoading" style="margin-left: 50vw; position: absolute; margin-top: 20px">
-      <i class="fa-solid fa-circle-notch fa-spin fa-3x"></i>
-    </div>
-    <div v-if="false" class="no-results" style="margin-left: 50vw">
-      Sem resultados disponíveis
-    </div>
-    <mdbDatatable v-show="!isLoading && projects.length" ref="table" borderless color="blue" :data="data" :pagination="false" />
+<div class="main-content hidden-scroll-bar">
+  <div class="tittle ml-4">
+    {{ operacao === 'meus-projetos' ? 'Meus projetos' : (operacao === 'projetos' ? 'Projetos' : 'Projetos das Disciplinas') }}
+  </div>
+  <div v-if="!isLoading && projects.length" class="tittle sub-tittle ml-4">
+    {{ 'Abaixo constam os projetos ' + (operacao === 'meus-projetos' ? 'cadastrados pelo usuário' : (operacao === 'projetos' ? 'cadastrados na plataforma' : 'alocados para as disciplinas mininistradas pelo usuário')) }}
+  </div>
+  <div v-show="isLoading" style="margin-left: 38vw" class="mt-4">
+    <i class="fa-solid fa-circle-notch fa-spin fa-3x"></i>
+  </div>
+  <div v-if="!isLoading && !projects.length" class="no-results align-content-center mt-3">
+    Sem resultados disponíveis
+  </div>
+  <mdbDatatable v-show="!isLoading && projects.length" ref="table" borderless color="blue" :data="data" :pagination="false" />
 </div>
-
-

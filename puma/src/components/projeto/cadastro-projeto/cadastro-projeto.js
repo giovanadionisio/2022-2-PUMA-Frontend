@@ -28,6 +28,7 @@ export default {
     if (this.operacao !== 'cadastrar') {
       if (this.operacao === 'visualizar') {
         this.disableForm();
+        this.removeDropdownIcons();
       }
       this.getProject(this.$route.params.id);
     }
@@ -70,6 +71,9 @@ export default {
       const textareas = document.getElementsByTagName('textarea');
       for (let i = 0; i < inputs.length; i += 1) { inputs[i].disabled = true; }
       for (let i = 0; i < textareas.length; i += 1) { textareas[i].disabled = true; }
+    },
+    removeDropdownIcons() {
+      document.getElementsByClassName('multiselect__select')[0].remove();
     },
     getKeywords() {
       this.isLoadingKeywords = true;
