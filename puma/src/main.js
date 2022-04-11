@@ -1,6 +1,8 @@
 import BootstrapVue from 'bootstrap-vue';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
+
+import { mdbDatatable } from 'mdbvue';
 import Multiselect from 'vue-multiselect';
 import 'vue-multiselect/dist/vue-multiselect.min.css';
 
@@ -18,6 +20,8 @@ import {
 import { faCircle as faCircleRegular } from '@fortawesome/free-regular-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import '@fortawesome/fontawesome-free/css/all.css';
+import '@fortawesome/fontawesome-free/js/all';
 
 import {
   localize,
@@ -43,7 +47,7 @@ import router from './router';
 import store from './store';
 import environment from './config/environment';
 
-import { validarCpf, validarCnpj } from '../utils/validators-puma';
+import { validarCpf, validarCnpj } from './utils/validators-puma';
 
 dotenv.config();
 
@@ -56,6 +60,7 @@ Vue.component('ValidationProvider', ValidationProvider);
 Vue.component('ValidationObserver', ValidationObserver);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.component('multiselect', Multiselect);
+Vue.component('mdbDatatable', mdbDatatable);
 
 Vue.use(VueMask);
 Vue.use(BootstrapVue);
@@ -88,7 +93,8 @@ extend('min', {
     return '';
   },
   params: ['length'],
-  message: 'O campo {_field_} deve ter ao menos {length} caracteres',
+  /* eslint-disable max-len */
+  message: (fieldName, placeholders) => (fieldName.slice(-1).toLowerCase() === 'a' ? `A ${fieldName} deve ter ao menos ${placeholders.length} caracteres` : `O ${fieldName} deve ter ao menos ${placeholders.length} caracteres`),
 });
 extend('confirmed', {
   ...confirmed,
@@ -100,6 +106,16 @@ extend('confirmed', {
   },
   params: ['target'],
   message: 'Os campos devem coincidir',
+});
+extend('email', {
+  ...email,
+  validate(value) {
+    if (value) {
+      return email.validate(value);
+    }
+    return '';
+  },
+  message: 'Insira um email válido',
 });
 extend('alpha_spaces', alpha_spaces);
 extend('max', max);

@@ -1,10 +1,16 @@
-<template src="./MultiselectExample.html"></template>
+<template src="./cadastro-projeto.html"></template>
 
-<script src="./MultiselectExample.js"></script>
+<script src="./cadastro-projeto.js"></script>
 
-<style src="./MultiselectExample.css" scoped></style>
+<style src="./cadastro-projeto.css" scoped></style>
 
 <style lang="css" scoped>
+
+/* .multiselect-custom >>> .multiselect__placeholder {
+    padding-top: 4px;
+    font-size: 16px;
+}
+ */
 .multiselect-custom >>> .multiselect__tag {
     background: #2c496e;
     font-weight: bold;

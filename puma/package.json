@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.1.1",
     "@fortawesome/fontawesome-svg-core": "^6.1.0",
     "@fortawesome/free-regular-svg-icons": "^6.1.0",
     "@fortawesome/free-solid-svg-icons": "^6.1.0",
@@ -18,7 +19,9 @@
     "bootstrap-vue": "^2.21.2",
     "core-js": "^3.6.5",
     "dotenv": "^10.0.0",
+    "font-awesome": "^4.7.0",
     "js-cookie": "^3.0.1",
+    "mdbvue": "^6.7.3",
     "npmm": "^1.0.6",
     "portal-vue": "^2.1.7",
     "uuid": "^8.3.2",

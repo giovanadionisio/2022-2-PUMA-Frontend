@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '../views/Home.vue';
 
 import store from '../store';
 
@@ -10,16 +9,8 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home,
-    meta: {
-      requiresAuth: true,
-    },
-  },
-  {
-    path: '/usuario/cadastro',
-    name: 'Cadastro Usuário',
     // eslint-disable-next-line import/no-unresolved
-    component: () => import('../views/usuario/cadastro-usuario/CadastroUsuario.vue'),
+    component: () => import('../components/usuario/login-usuario/LoginUsuario.vue'),
     meta: {
       guest: true,
     },
@@ -28,66 +19,82 @@ const routes = [
     path: '/usuario/login',
     name: 'Entrar',
     // eslint-disable-next-line import/no-unresolved
-    component: () => import('../views/usuario/login-usuario/LoginUsuario.vue'),
+    component: () => import('../components/usuario/login-usuario/LoginUsuario.vue'),
     meta: {
       guest: true,
     },
   },
   {
-    path: '/usuario/recoveryPassword',
+    path: '/usuario/cadastro',
+    name: 'Cadastro Usuário',
+    // eslint-disable-next-line import/no-unresolved
+    component: () => import('../components/usuario/cadastro-usuario/CadastroUsuario.vue'),
+    meta: {
+      guest: true,
+    },
+  },
+  {
+    path: '/usuario/recuperacao-senha',
     name: 'Recuperação Senha',
     // eslint-disable-next-line import/no-unresolved
-    component: () => import('../views/usuario/recovery-password/RecoveryPassword.vue'),
+    component: () => import('../components/usuario/recovery-password/RecoveryPassword.vue'),
     meta: {
       guest: true,
     },
   },
   {
-    path: '/usuario/newPassword',
+    path: '/usuario/atualizar-senha',
     name: 'Nova Senha',
     // eslint-disable-next-line import/no-unresolved
-    component: () => import('../views/usuario/new-password/NewPassword.vue'),
+    component: () => import('../components/usuario/new-password/NewPassword.vue'),
     meta: {
       guest: true,
     },
   },
   {
-    path: '/meus-projetos/listar',
-    name: 'Meus Projetos',
-    // component: () => import('../views/MyProjects/MyProjects.vue'),
-    component: () => import('../components/MultiselectExample/MultiselectExample.vue'),
+    path: '/projetos',
+    name: 'Consulta de Projetos',
+    component: () => import('../components/projeto/consulta-projeto/ConsultaProjeto.vue'),
     meta: {
       requiresAuth: true,
     },
   },
   {
-    path: '/meus-projetos/consultar', // consultar:id
-    name: 'Consultar Projeto',
-    component: () => import('../views/MyProjects/MyProjects.vue'),
+    path: '/projetos-disciplina',
+    name: 'Consulta por Disciplina',
+    component: () => import('../components/projeto/consulta-projeto/ConsultaProjeto.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/meus-projetos',
+    name: 'Meus Projetos',
+    component: () => import('../components/projeto/consulta-projeto/ConsultaProjeto.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/projetos/visualizar/:id',
+    name: 'Visualização de Projeto',
+    component: () => import('../components/projeto/cadastro-projeto/CadastroProjeto.vue'),
     meta: {
       requiresAuth: true,
     },
   },
   {
     path: '/projetos/cadastrar',
-    name: 'Cadastrar de Projeto',
-    component: () => import('../views/cadastroProjeto/cadastro-projeto.vue'),
+    name: 'Cadastro de Projeto',
+    component: () => import('../components/projeto/cadastro-projeto/CadastroProjeto.vue'),
     meta: {
       requiresAuth: true,
     },
   },
   {
-    path: '/projetos/listar',
-    name: 'Projetos',
-    component: () => import('../views/SubjectProjects/SubjectProjects.vue'),
-    meta: {
-      requiresAuth: true,
-    },
-  },
-  {
-    path: '/projetos/consultar', // consultar:id
-    name: 'Projetos',
-    component: () => import('../views/MyProjects/MyProjects.vue'),
+    path: '/projetos/editar/:id',
+    name: 'Edição de Projeto',
+    component: () => import('../components/projeto/cadastro-projeto/CadastroProjeto.vue'),
     meta: {
       requiresAuth: true,
     },
