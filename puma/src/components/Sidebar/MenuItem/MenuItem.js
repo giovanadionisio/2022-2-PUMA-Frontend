@@ -5,9 +5,6 @@ export default {
     props: {
         props: { type: Object },
     },
-    mounted() {
-        // console.log(this.props.show());
-    },
     data() {
         return {
             selected: this.props.key === this.$store.getters.currentNavigation,
