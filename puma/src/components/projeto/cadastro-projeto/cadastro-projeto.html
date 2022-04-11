@@ -3,9 +3,7 @@
     <b-row>
       <b-col cols="12">
         <div class='main-title'>
-          <!-- Sempre será apenas CADASTRAR -->
-          {{ operacao === 'visualizar' ? 'Visualizar Projeto': (operacao === 'alterar' ? 'Alterar Projeto' : 'Cadastrar
-          Projeto') }}
+          {{ operacao === 'visualizar' ? 'Visualizar Projeto': (operacao === 'alterar' ? 'Alterar Projeto' : 'Cadastrar Projeto') }}
         </div>
       </b-col>
     </b-row>
@@ -113,7 +111,7 @@
                 type="submit" class="btn btn-warning" @click="onSubmit" />
             </div>
             <div class="m-4" />
-            <b-button v-if="operacao !== 'visualizar'" href="/meus-projetos" class="btn btn-warning">
+            <b-button v-if="operacao !== 'visualizar'" class="btn btn-warning" @click="$router.push({path: '/meus-projetos'}).catch(() => {})">
               CANCELAR
             </b-button>
           </div>
