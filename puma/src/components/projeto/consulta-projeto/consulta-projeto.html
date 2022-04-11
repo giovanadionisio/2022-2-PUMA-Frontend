@@ -3,7 +3,7 @@
     {{ operacao === 'meus-projetos' ? 'Meus projetos' : (operacao === 'projetos' ? 'Projetos' : 'Projetos das Disciplinas') }}
   </div>
   <div v-if="!isLoading && projects.length" class="tittle sub-tittle ml-4">
-    {{ 'Abaixo constam os projetos ' + (operacao === 'meus-projetos' ? 'cadastrados pelo usuário' : (operacao === 'projetos' ? 'cadastrados na plataforma' : 'alocados para as disciplinas mininistradas pelo usuário')) }}
+    {{ 'Projetos ' + (operacao === 'meus-projetos' ? 'cadastrados pelo usuário' : (operacao === 'projetos' ? 'cadastrados na plataforma' : 'alocados para as disciplinas mininistradas pelo usuário')) }}
   </div>
   <div v-show="isLoading" style="margin-left: 38vw" class="mt-4">
     <i class="fa-solid fa-circle-notch fa-spin fa-3x"></i>

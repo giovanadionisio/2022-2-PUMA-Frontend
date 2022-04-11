@@ -29,17 +29,12 @@ export default {
     localStorage.email = '';
   },
   methods: {
-    ok() {
-      // localStorage.email = this.email;
-      this.$router.push('/usuario/newPassword');
-    },
-
     disableError() {
       this.emailNotfound = false;
     },
-
-    enviarEmail() {
-      if (this.email.length) {
+    async enviarEmail() {
+      const isValid = await this.$refs.observer.validate();
+      if (isValid) {
         this.userService.sendEmail(this.email, (res) => {
           if (res.status === 200) {
             localStorage.email = this.email;
