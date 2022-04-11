@@ -144,7 +144,7 @@ export default {
         });
         searchInput.after(addProjectButton);
       }
-      if (document.getElementById('btn-add-project') && this.operacao !== 'meus-projetos') {
+      if (this.operacao !== 'meus-projetos' && document.getElementById('btn-add-project')) {
         document.getElementById('btn-add-project').remove();
       }
     },
