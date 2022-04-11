@@ -168,6 +168,9 @@ export default {
     },
     setSvgStyles() {
       const svgs = document.getElementsByTagName('svg');
+      // if (this.isLoading && svgs.item(0)) {
+      //   svgs.item(0).style.marginTop = '20px';
+      // }
       if (svgs.item(3) && svgs.item(7)) {
         svgs.item(3).style.marginLeft = '15px';
         svgs.item(7).style.marginLeft = '15px';

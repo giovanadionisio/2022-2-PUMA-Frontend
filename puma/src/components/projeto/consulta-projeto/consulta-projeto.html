@@ -1,8 +1,8 @@
-<div style="display: inline-table">
-    <div v-show="isLoading" style="margin-left: 38vw">
+<div v-bind:style="{ float: !isLoading && projects.length ? 'right' : ''}">
+    <div v-show="isLoading" style="margin-left: 50vw; position: absolute; margin-top: 20px">
       <i class="fa-solid fa-circle-notch fa-spin fa-3x"></i>
     </div>
-    <div v-show="!isLoading && !projects.length" class="no-results">
+    <div v-if="false" class="no-results" style="margin-left: 50vw">
       Sem resultados disponíveis
     </div>
     <mdbDatatable v-show="!isLoading && projects.length" ref="table" borderless color="blue" :data="data" :pagination="false" />
