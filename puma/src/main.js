@@ -107,6 +107,16 @@ extend('confirmed', {
   params: ['target'],
   message: 'Os campos devem coincidir',
 });
+extend('email', {
+  ...email,
+  validate(value) {
+    if (value) {
+      return email.validate(value);
+    }
+    return '';
+  },
+  message: 'Insira um email válido',
+});
 extend('alpha_spaces', alpha_spaces);
 extend('max', max);
 extend('cnpj', {

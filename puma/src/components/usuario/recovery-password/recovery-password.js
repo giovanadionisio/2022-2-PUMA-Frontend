@@ -1,5 +1,3 @@
-import { extend } from 'vee-validate';
-import { email, required } from 'vee-validate/dist/rules';
 import UserService from '../../../services/UserService';
 import Loading from '../../shared/loading/Loading.vue';
 import VisitorNav from '../../VisitorNav/VisitorNav.vue';
@@ -49,18 +47,3 @@ export default {
     },
   },
 };
-
-extend('email', {
-  ...email,
-  validate(value) {
-    if (value) {
-      return email.validate(value);
-    }
-    return '';
-  },
-  message: 'Insira um email válido',
-});
-extend('required', {
-  ...required,
-  message: 'Preenchimento obrigatório ',
-});

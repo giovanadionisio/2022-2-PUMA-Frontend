@@ -1,9 +1,5 @@
-/* eslint-disable camelcase */
 import { extend } from 'vee-validate';
-// eslint-disable-next-line camelcase
-import {
-  email, required, min, regex,
-} from 'vee-validate/dist/rules';
+import { regex } from 'vee-validate/dist/rules';
 import UserService from '../../../services/UserService';
 import Loading from '../../shared/loading/Loading.vue';
 import VisitorNav from '../../VisitorNav/VisitorNav.vue';
@@ -21,10 +17,10 @@ export default {
     return {
       userService: new UserService(),
       email: '',
-      isLoading: false,
-      isEqualsToNewPassword: true,
       newPassword: '',
       confirmNewPassword: '',
+      isLoading: false,
+      isEqualsToNewPassword: true,
       passwordRedefined: false,
       navs: [{ title: 'HOME' }, { title: 'RECUPERAÇÃO DE SENHA' }],
     };
@@ -35,13 +31,8 @@ export default {
 
   methods: {
     verifyConfirmPassword() {
-      if (this.confirmNewPassword === this.newPassword) {
-        this.isEqualsToNewPassword = true;
-      } else {
-        this.isEqualsToNewPassword = false;
-      }
+      this.isEqualsToNewPassword = this.confirmNewPassword === this.newPassword;
     },
-
     async updatePassword() {
       const isValid = await this.$refs.observer.validate();
       if (isValid && this.isEqualsToNewPassword && this.newPassword.length) {
@@ -54,29 +45,6 @@ export default {
     },
   },
 };
-
-extend('email', {
-  ...email,
-  validate(value) {
-    if (value) {
-      return email.validate(value);
-    }
-    return '';
-  },
-  message: 'Insira um email válido',
-});
-
-extend('required', {
-  ...required,
-  message: 'Preenchimento obrigatório',
-});
-
-extend('min', {
-  // eslint-disable-next-line camelcase
-  ...min,
-  message: 'Mínimo 6 caracteres',
-});
-
 extend('regex', {
   // eslint-disable-next-line camelcase
   ...regex,
