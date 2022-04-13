@@ -6,6 +6,7 @@
                     VER DETALHES DO PROJETO
                 </span>
             </b-col>
+            
             <b-col cols="6">
                 <b-row align-h="end">
                     <b-col cols="2" v-if="disabled">
@@ -83,11 +84,11 @@
                     <b-col cols="6">
                         <div role="group">
                             <label for="keyword-1" class="input-label">PALAVRAS-CHAVE</label>
-                            <multiselect v-model="value" :options="options" :disabled="disabled" :multiple="true"
-                                track-by="code" label="name" selectLabel="Clique para selecionar"
+                            <multiselect @change="handleChangeKeyWords" v-model="selectedKeywords" :options="keywords" :disabled="disabled" :multiple="true"
+                                track-by="value" label="text" selectLabel="Clique para selecionar"
                                 deselectLabel="Clique para remover" selectedLabel="Selecionada"
                                 placeholder="Pesquise ou adicione uma palavra-chave" tagPosition="bottom"
-                                class="your_custom_class">
+                                class="keyword_select">
                                 <span slot="noResult">Oops! Nenhuma palavra-chave encontrada.</span>
                                 <span slot="noOptions">Oops! Nenhuma palavra-chave cadastrada.</span>
                             </multiselect>
@@ -95,7 +96,7 @@
                         <div class="my-3" />
                         <div role="group">
                             <label for="keyword-1" class="input-label">PALAVRA-CHAVE PRINCIPAL</label>
-                            <b-form-select v-model="selected" :options="options" size="md" :disabled="disabled">
+                            <b-form-select v-model="mainKeyword" :options="selectedKeywords" @change="handleChangeKeyWords" size="md" :disabled="disabled">
                             </b-form-select>
                         </div>
                     </b-col>

@@ -5,14 +5,6 @@ export default {
     props: {},
     data() {
         return {
-            value: [
-                { name: 'Javascript', code: 'js' }
-            ],
-            options: [
-                { name: 'Vue.js', code: 'vu' },
-                { name: 'Javascript', code: 'js' },
-                { name: 'Open Source', code: 'os' }
-            ],
             disabled: true,
             subject: {
                 subjectId: 0,
@@ -33,13 +25,23 @@ export default {
                 status: 'SUBMETIDO',
                 feedback: '',
             },
-            selectedKeywords: [0, 1, 3],
-            keywords: [],
+            selectedKeywords: [],
+            keywords: [
+                { value: 0, text: 'Vue.js' },
+                { value: 1, text: 'Javascript' },
+                { value: 2, text: 'Open Source' }
+            ],
+            mainKeyword: {}
         };
     },
     methods: {
         toggleEnableForm: function () {
             this.disabled = !this.disabled;
+        },
+
+        handleChangeKeyWords: function () {
+            console.log('mainKeyword')
+            console.log(this.mainKeyword)
         }
     },
 }
