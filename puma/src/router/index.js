@@ -99,6 +99,14 @@ const routes = [
       requiresAuth: true,
     },
   },
+  {
+    path: '/disciplinas/cadastrar',
+    name: 'Cadastro de Disciplina',
+    component: () => import('../components/disciplina/cadastro-disciplina/CadastroDisciplina.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
 ];
 
 const router = new VueRouter({
