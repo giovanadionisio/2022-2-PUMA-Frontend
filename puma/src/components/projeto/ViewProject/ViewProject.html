@@ -1,0 +1,159 @@
+<div class="main-content">
+    <b-container fluid class="main-container">
+        <b-row>
+            <b-col cols="6">
+                <span class="main-title">
+                    VER DETALHES DO PROJETO
+                </span>
+            </b-col>
+
+            <b-col cols="6">
+                <b-row align-h="end">
+                    <b-col cols="2" v-if="disabled && editable" class="m-2">
+                        <b-button variant="outline-primary" class="button" v-on:click="toggleEnableForm()">
+                            Avaliar
+                        </b-button>
+                    </b-col>
+                    <b-col cols="2" v-if="!disabled" class="m-2">
+                        <b-button variant="outline-primary" class="button">
+                            Enviar
+                        </b-button>
+                    </b-col>
+                    <b-col cols="2" v-if="!disabled" class="m-2">
+                        <b-button variant="outline-primary" class="button" v-on:click="toggleEnableForm()">
+                            Cancelar
+                        </b-button>
+                    </b-col>
+                    <b-col v-if="editable" cols="2" class="m-2">
+                        <b-button variant="outline-primary" class="button">Excluir</b-button>
+                    </b-col>
+                </b-row>
+            </b-col>
+        </b-row>
+        <b-row class="my-2">
+            <b-col cols="12">
+                <span class="data-label">PROJETO:</span>
+                <span class="data-content">{{ project.name }}</span>
+            </b-col>
+        </b-row>
+        <b-row class="my-2">
+            <b-col cols="4">
+                <span class="data-label">AUTOR(A):</span>
+                <span class="data-content">{{ user.fullName }}</span>
+            </b-col>
+            <b-col cols="4">
+                <span class="data-label">TELEFONE:</span>
+                <span class="data-content">{{ user.phoneNumber }}</span>
+            </b-col>
+            <b-col cols="4">
+                <span class="data-label">E-MAIL:</span>
+                <span class="data-content">{{ user.email }}</span>
+            </b-col>
+        </b-row>
+        <b-row class="my-2">
+            <b-col cols="4">
+                <span class="data-label">STATUS:</span>
+                <span class="data-content">{{ project.status }}</span>
+            </b-col>
+            <b-col cols="4">
+                <span class="data-label">DISCIPLINA:</span>
+                <span class="data-content">{{ subject.name }}</span>
+            </b-col>
+            <b-col cols="4">
+                <span class="data-label">SEMESTRE:</span>
+                <span class="data-content">N/A</span>
+            </b-col>
+        </b-row>
+        <b-row class="my-2 mx-0">
+            <b-col cols="12" class="form-container p-0">
+                <b-row class="m-3">
+                    <b-col cols="6">
+                        <div role="group">
+                            <label for="desafio" class="input-label">DESAFIO ENFRENTADO</label>
+                            <b-form-textarea id="desafio" rows="6" v-model="project.problem" :disabled="true">
+                            </b-form-textarea>
+                        </div>
+                        <div class="my-3" />
+                        <div role="group">
+                            <label for="results" class="input-label">RESULTADOS DESEJADOS</label>
+                            <b-form-textarea id="results" rows="6" v-model="project.expectedResult" :disabled="true">
+                            </b-form-textarea>
+                        </div>
+                        <div class="my-3" />
+
+                        <div role="group">
+                            <label for="keywords" class="input-label">PALAVRAS-CHAVE</label>
+                            <multiselect @change="handleChangeKeyWords" v-model="selectedKeywords" :options="keywords"
+                                :disabled="true" :multiple="true" track-by="value" label="text" :searchable="true"
+                                :showLabels="true" selectLabel="" deselectLabel="" selectedLabel=""
+                                placeholder="Pesquise ou adicione uma palavra-chave" tagPosition="bottom"
+                                class="multiselect-custom">
+                                <template slot="option" slot-scope="scope">
+                                    <div class="option__desc checkbox-label">
+                                        <input class="mx-2" type="checkbox" :checked="isChecked(scope.option)"
+                                            @focus.prevent :key="scope.option.value" />
+                                        <span class="option__title">{{ scope.option.text }}</span>
+                                    </div>
+                                </template>
+                                <span slot="maxElements">
+                                    Máximo de 3 opções selecionadas. Remova ao menos uma palavra-chave.
+                                </span>
+                                <span slot="noResult">
+                                    Nenhuma palavra-chave encontrada.
+                                </span>
+                            </multiselect>
+                        </div>
+                        <div class="my-3" />
+                        <div role="group">
+                            <label for="keyword-1" class="input-label">PALAVRA-CHAVE PRINCIPAL</label>
+                            <b-form-select id="keyword-1" v-model="mainKeyword" :options="selectedKeywords"
+                                @change="handleChangeKeyWords" size="md" :disabled="true">
+                            </b-form-select>
+                        </div>
+                    </b-col>
+                    <b-col cols="6">
+                        <div role="group">
+                            <label for="analise" class="input-label">ANÁLISE DA PROPOSTA DE PROJETO</label>
+                            <b-form-select id="analise" v-model="selectedPropose" :options="proposes"
+                                @change="handleChangeKeyWords" size="md" :disabled="disabled">
+                            </b-form-select>
+                        </div>
+                        <div class="my-3" />
+                        <div v-if="selectedPropose === 0" role="group">
+                            <label for="feedback" class="input-label">FEEDBACK PARA AUTOR DA PROPOSTA DE PROJETO</label>
+                            <b-form-textarea placeholder="Proposta está de acordo com o escopo da disciplina"
+                                id="feedback" rows="6" :disabled="disabled">
+                            </b-form-textarea>
+                        </div>
+                        <div v-if="selectedPropose === 1" role="group">
+                            <label for="feedback" class="input-label">MOTIVO DA REJEIÇÃO DA PROPOSTA</label>
+                            <b-form-textarea
+                                placeholder="Escreva o motivo da rejeição da proposta... (mínimo 100 caracteres)"
+                                id="feedback" rows="6" :disabled="disabled">
+                            </b-form-textarea>
+                        </div>
+                        <div v-if="selectedPropose === 2" role="group">
+                            <label class="input-label">ESCOLHA DA DISCIPLINA PARA ENVIAR A PROPOSTA</label>
+                            <b-form-select id="choices" v-model="selectedSubject" :options="subjects" size="md"
+                                :disabled="disabled">
+                            </b-form-select>
+                            <div class="my-3" />
+                            <label for="feedback" class="input-label">MOTIVO DO ENCAMINHAMENTO DA PROPOSTA</label>
+                            <b-form-textarea
+                                placeholder="Escreva o motivo do encaminhamento da proposta, seja por dúvida de qual disciplina escolher ou outra razão... (mínimo 100 caracteres)"
+                                id="feedback" rows="6" :disabled="disabled">
+                            </b-form-textarea>
+                        </div>
+                        <div v-if="selectedPropose === 3" role="group">
+                            <label for="feedback" class="input-label">MOTIVO DO ENCAMINHAMENTO DA PROPOSTA</label>
+                            <b-form-textarea
+                                placeholder="Escreva o motivo do encaminhamento da proposta, seja por dúvida de qual disciplina escolher ou outra razão... (mínimo 100 caracteres)"
+                                id="feedback" rows="6" :disabled="disabled">
+                            </b-form-textarea>
+                        </div>
+                    </b-col>
+                </b-row>
+            </b-col>
+        </b-row>
+    </b-container>
+</div>

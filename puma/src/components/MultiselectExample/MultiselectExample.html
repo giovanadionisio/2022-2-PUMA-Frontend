@@ -1,0 +1,38 @@
+<div class="main-content">
+    <div role="group">
+        <label for="keywords">PALAVRAS-CHAVE</label>
+        <multiselect v-model="value" :options="options" :disabled="disabled" :multiple="true" track-by="code"
+            label="name" :taggable="true" @tag="addTag" tagPosition="bottom" class="multiselect-custom"
+            selectLabel="Clique para selecionar" deselectLabel="Clique para remover"
+            tag-placeholder="Adicione essa palavra-chave" selectedLabel="Selecionada"
+            placeholder="Pesquise ou adicione uma palavra-chave">
+            <!--
+            <span slot="noResult">Oops! Nenhuma palavra-chave encontrada.</span>
+            <span slot="noOptions">Oops! Nenhuma palavra-chave cadastrada.</span>
+            <span slot="maxElements">Máximo de 3 opções selecionadas. Primeiro remova uma opção selecionada para
+                selecionar outra.</span>
+        -->
+        </multiselect>
+    </div>
+</div>
+
+<!--
+    <multiselect id="keywords" v-model="keywordsSelected" :options="keywords" track-by="keywordid" label="keyword"
+        :multiple="true" openDirection="bottom" :placeholder="multiSelectPlaceholder" :searchable="true"
+        :showLabels="true" :closeOnSelect="false" :max-height="150" :max="3" @input="sortMultiselectLabels()"
+        selectLabel="" deselectLabel="" selectedLabel="" @close="isMultiselectTouched = true"
+        :loading="isLoadingKeywords" class="multiselect-custom"
+        :disabled="isLoadingKeywords || !keywords.length || operacao === 'visualizar'">
+        <template slot="option" slot-scope="scope">
+            <div class="option__desc checkbox-label">
+                <input class="mx-2" type="checkbox" :checked="isChecked(scope.option)" @focus.prevent
+                    :key="scope.option.keywordid" />
+                <span class="option__title">{{ scope.option.keyword }}</span>
+            </div>
+        </template>
+        <span slot="maxElements">
+            Máximo de 3 opções selecionadas. Primeiro remova uma opção selecionada para selecionar outra.
+        </span>
+        <span slot="noResult">Oops! Nenhuma palavra-chave encontrada.</span>
+    </multiselect>
+-->

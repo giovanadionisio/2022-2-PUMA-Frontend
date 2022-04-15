@@ -8,7 +8,7 @@ export default {
     data() {
         return {
             selected: this.props.key === this.$store.getters.currentNavigation,
-            hasAccess: this.props.userTypes.some((type) => type === this.$store.getters.user.type)
+            hasAccess: this.props.show(),
         }
     },
     watch: {
