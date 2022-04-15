@@ -76,6 +76,14 @@ const routes = [
     },
   },
   {
+    path: '/projetos-disciplina/visualizar/:id',
+    name: 'Consulta por Disciplina Visualizar',
+    component: () => import('../components/projeto/ViewProject/ViewProject.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
     path: '/meus-projetos/cadastrar',
     name: 'Cadastro de Projeto',
     component: () => import('../components/projeto/cadastro-projeto/CadastroProjeto.vue'),
