@@ -6,58 +6,59 @@
                     VER DETALHES DO PROJETO
                 </span>
             </b-col>
-
             <b-col cols="6">
                 <b-row align-h="end">
-                    <b-col cols="2" v-if="disabled && editable" class="m-2">
-                        <b-button variant="outline-primary" class="button" v-on:click="toggleEnableForm()">
+                    <b-col cols="2" v-if="editable && disabled" class="m-2">
+                        <b-button variant="outline-primary" class="button" v-on:click="handleEvaluate()">
                             Avaliar
                         </b-button>
                     </b-col>
                     <b-col cols="2" v-if="!disabled" class="m-2">
-                        <b-button variant="outline-primary" class="button">
+                        <b-button variant="outline-primary" class="button" v-on:click="handleSubmit()">
                             Enviar
                         </b-button>
                     </b-col>
                     <b-col cols="2" v-if="!disabled" class="m-2">
-                        <b-button variant="outline-primary" class="button" v-on:click="toggleEnableForm()">
+                        <b-button variant="outline-primary" class="button" v-on:click="handleCancelEvaluate()">
                             Cancelar
                         </b-button>
                     </b-col>
-                    <b-col v-if="editable" cols="2" class="m-2">
-                        <b-button variant="outline-primary" class="button">Excluir</b-button>
-                    </b-col>
+                    <!-- <b-col v-if="editable" cols="2" class="m-2">
+                        <b-button variant="outline-primary" class="button">
+                            Excluir
+                        </b-button>
+                    </b-col> -->
                 </b-row>
             </b-col>
         </b-row>
         <b-row class="my-2">
             <b-col cols="12">
                 <span class="data-label">PROJETO:</span>
-                <span class="data-content">{{ project.name }}</span>
+                <span class="data-content">{{ form.project.name }}</span>
             </b-col>
         </b-row>
         <b-row class="my-2">
             <b-col cols="4">
                 <span class="data-label">AUTOR(A):</span>
-                <span class="data-content">{{ user.fullName }}</span>
+                <span class="data-content">{{ form.user.fullName }}</span>
             </b-col>
             <b-col cols="4">
                 <span class="data-label">TELEFONE:</span>
-                <span class="data-content">{{ user.phoneNumber }}</span>
+                <span class="data-content">{{ form.user.phoneNumber }}</span>
             </b-col>
             <b-col cols="4">
                 <span class="data-label">E-MAIL:</span>
-                <span class="data-content">{{ user.email }}</span>
+                <span class="data-content">{{ form.user.email }}</span>
             </b-col>
         </b-row>
         <b-row class="my-2">
             <b-col cols="4">
                 <span class="data-label">STATUS:</span>
-                <span class="data-content">{{ project.status }}</span>
+                <span class="data-content">{{ form.project.status }}</span>
             </b-col>
             <b-col cols="4">
                 <span class="data-label">DISCIPLINA:</span>
-                <span class="data-content">{{ subject.name }}</span>
+                <span class="data-content">{{ form.subject.name }}</span>
             </b-col>
             <b-col cols="4">
                 <span class="data-label">SEMESTRE:</span>
@@ -69,21 +70,30 @@
                 <b-row class="m-3">
                     <b-col cols="6">
                         <div role="group">
-                            <label for="desafio" class="input-label">DESAFIO ENFRENTADO</label>
-                            <b-form-textarea id="desafio" rows="6" v-model="project.problem" :disabled="true">
+                            <label for="name" class="input-label">TÍTULO PARA O PROJETO</label>
+                            <b-form-input id="name" v-model="form.project.name" :disabled="true">
+                            </b-form-input>
+                        </div>
+                        <div class="my-3" />
+                        <div role="group">
+                            <label for="problem" class="input-label">PROBLEMA ENFRENTADO</label>
+                            <b-form-textarea id="problem" rows="6" v-model="form.project.problem" :disabled="true"
+                                :maxlength="1000">
                             </b-form-textarea>
+                            <span class="counter">({{form.project.problem.length}}/1000)</span>
                         </div>
                         <div class="my-3" />
                         <div role="group">
                             <label for="results" class="input-label">RESULTADOS DESEJADOS</label>
-                            <b-form-textarea id="results" rows="6" v-model="project.expectedResult" :disabled="true">
+                            <b-form-textarea id="results" rows="6" v-model="form.project.expectedResult"
+                                :disabled="true" :maxlength="1000">
                             </b-form-textarea>
+                            <span class="counter">({{form.project.expectedResult.length}}/1000)</span>
                         </div>
                         <div class="my-3" />
-
                         <div role="group">
                             <label for="keywords" class="input-label">PALAVRAS-CHAVE</label>
-                            <multiselect @change="handleChangeKeyWords" v-model="selectedKeywords" :options="keywords"
+                            <multiselect id="keywords" v-model="form.selectedKeywords" :options="keywords"
                                 :disabled="true" :multiple="true" track-by="value" label="text" :searchable="true"
                                 :showLabels="true" selectLabel="" deselectLabel="" selectedLabel=""
                                 placeholder="Pesquise ou adicione uma palavra-chave" tagPosition="bottom"
@@ -105,51 +115,63 @@
                         </div>
                         <div class="my-3" />
                         <div role="group">
-                            <label for="keyword-1" class="input-label">PALAVRA-CHAVE PRINCIPAL</label>
-                            <b-form-select id="keyword-1" v-model="mainKeyword" :options="selectedKeywords"
-                                @change="handleChangeKeyWords" size="md" :disabled="true">
+                            <label for="main-keyword" class="input-label">PALAVRA-CHAVE PRINCIPAL</label>
+                            <b-form-select id="main-keyword" v-model="form.mainKeyword" :options="form.selectedKeywords"
+                                size="md" :disabled="true">
                             </b-form-select>
                         </div>
                     </b-col>
                     <b-col cols="6">
-                        <div role="group">
+                        <div v-if="hasFeedback() && disabled" role="group">
+                            <label for="feedback" class="input-label">FEEDBACK DA ÚLTIMA AVALIAÇÃO</label>
+                            <b-form-textarea id="feedback" rows="6" :disabled="true" v-model="form.project.feedback"
+                                :maxlength="1000">
+                            </b-form-textarea>
+                            <span class="counter">({{form.project.feedback.length}}/1000)</span>
+                        </div>
+                        <div v-if="!disabled" role="group">
                             <label for="analise" class="input-label">ANÁLISE DA PROPOSTA DE PROJETO</label>
-                            <b-form-select id="analise" v-model="selectedPropose" :options="proposes"
-                                @change="handleChangeKeyWords" size="md" :disabled="disabled">
+                            <b-form-select id="analise" v-model="form.selectedEvaluation" :options="evaluations"
+                                size="md" :disabled="disabled">
                             </b-form-select>
                         </div>
                         <div class="my-3" />
-                        <div v-if="selectedPropose === 0" role="group">
+                        <div v-if="!disabled && form.selectedEvaluation === 0" role="group">
                             <label for="feedback" class="input-label">FEEDBACK PARA AUTOR DA PROPOSTA DE PROJETO</label>
-                            <b-form-textarea placeholder="Proposta está de acordo com o escopo da disciplina"
-                                id="feedback" rows="6" :disabled="disabled">
+                            <b-form-textarea id="feedback" rows="6" :disabled="disabled" v-model="form.project.feedback"
+                                :maxlength="1000" placeholder="Proposta está de acordo com o escopo...">
                             </b-form-textarea>
+                            <span class="counter">({{form.project.feedback.length}}/1000)</span>
                         </div>
-                        <div v-if="selectedPropose === 1" role="group">
+                        <div v-if="!disabled && form.selectedEvaluation === 1" role="group">
                             <label for="feedback" class="input-label">MOTIVO DA REJEIÇÃO DA PROPOSTA</label>
-                            <b-form-textarea
-                                placeholder="Escreva o motivo da rejeição da proposta... (mínimo 100 caracteres)"
-                                id="feedback" rows="6" :disabled="disabled">
+                            <b-form-textarea id="feedback" rows="6" :disabled="disabled" v-model="form.project.feedback"
+                                :maxlength="1000" placeholder="Escreva o motivo da rejeição da proposta...">
                             </b-form-textarea>
+                            <span class="counter">({{form.project.feedback.length}}/1000)</span>
                         </div>
-                        <div v-if="selectedPropose === 2" role="group">
-                            <label class="input-label">ESCOLHA DA DISCIPLINA PARA ENVIAR A PROPOSTA</label>
-                            <b-form-select id="choices" v-model="selectedSubject" :options="subjects" size="md"
+                        <div v-if="!disabled && form.selectedEvaluation === 2" role="group">
+                            <label for="subjects" class="input-label">
+                                ESCOLHA DA DISCIPLINA PARA ENVIAR A PROPOSTA
+                            </label>
+                            <b-form-select id="subjects" v-model="form.selectedSubject" :options="subjects" size="md"
                                 :disabled="disabled">
                             </b-form-select>
                             <div class="my-3" />
                             <label for="feedback" class="input-label">MOTIVO DO ENCAMINHAMENTO DA PROPOSTA</label>
-                            <b-form-textarea
-                                placeholder="Escreva o motivo do encaminhamento da proposta, seja por dúvida de qual disciplina escolher ou outra razão... (mínimo 100 caracteres)"
-                                id="feedback" rows="6" :disabled="disabled">
+                            <b-form-textarea id="feedback" rows="6" :disabled="disabled" v-model="form.project.feedback"
+                                :maxlength="1000"
+                                placeholder="Escreva o motivo do encaminhamento da proposta, seja por dúvida de qual disciplina escolher ou outra razão...">
                             </b-form-textarea>
+                            <span class="counter">({{form.project.feedback.length}}/1000)</span>
                         </div>
-                        <div v-if="selectedPropose === 3" role="group">
+                        <div v-if="!disabled && form.selectedEvaluation === 3" role="group">
                             <label for="feedback" class="input-label">MOTIVO DO ENCAMINHAMENTO DA PROPOSTA</label>
-                            <b-form-textarea
-                                placeholder="Escreva o motivo do encaminhamento da proposta, seja por dúvida de qual disciplina escolher ou outra razão... (mínimo 100 caracteres)"
-                                id="feedback" rows="6" :disabled="disabled">
+                            <b-form-textarea id="feedback" rows="6" :disabled="disabled" v-model="form.project.feedback"
+                                :maxlength="1000"
+                                placeholder="Escreva o motivo do encaminhamento da proposta, seja por dúvida de qual disciplina escolher ou outra razão...">
                             </b-form-textarea>
+                            <span class="counter">({{form.project.feedback.length}}/1000)</span>
                         </div>
                     </b-col>
                 </b-row>

@@ -5,6 +5,8 @@
       rel='stylesheet'
     />
     <Sidebar v-if='isAuthenticated' />
+    <ConfirmModal />
+    <LoadingModal />
     <router-view />
   </div>
 </template>
@@ -13,10 +15,14 @@
 /* eslint-disable */
 // eslint-disable-next-line import/no-unresolved
 import Sidebar from '@/components/Sidebar/Sidebar.vue';
+import ConfirmModal from '@/components/ConfirmModal/ConfirmModal.vue';
+import LoadingModal from '@/components/LoadingModal/LoadingModal.vue';
 
 export default {
   components: {
     Sidebar,
+    ConfirmModal,
+    LoadingModal,
   },
   methods: {
     updateSessionStatus() {

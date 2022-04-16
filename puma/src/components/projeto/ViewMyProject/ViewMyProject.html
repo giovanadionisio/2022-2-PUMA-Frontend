@@ -6,26 +6,27 @@
                     VER DETALHES DO PROJETO
                 </span>
             </b-col>
-
             <b-col cols="6">
                 <b-row align-h="end">
-                    <b-col cols="2" v-if="disabled" class="m-2">
+                    <b-col cols="2" v-if="editable && disabled" class="m-2">
                         <b-button variant="outline-primary" class="button" v-on:click="toggleEnableForm()">
                             Editar
                         </b-button>
                     </b-col>
                     <b-col cols="2" v-if="!disabled" class="m-2">
-                        <b-button variant="outline-primary" class="button">
+                        <b-button variant="outline-primary" class="button" v-on:click="handleSubmit()">
                             Salvar
                         </b-button>
                     </b-col>
                     <b-col cols="2" v-if="!disabled" class="m-2">
-                        <b-button variant="outline-primary" class="button" v-on:click="toggleEnableForm()">
+                        <b-button variant="outline-primary" class="button" v-on:click="handleCancelEdit()">
                             Cancelar
                         </b-button>
                     </b-col>
-                    <b-col cols="2" class="m-2">
-                        <b-button variant="outline-primary" class="button">Excluir</b-button>
+                    <b-col cols="2" v-if="editable" class="m-2">
+                        <b-button variant="outline-primary" class="button" v-on:click="handleDeleteProject()">
+                            Excluir
+                        </b-button>
                     </b-col>
                 </b-row>
             </b-col>
@@ -33,31 +34,31 @@
         <b-row class="my-2">
             <b-col cols="12">
                 <span class="data-label">PROJETO:</span>
-                <span class="data-content">{{ project.name }}</span>
+                <span class="data-content">{{ form.project.name }}</span>
             </b-col>
         </b-row>
         <b-row class="my-2">
             <b-col cols="4">
                 <span class="data-label">AUTOR(A):</span>
-                <span class="data-content">{{ user.fullName }}</span>
+                <span class="data-content">{{ form.user.fullName }}</span>
             </b-col>
             <b-col cols="4">
                 <span class="data-label">TELEFONE:</span>
-                <span class="data-content">{{ user.phoneNumber }}</span>
+                <span class="data-content">{{ form.user.phoneNumber }}</span>
             </b-col>
             <b-col cols="4">
                 <span class="data-label">E-MAIL:</span>
-                <span class="data-content">{{ user.email }}</span>
+                <span class="data-content">{{ form.user.email }}</span>
             </b-col>
         </b-row>
         <b-row class="my-2">
             <b-col cols="4">
                 <span class="data-label">STATUS:</span>
-                <span class="data-content">{{ project.status }}</span>
+                <span class="data-content">{{ form.project.status }}</span>
             </b-col>
             <b-col cols="4">
                 <span class="data-label">DISCIPLINA:</span>
-                <span class="data-content">{{ subject.name }}</span>
+                <span class="data-content">{{ form.subject.name }}</span>
             </b-col>
             <b-col cols="4">
                 <span class="data-label">SEMESTRE:</span>
@@ -69,22 +70,30 @@
                 <b-row class="m-3">
                     <b-col cols="6">
                         <div role="group">
-                            <label for="desafio" class="input-label">DESAFIO ENFRENTADO</label>
-                            <b-form-textarea id="desafio" rows="6" v-model="project.problem" :disabled="disabled">
-                            </b-form-textarea>
+                            <label for="name" class="input-label">TÍTULO PARA O PROJETO</label>
+                            <b-form-input id="name" v-model="form.project.name" :disabled="disabled">
+                            </b-form-input>
                         </div>
                         <div class="my-3" />
                         <div role="group">
-                            <label for="desafio" class="input-label">RESULTADOS DESEJADOS</label>
-                            <b-form-textarea id="resultados" rows="6" v-model="project.expectedResult"
-                                :disabled="disabled">
+                            <label for="problem" class="input-label">PROBLEMA ENFRENTADO</label>
+                            <b-form-textarea id="problem" rows="6" v-model="form.project.problem" :disabled="disabled"
+                                :maxlength="1000">
                             </b-form-textarea>
+                            <span class="counter">({{form.project.problem.length}}/1000)</span>
                         </div>
-                    </b-col>
-                    <b-col cols="6">
+                        <div class="my-3" />
                         <div role="group">
-                            <label for="keyword-1" class="input-label">PALAVRAS-CHAVE</label>
-                            <multiselect @change="handleChangeKeyWords" v-model="selectedKeywords" :options="keywords"
+                            <label for="results" class="input-label">RESULTADOS DESEJADOS</label>
+                            <b-form-textarea id="results" rows="6" v-model="form.project.expectedResult"
+                                :disabled="disabled" :maxlength="1000">
+                            </b-form-textarea>
+                            <span class="counter">({{form.project.expectedResult.length}}/1000)</span>
+                        </div>
+                        <div class="my-3" />
+                        <div role="group">
+                            <label for="keywords" class="input-label">PALAVRAS-CHAVE</label>
+                            <multiselect id="keywords" v-model="form.selectedKeywords" :options="keywords"
                                 :disabled="disabled" :multiple="true" track-by="value" label="text" :searchable="true"
                                 :showLabels="true" selectLabel="" deselectLabel="" selectedLabel=""
                                 placeholder="Pesquise ou adicione uma palavra-chave" tagPosition="bottom"
@@ -106,10 +115,17 @@
                         </div>
                         <div class="my-3" />
                         <div role="group">
-                            <label for="keyword-1" class="input-label">PALAVRA-CHAVE PRINCIPAL</label>
-                            <b-form-select v-model="mainKeyword" :options="selectedKeywords"
-                                @change="handleChangeKeyWords" size="md" :disabled="disabled">
+                            <label for="main-keyword" class="input-label">PALAVRA-CHAVE PRINCIPAL</label>
+                            <b-form-select id="main-keyword" v-model="form.mainKeyword" :options="form.selectedKeywords"
+                                size="md" :disabled="disabled">
                             </b-form-select>
+                        </div>
+                    </b-col>
+                    <b-col cols="6" v-if="hasFeedback()">
+                        <div role="group">
+                            <label for="feedback" class="input-label">FEEDBACK DA AVALIAÇÃO</label>
+                            <b-form-textarea id="feedback" rows="6" v-model="form.project.feedback" :disabled="true">
+                            </b-form-textarea>
                         </div>
                     </b-col>
                 </b-row>

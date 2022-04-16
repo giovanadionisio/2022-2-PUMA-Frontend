@@ -91,7 +91,7 @@ export default {
         row.etapa = project.status === 'IC' || project.status === 'EX' || project.status === 'EC' ? 'Projeto' : 'Proposta';
         row.status = statusProjetoEnum(project.status);
         row.name = project.name.slice(0, 20);
-        row.buttons = '<button name="visualizar" class="btn mr-2" id=' + project.projectid + '><i class="fa-solid fa-circle-info mr-2"></i>VER DETALHES</button>';
+        row.buttons = '<button name="visualizar" class="btn cp-btn mr-2" id=' + project.projectid + '><i class="fa-solid fa-circle-info mr-2"></i>VER DETALHES</button>';
         this.data.rows.push(row);
       });
     },
@@ -135,7 +135,7 @@ export default {
     configAddProjectButton(searchInput) {
       if (!document.getElementById('btn-add-project') && this.operacao === 'meus-projetos') {
         const addProjectButton = document.createElement('button');
-        addProjectButton.classList.add('btn', 'mt-3', 'col-md-8');
+        addProjectButton.classList.add('btn', 'cp-btn', 'mt-3', 'col-md-8');
         addProjectButton.innerHTML = '<i class="fa-solid fa-plus-circle mr-2 add-project"></i>ADICIONAR PROJETO';
         addProjectButton.name = 'cadastrar';
         addProjectButton.id = 'btn-add-project';
@@ -153,7 +153,6 @@ export default {
         const button = event.target;
         const operacao = button.name;
         const path = this.$route.path.slice(1);
-        console.log({ path })
         if (button.id) {
           this.$router.push({ path: `/${path}/visualizar/${button.id}` }).catch(() => { });
         }
