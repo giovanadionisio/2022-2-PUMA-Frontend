@@ -122,6 +122,39 @@ export default class ProjectService {
     });
   }
 
+  getAvailableKeywordsToSubject() {
+    return new Promise((resolve, reject) => {
+      axios.get(`${global.URL_GATEWAY}/project/subject/keywords`).then((response) => {
+        resolve(response);
+      }).catch((error) => {
+        alert(error);
+        reject('Erro ao recuperar as palavras-chave para disciplinaa');
+      });
+    });
+  }
+
+  getSubareas() {
+    return new Promise((resolve, reject) => {
+      axios.get(`${global.URL_GATEWAY}/project/subareas`).then((response) => {
+        resolve(response);
+      }).catch((error) => {
+        alert(error);
+        reject('Erro ao recuperar as subareas');
+      });
+    });
+  }
+
+  addSubject(subject) {
+    return new Promise((resolve, reject) => {
+      const auth = store.getters.token;
+      axios.post(`${global.URL_GATEWAY}/project/subject`, subject, { headers: { auth } }).then((response) => {
+        resolve(response);
+      }).catch((response) => {
+        reject(`Erro ao cadastrar disciplina: ${response}`);
+      });
+    });
+  }
+
   async getSubjects() {
     const auth = store.getters.token;
     const subjects = await axios.get(`${global.URL_GATEWAY}/project/subject`, {
