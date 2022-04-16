@@ -37,7 +37,7 @@ export default class ProjectService {
 
   async getAllSubjects() {
     const auth = store.getters.token;
-    const subjects = await axios.get(`${global.URL_GATEWAY}/project/subject`, {
+    const subjects = await axios.get(`${global.URL_GATEWAY}/project/disciplina`, {
       headers: {
         auth,
       },
@@ -120,5 +120,15 @@ export default class ProjectService {
         reject('erro na deleção do arquivo');
       });
     });
+  }
+
+  async getSubjects() {
+    const auth = store.getters.token;
+    const subjects = await axios.get(`${global.URL_GATEWAY}/project/subject`, {
+      headers: {
+        auth,
+      },
+    });
+    return subjects;
   }
 }

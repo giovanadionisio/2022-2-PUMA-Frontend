@@ -1,7 +1,6 @@
 <div class="main-content hidden-scroll-bar">
   <div class="tittle ml-4">
-    {{ operacao === 'meus-projetos' ? 'Meus projetos' : (operacao === 'projetos' ? 'Projetos' : 'Projetos das
-    Disciplinas') }}
+    {{ operacao === 'meus-projetos' ? 'Meus projetos' : (operacao === 'projetos' ? 'Projetos' : 'Projetos dasDisciplinas') }}
   </div>
   <div v-if="!isLoading && projects.length" class="tittle sub-tittle ml-4">
     {{ 'Projetos ' + (operacao === 'meus-projetos' ? 'cadastrados pelo usuário' : (operacao === 'projetos' ?

@@ -61,7 +61,7 @@ const routes = [
   },
   {
     path: '/projetos-disciplina',
-    name: 'Consulta por Disciplina',
+    name: 'Projetos por Disciplina',
     component: () => import('../components/projeto/consulta-projeto/ConsultaProjeto.vue'),
     meta: {
       requiresAuth: true,
@@ -95,6 +95,14 @@ const routes = [
     path: '/projetos/editar/:id',
     name: 'Edição de Projeto',
     component: () => import('../components/projeto/cadastro-projeto/CadastroProjeto.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/disciplinas',
+    name: 'Consulta a Disciplinas',
+    component: () => import('../components/disciplina/consulta-disciplina/ConsultaDisciplina.vue'),
     meta: {
       requiresAuth: true,
     },

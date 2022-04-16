@@ -1,0 +1,15 @@
+<div class="main-content hidden-scroll-bar">
+  <div class="tittle ml-4">
+    Disciplinas
+  </div>
+  <div v-if="!isLoading && subjects.length" class="tittle sub-tittle ml-4">
+    Disciplinas cadastradas na plataforma
+  </div>
+  <div v-show="isLoading" style="margin-left: 38vw" class="mt-4">
+    <i class="fa-solid fa-circle-notch fa-spin fa-3x"></i>
+  </div>
+  <mdbDatatable v-show="!isLoading" ref="table" borderless color="blue" :data="data" :pagination="false"/>
+  <div v-if="!isLoading && !subjects.length" class="no-results align-content-center mt-3">
+    Sem resultados disponíveis
+  </div>
+</div>

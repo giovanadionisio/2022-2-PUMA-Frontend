@@ -1,0 +1,66 @@
+.hidden-scroll-bar {
+    overflow-x: hidden;
+}
+
+thead{
+    font-size: 25px;
+    color: #15355e;
+}
+
+table {
+    border-spacing: 30px;
+    border-collapse: separate;
+}
+
+tr {
+    border-top: hidden;
+}
+
+svg {
+    cursor: pointer;
+}
+
+.btn {
+    background-color: white;
+    color: #15355e;
+    border-color: #15355e;
+}
+
+.search-input {
+    height: 40px;
+    padding-left: 30px;
+}
+
+.search-icon {
+    cursor: auto;
+    position: absolute;
+    z-index: 3;
+    margin-left: 10px;
+    padding-top: 12px;
+}
+
+.table-div {
+    display: inline-table;
+}
+
+.no-results {
+    color: #15355e;
+    margin-left: 30vw;
+    font-size: 20px;
+}
+
+.add-project {
+    margin-left: 0px !important;
+}
+
+.tittle {
+    color: #15355E;
+    font-weight: bold;
+    font-size: 40px;
+    text-transform: uppercase
+}
+
+.sub-tittle {
+    font-size: 20px !important;
+    font-weight: normal !important;
+}
