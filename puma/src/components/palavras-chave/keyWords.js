@@ -1,11 +1,20 @@
+import KeywordService from '../../services/KeywordService';
+
 export default {
   data() {
     return {
+      multiSelectPlaceholder: 'Carregando opções...',
+      isMultiselectTouched: false,
+      keywordService: new KeywordService(),
+
       openModalRegister: false,
       openModalEdit: false,
       openModalDelete: false,
       currentKeyWord: {},
       selected: null,
+      inputKeyword: { val: '', isValid: true },
+
+      operacao: 'cadastrar',
       options: [
         { value: null, text: 'Filtre por disciplina', disabled: true },
         { value: 'Planejamento e Controle de Produção - PSP 4', text: 'Planejamento e Controle de Produção - PSP 4' },
@@ -13,6 +22,8 @@ export default {
         { value: 'Engenharia - PSP 6', text: 'Engenharia - PSP 6' },
         { value: 'Gestão Estratégica - PSP 7', text: 'Gestão Estratégica - PSP 7' },
       ],
+      isLoadingKeywords: false,
+      optionsSelected: [],
       keyWords: [],
       keyWordsList: [
         { item: 1, palavra_chave: 'Qualidade', disciplina: 'Gestão da Qualidade - PSP 5' },
@@ -58,10 +69,11 @@ export default {
     editKeyWord(keyWord) {
       this.openModalEdit = true;
       this.currentKeyWord = keyWord;
+      console.log('oi');
     },
 
     editar() {
-      console.log('editar keyword');
+      console.log('eita keyword');
       console.log(this.currentKeyWord);
     },
 
@@ -72,5 +84,17 @@ export default {
     },
 
     getKeyWords() {},
+
+    getNewKeyword() {
+      console.log('No peito na grama:', this.inputKeyword.value);
+    },
+
+    async addKeyword() {
+      console.log('Add Keyword:', this.inputKeyword.val);
+      const isFormValid = true;
+      if (isFormValid) {
+        this.keywordService.addKeyword(this.inputKeyword.val);
+      }
+    },
   },
 };

@@ -34,9 +34,26 @@
         CRIAR NOVA PALAVRA-CHAVE
       </template>
 
+
+      <ValidationProvider rules="required" v-slot="v" :bails="false" name="título">
+        <div role="group">
+          <label for="inputKeyword" class="title-textarea">PALAVRA-CHAVE</label>
+          <div class="error-div">
+            <input type="text" id="inputKeyword" maxlength="1020" class="title-input-field"
+              placeholder="Escreva aqui sua nova palavra-chave" v-model="inputKeyword.val"
+              v-bind:class="{ inputFieldKeyword: !v.errors.length && operacao !== 'visualizar' }"
+              v-bind:style="v.errors.length ? { borderColor: '#EB0600' } : {}" :disabled=isLoading>
+            <span class="error-span" v-for="erro in v.errors">
+              {{ erro }}
+            </span>
+          </div>
+        </div>
+      </ValidationProvider>
+        
+
       <template #modal-footer>
         <div class="divFooter">
-          <button class="btn-crud btn-warning" >
+          <button class="btn-crud btn-warning"  @click="addKeyword()">
             CRIAR
           </button>
 
@@ -52,8 +69,11 @@
     <template #modal-header>
       EDITAR PALAVRA-CHAVE
     </template>
+    
+    
+  
 
-    <template #modal-footer>
+  <template #modal-footer>
       <div class="divFooter">
         <button @click="editar" class="btn-crud btn-warning" >
           EDITAR
