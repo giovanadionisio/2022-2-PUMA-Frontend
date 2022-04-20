@@ -70,8 +70,21 @@
       EDITAR PALAVRA-CHAVE
     </template>
     
-    
-  
+    <ValidationProvider rules="required" v-slot="v" :bails="false" name="título">
+      <div role="group">
+        <label for="editKeyWord" class="title-textarea">PALAVRA-CHAVE</label>
+        <div class="error-div">
+          <input type="text" id="editKeyWord" maxlength="1020" class="title-input-field"
+            placeholder="" v-model="editKeyword.val"
+            v-bind:class="{ inputFieldKeyword: !v.errors.length && operacao !== 'visualizar' }"
+            v-bind:style="v.errors.length ? { borderColor: '#EB0600' } : {}" :disabled=isLoading>
+          <span class="error-span" v-for="erro in v.errors">
+            {{ erro }}
+          </span>
+        </div>
+      </div>
+    </ValidationProvider>
+
 
   <template #modal-footer>
       <div class="divFooter">
@@ -94,11 +107,11 @@
       Voce tem certeza que deseja confirmar 
     </div>
     <div style="text-align: center;">
-      a exclusao da palavra-chave ?
+      a exclusao da palavra-chave?
     </div>
     <template #modal-footer>
       <div class="divFooter">
-        <button class="btn-delete" >
+        <button class="btn-delete" @click="deletar" >
           CONFIRMAR
         </button>
 
