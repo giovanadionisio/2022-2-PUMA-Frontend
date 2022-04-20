@@ -39,6 +39,7 @@ export default {
         this.disableForm();
         this.removeDropdownIcons();
       }
+      this.getSubject(this.$route.params.id);
     }
   },
   methods: {
@@ -55,13 +56,26 @@ export default {
           subareas: this.subareasSelected,
           professors: this.professorsSelected,
         };
-        this.projectService.addSubject(subject).then(async () => {
-          this.isLoading = false;
-          this.$router.push({ name: 'Disciplinas' }).catch(() => { });
-        }).catch((error) => {
-          this.isLoading = false;
-          alert(`Infelizmente houve um erro ao cadastrar a disciplina: ${error}`);
-        });
+        if (this.operacao === 'cadastrar') {
+          this.projectService.addSubject(subject).then(async () => {
+            this.isLoading = false;
+            this.$router.push({ name: 'Disciplinas' }).catch(() => { });
+          }).catch((error) => {
+            this.isLoading = false;
+            alert(`Infelizmente houve um erro ao cadastrar a disciplina: ${error}`);
+          });
+        } else if (this.operacao === 'editar') {
+          subject.subject.subjectid = parseInt(this.$route.params.id, 10);
+          subject.subject.coursesyllabus = this.courseSyllabus.val;
+          console.log('sub', subject);
+          this.projectService.updateSubject(this.$route.params.id, subject).then(async () => {
+            this.isLoading = false;
+            this.$router.push({ name: 'Disciplinas' }).catch(() => { });
+          }).catch((error) => {
+            this.isLoading = false;
+            alert(`Infelizmente houve um erro ao atualizar a disciplina: ${error}`);
+          });
+        }
       }
     },
     sortMultiselectLabels() {
@@ -142,6 +156,19 @@ export default {
     addKeyword(keyword) {
       this.keywords.push({ keyword });
       this.keywordsSelected.push({ keyword });
+    },
+    getSubject(subjectid) {
+      this.projectService.getSubjectById(subjectid).then((response) => {
+        const subject = response.data;
+        this.keywordsSelected = subject.keywords;
+        this.subareasSelected = subject.subareas;
+        this.professorsSelected = subject.professors;
+        this.subject = subject.subject[0];
+        this.name.val = subject.subject[0].name;
+        this.courseSyllabus.val = subject.subject[0].coursesyllabus;
+      }).catch((error) => {
+        alert(`Erro ao recuperar disciplina: ${error}`);
+      });
     },
   },
 };

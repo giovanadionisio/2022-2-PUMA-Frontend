@@ -165,4 +165,21 @@ export default class ProjectService {
       });
     });
   }
+
+  async getSubjectById(subjectid) {
+    const auth = store.getters.token;
+    const subject = await axios.get(`${global.URL_GATEWAY}/project/subject/${subjectid}`, { headers: { auth } });
+    return subject;
+  }
+
+  updateSubject(subjectid, subjectBody) {
+    return new Promise((resolve, reject) => {
+      const auth = store.getters.token;
+      axios.put(`${global.URL_GATEWAY}/project/subject/${subjectid}`, subjectBody, { headers: { auth } }).then((response) => {
+        resolve(response);
+      }).catch((response) => {
+        reject(`Erro ao atualizar disciplina: ${response}`);
+      });
+    });
+  }
 }
