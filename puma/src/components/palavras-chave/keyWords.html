@@ -1,0 +1,91 @@
+<div class="main-content hidden-scroll-bar">
+  <div class="tittle ml-4">
+    Lista das Palavras Chave
+  </div>
+  <div class="sub-tittle ml-4">
+    Nesta página você consegue ver todas as palavras-chave da plataforma 
+  </div>
+  <div class="ml-4 div-filter-and-button">
+    <b-form-select @input="filter" class="col-md-4 select" v-model="selected" :options="options"></b-form-select>
+    <button class="btn sizes mr-2" @click="openModalRegister=true">
+      <font-awesome-icon icon="fa-regular fa-plus-square" size="lg" />
+      CRIAR NOVA PALAVRA CHAVE
+    </button>
+  </div>
+  <div>
+    <b-table class="table ml-4" :items="keyWordsList" :fields="keyWordsFields">
+      <template #cell(actions)="data">
+        <div class="actions">
+          <button class="btn mr-2" @click="editKeyWord(data.item)">
+            <font-awesome-icon icon="fa-regular fa-edit" size="lg" />
+            EDITAR
+          </button>
+          <button class="btn mr-2" @click="deleteKeyWord(data.item)">
+            <font-awesome-icon icon="fa-regular fa-trash-can" size="lg" />
+            EXCLUIR
+          </button>
+        </div>
+      </template>
+    </b-table>
+  </div>
+
+  <b-modal style="padding: 0; margin: 0" v-model="openModalRegister" centered size="lg" modal-class="myclass">
+      <template #modal-header>
+        CRIAR NOVA PALAVRA-CHAVE
+      </template>
+
+      <template #modal-footer>
+        <div class="divFooter">
+          <button class="btn-crud btn-warning" >
+            CRIAR
+          </button>
+
+          <button class="btn-crud c-invert" @click="openModalRegister=false">
+            CANCELAR
+          </button>
+
+        </div>
+      </template>
+  </b-modal>
+
+  <b-modal style="padding: 0; margin: 0" v-model="openModalEdit" centered size="lg" modal-class="myclass">
+    <template #modal-header>
+      EDITAR PALAVRA-CHAVE
+    </template>
+
+    <template #modal-footer>
+      <div class="divFooter">
+        <button @click="editar" class="btn-crud btn-warning" >
+          EDITAR
+        </button>
+
+        <button class="btn-crud c-invert" @click="openModalEdit=false">
+          CANCELAR
+        </button>
+      </div>
+    </template>
+  </b-modal>
+
+  <b-modal style="padding: 0; margin: 0" v-model="openModalDelete" centered size="xs" modal-class="myclass">
+    <template #modal-header>
+      EXCLUIR PALAVRA-CHAVE
+    </template>
+    <div style="text-align: center;">
+      Voce tem certeza que deseja confirmar 
+    </div>
+    <div style="text-align: center;">
+      a exclusao da palavra-chave ?
+    </div>
+    <template #modal-footer>
+      <div class="divFooter">
+        <button class="btn-delete" >
+          CONFIRMAR
+        </button>
+
+        <button class="btn-delete d-invert" @click="openModalDelete=false">
+          CANCELAR
+        </button>
+      </div>
+    </template>
+  </b-modal>
+</div>

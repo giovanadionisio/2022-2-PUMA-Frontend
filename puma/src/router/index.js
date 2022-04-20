@@ -107,6 +107,14 @@ const routes = [
       requiresAuth: true,
     },
   },
+  {
+    path: '/palavras-chave',
+    name: 'Palabras Chave',
+    component: () => import('../components/palavras-chave/KeyWords.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
 ];
 
 const router = new VueRouter({

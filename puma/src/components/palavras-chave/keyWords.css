@@ -1,0 +1,208 @@
+/*.table-striped>tbody>tr:nth-child(odd)>td,*/
+/*.table-striped>tbody>tr:nth-child(odd)>th {*/
+/*    background-color: red;*/
+/*}*/
+.hidden-scroll-bar {
+  overflow-x: hidden;
+}
+
+thead{
+  font-size: 25px;
+  color: #15355e;
+}
+
+tr {
+  border-top: hidden;
+}
+
+td {
+  color: #15355e;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+svg {
+  cursor: pointer;
+}
+
+.btn {
+  padding: 4px;
+  font-size: 16px;
+  background-color: white;
+  color: #15355e;
+  border-color: #15355e;
+  font-weight: bold;
+}
+
+.sizes {
+  padding: 5px;
+  font-size: 18px;
+}
+
+.div-filter-and-button {
+  margin-top: 35px;
+}
+
+.select {
+  margin-right: 20px;
+}
+
+.search-input {
+  height: 40px;
+  padding-left: 30px;
+}
+
+.search-icon {
+  cursor: auto;
+  position: absolute;
+  z-index: 3;
+  margin-left: 10px;
+  padding-top: 12px;
+}
+
+.table {
+  margin-top: 30px;
+}
+
+.no-results {
+  color: #15355e;
+  margin-left: 30vw;
+  font-size: 20px;
+}
+
+.add-project {
+  margin-left: 0px !important;
+}
+
+.tittle {
+  color: #15355E;
+  font-weight: bold;
+  font-size: 40px;
+  text-transform: uppercase
+}
+
+.sub-tittle {
+  color: #15355E;
+  font-size: 20px !important;
+  font-weight: normal !important;
+}
+
+.actions {
+  display: flex;
+  width: 100%;
+}
+
+.myclass > .modal-dialog > .modal-content > .modal-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #15355E !important;
+  color: white;
+  font-weight: bold;
+  font-size: 28px;
+  height: 50px;
+}
+
+.divFooter {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.btn-crud {
+  align-items: center;
+  background-color: #f7db36;
+  color: #15355e;
+  border: 2px solid #f7db36;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 24px;
+  font-weight: 700;
+  transition: 0.1s;
+  width: 196.7px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.btn-crud:hover {
+  color: #15355e;
+  background-color: #f7db36;
+  border: 2px solid #f7db36;
+}
+
+.btn-crud:focus {
+  color: #15355e;
+  background-color: #f7db36;
+  border: 2px solid #f7db36;
+}
+
+.btn-crud:active {
+  color: #15355e;
+  background-color: #f7db36;
+  border: 2px solid #f7db36;
+}
+
+.c-invert {
+  color: #15355e;
+  background-color: white;
+}
+
+.c-invert:active {
+  color: #15355e;
+  background-color: #fcfcfc;
+  border: 2px solid #f7db36;
+
+}
+
+.c-invert:focus {
+  color: #15355e;
+  background-color: #fcfcfc;
+}
+
+.c-invert:hover {
+  color: #15355e;
+  background-color: white;
+}
+
+.btn-delete {
+  align-items: center;
+  background-color: #EB0600;
+  color: white;
+  border: 3px solid white;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 24px;
+  font-weight: 700;
+  transition: 0.1s;
+  width: 196.7px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.btn-delete:focus {
+  color: white;
+  background-color: #EB0600;
+  border: 3px solid #e39696;
+}
+
+.btn-delete:active {
+  color: white;
+  background-color: #a30602;
+  border: 3px solid #e39696;
+}
+
+.d-invert {
+  color: #EB0600;
+  border: 1px solid #EB0600;
+  background-color: white;
+}
+
+.d-invert:active {
+  color: #EB0600;
+  background-color: #fcfcfc;
+}
+
+.d-invert:focus {
+  color: #EB0600;
+  background-color: #fcfcfc;
+}
