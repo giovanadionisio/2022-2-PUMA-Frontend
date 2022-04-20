@@ -144,6 +144,17 @@ export default class ProjectService {
     });
   }
 
+  getProfessors() {
+    return new Promise((resolve, reject) => {
+      axios.get(`${global.URL_GATEWAY}/project/professors`).then((response) => {
+        resolve(response);
+      }).catch((error) => {
+        alert(error);
+        reject('Erro ao recuperar os professores');
+      });
+    });
+  }
+
   addSubject(subject) {
     return new Promise((resolve, reject) => {
       const auth = store.getters.token;
