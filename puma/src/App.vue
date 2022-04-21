@@ -10,9 +10,7 @@
 </template>
 
 <script>
-/* eslint-disable */
-// eslint-disable-next-line import/no-unresolved
-import MenuLateral from '../src/components/shared/menu-lateral/MenuLateral.vue';
+import MenuLateral from './components/shared/menu-lateral/MenuLateral.vue';
 
 export default {
   components: {
