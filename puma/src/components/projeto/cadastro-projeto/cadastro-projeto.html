@@ -68,8 +68,8 @@
               id="keywords"
               v-model="keywordsSelected"
               :options="keywords"
-              track-by="keywordid"
-              label="keyword"
+              track-by="value"
+              label="text"
               :multiple="true"
               openDirection="bottom"
               :placeholder="multiSelectPlaceholder"
@@ -86,11 +86,11 @@
               @close="isMultiselectTouched = true; multiSelectPlaceholder = 'Selecione'"
               :loading="isLoadingKeywords"
               class="multiselect-custom"
-              :disabled="isLoadingKeywords || !keywords.length || operacao === 'visualizar'">
+              :disabled="isLoadingKeywords">
               <template slot="option" slot-scope="scope">
                 <div class="option__desc checkbox-label">
-                  <input class="mx-2" type="checkbox" :checked="isChecked(scope.option)" @focus.prevent :key="scope.option.keywordid" />
-                  <span class="option__title">{{ scope.option.keyword }}</span>
+                  <input class="mx-2" type="checkbox" :checked="isChecked(scope.option)" @focus.prevent :key="scope.option.value" />
+                  <span class="option__title">{{ scope.option.text }}</span>
                 </div>
               </template>
               <span slot="maxElements">
@@ -103,6 +103,11 @@
             <span v-if="isMultiselectTouched && !keywordsSelected.length" class="error-span">
               Escolha no mínimo uma palavra-chave
             </span>
+            <div class="my-3"> </div>
+            <span class="title-main-keyword">Escolha a palavra chave principal</span>
+            <b-form-select id="mainKeyword" v-model="mainKeyword"
+              :options="keywordsSelected" size="md">
+            </b-form-select>
           </div>
           <div class="py-3" />
           <div class="btn-toolbar">

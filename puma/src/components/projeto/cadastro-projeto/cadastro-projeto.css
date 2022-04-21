@@ -136,6 +136,16 @@ div#checklist {
   text-transform: uppercase;
 }
 
+.title-main-keyword{
+  color: #15355E;
+  font-size: 18px;
+  line-height: 28px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
 .text-keywords{
   font-size: 1.1em;
   text-align: left;

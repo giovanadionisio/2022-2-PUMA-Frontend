@@ -1,3 +1,4 @@
+/* eslint-disable */
 import ProjectService from '../../../services/ProjectService';
 import AlocateService from '../../../services/AlocateService';
 /* eslint-disable prefer-destructuring */
@@ -18,6 +19,7 @@ export default {
       operacao: 'cadastrar',
       keywords: [],
       keywordsSelected: [],
+      mainKeyword: null,
     };
   },
   beforeMount() {
@@ -42,7 +44,7 @@ export default {
           name: this.titulo.val,
           problem: this.descricao.val,
           expectedresult: this.resultadoEsperado.val,
-          keywords: this.keywordsSelected,
+          keywords: this.keywordsSelected.map((k)=>({keywordid:k.value})),
           status: 'SB',
           createdat: new Date().toISOString(),
           userid: this.$store.getters.user.userId,
@@ -64,7 +66,7 @@ export default {
       return !!this.keywordsSelected.length;
     },
     isChecked(option) {
-      return this.keywordsSelected.some((op) => op.keywordid === option.keywordid);
+      return this.keywordsSelected.some((op) => op.value === option.value);
     },
     disableForm() {
       const inputs = document.getElementsByTagName('input');
@@ -78,7 +80,7 @@ export default {
     getKeywords() {
       this.isLoadingKeywords = true;
       this.projectService.getKeywords().then((response) => {
-        this.keywords = response.data;
+        this.keywords = response.data.map((k)=>({value: k.keywordid, text: k.keyword}));
         this.isLoadingKeywords = false;
         this.multiSelectPlaceholder = this.keywords.length ? 'Selecione' : 'Sem palavras disponíveis';
       }).catch((error) => {
