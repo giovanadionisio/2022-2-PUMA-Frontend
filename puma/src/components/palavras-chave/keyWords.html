@@ -6,14 +6,14 @@
     Nesta página você consegue ver todas as palavras-chave da plataforma 
   </div>
   <div class="ml-4 div-filter-and-button">
-    <b-form-select @input="filter" class="col-md-4 select" v-model="selected" :options="options"></b-form-select>
+    <b-form-select @input="filter" class="col-md-4 select" v-model="selected" :options="subjects"></b-form-select>
     <button class="btn sizes mr-2" @click="openModalRegister=true">
       <font-awesome-icon icon="fa-regular fa-plus-square" size="lg" />
       CRIAR NOVA PALAVRA CHAVE
     </button>
   </div>
   <div>
-    <b-table class="table ml-4" :items="keyWordsList" :fields="keyWordsFields">
+    <b-table class="table ml-4" :items="tableKeywordSubject" :fields="keyWordsFields">
       <template #cell(actions)="data">
         <div class="actions">
           <button class="btn mr-2" @click="editKeyWord(data.item)">
@@ -39,20 +39,20 @@
         <template #label>
           <span class="label-text">PALAVRA-CHAVE</span>
         </template>
-        <b-form-input type="text" placeholder="Escreva aqui sua nova palavra-chave" class="custom-input"/>
+        <b-form-input type="text" placeholder="Escreva aqui sua nova palavra-chave" class="custom-input" id="inputKeyword" v-model="inputKeyword"/>
       </b-form-group>
 
       <b-form-group class="col-md-9">
         <template #label>
           <span class="label-text">DISCIPLINA</span>
         </template>
-        <b-select v-model="selectedToRegister" :options="options2"
+        <b-select v-model="selectedToRegister" :options="subjects"
         class="custom-input" />
       </b-form-group>
     </div>
       
     <div class="divFooter">
-      <button class="btn-crud btn-warning" style="margin-right: 5%;" >
+      <button class="btn-crud btn-warning" style="margin-right: 5%;" @click="addKeyword()" >
         CRIAR
       </button>
 
@@ -72,7 +72,7 @@
         <template #label>
           <span class="label-text">PALAVRA-CHAVE</span>
         </template>
-        <b-form-input type="text" placeholder="Escreva aqui a palavra-chave" v-model="selectedNameDiscipline"
+        <b-form-input type="text" placeholder="Escreva aqui a palavra-chave" v-model="newKeyword"
           class="custom-input" />
         </b-form-group>
 
@@ -80,7 +80,7 @@
         <template #label>
           <span class="label-text">DISCIPLINA</span>
         </template>
-        <b-select v-model="selectedToedit" :options="options2" class="custom-input"/>
+        <b-select v-model="selectedSubject" :options="subjects" class="custom-input"/>
       </b-form-group>
     </div>
 
@@ -106,7 +106,7 @@
     </div>
 
     <div class="divFooter">
-      <button class="btn-delete" style="margin-right: 5%;">
+      <button class="btn-delete" style="margin-right: 5%;" @click="deletar">
         CONFIRMAR
       </button>
       <button class="btn-delete d-invert" @click="openModalDelete=false">

@@ -20,9 +20,21 @@ export default class KeywordService {
     });
   }
 
+  addKeywordToSubject(keywordid, subjectid) {
+    return new Promise((resolve, reject) => {
+      const auth = store.getters.token;
+      console.log(`${global.URL_GATEWAY}/project/palavra-chave`);
+      axios.post(`${global.URL_GATEWAY}/project/subject/keyword`, { keywordid: keywordid, subjectid: subjectid }, { headers: { auth } }).then((response) => {
+        resolve(response);
+      }).catch((response) => {
+        reject(response);
+      });
+    });
+  }
+
   getKeywords() {
     return new Promise((resolve, reject) => {
-      console.log('Cheguei aqui');
+      // console.log('Cheguei aqui');
       axios.get(`${global.URL_GATEWAY}/project/palavra-chave2`).then((response) => {
         resolve(response);
         // console.log('Se liga meu nego', response);
@@ -33,11 +45,36 @@ export default class KeywordService {
     });
   }
 
+  getSubjects() {
+    return new Promise((resolve, reject) => {
+      // console.log('Cheguei aqui No Subjects');
+      axios.get(`${global.URL_GATEWAY}/project/subjects`).then((response) => {
+        resolve(response);
+        // console.log('Se liga meu nego', response);
+      }).catch((error) => {
+        alert(error);
+        reject('Erro ao Recuperar o Subjects');
+      });
+    });
+  }
+
   updateKeyword(keywordid, newKeyword) {
     return new Promise((resolve, reject) => {
       const auth = store.getters.token;
       console.log('DEBUG UPDATE:', keywordid, newKeyword);
       axios.put(`${global.URL_GATEWAY}/project/palavra-chave/edit`, { keywordid: keywordid, newKeyword: newKeyword }, { headers: { auth } }).then((response) => {
+        resolve(response);
+      }).catch((response) => {
+        reject(response);
+      });
+    });
+  }
+
+  updateSubjectKeyword(keywordid, subjectid) {
+    return new Promise((resolve, reject) => {
+      const auth = store.getters.token;
+      console.log('DEBUG UPDATE SUBJECT:', keywordid, subjectid);
+      axios.put(`${global.URL_GATEWAY}/project/subject/keyword`, { keywordid: keywordid, subjectid: subjectid }, { headers: { auth } }).then((response) => {
         resolve(response);
       }).catch((response) => {
         reject(response);

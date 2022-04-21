@@ -17,8 +17,12 @@ export default {
       selectedToedit: null,
       selectedToRegister: null,
       selectedNameDiscipline: '',
-      inputKeyword: { val: '', isValid: true },
-      editKeyword: { val: '', isValid: true },
+      selectedSubject: '',
+      newKeyword: '',
+      inputKeyword: '',
+      editKeyword: '',
+      idKeywordEdit: '',
+      idSubjectEdit: '',
       operacao: 'cadastrar',
       options: [
         { value: null, text: 'Filtre por disciplina', disabled: true },
@@ -35,18 +39,31 @@ export default {
         { value: 'Engenharia - PSP 6', text: 'Engenharia - PSP 6' },
         { value: 'Gestão Estratégica - PSP 7', text: 'Gestão Estratégica - PSP 7' },
       ],
-
+      subjects: [
+        { value: null, text: 'Escolha a disciplina', disabled: true },
+        { value: 1, text: 'Qualidade' },
+      ],
+      subjectsList: [],
       isLoadingKeywords: false,
       optionsSelected: [],
       keyWords: [],
-      keyWordsList: [
+      tableKeywordSubject: [
         { keywordid: 1, keyword: 'Qualidade', subjectId: 'Gestão da Qualidade - PSP 5' },
         { keywordid: 2, keyword: 'Estoque', subjectId: 'Planejamento e Controle de Produção - PSP 4' },
         { keywordid: 3, keyword: 'Capacidade', subjectId: 'Planejamento e Controle de Produção - PSP 4' },
         { keywordid: 4, keyword: 'Estratégia', subjectId: 'Gestão Estratégica - PSP 7' },
         { keywordid: 5, keyword: 'Desenvolver Produto', subjectId: 'Engenharia - PSP 6' },
       ],
-
+      subjectsFields: [
+        {
+          key: 'id',
+          label: 'idDisciplina',
+        },
+        {
+          key: 'name',
+          label: 'subjectname',
+        },
+      ],
       keyWordsFields: [
         {
           key: 'keywordid',
@@ -57,7 +74,7 @@ export default {
           label: 'PALAVRA CHAVE',
         },
         {
-          key: 'name',
+          key: 'subjectname',
           label: 'DISCIPLINA',
         },
         {
@@ -70,28 +87,31 @@ export default {
 
   created() {
     this.getKeyWords();
+    this.getSubjects();
   },
 
   methods: {
     filter(discipline) {
-      this.keyWordsList = this.keyWords;
-      const filter = this.keyWordsList.filter((d) => d.disciplina === discipline);
-      this.keyWordsList = filter;
+      this.tableKeywordSubject = this.keyWords;
+      const filter = this.tableKeywordSubject.filter((d) => d.disciplina === discipline);
+      this.tableKeywordSubject = filter;
     },
 
     editKeyWord(keyWord) {
       this.openModalEdit = true;
-      this.currentKeyWord = keyWord;
-      this.selectedToedit = keyWord.disciplina;
-      this.selectedNameDiscipline = keyWord.palavra_chave;
-      console.log('oi');
-      console.log(keyWord.keyword);
+      this.idKeywordEdit = keyWord.keywordid;
+      this.selectedSubject = keyWord.subjectid;
+      this.newKeyword = keyWord.keyword;
     },
 
     async editar() {
-      console.log(this.currentKeyWord.keywordid, this.editKeyword.val);
-      this.keywordService.updateKeyword(this.currentKeyWord.keywordid,
-        this.editKeyword.val).then(async () => {
+      console.log('Ta ok?', this.idKeywordEdit, this.selectedSubject, this.newKeyword);
+      this.keywordService.updateKeyword(this.idKeywordEdit,
+        this.newKeyword).then(async (response) => {
+        console.log(response);
+        console.log(response.data);
+        const idKeywordUpdated = response.data[0].keywordid;
+        this.keywordService.updateSubjectKeyword(idKeywordUpdated, this.selectedSubject);
         this.openModalEdit = false;
         alert('Palavra-Chave Editada com Sucesso!');
         document.location.reload(true);
@@ -120,10 +140,20 @@ export default {
 
     getKeyWords() {
       this.keywordService.getKeywords().then((response) => {
-        console.log('UEEEE');
-        this.keyWordsList = JSON.parse(JSON.stringify(response.data));
+        this.tableKeywordSubject = JSON.parse(JSON.stringify(response.data));
         this.keyWords = response.data;
-        console.log('DEBUGA', this.keyWordsList);
+        // console.log('DEBUGA', this.tableKeywordSubject);
+      }).catch((error) => {
+        console.log('erro', error);
+      });
+    },
+
+    getSubjects() {
+      this.keywordService.getSubjects().then((response) => {
+        // console.log('GetSubjects');
+        this.subjects = JSON.parse(JSON.stringify(response.data));
+        this.subjects.unshift({ value: null, text: 'Escolha a disciplina', disabled: true });
+        // console.log('SUBJECT??', this.subjects);
       }).catch((error) => {
         console.log('erro', error);
       });
@@ -136,8 +166,12 @@ export default {
     async addKeyword() {
       const isFormValid = true;
       if (isFormValid) {
-        console.log('Palavra que está sendo enviada', this.inputKeyword.val);
-        this.keywordService.addKeyword(this.inputKeyword.val).then(async () => {
+        console.log('Palavra que está sendo enviada', this.inputKeyword);
+        console.log('Disciplina que está sendo enviada', this.selectedToRegister);
+        this.keywordService.addKeyword(this.inputKeyword).then((response) => {
+          const currentKeywordid = response.data.response.response.keywordid;
+          const idSubject = this.selectedToRegister;
+          this.keywordService.addKeywordToSubject(currentKeywordid, idSubject);
           this.openModalRegister = false;
           alert('Palavra-Chave Cadastrada com sucesso');
           document.location.reload(true);
