@@ -43,6 +43,16 @@ export default {
                         this.$router.push({ path: '/meus-projetos'}).catch(() => {});
                     },
                 },
+                subjects: {
+                    key: NAV_CONST.SUBJECTS.KEY,
+                    title: 'Disciplinas',
+                    iconUrl: require('@/assets/subjects-menu.svg'),
+                    show: () => { return true },
+                    onclick: () => {
+                        this.$store.commit('SET_CURRENT_NAVIGATION', NAV_CONST.SUBJECTS.KEY);
+                        this.$router.push({ path: '/disciplinas'}).catch(() => {});
+                    },
+                },
                 logout: {
                     title: 'Sair',
                     iconUrl: require('@/assets/menu-3.svg'),

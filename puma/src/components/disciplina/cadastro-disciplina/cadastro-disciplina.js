@@ -2,7 +2,7 @@ import ProjectService from '../../../services/ProjectService';
 import AlocateService from '../../../services/AlocateService';
 /* eslint-disable prefer-destructuring */
 export default {
-  name: 'CadastroProjeto',
+  name: 'CadastroDisciplina',
   data() {
     return {
       name: { val: '', isValid: true },
@@ -51,7 +51,7 @@ export default {
 
         this.projectService.addSubject(subject).then(async () => {
           this.isLoading = false;
-          this.$router.push({ name: 'Disciplinas' }).catch(() => { });
+          this.$router.push({ name: 'Consulta a Disciplinas' }).catch(() => { });
         }).catch((error) => {
           this.isLoading = false;
           alert(`Infelizmente houve um erro ao cadastrar a disciplina: ${error}`);
@@ -91,7 +91,6 @@ export default {
       this.isLoadingKeywords = true;
       this.projectService.getAvailableKeywordsToSubject().then((response) => {
         this.keywords = response.data;
-        console.log(response.data);
         this.isLoadingKeywords = false;
         this.multiSelectPlaceholder = this.keywords.length ? 'Selecione' : 'Sem palavras disponíveis';
       }).catch((error) => {
@@ -104,7 +103,6 @@ export default {
       this.isLoadingSubareas = true;
       this.projectService.getSubareas().then((response) => {
         this.subareas = response.data;
-        console.log(response.data);
         this.isLoadingSubareas = false;
         this.multiSelectPlaceholder = this.subareas.length ? 'Selecione' : 'Sem subáreas disponíveis';
       }).catch((error) => {

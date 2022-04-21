@@ -64,3 +64,21 @@ svg {
     font-size: 20px !important;
     font-weight: normal !important;
 }
+
+header {
+    justify-content: center !important;
+}
+
+.btn-confirm {
+    background-color: #dc3545 !important;
+}
+
+.btn-cancel {
+    border-color: #15355e !important;
+    color: #15355e !important;
+    background-color: white !important;
+}
+
+.modal-tittle {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}

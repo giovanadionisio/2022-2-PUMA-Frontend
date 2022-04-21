@@ -2,7 +2,7 @@
 
 <script src="./cadastro-disciplina.js"></script>
 
-<style src="./cadastro-disciplina.css"></style>
+<style src="./cadastro-disciplina.css" scoped></style>
 
 <style lang="css" scoped>
 

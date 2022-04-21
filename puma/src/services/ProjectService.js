@@ -164,4 +164,14 @@ export default class ProjectService {
     });
     return subjects;
   }
+
+  deleteSubject(subjectId) {
+    return new Promise((resolve, reject) => {
+      axios.delete(`${global.URL_GATEWAY}/project/subject/${subjectId}`).then((response) => {
+        resolve(response.data);
+      }).catch((error) => {
+        reject(error);
+      });
+    });
+  }
 }

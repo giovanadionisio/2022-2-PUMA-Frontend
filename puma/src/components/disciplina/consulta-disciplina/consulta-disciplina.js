@@ -1,7 +1,9 @@
 import ProjectService from '../../../services/ProjectService';
+import ModalAviso from '../../shared/modal-aviso/ModalAviso.vue';
 /* eslint-disable*/
 export default {
   name: 'ConsultaDisciplinas',
+  components: {ModalAviso},
   data() {
     return {
       data: {
@@ -25,6 +27,8 @@ export default {
       },
       isLoading: false,
       wasLoaded: false,
+      isDeletingSubject: false,
+      currentSubject: '',
       subjects: [],
       projectService: new ProjectService(),
       operacao: '',
@@ -48,6 +52,7 @@ export default {
       // this.operacao = this.$route.path.slice(1);
       this.projectService.getSubjects().then((response) => {
         this.subjects = response.data;
+        if (!response.data.length) { delete this.data.columns[0][2]; }
         this.data.rows.splice(0);
         this.configTableRows();
         if (!this.wasLoaded) {
@@ -68,7 +73,7 @@ export default {
     configTableRows() {
       this.subjects.forEach((subject) => {
         const row = subject;
-        row.buttons = '<button name="visualizar" class="btn mr-2" id=' + subject.subjectid + '><i class="fa-solid fa-circle-info mr-2"></i>VER DETALHES</button>';
+        row.buttons = '<button name="visualizar" class="btn mr-2" id=' + subject.subjectid + '><i class="fa-solid fa-circle-info mr-2"></i>VER DETALHES</button><button name="excluir" class="btn mr-2" id=' + subject.subjectid + '><i class="fa-solid fa-trash mr-2"></i>EXCLUIR</button>';
         this.data.rows.push(row);
       });
     },
@@ -128,7 +133,23 @@ export default {
         const operacao = button.name;
         if (button.id && operacao !== 'excluir') {
           this.$router.push({ path: `/disciplinas/${operacao}/${button.id}` }).catch(() => {});
+        } else if (operacao === 'excluir') {
+          this.currentSubject = { subjectid: button.id };
+          this.$refs['modal-confirmacao-exclusao'].show();
         }
+      });
+    },
+    deleteSubject(bvModalEvent) {
+      this.isDeletingSubject = true;
+      document.getElementsByClassName('close text-light')[0].remove();
+      bvModalEvent.preventDefault();
+      this.projectService.deleteSubject(this.currentSubject.subjectid).then(() => {
+        this.$refs['modal-confirmacao-exclusao'].hide();
+        this.isDeletingSubject = false;
+        this.getSubjects();
+      }).catch((error) => {
+        this.isDeletingSubject = false;
+        alert(error);
       });
     },
     markThsAsTouched() {
@@ -149,5 +170,6 @@ export default {
         svgs.item(7).style.marginLeft = '15px';
       }
     },
+
   },
 };
