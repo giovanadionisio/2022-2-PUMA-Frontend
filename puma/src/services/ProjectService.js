@@ -8,16 +8,6 @@ import axios from '../main.js';
 import store from '../store';
 
 export default class ProjectService {
-  async getAllocatedProjects(subjctId) {
-    const auth = store.getters.token;
-    const allocatedArray = await axios.get(`${global.URL_GATEWAY}/project/alocated/${subjctId}`, {
-      headers: {
-        auth,
-      },
-    });
-    return allocatedArray;
-  }
-
   async getMyProposals(user) {
     const auth = store.getters.token;
     const myProposals = await axios.get(`${global.URL_GATEWAY}/project/myProposals`, {
@@ -31,38 +21,14 @@ export default class ProjectService {
 
   async getProjById(projId) {
     const auth = store.getters.token;
-    const projInfos = await axios.get(`${global.URL_GATEWAY}/project/project/${projId}`, { headers: { auth } });
+    const projInfos = await axios.get(`${global.URL_GATEWAY}/project/get/${projId}`, { headers: { auth } });
     return projInfos;
-  }
-
-  async putProposal(projectId, subjId) {
-    const auth = store.getters.token;
-    const subjects = await axios.put(`${global.URL_GATEWAY}/project/proposal/${projectId}`,
-      { subjectId: subjId },
-      {
-        headers: {
-          auth,
-        },
-      });
-    return subjects;
-  }
-
-  async putProposalStatus(id, status) {
-    const auth = store.getters.token;
-    const subjects = await axios.put(`${global.URL_GATEWAY}/project/alocate/${id}/status`,
-      { proposal: { approved: status } },
-      {
-        headers: {
-          auth,
-        },
-      });
-    return subjects;
   }
 
   addProject(project) {
     return new Promise((resolve, reject) => {
       const auth = store.getters.token;
-      axios.post(`${global.URL_GATEWAY}/project`, project, { headers: { auth } }).then((response) => {
+      axios.post(`${global.URL_GATEWAY}/project/create`, project, { headers: { auth } }).then((response) => {
         resolve(response);
       }).catch((response) => {
         reject(`/projetos/cadastrar reject: ${response}`);
@@ -70,20 +36,9 @@ export default class ProjectService {
     });
   }
 
-  addFile(file) {
-    return new Promise((resolve, reject) => {
-      const auth = store.getters.token;
-      axios.post(`${global.URL_GATEWAY}/project/upload`, file, { headers: { auth } }).then((response) => {
-        resolve(response);
-      }).catch(() => {
-        reject('erro no upload do arquivo');
-      });
-    });
-  }
-
   deleteProject(idprojeto) {
     return new Promise((resolve, reject) => {
-      axios.post(`${global.URL_GATEWAY}/project/${idprojeto}`).then((response) => {
+      axios.post(`${global.URL_GATEWAY}/project/delete/${idprojeto}`).then((response) => {
         resolve(response);
       }).catch(() => {
         reject('erro na deleção do arquivo');
@@ -98,16 +53,6 @@ export default class ProjectService {
       }).catch((error) => {
         alert(error);
         reject('Erro ao recuperar as palavras-chave');
-      });
-    });
-  }
-
-  getKnowledgeAreas() {
-    return new Promise((resolve, reject) => {
-      axios.get(`${global.URL_GATEWAY}/areas-conhecimento`).then((response) => {
-        resolve(response);
-      }).catch(() => {
-        reject('erro na deleção do arquivo');
       });
     });
   }
