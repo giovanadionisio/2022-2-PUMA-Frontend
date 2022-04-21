@@ -208,6 +208,7 @@ svg {
   background-color: #fcfcfc;
 }
 
+<<<<<<< HEAD
 .label-text {
   color: #15355E;
   font-weight: bold;
@@ -224,3 +225,58 @@ svg {
   color: #15355e;
   font-size: 17px;
 }
+=======
+.inputFieldKeyword:hover{
+  border-radius: 7px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  border:2px solid #f7db36;
+}
+
+.title-input-field {
+  /* font-size: 14px; */
+  border:2px solid #15355e;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  margin-left:10%;
+  height: 26px;
+  width: 80%;
+  float: center;
+}
+
+.error-span {
+  display: flex;
+  margin-left: 10%;
+  margin-top: 10px;
+  text-align: left;
+  flex-direction: column;
+  color: #EB0600;
+}
+
+
+.textarea-field {
+  /* font-size: 14px; */
+  border:2px solid #15355e;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  padding: 150px;
+  font-family: rubik, Sans-serif;
+  font-weight: 300;
+}
+
+
+.title-textarea {
+  font-weight: bold;
+  color: #15355E;
+  font-size: 24px;
+  line-height: 28px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  margin-left:10%;
+
+}
+>>>>>>> 2b1045d381a22200f439a6f1759f58061c8e17ee

@@ -67,6 +67,7 @@ export default {
       let user = this.$store.getters.user;
       user.operation = this.operacao;
       this.projectService.getMyProposals(user).then((response) => {
+        console.log(response.data);
         this.projects = response.data;
         this.data.rows.splice(0);
         this.configTableRows();
