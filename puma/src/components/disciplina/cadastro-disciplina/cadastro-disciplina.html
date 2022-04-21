@@ -3,7 +3,7 @@
       <b-row>
         <b-col cols="12">
           <div class='main-title'>
-            {{ operacao === 'visualizar' ? 'Visualizar Projeto': (operacao === 'alterar' ? 'Alterar Projeto' : 'Cadastrar Disciplina') }}
+            {{ (operacao === 'editar' || operacao === 'visualizar') ?  subject.name : 'Cadastrar Disciplina' }}
           </div>
         </b-col>
       </b-row>
@@ -15,7 +15,7 @@
                   <label for="titulo" class="title-textarea">Nome</label>
                   <div class="error-div">
                     <input type="text" id="titulo" maxlength="1020" class="title-input-field"
-                      placeholder="Digite o nome para sua disciplina" v-model="name.val"
+                      placeholder="Digite o nome para sua disciplina" v-model="name"
                       v-bind:class="{ inputFieldRegisterProject: !v.errors.length && operacao !== 'visualizar' }"
                       v-bind:style="v.errors.length ? { borderColor: '#EB0600' } : {}" :disabled=isLoading>
                     <span class="error-span" v-for="erro in v.errors">
@@ -47,7 +47,7 @@
             deselectLabel=""
             selectedLabel=""
             @open = "multiSelectPlaceholder = 'Pesquisar'"
-            @close="isMultiselectTouched = true; multiSelectPlaceholder = 'Selecione'"
+            @close="isMultiselectsTouched = true; multiSelectPlaceholder = 'Selecione'"
             :loading="isLoadingKeywords"
             class="multiselect-custom"
             :taggable=true
@@ -67,7 +67,7 @@
                 Nenhuma palavra-chave encontrada.
             </span>
             </multiselect>
-            <span v-if="isMultiselectTouched && !keywordsSelected.length" class="error-span">
+            <span v-if="isMultiselectsTouched && !keywordsSelected.length" class="error-span">
                 Escolha no mínimo uma palavra-chave
             </span>
             <div class="py-3" />
@@ -93,7 +93,7 @@
             deselectLabel=""
             selectedLabel=""
             @open = "multiSelectPlaceholder = 'Pesquisar'"
-            @close="isMultiselectTouched = true; multiSelectPlaceholder = 'Selecione'"
+            @close="isMultiselectsTouched = true; multiSelectPlaceholder = 'Selecione'"
             :loading="isLoadingSubareas"
             class="multiselect-custom"
             :disabled="isLoadingSubareas || !subareas.length || operacao === 'visualizar'">
@@ -110,7 +110,7 @@
                 Nenhuma subárea encontrada.
             </span>
             </multiselect>
-            <span v-if="isMultiselectTouched && !subareasSelected.length" class="error-span">
+            <span v-if="isMultiselectsTouched && !subareasSelected.length" class="error-span">
                 Escolha no mínimo uma subárea
             </span>
             <div class="py-3" />
@@ -139,7 +139,7 @@
               deselectLabel=""
               selectedLabel=""
               @open = "multiSelectPlaceholder = 'Pesquisar'"
-              @close="isMultiselectTouched = true; multiSelectPlaceholder = 'Selecione'"
+              @close="isMultiselectsTouched = true; multiSelectPlaceholder = 'Selecione'"
               :loading="isLoadingProfessors"
               class="multiselect-custom"
               :disabled="isLoadingProfessors || !professors.length || operacao === 'visualizar'">
@@ -156,7 +156,7 @@
                 Nenhum professor encontrado.
             </span>
             </multiselect>
-            <span v-if="isMultiselectTouched && !professorsSelected.length" class="error-span">
+            <span v-if="isMultiselectsTouched && !professorsSelected.length" class="error-span">
                 Escolha no mínimo um professor
             </span>
             <div class="py-3" />
@@ -165,7 +165,7 @@
                   <label for="descricao" class="title-textarea">Ementa</label>
                   <div class="error-div">
                     <textarea id="descricao" placeholder="Descreva a ementa da disciplina usando, no mínimo, 200 caracteres."
-                      maxlength="1000" rows="7" v-model="courseSyllabus.val" :disabled=isLoading class="textarea-field"
+                      maxlength="1000" rows="7" v-model="courseSyllabus" :disabled=isLoading class="textarea-field"
                       v-bind:class="{ inputFieldRegisterProject: !v.errors.length && operacao !== 'visualizar' }"
                       v-bind:style="v.errors.length ? { borderColor: '#EB0600' } : {}">
                       </textarea>
@@ -176,13 +176,13 @@
                 </div>
               </ValidationProvider>
               <div class="py-3" />
-            <div class="btn-toolbar">
+            <div class="btn-toolbar" style="justify-content: center">
               <div v-if="operacao !== 'visualizar'">
                 <input :value="operacao === 'editar' ? 'Editar' : 'Salvar'" v-if="!isLoading && operacao !== 'visualizar'"
                   type="submit" class="btn btn-warning" @click="onSubmit" />
               </div>
               <div class="m-4" />
-              <b-button v-if="operacao !== 'visualizar'" class="btn btn-warning cancel-btn" @click="$router.push({path: '/disciplinas'}).catch(() => {})">
+              <b-button class="btn btn-warning cancel-btn" @click="$router.push({path: '/disciplinas'}).catch(() => {})">
                 VOLTAR
               </b-button>
             </div>

@@ -1,13 +1,15 @@
 import ProjectService from '../../../services/ProjectService';
 import AlocateService from '../../../services/AlocateService';
-/* eslint-disable prefer-destructuring */
+/* eslint-disable */
 export default {
   name: 'CadastroDisciplina',
   data() {
     return {
-      name: { val: '', isValid: true },
-      courseSyllabus: { val: '', isValid: true },
-      formIsValid: '',
+      name: '',
+      courseSyllabus: '',
+      keywords: [],
+      subareas: [],
+      professors: [],
       projectService: new ProjectService(),
       alocateService: new AlocateService(),
       multiSelectPlaceholderKeyword: 'Carregando opções...',
@@ -17,14 +19,12 @@ export default {
       isLoadingKeywords: false,
       isLoadingSubareas: false,
       isLoadingProfessors: false,
-      isMultiselectTouched: false,
-      operacao: 'cadastrar',
-      keywords: [],
+      isMultiselectsTouched: false,
+      operacao: this.$route.path.split('/', 3)[2],
       keywordsSelected: [],
-      subareas: [],
       subareasSelected: [],
-      professors: [],
       professorsSelected: [],
+      subject: '',
     };
   },
   beforeMount() {
@@ -33,7 +33,6 @@ export default {
     this.getProfessors();
   },
   mounted() {
-    this.operacao = this.$route.path.split('/', 3)[2];
     if (this.operacao !== 'cadastrar') {
       if (this.operacao === 'visualizar') {
         this.disableForm();
@@ -45,12 +44,12 @@ export default {
   methods: {
     async onSubmit() {
       const isFormValid = await this.$refs.observer.validate();
-      const isMultiselectValid = this.validateMultiselect();
+      const isMultiselectValid = this.validateMultiselects();
       if (isFormValid && isMultiselectValid) {
         const subject = {
           subject: {
-            name: this.name.val,
-            courseSyllabus: this.courseSyllabus.val,
+            name: this.name,
+            courseSyllabus: this.courseSyllabus,
           },
           keywords: this.keywordsSelected,
           subareas: this.subareasSelected,
@@ -59,15 +58,14 @@ export default {
         if (this.operacao === 'cadastrar') {
           this.projectService.addSubject(subject).then(async () => {
             this.isLoading = false;
-          this.$router.push({ name: 'Consulta a Disciplinas' }).catch(() => { });
+          this.$router.push({ name: 'Disciplinas' }).catch(() => { });
           }).catch((error) => {
             this.isLoading = false;
             alert(`Infelizmente houve um erro ao cadastrar a disciplina: ${error}`);
           });
         } else if (this.operacao === 'editar') {
           subject.subject.subjectid = parseInt(this.$route.params.id, 10);
-          subject.subject.coursesyllabus = this.courseSyllabus.val;
-          console.log('sub', subject);
+          subject.subject.coursesyllabus = this.courseSyllabus;
           this.projectService.updateSubject(this.$route.params.id, subject).then(async () => {
             this.isLoading = false;
             this.$router.push({ name: 'Disciplinas' }).catch(() => { });
@@ -85,19 +83,11 @@ export default {
       this.subareasSelected.sort((a, b) => b.description.length - a.description.length);
     },
     sortProfessorMultiselectLabels() {
-      this.professorSelected.sort((a, b) => b.fullname.length - a.fullname.length);
+      this.professorsSelected.sort((a, b) => b.fullname.length - a.fullname.length);
     },
-    validateMultiselect() {
-      this.isMultiselectTouched = true;
-      return !!this.keywordsSelected.length;
-    },
-    validateSubareaMultiselect() {
-      this.isMultiselectTouched = true;
-      return !!this.subareasSelected.length;
-    },
-    validateProfessorMultiselect() {
-      this.isMultiselectTouched = true;
-      return !!this.professorsSelected.length;
+    validateMultiselects() {
+      this.isMultiselectsTouched = true;
+      return !!this.keywordsSelected.length ;
     },
     isChecked(option) {
       return this.keywordsSelected.some((op) => op.keyword === option.keyword);
@@ -115,11 +105,15 @@ export default {
       for (let i = 0; i < textareas.length; i += 1) { textareas[i].disabled = true; }
     },
     removeDropdownIcons() {
-      document.getElementsByClassName('multiselect__select')[0].remove();
+      let multiselecctsIcon = document.getElementsByClassName('multiselect__select');
+      while(multiselecctsIcon.length > 0){
+        multiselecctsIcon[0].remove();
+      }
     },
     getKeywords() {
       this.isLoadingKeywords = true;
       this.projectService.getAvailableKeywordsToSubject().then((response) => {
+        console.log(response.data);
         this.keywords = response.data;
         this.isLoadingKeywords = false;
         this.multiSelectPlaceholderKeyword = this.keywords.length ? 'Crie palavras-chave para sua disciplina' : 'Sem palavras disponíveis';
@@ -164,8 +158,8 @@ export default {
         this.subareasSelected = subject.subareas;
         this.professorsSelected = subject.professors;
         this.subject = subject.subject[0];
-        this.name.val = subject.subject[0].name;
-        this.courseSyllabus.val = subject.subject[0].coursesyllabus;
+        this.name = subject.subject[0].name;
+        this.courseSyllabus = subject.subject[0].coursesyllabus;
       }).catch((error) => {
         alert(`Erro ao recuperar disciplina: ${error}`);
       });

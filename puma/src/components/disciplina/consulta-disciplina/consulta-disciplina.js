@@ -73,7 +73,7 @@ export default {
     configTableRows() {
       this.subjects.forEach((subject) => {
         const row = subject;
-        row.buttons = '<button name="visualizar" class="btn mr-2" id=' + subject.subjectid + '><i class="fa-solid fa-circle-info mr-2"></i>VER DETALHES</button><button name="excluir" class="btn mr-2" id=' + subject.subjectid + '><i class="fa-solid fa-trash mr-2"></i>EXCLUIR</button>';
+        row.buttons = '<button name="visualizar" class="btn mr-2" id=' + subject.subjectid + '><i class="fa-solid fa-circle-info mr-2"></i>VER DETALHES</button><button name="editar" class="btn mr-2" id=' + subject.subjectid + '><i class="fas fa-edit mr-2"></i>EDITAR</button><button name="excluir" class="btn mr-2" id=' + subject.subjectid + '><i class="fa-solid fa-trash mr-2"></i>EXCLUIR</button>';
         this.data.rows.push(row);
       });
     },
@@ -132,7 +132,7 @@ export default {
         const button = event.target;
         const operacao = button.name;
         if (button.id && operacao !== 'excluir') {
-          this.$router.push({ path: `/disciplinas/${operacao}/${button.id}` }).catch(() => {});
+          this.$router.push({path: `/disciplinas/${operacao}/${button.id}`}).catch(() => {});
         } else if (operacao === 'excluir') {
           this.currentSubject = { subjectid: button.id };
           this.$refs['modal-confirmacao-exclusao'].show();

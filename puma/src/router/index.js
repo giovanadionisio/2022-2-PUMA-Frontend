@@ -101,7 +101,7 @@ const routes = [
   },
   {
     path: '/disciplinas',
-    name: 'Consulta a Disciplinas',
+    name: 'Disciplinas',
     component: () => import('../components/disciplina/consulta-disciplina/ConsultaDisciplina.vue'),
     meta: {
       requiresAuth: true,
@@ -117,7 +117,15 @@ const routes = [
   },
   {
     path: '/disciplinas/editar/:id',
-    name: 'Edição da Disciplina',
+    name: 'Edição de Disciplina',
+    component: () => import('../components/disciplina/cadastro-disciplina/CadastroDisciplina.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/disciplinas/visualizar/:id',
+    name: 'Visualização d Disciplina',
     component: () => import('../components/disciplina/cadastro-disciplina/CadastroDisciplina.vue'),
     meta: {
       requiresAuth: true,
