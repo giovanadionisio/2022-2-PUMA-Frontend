@@ -5,9 +5,9 @@ export default {
   name: 'CadastroProjeto',
   data() {
     return {
-      titulo: { val: '', isValid: true },
-      descricao: { val: '', isValid: true },
-      resultadoEsperado: { val: '', isValid: true },
+      titulo: '',
+      descricao: '',
+      resultadoEsperado: '',
       formIsValid: '',
       projectService: new ProjectService(),
       alocateService: new AlocateService(),
@@ -39,9 +39,9 @@ export default {
       const isMultiselectValid = this.validateMultiselect();
       if (isFormValid && isMultiselectValid) {
         const project = {
-          name: this.titulo.val,
-          problem: this.descricao.val,
-          expectedresult: this.resultadoEsperado.val,
+          name: this.titulo,
+          problem: this.descricao,
+          expectedresult: this.resultadoEsperado,
           keywords: this.keywordsSelected,
           status: 'SB',
           createdat: new Date().toISOString(),
@@ -91,9 +91,9 @@ export default {
       this.projectService.getProjById(projectId).then((response) => {
         const project = response.data;
         this.keywordsSelected = project.keywords;
-        this.titulo.val = project.name;
-        this.descricao.val = project.problem;
-        this.resultadoEsperado.val = project.expectedresult;
+        this.titulo = project.name;
+        this.descricao = project.problem;
+        this.resultadoEsperado = project.expectedresult;
       }).catch((error) => {
         alert(`Erro ao recuperar projeto: ${error}`);
       });
