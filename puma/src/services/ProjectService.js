@@ -35,16 +35,6 @@ export default class ProjectService {
     return projInfos;
   }
 
-  async getAllSubjects() {
-    const auth = store.getters.token;
-    const subjects = await axios.get(`${global.URL_GATEWAY}/project/disciplina`, {
-      headers: {
-        auth,
-      },
-    });
-    return subjects;
-  }
-
   async putProposal(projectId, subjId) {
     const auth = store.getters.token;
     const subjects = await axios.put(`${global.URL_GATEWAY}/project/proposal/${projectId}`,
