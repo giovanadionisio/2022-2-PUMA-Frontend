@@ -6,6 +6,9 @@ export default {
       openModalDelete: false,
       currentKeyWord: {},
       selected: null,
+      selectedToedit: null,
+      selectedToRegister: null,
+      selectedNameDiscipline: '',
       options: [
         { value: null, text: 'Filtre por disciplina', disabled: true },
         { value: 'Planejamento e Controle de Produção - PSP 4', text: 'Planejamento e Controle de Produção - PSP 4' },
@@ -13,6 +16,15 @@ export default {
         { value: 'Engenharia - PSP 6', text: 'Engenharia - PSP 6' },
         { value: 'Gestão Estratégica - PSP 7', text: 'Gestão Estratégica - PSP 7' },
       ],
+
+      options2: [
+        { value: null, text: 'Escolha a disciplina', disabled: true },
+        { value: 'Planejamento e Controle de Produção - PSP 4', text: 'Planejamento e Controle de Produção - PSP 4' },
+        { value: 'Gestão da Qualidade - PSP 5', text: 'Gestão da Qualidade - PSP 5' },
+        { value: 'Engenharia - PSP 6', text: 'Engenharia - PSP 6' },
+        { value: 'Gestão Estratégica - PSP 7', text: 'Gestão Estratégica - PSP 7' },
+      ],
+
       keyWords: [],
       keyWordsList: [
         { item: 1, palavra_chave: 'Qualidade', disciplina: 'Gestão da Qualidade - PSP 5' },
@@ -58,6 +70,8 @@ export default {
     editKeyWord(keyWord) {
       this.openModalEdit = true;
       this.currentKeyWord = keyWord;
+      this.selectedToedit = keyWord.disciplina;
+      this.selectedNameDiscipline = keyWord.palavra_chave;
     },
 
     editar() {

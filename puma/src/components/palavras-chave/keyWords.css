@@ -104,9 +104,10 @@ svg {
 }
 
 .divFooter {
+  margin: 25px 0 5px 0;
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
 }
 
 .btn-crud {
@@ -168,7 +169,7 @@ svg {
   align-items: center;
   background-color: #EB0600;
   color: white;
-  border: 3px solid white;
+  border: 2px solid #EB0600;
   border-radius: 5px;
   padding: 5px;
   font-size: 24px;
@@ -182,18 +183,18 @@ svg {
 .btn-delete:focus {
   color: white;
   background-color: #EB0600;
-  border: 3px solid #e39696;
+  border: 2px solid #EB0600;
 }
 
 .btn-delete:active {
   color: white;
   background-color: #a30602;
-  border: 3px solid #e39696;
+  border: 2px solid #EB0600;
 }
 
 .d-invert {
   color: #EB0600;
-  border: 1px solid #EB0600;
+  border: 2px solid #EB0600;
   background-color: white;
 }
 
@@ -205,4 +206,21 @@ svg {
 .d-invert:focus {
   color: #EB0600;
   background-color: #fcfcfc;
+}
+
+.label-text {
+  color: #15355E;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.custom-input {
+  border: 2px solid #15355E;
+  height: 42px;
+}
+
+.text-delete {
+  text-align: center; 
+  color: #15355e;
+  font-size: 17px;
 }

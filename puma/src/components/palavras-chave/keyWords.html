@@ -29,63 +29,89 @@
     </b-table>
   </div>
 
-  <b-modal style="padding: 0; margin: 0" v-model="openModalRegister" centered size="lg" modal-class="myclass">
-      <template #modal-header>
-        CRIAR NOVA PALAVRA-CHAVE
-      </template>
+  <b-modal hide-footer v-model="openModalRegister" centered size="lg" modal-class="myclass">
+    <template #modal-header>
+      CRIAR NOVA PALAVRA-CHAVE
+    </template>
+        
+    <div style="display: flex; flex-direction: column;  align-items: center;">
+      <b-form-group class="col-md-9">
+        <template #label>
+          <span class="label-text">PALAVRA-CHAVE</span>
+        </template>
+        <b-form-input type="text" placeholder="Escreva aqui sua nova palavra-chave" class="custom-input"/>
+      </b-form-group>
 
-      <template #modal-footer>
-        <div class="divFooter">
-          <button class="btn-crud btn-warning" >
-            CRIAR
-          </button>
+      <b-form-group class="col-md-9">
+        <template #label>
+          <span class="label-text">DISCIPLINA</span>
+        </template>
+        <b-select v-model="selectedToRegister" :options="options2"
+        class="custom-input" />
+      </b-form-group>
+    </div>
+      
+    <div class="divFooter">
+      <button class="btn-crud btn-warning" >
+        CRIAR
+      </button>
 
-          <button class="btn-crud c-invert" @click="openModalRegister=false">
-            CANCELAR
-          </button>
-
-        </div>
-      </template>
+      <button class="btn-crud c-invert" @click="openModalRegister=false">
+        CANCELAR
+      </button>
+    </div>
   </b-modal>
 
-  <b-modal style="padding: 0; margin: 0" v-model="openModalEdit" centered size="lg" modal-class="myclass">
+  <b-modal hide-footer v-model="openModalEdit" centered size="lg" modal-class="myclass">
     <template #modal-header>
       EDITAR PALAVRA-CHAVE
     </template>
+   
+    <div style="display: flex; flex-direction: column; align-items: center;">
+      <b-form-group class="col-md-9">
+        <template #label>
+          <span class="label-text">PALAVRA-CHAVE</span>
+        </template>
+        <b-form-input type="text" placeholder="Escreva aqui a palavra-chave" v-model="selectedNameDiscipline"
+          class="custom-input" />
+        </b-form-group>
 
-    <template #modal-footer>
-      <div class="divFooter">
-        <button @click="editar" class="btn-crud btn-warning" >
-          EDITAR
-        </button>
+      <b-form-group class="col-md-9">
+        <template #label>
+          <span class="label-text">DISCIPLINA</span>
+        </template>
+        <b-select v-model="selectedToedit" :options="options2" class="custom-input"/>
+      </b-form-group>
+    </div>
 
-        <button class="btn-crud c-invert" @click="openModalEdit=false">
-          CANCELAR
-        </button>
-      </div>
-    </template>
+    <div class="divFooter">
+      <button @click="editar" class="btn-crud btn-warning" style="margin-right: 5%;">
+        EDITAR
+      </button>
+      <button class="btn-crud c-invert" @click="openModalEdit=false">
+        CANCELAR
+      </button>
+    </div>
+
   </b-modal>
 
-  <b-modal style="padding: 0; margin: 0" v-model="openModalDelete" centered size="xs" modal-class="myclass">
+  <b-modal hide-footer v-model="openModalDelete" centered size="xs" modal-class="myclass">
     <template #modal-header>
       EXCLUIR PALAVRA-CHAVE
     </template>
-    <div style="text-align: center;">
-      Voce tem certeza que deseja confirmar 
+    
+    <div style="display: flex; flex-direction: column; align-items: center;">
+      <span class="text-delete">Voce tem certeza que deseja confirmar</span>
+      <span class="text-delete">a exclusao da palavra-chave ?</span>
     </div>
-    <div style="text-align: center;">
-      a exclusao da palavra-chave ?
-    </div>
-    <template #modal-footer>
-      <div class="divFooter">
-        <button class="btn-delete" >
-          CONFIRMAR
-        </button>
 
-        <button class="btn-delete d-invert" @click="openModalDelete=false">
-          CANCELAR
-        </button>
-      </div>
-    </template>
+    <div class="divFooter">
+      <button class="btn-delete" style="margin-right: 5%;">
+        CONFIRMAR
+      </button>
+      <button class="btn-delete d-invert" @click="openModalDelete=false">
+        CANCELAR
+      </button>
+    </div>
   </b-modal>
 </div>
