@@ -4,7 +4,7 @@
       href='https://fonts.googleapis.com/css?family=Rubik:300,400,500,600,700,900'
       rel='stylesheet'
     />
-    <Sidebar v-if='isAuthenticated' />
+    <MenuLateral v-if='isAuthenticated' />
     <router-view />
   </div>
 </template>
@@ -12,11 +12,11 @@
 <script>
 /* eslint-disable */
 // eslint-disable-next-line import/no-unresolved
-import Sidebar from '@/components/Sidebar/Sidebar.vue';
+import MenuLateral from '../src/components/shared/menu-lateral/MenuLateral.vue';
 
 export default {
   components: {
-    Sidebar,
+    MenuLateral,
   },
   methods: {
     updateSessionStatus() {
@@ -61,7 +61,7 @@ html, body {
   top: 0;
   width: calc(100% - 250px);
   margin-left: 250px;
-  padding: 30px 10px; 
+  padding: 30px 10px;
   margin-bottom: 50px;
   /* height: 100%; */
 }

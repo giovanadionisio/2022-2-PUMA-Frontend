@@ -1,5 +1,5 @@
 import ProjectService from '../../../services/ProjectService';
-import ModalAviso from '../../shared/modal-aviso/ModalAviso.vue';
+import ModalAviso from '../../shared/modal-confirmacao/ModalConfirmacao.vue';
 /* eslint-disable*/
 export default {
   name: 'ConsultaDisciplinas',
@@ -31,7 +31,6 @@ export default {
       currentSubject: '',
       subjects: [],
       projectService: new ProjectService(),
-      operacao: '',
     };
   },
   watch: {
@@ -49,7 +48,6 @@ export default {
   methods: {
     getSubjects() {
       this.isLoading = true;
-      // this.operacao = this.$route.path.slice(1);
       this.projectService.getSubjects().then((response) => {
         this.subjects = response.data;
         if (!response.data.length) { delete this.data.columns[0][2]; }
@@ -97,8 +95,9 @@ export default {
     configSearchInput() {
       const searchInput = document.getElementsByTagName('input')[0];
       searchInput.placeholder = 'Pesquise por item ou título';
-      // searchInput.setAttribute('value', 'math');
-      // searchInput.dispatchEvent(new Event('input'));
+      // add the below lines to initialize search input with some value.
+        // searchInput.setAttribute('value', 'math');
+        // searchInput.dispatchEvent(new Event('input'));
       searchInput.classList.add('search-input');
       searchInput.style.width = '100%';
       return searchInput;
@@ -170,6 +169,5 @@ export default {
         svgs.item(7).style.marginLeft = '15px';
       }
     },
-
   },
 };

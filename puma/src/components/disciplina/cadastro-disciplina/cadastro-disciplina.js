@@ -113,7 +113,6 @@ export default {
     getKeywords() {
       this.isLoadingKeywords = true;
       this.projectService.getAvailableKeywordsToSubject().then((response) => {
-        console.log(response.data);
         this.keywords = response.data;
         this.isLoadingKeywords = false;
         this.multiSelectPlaceholderKeyword = this.keywords.length ? 'Crie palavras-chave para sua disciplina' : 'Sem palavras disponíveis';

@@ -1,12 +1,12 @@
 /* eslint-disable */
-import MenuItem from "./MenuItem/MenuItem.vue";
-import USER_CONST from '../../utils/enums/users.enum.js';
-import NAV_CONST from '../../utils/enums/navigations.enum.js';
+import ItemMenuLateral from "./item-menu-lateral/ItemMenuLateral.vue";
+import USER_CONST from '../../../utils/enums/users.enum.js';
+import NAV_CONST from '../../../utils/enums/navigations.enum.js';
 
 export default {
-    name: 'Sidebar',
+    name: 'MenuLateral',
     components: {
-        MenuItem,
+        ItemMenuLateral,
     },
     props: {},
     data() {
@@ -46,7 +46,7 @@ export default {
                 subjects: {
                     key: NAV_CONST.SUBJECTS.KEY,
                     title: 'Disciplinas',
-                    iconUrl: require('@/assets/subjects-menu.svg'),
+                    iconUrl: require('@/assets/subjects.png'),
                     show: () => { return true },
                     onclick: () => {
                         this.$store.commit('SET_CURRENT_NAVIGATION', NAV_CONST.SUBJECTS.KEY);
@@ -65,5 +65,11 @@ export default {
                 }
             }
         };
+    },
+    methods: {
+        redirectToUserProjects() {
+            this.$store.commit('SET_CURRENT_NAVIGATION', NAV_CONST.MY_PROJECTS.KEY);
+            this.$router.push({ path: '/meus-projetos'}).catch(() => {});
+        }
     },
 };

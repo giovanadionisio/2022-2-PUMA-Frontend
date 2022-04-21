@@ -9,7 +9,6 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    // eslint-disable-next-line import/no-unresolved
     component: () => import('../components/usuario/login-usuario/LoginUsuario.vue'),
     meta: {
       guest: true,
@@ -18,7 +17,6 @@ const routes = [
   {
     path: '/usuario/login',
     name: 'Entrar',
-    // eslint-disable-next-line import/no-unresolved
     component: () => import('../components/usuario/login-usuario/LoginUsuario.vue'),
     meta: {
       guest: true,
@@ -36,7 +34,6 @@ const routes = [
   {
     path: '/usuario/recuperacao-senha',
     name: 'Recuperação Senha',
-    // eslint-disable-next-line import/no-unresolved
     component: () => import('../components/usuario/recovery-password/RecoveryPassword.vue'),
     meta: {
       guest: true,
@@ -45,7 +42,6 @@ const routes = [
   {
     path: '/usuario/atualizar-senha',
     name: 'Nova Senha',
-    // eslint-disable-next-line import/no-unresolved
     component: () => import('../components/usuario/new-password/NewPassword.vue'),
     meta: {
       guest: true,
