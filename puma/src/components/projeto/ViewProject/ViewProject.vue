@@ -11,6 +11,14 @@
     font-size: 16px;
 }
 
+.multiselect-custom >>> .multiselect__tags {
+    border: 1px solid #ced4da;
+}
+
+.multiselect-custom-error >>> .multiselect__tags {
+    border: 1px solid #dc3545;
+}
+
 .multiselect-custom >>> .multiselect__tag-icon {
     background: #2c496e;
     line-height: 25px;
@@ -31,6 +39,6 @@
 }
 
 .multiselect-custom >>> .multiselect__select {
-    background: #fff !important;
+    background: transparent !important;
 }
 </style>

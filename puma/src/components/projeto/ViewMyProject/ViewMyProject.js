@@ -1,4 +1,6 @@
 /* eslint-disable */
+import ProjectService from '../../../services/ProjectService';
+import getProjectStatus from '../../../utils/enums/status-projeto.enum';
 
 export default {
     name: 'ViewMyProject',
@@ -8,40 +10,40 @@ export default {
             disabled: true,
             editable: false,
             initialForm: {
-                project: {
-                    projectId: 0,
-                    name: 'Melhorar o controle de estoque da padaria Sonho Bom',
-                    createdAt: '',
-                    problem: 'Eu não consigo controlar o estoque da padaria, então alguns itens acabam estragando, outros faltam e também não consigo mensurar a demanda. Eu sei quais são os meses que mais vendem, mas não exatamente a quantidade.',
-                    expectedResult: 'Espero ter uma noção, uma quantidade média da demanda da minha empresa, saber qual é o giro de estoque também para enfim conseguir reduzir os desperdícios e quero também qual é a produção recomendada.',
-                    status: 'SB',
-                    feedback: 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which dont look even slightly believable.If you are going to use a passage of Lorem Ipsum, you need to be sure there isnt anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet',
-                },
-                subject: {
-                    subjectId: 0,
-                    name: 'PLANEJAMENTO E CONTROLE DE PRODUÇÃO',
-                },
-                user: {
-                    userId: 0,
-                    fullName: 'Gustavo Rodrigues',
-                    email: 'gustavo@email.com',
-                    phoneNumber: '(61) 99999-9999',
-                },
+                projectid: null,
+                name: '',
+                createdat: '',
+                problem: '',
+                expectedresult: '',
+                status: '',
+                statusdesc: '',
+                feedback: '',
                 mainKeyword: null,
                 selectedKeywords: [],
+                subject: {
+                    subjectid: null,
+                    name: '',
+                },
+                user: {
+                    userid: null,
+                    fullname: '',
+                    email: '',
+                    phonenumber: '',
+                },
+                semester: {
+                    semesterid: null,
+                    year: '',
+                    semester: '',
+                },
             },
             form: {},
-            keywords: [
-                { value: 0, text: 'Vue.js' },
-                { value: 1, text: 'Javascript' },
-                { value: 2, text: 'Open Source' }
-            ],
+            keywords: [],  // { value, text }[]
         };
     },
     async created() {
         this.form = JSON.parse(JSON.stringify(this.initialForm));
         await this.handleLoadData();
-        this.editable = ['SB'].includes(this.form.project.status);
+        this.editable = ['SB'].includes(this.form.status);
     },
     methods: {
         toggleEnableForm: function () {
@@ -51,24 +53,68 @@ export default {
             return this.form.selectedKeywords.find((k) => k.value === keyword.value);
         },
         hasFeedback: function () {
-            return ['AC', 'RC', 'IC', 'EX', 'EC'].includes(this.form.project.status);
+            return ['AC', 'RC', 'IC', 'EX', 'EC'].includes(this.form.status);
         },
         makeToast: function (title, message, variant) {
             this.$bvToast.toast(message, { title: title, variant: variant, solid: true });
         },
+        handleChangeKeywords: function (value) {
+            if (!!!value.find((k) => k.value === this.form.mainKeyword)) {
+                this.form.mainKeyword = null;
+            }
+        },
         handleLoadData: async function () {
-            const projectId = this.$route.params.id;
-            this.$store.commit('OPEN_LOADING_MODAL', { title: 'Carregando...' });
-            // 1. request and set all keywords
-            // 2. request and set project (projectId) in this.initialForm and this.form
-            await new Promise(resolve => setTimeout(resolve, 3000));
-            this.$store.commit('CLOSE_LOADING_MODAL');
+            try {
+                const projectId = this.$route.params.id;
+                const projectService = new ProjectService();
+
+                this.$store.commit('OPEN_LOADING_MODAL', { title: 'Carregando...' });
+
+                const project = (await projectService.getProject(projectId)).data;
+                const allKeywords = (await projectService.getAvailableKeywordsToProject()).data;
+
+                const { Keywords, User, Subject, Semester, ...rest } = project;
+                const mainKeyword = Keywords.filter((k) => k.main)[0];
+                const createdat = (new Date(project.createdat)).toLocaleString();
+                const formData = {
+                    ...rest, createdat, statusdesc: getProjectStatus(project.status),
+                    user: User,
+                    subject: Subject,
+                    semester: Semester,
+                    mainKeyword: mainKeyword?.keywordid,
+                    selectedKeywords: Keywords.map((k) => ({ value: k.keywordid, text: k.keyword })).sort(),
+                };
+
+                this.keywords = allKeywords.map((k) => ({ value: k.keywordid, text: k.keyword })).sort();
+
+                this.initialForm = JSON.parse(JSON.stringify(formData));
+                this.form = JSON.parse(JSON.stringify(formData));
+
+                this.$store.commit('CLOSE_LOADING_MODAL');
+            } catch (error) {
+                this.$store.commit('CLOSE_LOADING_MODAL');
+                this.makeToast('Erro', 'Falha ao carregar os dados', 'danger');
+            }
         },
         handleSubmit: async function () {
             try {
+                const isFormValid = await this.$refs.observer.validate();
+                if (!isFormValid) return;
+
+                const projectService = new ProjectService();
                 this.$store.commit('OPEN_LOADING_MODAL', { title: 'Salvando...' });
-                // request to update api
-                await new Promise(resolve => setTimeout(resolve, 3000));
+
+                const payload = {
+                    projectid: this.form.projectid,
+                    name: this.form.name,
+                    problem: this.form.problem,
+                    expectedresult: this.form.expectedresult,
+                    keywords: this.form.selectedKeywords.map((k) => ({
+                        keywordid: k.value, main: k.value === this.form.mainKeyword
+                    })),
+                };
+
+                await projectService.updateProject(payload);
                 this.$store.commit('CLOSE_LOADING_MODAL');
                 await this.$router.push({ path: `/meus-projetos` });
                 this.makeToast('Sucesso', 'Operação realizada com sucesso', 'success');
@@ -83,10 +129,10 @@ export default {
         },
         handleDelete: async function () {
             try {
+                const projectService = new ProjectService();
                 this.$store.commit('CLOSE_CONFIRM_MODAL');
                 this.$store.commit('OPEN_LOADING_MODAL', { title: 'Excluindo...' });
-                // request to delete api
-                await new Promise(resolve => setTimeout(resolve, 3000));
+                await projectService.deleteProject(this.form.project.projectid);
                 this.$store.commit('CLOSE_LOADING_MODAL');
                 await this.$router.push({ path: `/meus-projetos` });
                 this.makeToast('Sucesso', 'Operação realizada com sucesso', 'success');

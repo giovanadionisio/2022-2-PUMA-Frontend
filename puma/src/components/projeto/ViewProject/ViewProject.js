@@ -1,4 +1,6 @@
 /* eslint-disable */
+import ProjectService from '../../../services/ProjectService';
+import getProjectStatus from '../../../utils/enums/status-projeto.enum';
 
 export default {
     name: 'ViewProject',
@@ -9,27 +11,31 @@ export default {
             disabled: true,
             currentUserAdmin: false,
             initialForm: {
-                project: {
-                    projectId: 0,
-                    name: 'Melhorar o controle de estoque da padaria Sonho Bom',
-                    createdAt: '',
-                    problem: 'Eu não consigo controlar o estoque da padaria, então alguns itens acabam estragando, outros faltam e também não consigo mensurar a demanda. Eu sei quais são os meses que mais vendem, mas não exatamente a quantidade.',
-                    expectedResult: 'Espero ter uma noção, uma quantidade média da demanda da minha empresa, saber qual é o giro de estoque também para enfim conseguir reduzir os desperdícios e quero também qual é a produção recomendada.',
-                    status: 'RL',
-                    feedback: 'Espero ter uma noção, uma quantidade média da demanda da minha empresa, sabe',
-                },
-                subject: {
-                    subjectId: 0,
-                    name: 'PLANEJAMENTO E CONTROLE DE PRODUÇÃO',
-                },
-                user: {
-                    userId: 0,
-                    fullName: 'Gustavo Rodrigues',
-                    email: 'gustavo@email.com',
-                    phoneNumber: '(61) 99999-9999',
-                },
+                projectid: null,
+                name: '',
+                createdat: '',
+                problem: '',
+                expectedresult: '',
+                status: '',
+                statusdesc: '',
+                feedback: '',
                 mainKeyword: null,
                 selectedKeywords: [],
+                subject: {
+                    subjectid: null,
+                    name: '',
+                },
+                user: {
+                    userid: null,
+                    fullname: '',
+                    email: '',
+                    phonenumber: '',
+                },
+                semester: {
+                    semesterid: null,
+                    year: '',
+                    semester: '',
+                },
                 selectedSubject: null,
                 selectedEvaluation: null,
             },
@@ -40,23 +46,14 @@ export default {
                 { value: 2, text: 'Encaminhar proposta para outra disciplina' },
                 { value: 3, text: 'Eu não sei para qual disciplina encaminhar' }
             ],
-            keywords: [
-                { value: 0, text: 'Vue.js' },
-                { value: 1, text: 'Javascript' },
-                { value: 2, text: 'Open Source' }
-            ],
-            subjects: [
-                { value: 0, text: 'Planejamento e Controle de Produçao - PSP 4' },
-                { value: 1, text: 'Gestão da Qualidade - PSP 5' },
-                { value: 2, text: 'Engenharia de Produto - PSP 6' },
-                { value: 3, text: 'Eu não sei para qual disciplina encaminhar' }
-            ],
+            keywords: [], // { value, text }[]
+            subjects: [], // { value, text }[]
         };
     },
     async created() {
         this.form = JSON.parse(JSON.stringify(this.initialForm));
         await this.handleLoadData();
-        this.editable = ['SB', 'RL', 'AL'].includes(this.form.project.status);
+        this.editable = ['SB', 'RL', 'AL'].includes(this.form.status);
     },
     methods: {
         toggleEnableForm: function () {
@@ -66,38 +63,72 @@ export default {
             return this.form.selectedKeywords.find((k) => k.value === keyword.value);
         },
         hasFeedback: function () {
-            return ['RL', 'AL', 'AC', 'RC', 'IC', 'EX', 'EC'].includes(this.form.project.status);
+            return ['RL', 'AL', 'AC', 'RC', 'IC', 'EX', 'EC'].includes(this.form.status);
         },
         makeToast: function (title, message, variant) {
             this.$bvToast.toast(message, { title: title, variant: variant, solid: true });
         },
+        handleChangeEvaluation: function () {
+            const AC_FEEDBACK = 'A proposta de projeto foi aceita e em breve poderá ser alocada a um semestre.';
+            if (this.form.selectedEvaluation === 0) {
+                this.form.feedback = AC_FEEDBACK;
+            } else {
+                this.form.feedback = '';
+            }
+        },
         handleLoadData: async function () {
             const projectId = this.$route.params.id;
+            const projectService = new ProjectService();
             this.$store.commit('OPEN_LOADING_MODAL', { title: 'Carregando...' });
-            // 1. request and set all keywords
-            // 2. request and set all subjects
-            // 3. request and set project (projectId) in this.initialForm and this.form
-            await new Promise(resolve => setTimeout(resolve, 3000));
+
+            const project = (await projectService.getProject(projectId)).data;
+            const allSubjects = (await projectService.subjectList(projectId)).data;
+            // const allKeywords = (await projectService.getAvailableKeywordsToProject()).data;
+
+            const { Keywords, User, Subject, Semester, ...rest } = project;
+            const mainKeyword = Keywords.filter((k) => k.main)[0];
+            const createdat = (new Date(project.createdat)).toLocaleString();
+            const formData = {
+                ...rest,
+                createdat,
+                feedback: project.feedback || '',
+                statusdesc: getProjectStatus(project.status),
+                user: User,
+                subject: Subject,
+                semester: Semester,
+                mainKeyword: mainKeyword?.keywordid,
+                selectedKeywords: Keywords.map((k) => ({ value: k.keywordid, text: k.keyword })).sort(),
+                selectedSubject: null,
+                selectedEvaluation: null,
+            };
+
+            this.subjects = allSubjects.map((s) => ({ value: s.subjectid, text: s.name })).sort();
+            this.initialForm = JSON.parse(JSON.stringify(formData));
+            this.form = JSON.parse(JSON.stringify(formData));
+
             this.$store.commit('CLOSE_LOADING_MODAL');
         },
         handleSubmit: async function () {
             try {
+                const isFormValid = await this.$refs.observer.validate();
+                if (!isFormValid) return;
+
+                const projectService = new ProjectService();
                 this.$store.commit('OPEN_LOADING_MODAL', { title: 'Enviando...' });
-                let payload = { projectId: this.form.project.projectId, feedback: this.form.project.feedback };
+                let payload = { projectId: this.form.projectid, feedback: this.form.feedback };
                 if (this.form.selectedEvaluation === 0) {
                     payload = { ...payload, status: 'AC' };
-                    // request to evaluate api
+                    await projectService.evaluateProject(payload);
                 } else if (this.form.selectedEvaluation === 1) {
                     payload = { ...payload, status: 'RC' };
-                    // request to evaluate api
+                    await projectService.evaluateProject(payload);
                 } else if (this.form.selectedEvaluation === 2) {
                     payload = { ...payload, status: 'RL', subjectId: this.form.selectedSubject };
-                    // request to realocate api
+                    await projectService.reallocateProject(payload);
                 } else if (this.form.selectedEvaluation === 3) {
                     payload = { ...payload, status: 'AL', subjectId: this.form.selectedSubject };
-                    // request to realocate api
+                    await projectService.reallocateProject(payload);
                 }
-                await new Promise(resolve => setTimeout(resolve, 3000));
                 this.$store.commit('CLOSE_LOADING_MODAL');
                 await this.$router.push({ path: `/projetos-disciplina` });
                 this.makeToast('Sucesso', 'Operação realizada com sucesso', 'success');
@@ -107,7 +138,7 @@ export default {
             }
         },
         handleEvaluate: function () {
-            this.form.project.feedback = '';
+            this.form.feedback = '';
             this.toggleEnableForm();
         },
         handleCancelEvaluate: function () {

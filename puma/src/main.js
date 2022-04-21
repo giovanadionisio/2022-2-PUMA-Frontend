@@ -70,6 +70,7 @@ Vue.prototype.$http = axios;
 
 environment.configUser();
 
+/* Vee Validate Validations */
 extend('email', {
   ...email,
   validate(value) {
@@ -80,10 +81,12 @@ extend('email', {
   },
   message: 'Insira um email válido',
 });
+
 extend('required', {
   ...required,
   message: 'Preenchimento obrigatório',
 });
+
 extend('min', {
   ...min,
   validate(value, { length }) {
@@ -96,6 +99,15 @@ extend('min', {
   /* eslint-disable max-len */
   message: (fieldName, placeholders) => (fieldName.slice(-1).toLowerCase() === 'a' ? `A ${fieldName} deve ter ao menos ${placeholders.length} caracteres` : `O ${fieldName} deve ter ao menos ${placeholders.length} caracteres`),
 });
+
+extend('min_array', {
+  validate(value, { length }) {
+    return (value.length >= Number(length));
+  },
+  params: ['length'],
+  message: (message) => message,
+});
+
 extend('confirmed', {
   ...confirmed,
   validate(value, { target }) {
@@ -107,6 +119,7 @@ extend('confirmed', {
   params: ['target'],
   message: 'Os campos devem coincidir',
 });
+
 extend('email', {
   ...email,
   validate(value) {
@@ -117,8 +130,11 @@ extend('email', {
   },
   message: 'Insira um email válido',
 });
+
 extend('alpha_spaces', alpha_spaces);
+
 extend('max', max);
+
 extend('cnpj', {
   validate: (value) => {
     if (value.length === 18) {
@@ -128,6 +144,7 @@ extend('cnpj', {
   },
   message: 'CNPJ inválido',
 });
+
 extend('cpf', {
   validate: (value) => {
     if (value.length === 14) {

@@ -15,6 +15,7 @@
 .data-content {
     color: #15355E;   
     margin-left: 5px;
+    font-size: 18px;
 }
 
 .counter {
@@ -44,4 +45,8 @@
 .button:hover {
     color: #fff;
     background-color: #15355E;
+}
+
+.error-span {
+    color: #DC3545;
 }
