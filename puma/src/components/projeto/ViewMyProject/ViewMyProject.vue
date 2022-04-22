@@ -1,8 +1,8 @@
-<template src="./cadastro-projeto.html"></template>
+<template src="./ViewMyProject.html"></template>
 
-<script src="./cadastro-projeto.js"></script>
+<script src="./ViewMyProject.js"></script>
 
-<style src="./cadastro-projeto.css" scoped></style>
+<style src="./ViewMyProject.css" scoped></style>
 
 <style lang="css" scoped>
 .multiselect-custom >>> .multiselect__tag {

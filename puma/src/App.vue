@@ -5,6 +5,8 @@
       rel='stylesheet'
     />
     <Sidebar v-if='isAuthenticated' />
+    <ConfirmModal />
+    <LoadingModal />
     <router-view />
   </div>
 </template>
@@ -13,10 +15,14 @@
 /* eslint-disable */
 // eslint-disable-next-line import/no-unresolved
 import Sidebar from '@/components/Sidebar/Sidebar.vue';
+import ConfirmModal from '@/components/ConfirmModal/ConfirmModal.vue';
+import LoadingModal from '@/components/LoadingModal/LoadingModal.vue';
 
 export default {
   components: {
     Sidebar,
+    ConfirmModal,
+    LoadingModal,
   },
   methods: {
     updateSessionStatus() {
@@ -40,6 +46,8 @@ export default {
 };
 </script>
 
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
+
 <style>
 html, body {
   margin: 0;
@@ -50,8 +58,6 @@ html, body {
   font-family: Avenir, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* text-align: center; */
-  /* color: #15355e; */
   height:100%;
 }
 
@@ -63,7 +69,6 @@ html, body {
   margin-left: 250px;
   padding: 30px 10px; 
   margin-bottom: 50px;
-  /* height: 100%; */
 }
 
 .input-field {

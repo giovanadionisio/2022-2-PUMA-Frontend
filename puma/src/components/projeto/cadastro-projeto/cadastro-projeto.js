@@ -1,23 +1,22 @@
+/* eslint-disable */
 import ProjectService from '../../../services/ProjectService';
 import AlocateService from '../../../services/AlocateService';
-/* eslint-disable prefer-destructuring */
+
 export default {
   name: 'CadastroProjeto',
   data() {
     return {
-      titulo: { val: '', isValid: true },
-      descricao: { val: '', isValid: true },
-      resultadoEsperado: { val: '', isValid: true },
+      operacao: 'cadastrar',
+      titulo: '',
+      descricao: '',
+      resultadoEsperado: '',
       formIsValid: '',
+      keywords: [],
+      mainKeyword: null,
+      selectedKeywords: [],
       projectService: new ProjectService(),
       alocateService: new AlocateService(),
       multiSelectPlaceholder: 'Carregando opções...',
-      isLoading: false,
-      isLoadingKeywords: false,
-      isMultiselectTouched: false,
-      operacao: 'cadastrar',
-      keywords: [],
-      keywordsSelected: [],
     };
   },
   beforeMount() {
@@ -35,36 +34,45 @@ export default {
   },
   methods: {
     async onSubmit() {
-      const isFormValid = await this.$refs.observer.validate();
-      const isMultiselectValid = this.validateMultiselect();
-      if (isFormValid && isMultiselectValid) {
+      try {
+        this.$store.commit('OPEN_LOADING_MODAL', { title: 'Cadastrando...' });
+
+        const isFormValid = await this.$refs.observer.validate();
+        if (!isFormValid) return;
+
         const project = {
-          name: this.titulo.val,
-          problem: this.descricao.val,
-          expectedresult: this.resultadoEsperado.val,
-          keywords: this.keywordsSelected,
+          name: this.titulo,
+          problem: this.descricao,
+          expectedresult: this.resultadoEsperado,
           status: 'SB',
           createdat: new Date().toISOString(),
           userid: this.$store.getters.user.userId,
+          keywords: this.selectedKeywords.map((k) => ({ keywordid: k.value, main: k.value === this.mainKeyword })),
         };
-        this.projectService.addProject(project).then(async () => {
-          this.isLoading = false;
-          this.$router.push({ name: 'Meus Projetos' }).catch(() => { });
-        }).catch((error) => {
-          this.isLoading = false;
-          alert(`Infelizmente houve um erro ao cadastrar a proposta: ${error}`);
-        });
+
+        await this.projectService.addProject(project);
+
+        this.$store.commit('CLOSE_LOADING_MODAL');
+        await this.$router.push({ path: `/meus-projetos` });
+        this.makeToast('Sucesso', 'Operação realizada com sucesso', 'success');
+      } catch (error) {
+        this.$store.commit('CLOSE_LOADING_MODAL');
+        this.makeToast('Erro', 'Falha ao realizar operação', 'danger');
       }
     },
-    sortMultiselectLabels() {
-      this.keywordsSelected.sort((a, b) => b.keyword.length - a.keyword.length);
+    handleChangeKeywords: function (value) {
+      if (!!!value.find((k) => k.value === this.mainKeyword)) {
+        this.mainKeyword = null;
+      }
     },
-    validateMultiselect() {
-      this.isMultiselectTouched = true;
-      return !!this.keywordsSelected.length;
+    makeToast: function (title, message, variant) {
+      this.$bvToast.toast(message, { title: title, variant: variant, solid: true });
+    },
+    sortMultiselectLabels() {
+      this.selectedKeywords.sort((a, b) => b.keyword.length - a.keyword.length);
     },
     isChecked(option) {
-      return this.keywordsSelected.some((op) => op.keywordid === option.keywordid);
+      return this.selectedKeywords.some((op) => op.value === option.value);
     },
     disableForm() {
       const inputs = document.getElementsByTagName('input');
@@ -75,25 +83,28 @@ export default {
     removeDropdownIcons() {
       document.getElementsByClassName('multiselect__select')[0].remove();
     },
-    getKeywords() {
-      this.isLoadingKeywords = true;
-      this.projectService.getKeywords().then((response) => {
-        this.keywords = response.data;
-        this.isLoadingKeywords = false;
+    async getKeywords() {
+      try {
+        this.$store.commit('OPEN_LOADING_MODAL', { title: 'Carregando...' });
+
+        const response = await this.projectService.getKeywords();
+        this.keywords = response.data.map((k) => ({ value: k.keywordid, text: k.keyword })).sort();
         this.multiSelectPlaceholder = this.keywords.length ? 'Selecione' : 'Sem palavras disponíveis';
-      }).catch((error) => {
-        this.isLoadingKeywords = false;
+
+        this.$store.commit('CLOSE_LOADING_MODAL');
+      } catch (error) {
         this.multiSelectPlaceholder = 'Sem palavras disponíveis';
-        alert(`Infelizmente houve um erro ao recuperar as palavras-chave: ${error}`);
-      });
+        this.$store.commit('CLOSE_LOADING_MODAL');
+        this.makeToast('Erro', 'Falha ao carregar os dados', 'danger');
+      }
     },
     getProject(projectId) {
       this.projectService.getProjById(projectId).then((response) => {
         const project = response.data;
-        this.keywordsSelected = project.keywords;
-        this.titulo.val = project.name;
-        this.descricao.val = project.problem;
-        this.resultadoEsperado.val = project.expectedresult;
+        this.selectedKeywords = project.keywords;
+        this.titulo = project.name;
+        this.descricao = project.problem;
+        this.resultadoEsperado = project.expectedresult;
       }).catch((error) => {
         alert(`Erro ao recuperar projeto: ${error}`);
       });

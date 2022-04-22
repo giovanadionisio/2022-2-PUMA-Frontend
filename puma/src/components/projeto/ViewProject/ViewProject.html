@@ -1,0 +1,229 @@
+<div class="main-content">
+    <b-container fluid class="main-container">
+        <b-row>
+            <b-col cols="6">
+                <span class="main-title">
+                    VER DETALHES DO PROJETO
+                </span>
+            </b-col>
+            <b-col cols="6">
+                <b-row align-h="end">
+                    <b-col cols="2" v-if="editable && disabled" class="m-2">
+                        <b-button variant="outline-primary" class="button" v-on:click="handleEvaluate()">
+                            Avaliar
+                        </b-button>
+                    </b-col>
+                    <b-col cols="2" v-if="!disabled" class="m-2">
+                        <b-button variant="outline-primary" class="button" v-on:click="handleSubmit()">
+                            Enviar
+                        </b-button>
+                    </b-col>
+                    <b-col cols="2" v-if="!disabled" class="m-2">
+                        <b-button variant="outline-primary" class="button" v-on:click="handleCancelEvaluate()">
+                            Cancelar
+                        </b-button>
+                    </b-col>
+                    <!-- <b-col v-if="editable" cols="2" class="m-2">
+                        <b-button variant="outline-primary" class="button">
+                            Excluir
+                        </b-button>
+                    </b-col> -->
+                </b-row>
+            </b-col>
+        </b-row>
+        <b-row class="my-2">
+            <b-col cols="8">
+                <span class="data-label">PROJETO:</span>
+                <span class="data-content">{{ form.name }}</span>
+            </b-col>
+            <b-col cols="4">
+                <span class="data-label">CRIADO EM:</span>
+                <span class="data-content">{{ form.createdat}}</span>
+            </b-col>
+        </b-row>
+        <b-row class="my-2">
+            <b-col cols="4">
+                <span class="data-label">AUTOR(A):</span>
+                <span class="data-content">{{ form.user.fullname }}</span>
+            </b-col>
+            <b-col cols="4">
+                <span class="data-label">TELEFONE:</span>
+                <span class="data-content">{{ form.user.phonenumber }}</span>
+            </b-col>
+            <b-col cols="4">
+                <span class="data-label">E-MAIL:</span>
+                <span class="data-content">{{ form.user.email }}</span>
+            </b-col>
+        </b-row>
+        <b-row class="my-2">
+            <b-col cols="4">
+                <span class="data-label">STATUS:</span>
+                <span class="data-content">{{ form.statusdesc }}</span>
+            </b-col>
+            <b-col cols="4">
+                <span class="data-label">DISCIPLINA:</span>
+                <span class="data-content">{{ form.subject.name }}</span>
+            </b-col>
+            <b-col cols="4">
+                <span class="data-label">SEMESTRE:</span>
+                <span v-if="form.semester" class="data-content">
+                    {{ form.semester.year }}-{{ form.semester.semester }}
+                </span>
+                <span v-if="!form.semester" class="data-content">
+                    N/A
+                </span>
+            </b-col>
+        </b-row>
+        <ValidationObserver ref="observer" v-slot="{invalid}" @submit.prevent="handleSubmit()">
+            <b-row class="my-2 mx-0">
+                <b-col cols="12" class="form-container p-0">
+                    <b-row class="m-3">
+                        <b-col cols="6">
+                            <div role="group">
+                                <label for="name" class="input-label">TÍTULO PARA O PROJETO</label>
+                                <b-form-input id="name" v-model="form.name" :disabled="true">
+                                </b-form-input>
+                            </div>
+                            <div class="my-3" />
+                            <div role="group">
+                                <label for="problem" class="input-label">PROBLEMA ENFRENTADO</label>
+                                <b-form-textarea id="problem" rows="6" v-model="form.problem" :disabled="true"
+                                    :maxlength="1000">
+                                </b-form-textarea>
+                                <span class="counter">({{form.problem.length}}/1000)</span>
+                            </div>
+                            <div class="my-3" />
+                            <div role="group">
+                                <label for="results" class="input-label">RESULTADOS DESEJADOS</label>
+                                <b-form-textarea id="results" rows="6" v-model="form.expectedresult" :disabled="true"
+                                    :maxlength="1000">
+                                </b-form-textarea>
+                                <span class="counter">({{form.expectedresult.length}}/1000)</span>
+                            </div>
+                            <div class="my-3" />
+                            <div role="group">
+                                <label for="keywords" class="input-label">PALAVRAS-CHAVE</label>
+                                <multiselect id="keywords" v-model="form.selectedKeywords" :options="keywords"
+                                    :disabled="true" :multiple="true" track-by="value" label="text" :searchable="true"
+                                    :showLabels="true" :max="3" :closeOnSelect="false" tagPosition="bottom"
+                                    selectLabel="" deselectLabel="" selectedLabel=""
+                                    placeholder="Pesquise ou selecione uma palavra-chave" class="multiselect-custom">
+                                    <template slot="option" slot-scope="scope">
+                                        <div class="option__desc checkbox-label">
+                                            <input class="mx-2" type="checkbox" :checked="isChecked(scope.option)"
+                                                @focus.prevent :key="scope.option.value" />
+                                            <span class="option__title">{{ scope.option.text }}</span>
+                                        </div>
+                                    </template>
+                                    <span slot="maxElements">
+                                        Máximo de 3 opções selecionadas.
+                                    </span>
+                                    <span slot="noResult">
+                                        Nenhuma palavra-chave encontrada.
+                                    </span>
+                                </multiselect>
+                            </div>
+                            <div class="my-3" />
+                            <div role="group">
+                                <label for="main-keyword" class="input-label">PALAVRA-CHAVE PRINCIPAL</label>
+                                <b-form-select id="main-keyword" v-model="form.mainKeyword"
+                                    :options="form.selectedKeywords" size="md" :disabled="true">
+                                </b-form-select>
+                            </div>
+                        </b-col>
+                        <b-col cols="6">
+                            <div v-if="hasFeedback() && disabled" role="group">
+                                <label for="feedback" class="input-label">FEEDBACK DA ÚLTIMA AVALIAÇÃO</label>
+                                <b-form-textarea id="feedback" rows="6" :disabled="true" v-model="form.feedback"
+                                    :maxlength="1000">
+                                </b-form-textarea>
+                                <span class="counter">({{form.feedback.length}}/1000)</span>
+                            </div>
+                            <div v-if="!disabled" role="group">
+                                <ValidationProvider vid="evaluation" rules="required" v-slot="{errors}" :bails="false"
+                                    name="campo">
+                                    <label for="evaluation" class="input-label">ANÁLISE DA PROPOSTA DE PROJETO</label>
+                                    <b-form-select id="evaluation" v-model="form.selectedEvaluation"
+                                        :options="evaluations" size="md" :disabled="disabled"
+                                        @change="handleChangeEvaluation()" :state="errors.length ? false : null">
+                                    </b-form-select>
+                                    <span class="error-span">{{ errors[0] }}</span>
+                                </ValidationProvider>
+                            </div>
+                            <div v-if="!disabled && form.selectedEvaluation === 0" role="group">
+                                <div class="my-3" />
+                                <ValidationProvider vid="feedback" rules="required" v-slot="{errors}" :bails="false"
+                                    name="campo">
+                                    <label for="feedback" class="input-label">
+                                        FEEDBACK PARA AUTOR DA PROPOSTA DE PROJETO
+                                    </label>
+                                    <b-form-textarea id="feedback" rows="6" :disabled="disabled" v-model="form.feedback"
+                                        :maxlength="1000" placeholder="Escreva o motivo da aprovação da proposta..."
+                                        :state="errors.length ? false : null">
+                                    </b-form-textarea>
+                                    <span class="counter">({{form.feedback.length}}/1000)</span>
+                                    <span class="error-span">{{ errors[0] }}</span>
+                                </ValidationProvider>
+                            </div>
+                            <div v-if="!disabled && form.selectedEvaluation === 1" role="group">
+                                <div class="my-3" />
+                                <ValidationProvider vid="feedback" rules="required" v-slot="{errors}" :bails="false"
+                                    name="campo">
+                                    <label for="feedback" class="input-label">MOTIVO DA REJEIÇÃO DA PROPOSTA</label>
+                                    <b-form-textarea id="feedback" rows="6" :disabled="disabled" v-model="form.feedback"
+                                        :maxlength="1000" placeholder="Escreva o motivo da rejeição da proposta..."
+                                        :state="errors.length ? false : null">
+                                    </b-form-textarea>
+                                    <span class="counter">({{form.feedback.length}}/1000)</span>
+                                    <span class="error-span">{{ errors[0] }}</span>
+                                </ValidationProvider>
+                            </div>
+                            <div v-if="!disabled && form.selectedEvaluation === 2" role="group">
+                                <div class="my-3" />
+                                <ValidationProvider vid="subject" rules="required" v-slot="{errors}" :bails="false"
+                                    name="campo">
+                                    <label for="subject" class="input-label">
+                                        ESCOLHA DA DISCIPLINA PARA ENVIAR A PROPOSTA
+                                    </label>
+                                    <b-form-select id="subject" v-model="form.selectedSubject" :options="subjects"
+                                        size="md" :disabled="disabled" :state="errors.length ? false : null">
+                                    </b-form-select>
+                                    <span class="error-span">{{ errors[0] }}</span>
+                                </ValidationProvider>
+                            </div>
+                            <div v-if="!disabled && form.selectedEvaluation === 2" role="group">
+                                <div class="my-3" />
+                                <ValidationProvider vid="feedback" rules="required" v-slot="{errors}" :bails="false"
+                                    name="campo">
+                                    <label for="feedback" class="input-label">
+                                        MOTIVO DO ENCAMINHAMENTO DA PROPOSTA
+                                    </label>
+                                    <b-form-textarea id="feedback" rows="6" :disabled="disabled" v-model="form.feedback"
+                                        :maxlength="1000" :state="errors.length ? false : null"
+                                        placeholder="Escreva o motivo do encaminhamento da proposta, seja por dúvida de qual disciplina escolher ou outra razão...">
+                                    </b-form-textarea>
+                                    <span class="counter">({{form.feedback.length}}/1000)</span>
+                                    <span class="error-span">{{ errors[0] }}</span>
+                                </ValidationProvider>
+                            </div>
+                            <div v-if="!disabled && form.selectedEvaluation === 3" role="group">
+                                <div class="my-3" />
+                                <ValidationProvider vid="feedback" rules="required" v-slot="{errors}" :bails="false"
+                                    name="campo">
+                                    <label for="feedback" class="input-label">MOTIVO DO ENCAMINHAMENTO DA
+                                        PROPOSTA</label>
+                                    <b-form-textarea id="feedback" rows="6" :disabled="disabled" v-model="form.feedback"
+                                        :maxlength="1000" :state="errors.length ? false : null"
+                                        placeholder="Escreva o motivo do encaminhamento da proposta, seja por dúvida de qual disciplina escolher ou outra razão...">
+                                    </b-form-textarea>
+                                    <span class="counter">({{form.feedback.length}}/1000)</span>
+                                    <span class="error-span">{{ errors[0] }}</span>
+                                </ValidationProvider>
+                            </div>
+                        </b-col>
+                    </b-row>
+                </b-col>
+            </b-row>
+        </ValidationObserver>
+    </b-container>
+</div>

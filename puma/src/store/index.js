@@ -4,6 +4,7 @@ import * as Cookies from 'js-cookie';
 import createPersistedState from 'vuex-persistedstate';
 
 import userStore from './modules/user';
+import modalStore from './modules/modal';
 import navigationStore from './modules/navigation';
 
 Vue.use(Vuex);
@@ -24,6 +25,7 @@ const navigationState = createPersistedState({
 const store = new Vuex.Store({
   modules: {
     userStore,
+    modalStore,
     navigationStore,
   },
   plugins: [userState, navigationState],

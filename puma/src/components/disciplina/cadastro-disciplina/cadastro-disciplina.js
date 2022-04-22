@@ -1,6 +1,7 @@
+/* eslint-disable prefer-destructuring */
 import ProjectService from '../../../services/ProjectService';
 import AlocateService from '../../../services/AlocateService';
-/* eslint-disable prefer-destructuring */
+
 export default {
   name: 'CadastroProjeto',
   data() {
