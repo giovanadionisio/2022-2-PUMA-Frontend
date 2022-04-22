@@ -33,23 +33,36 @@
     <template #modal-header>
       CRIAR NOVA PALAVRA-CHAVE
     </template>
-        
-    <div style="display: flex; flex-direction: column;  align-items: center;">
-      <b-form-group class="col-md-9">
-        <template #label>
-          <span class="label-text">PALAVRA-CHAVE</span>
-        </template>
-        <b-form-input type="text" placeholder="Escreva aqui sua nova palavra-chave" class="custom-input" id="inputKeyword" v-model="inputKeyword"/>
-      </b-form-group>
 
-      <b-form-group class="col-md-9">
-        <template #label>
-          <span class="label-text">DISCIPLINA</span>
-        </template>
-        <b-select v-model="selectedToRegister" :options="subjects"
-        class="custom-input" />
-      </b-form-group>
-    </div>
+    <ValidationObserver ref="observer" v-slot="{ invalid }">
+      <div style="display: flex; flex-direction: column;  align-items: center;">
+
+        <b-form-group class="col-md-9">
+          <template #label>
+            <span class="label-text">PALAVRA-CHAVE</span>
+          </template>
+
+          <validation-provider rules="required" v-slot="{ errors }">
+            <b-form-input @input="kewordNameAlreadyExist" type="text" placeholder="Escreva aqui sua nova palavra-chave" v-bind:class="{ invalid: errors.length }" class="custom-input" id="inputKeyword" v-model="inputKeyword"/>
+            <span class="error">{{ errors[0] }}</span>
+            <span v-if="kwNameAlreadyExist" class="error">Palavra-chave já existe, tente novamente.</span>
+          </validation-provider>
+        </b-form-group>
+
+        <b-form-group class="col-md-9">
+          <template #label>
+            <span class="label-text">DISCIPLINA</span>
+          </template>
+
+          <validation-provider rules="required" v-slot="{ errors }">
+            <b-select v-model="selectedToRegister" :options="subjects"
+            class="custom-input" />
+            <span class="error">{{ errors[0] }}</span>
+          </validation-provider>
+        </b-form-group>
+
+      </div>
+    </ValidationObserver>
       
     <div class="divFooter">
       <button class="btn-crud btn-warning" style="margin-right: 5%;" @click="addKeyword()" >
@@ -67,22 +80,33 @@
       EDITAR PALAVRA-CHAVE
     </template>
    
-    <div style="display: flex; flex-direction: column; align-items: center;">
-      <b-form-group class="col-md-9">
-        <template #label>
-          <span class="label-text">PALAVRA-CHAVE</span>
-        </template>
-        <b-form-input type="text" placeholder="Escreva aqui a palavra-chave" v-model="newKeyword"
-          class="custom-input" />
+    <ValidationObserver ref="observer" v-slot="{ invalid }">
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        
+        <b-form-group class="col-md-9">
+          <template #label>
+            <span class="label-text">PALAVRA-CHAVE</span>
+          </template>
+        
+          <validation-provider rules="required" v-slot="{ errors }">
+            <b-form-input type="text" placeholder="Escreva aqui a palavra-chave" v-model="newKeyword"
+            v-bind:class="{ invalid: errors.length }" class="custom-input" />
+            <span class="error">{{ errors[0] }}</span>
+          </validation-provider>
         </b-form-group>
+        
+        <b-form-group class="col-md-9">
+          <template #label>
+            <span class="label-text">DISCIPLINA</span>
+          </template>
 
-      <b-form-group class="col-md-9">
-        <template #label>
-          <span class="label-text">DISCIPLINA</span>
-        </template>
-        <b-select v-model="selectedSubject" :options="subjects" class="custom-input"/>
-      </b-form-group>
-    </div>
+          <validation-provider rules="required" v-slot="{ errors }">
+            <b-select v-model="selectedSubject" :options="subjects" v-bind:class="{ invalid: errors.length }" class="custom-input"/>
+            <span class="error">{{ errors[0] }}</span>
+          </validation-provider>
+        </b-form-group>
+      </div>
+    </ValidationObserver>
 
     <div class="divFooter">
       <button @click="editar" class="btn-crud btn-warning" style="margin-right: 5%;">

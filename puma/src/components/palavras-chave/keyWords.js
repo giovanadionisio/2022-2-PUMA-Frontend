@@ -4,6 +4,7 @@ import ProjectService from '../../services/ProjectService';
 export default {
   data() {
     return {
+      kwNameAlreadyExist: false,
       multiSelectPlaceholder: 'Carregando opções...',
       isMultiselectTouched: false,
       keywordService: new KeywordService(),
@@ -48,11 +49,11 @@ export default {
       optionsSelected: [],
       keyWords: [],
       tableKeywordSubject: [
-        { keywordid: 1, keyword: 'Qualidade', subjectId: 'Gestão da Qualidade - PSP 5' },
-        { keywordid: 2, keyword: 'Estoque', subjectId: 'Planejamento e Controle de Produção - PSP 4' },
-        { keywordid: 3, keyword: 'Capacidade', subjectId: 'Planejamento e Controle de Produção - PSP 4' },
-        { keywordid: 4, keyword: 'Estratégia', subjectId: 'Gestão Estratégica - PSP 7' },
-        { keywordid: 5, keyword: 'Desenvolver Produto', subjectId: 'Engenharia - PSP 6' },
+        { keywordid: 1, keyword: 'Qualidade', subjectname: 'Gestão da Qualidade - PSP 5' },
+        { keywordid: 2, keyword: 'Estoque', subjectname: 'Planejamento e Controle de Produção - PSP 4' },
+        { keywordid: 3, keyword: 'Capacidade', subjectname: 'Planejamento e Controle de Produção - PSP 4' },
+        { keywordid: 4, keyword: 'Estratégia', subjectname: 'Gestão Estratégica - PSP 7' },
+        { keywordid: 5, keyword: 'Desenvolver Produto', subjectname: 'Engenharia - PSP 6' },
       ],
       subjectsFields: [
         {
@@ -105,36 +106,36 @@ export default {
     },
 
     async editar() {
-      console.log('Ta ok?', this.idKeywordEdit, this.selectedSubject, this.newKeyword);
-      this.keywordService.updateKeyword(this.idKeywordEdit,
-        this.newKeyword).then(async (response) => {
-        console.log(response);
-        console.log(response.data);
-        const idKeywordUpdated = response.data[0].keywordid;
-        this.keywordService.updateSubjectKeyword(idKeywordUpdated, this.selectedSubject);
-        this.openModalEdit = false;
-        alert('Palavra-Chave Editada com Sucesso!');
-        document.location.reload(true);
-      }).catch((error) => {
-        this.openModalEdit = false;
-        alert(`Infelizmente houve um erro ao editar a palavra-chave: ${error}`);
-      });
+      const isFormValid = await this.$refs.observer.validate();
+      if (isFormValid && this.kwNameAlreadyExist === false) {
+        this.keywordService.updateKeyword(this.idKeywordEdit,
+          this.newKeyword).then(async (response) => {
+          const idKeywordUpdated = response.data[0].keywordid;
+          this.keywordService.updateSubjectKeyword(idKeywordUpdated, this.selectedSubject);
+          this.openModalEdit = false;
+          this.makeToast('success', 'Palavra-Chave Editada com Sucesso!');
+
+          document.location.reload(true);
+        }).catch((error) => {
+          this.openModalEdit = false;
+          this.makeToast('danger', `Infelizmente houve um erro ao tentar editar a palavra-chave: ${error}`);
+        });
+      }
     },
 
     deleteKeyWord(keyWord) {
       this.openModalDelete = true;
-      console.log('Ta na hora', keyWord.keywordid);
       this.keywordDelete = keyWord.keywordid;
     },
 
     deletar() {
       this.keywordService.deleteKeyword(this.keywordDelete).then(async () => {
         this.openModalDelete = false;
-        alert('Palavra-Chave Excluída com Sucesso!');
+        this.makeToast('success', 'Palavra-Chave Excluída com Sucesso!');
         document.location.reload(true);
       }).catch((error) => {
         this.openModalDelete = false;
-        alert(`Infelizmente houve um erro ao excluir a palavra-chave: ${error}`);
+        this.makeToast('danger', `Infelizmente houve um erro ao tentar excluir a palavra-chave: ${error}`);
       });
     },
 
@@ -142,7 +143,6 @@ export default {
       this.keywordService.getKeywords().then((response) => {
         this.tableKeywordSubject = JSON.parse(JSON.stringify(response.data));
         this.keyWords = response.data;
-        // console.log('DEBUGA', this.tableKeywordSubject);
       }).catch((error) => {
         console.log('erro', error);
       });
@@ -150,10 +150,8 @@ export default {
 
     getSubjects() {
       this.keywordService.getSubjects().then((response) => {
-        // console.log('GetSubjects');
         this.subjects = JSON.parse(JSON.stringify(response.data));
         this.subjects.unshift({ value: null, text: 'Escolha a disciplina', disabled: true });
-        // console.log('SUBJECT??', this.subjects);
       }).catch((error) => {
         console.log('erro', error);
       });
@@ -163,23 +161,41 @@ export default {
       console.log(this.inputKeyword.value);
     },
 
+    kewordNameAlreadyExist() {
+      const exist = this.tableKeywordSubject.find((k) => k.keyword === this.inputKeyword);
+      if (exist) {
+        this.kwNameAlreadyExist = true;
+      } else {
+        this.kwNameAlreadyExist = false;
+      }
+    },
+
     async addKeyword() {
-      const isFormValid = true;
-      if (isFormValid) {
-        console.log('Palavra que está sendo enviada', this.inputKeyword);
-        console.log('Disciplina que está sendo enviada', this.selectedToRegister);
+      this.kewordNameAlreadyExist();
+      const isFormValid = await this.$refs.observer.validate();
+
+      if (isFormValid && this.kwNameAlreadyExist === false) {
         this.keywordService.addKeyword(this.inputKeyword).then((response) => {
           const currentKeywordid = response.data.response.response.keywordid;
           const idSubject = this.selectedToRegister;
           this.keywordService.addKeywordToSubject(currentKeywordid, idSubject);
           this.openModalRegister = false;
-          alert('Palavra-Chave Cadastrada com sucesso');
+          this.makeToast('success', 'Cadastro realizado com sucesso!');
           document.location.reload(true);
         }).catch((error) => {
           this.openModalRegister = false;
-          alert(`Infelizmente houve um erro ao cadastrar a proposta: ${error}`);
+          this.makeToast('danger', `Infelizmente houve um erro ao tentar cadastrar: ${error}`);
         });
       }
+    },
+
+    makeToast(variant = null, text) {
+      this.$bvToast.toast(text, {
+        title: 'PALAVRA-CHAVE',
+        variant,
+        solid: true,
+        autoHideDelay: 2000,
+      });
     },
   },
 };
