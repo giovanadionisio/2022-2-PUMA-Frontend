@@ -55,7 +55,7 @@
           </template>
 
           <validation-provider rules="required" v-slot="{ errors }">
-            <b-select v-model="selectedToRegister" :options="subjects"
+            <b-select v-model="selectedToRegister" :options="subjectsForm"
             v-bind:class="{ invalid: errors.length }" class="custom-input" />
             <span class="error">{{ errors[0] }}</span>
           </validation-provider>
@@ -101,7 +101,7 @@
           </template>
 
           <validation-provider rules="required" v-slot="{ errors }">
-            <b-select v-model="selectedSubject" :options="subjects" v-bind:class="{ invalid: errors.length }" class="custom-input"/>
+            <b-select v-model="selectedSubject" :options="subjectsForm" v-bind:class="{ invalid: errors.length }" class="custom-input"/>
             <span class="error">{{ errors[0] }}</span>
           </validation-provider>
         </b-form-group>

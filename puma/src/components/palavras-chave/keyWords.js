@@ -24,37 +24,13 @@ export default {
       editKeyword: '',
       idKeywordEdit: '',
       idSubjectEdit: '',
-      operacao: 'cadastrar',
-      options: [
-        { value: null, text: 'Filtre por disciplina', disabled: true },
-        { value: 'Planejamento e Controle de Produção - PSP 4', text: 'Planejamento e Controle de Produção - PSP 4' },
-        { value: 'Gestão da Qualidade - PSP 5', text: 'Gestão da Qualidade - PSP 5' },
-        { value: 'Engenharia - PSP 6', text: 'Engenharia - PSP 6' },
-        { value: 'Gestão Estratégica - PSP 7', text: 'Gestão Estratégica - PSP 7' },
-      ],
-
-      options2: [
-        { value: null, text: 'Escolha a disciplina', disabled: true },
-        { value: 'Planejamento e Controle de Produção - PSP 4', text: 'Planejamento e Controle de Produção - PSP 4' },
-        { value: 'Gestão da Qualidade - PSP 5', text: 'Gestão da Qualidade - PSP 5' },
-        { value: 'Engenharia - PSP 6', text: 'Engenharia - PSP 6' },
-        { value: 'Gestão Estratégica - PSP 7', text: 'Gestão Estratégica - PSP 7' },
-      ],
-      subjects: [
-        { value: null, text: 'Escolha a disciplina', disabled: true },
-        { value: 1, text: 'Qualidade' },
-      ],
+      subjects: [],
+      subjectsForm: [],
       subjectsList: [],
       isLoadingKeywords: false,
       optionsSelected: [],
       keyWords: [],
-      tableKeywordSubject: [
-        { keywordid: 1, keyword: 'Qualidade', subjectname: 'Gestão da Qualidade - PSP 5' },
-        { keywordid: 2, keyword: 'Estoque', subjectname: 'Planejamento e Controle de Produção - PSP 4' },
-        { keywordid: 3, keyword: 'Capacidade', subjectname: 'Planejamento e Controle de Produção - PSP 4' },
-        { keywordid: 4, keyword: 'Estratégia', subjectname: 'Gestão Estratégica - PSP 7' },
-        { keywordid: 5, keyword: 'Desenvolver Produto', subjectname: 'Engenharia - PSP 6' },
-      ],
+      tableKeywordSubject: [],
       subjectsFields: [
         {
           key: 'id',
@@ -94,8 +70,12 @@ export default {
   methods: {
     filter(discipline) {
       this.tableKeywordSubject = this.keyWords;
-      const filter = this.tableKeywordSubject.filter((d) => d.disciplina === discipline);
-      this.tableKeywordSubject = filter;
+      if (discipline === 0) {
+        this.tableKeywordSubject = this.keyWords;
+      } else {
+        const filter = this.tableKeywordSubject.filter((d) => d.subjectid === discipline);
+        this.tableKeywordSubject = filter;
+      }
     },
 
     editKeyWord(keyWord) {
@@ -115,7 +95,8 @@ export default {
           this.openModalEdit = false;
           this.makeToast('success', 'Palavra-Chave Editada com Sucesso!');
 
-          document.location.reload(true);
+          // document.location.reload(true);
+          this.getKeyWords();
         }).catch((error) => {
           this.openModalEdit = false;
           this.makeToast('danger', `Infelizmente houve um erro ao tentar editar a palavra-chave: ${error}`);
@@ -132,7 +113,8 @@ export default {
       this.keywordService.deleteKeyword(this.keywordDelete).then(async () => {
         this.openModalDelete = false;
         this.makeToast('success', 'Palavra-Chave Excluída com Sucesso!');
-        document.location.reload(true);
+        // document.location.reload(true);
+        this.getKeyWords();
       }).catch((error) => {
         this.openModalDelete = false;
         this.makeToast('danger', `Infelizmente houve um erro ao tentar excluir a palavra-chave: ${error}`);
@@ -150,7 +132,10 @@ export default {
 
     getSubjects() {
       this.keywordService.getSubjects().then((response) => {
+        this.subjectsForm = JSON.parse(JSON.stringify(response.data));
+        this.subjectsForm.unshift({ value: null, text: 'Escolha a disciplina', disabled: true });
         this.subjects = JSON.parse(JSON.stringify(response.data));
+        this.subjects.unshift({ value: 0, text: 'Todas as Disciplinas' });
         this.subjects.unshift({ value: null, text: 'Escolha a disciplina', disabled: true });
       }).catch((error) => {
         console.log('erro', error);
@@ -180,8 +165,9 @@ export default {
           const idSubject = this.selectedToRegister;
           this.keywordService.addKeywordToSubject(currentKeywordid, idSubject);
           this.openModalRegister = false;
+          // document.location.reload(true);
           this.makeToast('success', 'Cadastro realizado com sucesso!');
-          document.location.reload(true);
+          this.getKeyWords();
         }).catch((error) => {
           this.openModalRegister = false;
           this.makeToast('danger', `Infelizmente houve um erro ao tentar cadastrar: ${error}`);
