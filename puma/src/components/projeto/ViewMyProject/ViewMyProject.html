@@ -62,7 +62,12 @@
             </b-col>
             <b-col cols="4">
                 <span class="data-label">DISCIPLINA:</span>
-                <span class="data-content">{{ form.subject.name }}</span>
+                <span v-if="form.subject" class="data-content">
+                    {{ form.subject.name }}
+                </span>
+                <span v-if="!form.subject" class="data-content">
+                    N/A
+                </span>
             </b-col>
             <b-col cols="4">
                 <span class="data-label">SEMESTRE:</span>
