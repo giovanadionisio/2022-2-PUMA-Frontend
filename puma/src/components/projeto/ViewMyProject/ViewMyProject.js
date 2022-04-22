@@ -132,7 +132,7 @@ export default {
                 const projectService = new ProjectService();
                 this.$store.commit('CLOSE_CONFIRM_MODAL');
                 this.$store.commit('OPEN_LOADING_MODAL', { title: 'Excluindo...' });
-                await projectService.deleteProject(this.form.project.projectid);
+                await projectService.deleteProject(this.form.projectid);
                 this.$store.commit('CLOSE_LOADING_MODAL');
                 await this.$router.push({ path: `/meus-projetos` });
                 this.makeToast('Sucesso', 'Operação realizada com sucesso', 'success');

@@ -114,15 +114,14 @@
                                 </div>
                             </ValidationProvider>
                             <div class="my-3" />
-                            <ValidationProvider vid="keywords" rules="required" v-slot="{errors}"
-                                name="Selecione no mínimo uma palavra-chave">
+                            <ValidationProvider vid="keywords" rules="required" v-slot="{errors}">
                                 <div role="group">
                                     <label for="keywords" class="input-label">PALAVRAS-CHAVE</label>
                                     <multiselect id="keywords" v-model="form.selectedKeywords" :options="keywords"
                                         :disabled="disabled" :multiple="true" track-by="value" label="text"
                                         :searchable="true" :showLabels="true" :max="3" :closeOnSelect="false"
                                         tagPosition="bottom" selectLabel="" deselectLabel="" selectedLabel=""
-                                        placeholder="Pesquise ou adicione uma palavra-chave" class="multiselect-custom"
+                                        placeholder="Pesquise ou selecione uma palavra-chave" class="multiselect-custom"
                                         :class="errors.length && 'multiselect-custom-error'"
                                         @input="handleChangeKeywords">
                                         <template slot="option" slot-scope="scope">
@@ -139,7 +138,9 @@
                                             Nenhuma palavra-chave encontrada.
                                         </span>
                                     </multiselect>
-                                    <span class="error-span">{{ errors[0] }}</span>
+                                    <span class="error-span">
+                                        {{ errors[0] && 'Escolha no mínimo uma palavra-chave'}}
+                                    </span>
                                 </div>
                             </ValidationProvider>
                             <div class="my-3" />
