@@ -187,6 +187,17 @@ export default class ProjectService {
     });
   }
 
+  getProfessors() {
+    return new Promise((resolve, reject) => {
+      axios.get(`${global.URL_GATEWAY}/project/professors`).then((response) => {
+        resolve(response);
+      }).catch((error) => {
+        alert(error);
+        reject('Erro ao recuperar os professores');
+      });
+    });
+  }
+
   addSubject(subject) {
     return new Promise((resolve, reject) => {
       const auth = store.getters.token;
@@ -205,6 +216,23 @@ export default class ProjectService {
         resolve(response);
       }).catch((error) => {
         reject(error);
+      });
+    });
+  }
+
+  async getSubjectById(subjectid) {
+    const auth = store.getters.token;
+    const subject = await axios.get(`${global.URL_GATEWAY}/project/subject/${subjectid}`, { headers: { auth } });
+    return subject;
+  }
+
+  updateSubject(subjectid, subjectBody) {
+    return new Promise((resolve, reject) => {
+      const auth = store.getters.token;
+      axios.put(`${global.URL_GATEWAY}/project/subject/${subjectid}`, subjectBody, { headers: { auth } }).then((response) => {
+        resolve(response);
+      }).catch((response) => {
+        reject(`Erro ao atualizar disciplina: ${response}`);
       });
     });
   }
