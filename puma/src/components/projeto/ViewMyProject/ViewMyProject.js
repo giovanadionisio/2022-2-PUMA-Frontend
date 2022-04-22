@@ -82,10 +82,12 @@ export default {
                     subject: Subject,
                     semester: Semester,
                     mainKeyword: mainKeyword?.keywordid,
-                    selectedKeywords: Keywords.map((k) => ({ value: k.keywordid, text: k.keyword })).sort(),
+                    selectedKeywords: Keywords.map((k) => ({ value: k.keywordid, text: k.keyword }))
+                        .sort((a, b) => a.text.localeCompare(b.text)),
                 };
 
-                this.keywords = allKeywords.map((k) => ({ value: k.keywordid, text: k.keyword })).sort();
+                this.keywords = allKeywords.map((k) => ({ value: k.keywordid, text: k.keyword }))
+                    .sort((a, b) => a.text.localeCompare(b.text));
 
                 this.initialForm = JSON.parse(JSON.stringify(formData));
                 this.form = JSON.parse(JSON.stringify(formData));

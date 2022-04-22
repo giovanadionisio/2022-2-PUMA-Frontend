@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable prefer-promise-reject-errors */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable import/extensions */
@@ -73,8 +74,8 @@ export default class ProjectService {
     return new Promise((resolve, reject) => {
       axios.post(`${global.URL_GATEWAY}/project/create`, project, { headers: { auth } }).then((response) => {
         resolve(response);
-      }).catch((response) => {
-        reject(`/projetos/cadastrar reject: ${response}`);
+      }).catch((error) => {
+        reject(error);
       });
     });
   }
@@ -128,8 +129,8 @@ export default class ProjectService {
       const auth = store.getters.token;
       axios.post(`${global.URL_GATEWAY}/project/upload`, file, { headers: { auth } }).then((response) => {
         resolve(response);
-      }).catch(() => {
-        reject('erro no upload do arquivo');
+      }).catch((error) => {
+        reject(error);
       });
     });
   }
@@ -139,7 +140,6 @@ export default class ProjectService {
       axios.get(`${global.URL_GATEWAY}/project/palavra-chave`).then((response) => {
         resolve(response);
       }).catch((error) => {
-        alert(error);
         reject('Erro ao recuperar as palavras-chave');
       });
     });
@@ -170,7 +170,6 @@ export default class ProjectService {
       axios.get(`${global.URL_GATEWAY}/project/subject/keywords`).then((response) => {
         resolve(response);
       }).catch((error) => {
-        alert(error);
         reject('Erro ao recuperar as palavras-chave para disciplina');
       });
     });
@@ -181,7 +180,6 @@ export default class ProjectService {
       axios.get(`${global.URL_GATEWAY}/project/subareas`).then((response) => {
         resolve(response);
       }).catch((error) => {
-        alert(error);
         reject('Erro ao recuperar as subareas');
       });
     });
@@ -192,7 +190,6 @@ export default class ProjectService {
       axios.get(`${global.URL_GATEWAY}/project/professors`).then((response) => {
         resolve(response);
       }).catch((error) => {
-        alert(error);
         reject('Erro ao recuperar os professores');
       });
     });

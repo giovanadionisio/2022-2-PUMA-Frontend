@@ -35,10 +35,10 @@ export default {
   methods: {
     async onSubmit() {
       try {
-        this.$store.commit('OPEN_LOADING_MODAL', { title: 'Cadastrando...' });
-
         const isFormValid = await this.$refs.observer.validate();
         if (!isFormValid) return;
+
+        this.$store.commit('OPEN_LOADING_MODAL', { title: 'Cadastrando...' });
 
         const project = {
           name: this.titulo,
@@ -68,11 +68,11 @@ export default {
     makeToast: function (title, message, variant) {
       this.$bvToast.toast(message, { title: title, variant: variant, solid: true });
     },
-    sortMultiselectLabels() {
-      this.selectedKeywords.sort((a, b) => b.keyword.length - a.keyword.length);
-    },
     isChecked(option) {
       return this.selectedKeywords.some((op) => op.value === option.value);
+    },
+    sortMultiselectLabels() {
+      this.selectedKeywords.sort((a, b) => b.keyword.length - a.keyword.length);
     },
     disableForm() {
       const inputs = document.getElementsByTagName('input');
@@ -87,8 +87,9 @@ export default {
       try {
         this.$store.commit('OPEN_LOADING_MODAL', { title: 'Carregando...' });
 
-        const response = await this.projectService.getKeywords();
-        this.keywords = response.data.map((k) => ({ value: k.keywordid, text: k.keyword })).sort();
+        const response = await this.projectService.getAvailableKeywordsToProject();
+        this.keywords = response.data.map((k) => ({ value: k.keywordid, text: k.keyword }))
+          .sort((a, b) => a.text.localeCompare(b.text));
         this.multiSelectPlaceholder = this.keywords.length ? 'Selecione' : 'Sem palavras disponíveis';
 
         this.$store.commit('CLOSE_LOADING_MODAL');

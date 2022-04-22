@@ -16,7 +16,7 @@
             <div role="group">
               <label for="descricao" class="input-label">PROBLEMA ENFRENTADO</label>
               <textarea id="descricao" placeholder="Descreva o desafio enfrentado usando, no mínimo, 200 caracteres."
-                maxlength="1000" rows="7" v-model="descricao" :disabled=isLoading class="textarea-field"
+                maxlength="1000" rows="7" v-model="descricao" class="textarea-field"
                 v-bind:class="{ inputFieldRegisterProject: !v.errors.length && operacao !== 'visualizar' }"
                 v-bind:style="v.errors.length ? { borderColor: '#EB0600' } : {}">
                   </textarea>
@@ -33,7 +33,7 @@
               <textarea id="resultado" placeholder="Descreva os resultados desejados" rows="5" minlength="40"
                 maxlength="500" v-model="resultadoEsperado" class="textarea-field"
                 v-bind:class="{ inputFieldRegisterProject: !v.errors.length && operacao !== 'visualizar' }"
-                v-bind:style="v.errors.length ? { borderColor: '#EB0600' } : {}" :disabled=isLoading></textarea>
+                v-bind:style="v.errors.length ? { borderColor: '#EB0600' } : {}"></textarea>
               <span class="counter">({{resultadoEsperado.length}}/1000)</span>
               <span class="error-span" v-for="erro in v.errors">
                 {{ erro }}
@@ -48,7 +48,7 @@
                 <input type="text" id="titulo" maxlength="100" class="title-input-field"
                   placeholder="Crie um título que indique o objetivo do projeto" v-model="titulo"
                   v-bind:class="{ inputFieldRegisterProject: !v.errors.length && operacao !== 'visualizar' }"
-                  v-bind:style="v.errors.length ? { borderColor: '#EB0600' } : {}" :disabled=isLoading>
+                  v-bind:style="v.errors.length ? { borderColor: '#EB0600' } : {}">
                 <span class="error-span" v-for="erro in v.errors">
                   {{ erro }}
                 </span>
@@ -103,9 +103,8 @@
             <div v-if="operacao !== 'visualizar'">
               <b-row>
                 <b-col>
-                  <input :value="operacao === 'editar' ? 'Editar' : 'Enviar'"
-                    v-if="!isLoading && operacao !== 'visualizar'" type="submit" class="btn btn-warning"
-                    @click="onSubmit" />
+                  <input :value="operacao === 'editar' ? 'Editar' : 'Enviar'" v-if="operacao !== 'visualizar'"
+                    type="submit" class="btn btn-warning" @click="onSubmit" />
                 </b-col>
                 <b-col>
                   <b-button v-if="operacao !== 'visualizar'" class="btn btn-warning"
