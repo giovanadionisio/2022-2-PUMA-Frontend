@@ -48,7 +48,7 @@ export default {
         },
         {
           key: 'keyword',
-          label: 'PALAVRA CHAVE',
+          label: 'PALAVRA-CHAVE',
         },
         {
           key: 'subjectname',
@@ -147,7 +147,9 @@ export default {
     },
 
     kewordNameAlreadyExist() {
-      const exist = this.tableKeywordSubject.find((k) => k.keyword === this.inputKeyword);
+      const exist = this.tableKeywordSubject.find(
+        (k) => k.keyword.toLowerCase() === this.inputKeyword.toLowerCase(),
+      );
       if (exist) {
         this.kwNameAlreadyExist = true;
       } else {
