@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 export default {
-    name: 'MenuItem',
+    name: 'ItemMenuLateral',
     props: {
         props: { type: Object },
     },

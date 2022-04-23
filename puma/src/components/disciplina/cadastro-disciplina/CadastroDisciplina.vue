@@ -2,19 +2,25 @@
 
 <script src="./cadastro-disciplina.js"></script>
 
-<style src="./cadastro-disciplina.css"></style>
+<style src="./cadastro-disciplina.css" scoped></style>
 
 <style lang="css" scoped>
-
-/* .multiselect-custom >>> .multiselect__placeholder {
-    padding-top: 4px;
-    font-size: 16px;
-}
- */
 .multiselect-custom >>> .multiselect__tag {
     background: #2c496e;
     font-weight: bold;
     font-size: 16px;
+}
+
+.multiselect-custom >>> .multiselect__tags {
+    border: 2px solid #15355e;
+}
+
+.multiselect-custom-hover >>> .multiselect__tags:hover {
+    border: 2px solid #f7db36;
+}
+
+.multiselect-custom-error >>> .multiselect__tags {
+    border: 2px solid #EB0600;
 }
 
 .multiselect-custom >>> .multiselect__tag-icon {
@@ -34,5 +40,9 @@
 
 .multiselect-custom >>> .multiselect__tag-icon:hover:after {
     color: #fff;
+}
+
+.multiselect-custom >>> .multiselect__select {
+    background: transparent !important;
 }
 </style>

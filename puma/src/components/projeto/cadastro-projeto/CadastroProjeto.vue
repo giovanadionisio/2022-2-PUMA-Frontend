@@ -12,11 +12,15 @@
 }
 
 .multiselect-custom >>> .multiselect__tags {
-    border: 1px solid #ced4da;
+    border: 2px solid #15355e;
+}
+
+.multiselect-custom-hover >>> .multiselect__tags:hover {
+    border: 2px solid #f7db36;
 }
 
 .multiselect-custom-error >>> .multiselect__tags {
-    border: 1px solid #dc3545;
+    border: 2px solid #EB0600;
 }
 
 .multiselect-custom >>> .multiselect__tag-icon {

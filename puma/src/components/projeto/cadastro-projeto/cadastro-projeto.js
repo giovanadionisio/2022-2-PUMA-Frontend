@@ -6,7 +6,6 @@ export default {
   name: 'CadastroProjeto',
   data() {
     return {
-      operacao: 'cadastrar',
       titulo: '',
       descricao: '',
       resultadoEsperado: '',
@@ -21,16 +20,6 @@ export default {
   },
   beforeMount() {
     this.getKeywords();
-  },
-  mounted() {
-    this.operacao = this.$route.path.split('/', 3)[2];
-    if (this.operacao !== 'cadastrar') {
-      if (this.operacao === 'visualizar') {
-        this.disableForm();
-        this.removeDropdownIcons();
-      }
-      this.getProject(this.$route.params.id);
-    }
   },
   methods: {
     async onSubmit() {
@@ -54,10 +43,10 @@ export default {
 
         this.$store.commit('CLOSE_LOADING_MODAL');
         await this.$router.push({ path: `/meus-projetos` });
-        this.makeToast('Sucesso', 'Operação realizada com sucesso', 'success');
+        this.makeToast('SUCESSO', 'Operação realizada com sucesso', 'success');
       } catch (error) {
         this.$store.commit('CLOSE_LOADING_MODAL');
-        this.makeToast('Erro', 'Falha ao realizar operação', 'danger');
+        this.makeToast('ERRO', 'Falha ao realizar operação', 'danger');
       }
     },
     handleChangeKeywords: function (value) {
@@ -70,9 +59,6 @@ export default {
     },
     isChecked(option) {
       return this.selectedKeywords.some((op) => op.value === option.value);
-    },
-    sortMultiselectLabels() {
-      this.selectedKeywords.sort((a, b) => b.keyword.length - a.keyword.length);
     },
     disableForm() {
       const inputs = document.getElementsByTagName('input');
@@ -96,7 +82,7 @@ export default {
       } catch (error) {
         this.multiSelectPlaceholder = 'Sem palavras disponíveis';
         this.$store.commit('CLOSE_LOADING_MODAL');
-        this.makeToast('Erro', 'Falha ao carregar os dados', 'danger');
+        this.makeToast('ERRO', 'Falha ao carregar os dados', 'danger');
       }
     },
     getProject(projectId) {

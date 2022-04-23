@@ -9,7 +9,6 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    // eslint-disable-next-line import/no-unresolved
     component: () => import('../components/usuario/login-usuario/LoginUsuario.vue'),
     meta: {
       guest: true,
@@ -18,7 +17,6 @@ const routes = [
   {
     path: '/usuario/login',
     name: 'Entrar',
-    // eslint-disable-next-line import/no-unresolved
     component: () => import('../components/usuario/login-usuario/LoginUsuario.vue'),
     meta: {
       guest: true,
@@ -36,7 +34,6 @@ const routes = [
   {
     path: '/usuario/recuperacao-senha',
     name: 'Recuperação Senha',
-    // eslint-disable-next-line import/no-unresolved
     component: () => import('../components/usuario/recovery-password/RecoveryPassword.vue'),
     meta: {
       guest: true,
@@ -45,7 +42,6 @@ const routes = [
   {
     path: '/usuario/atualizar-senha',
     name: 'Nova Senha',
-    // eslint-disable-next-line import/no-unresolved
     component: () => import('../components/usuario/new-password/NewPassword.vue'),
     meta: {
       guest: true,
@@ -69,7 +65,7 @@ const routes = [
   },
   {
     path: '/projetos-disciplina',
-    name: 'Consulta por Disciplina',
+    name: 'Projetos por Disciplina',
     component: () => import('../components/projeto/consulta-projeto/ConsultaProjeto.vue'),
     meta: {
       requiresAuth: true,
@@ -108,6 +104,14 @@ const routes = [
     },
   },
   {
+    path: '/disciplinas',
+    name: 'Disciplinas',
+    component: () => import('../components/disciplina/consulta-disciplina/ConsultaDisciplina.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
     path: '/disciplinas/cadastrar',
     name: 'Cadastro de Disciplina',
     component: () => import('../components/disciplina/cadastro-disciplina/CadastroDisciplina.vue'),
@@ -117,7 +121,15 @@ const routes = [
   },
   {
     path: '/disciplinas/editar/:id',
-    name: 'Edição da Disciplina',
+    name: 'Edição de Disciplina',
+    component: () => import('../components/disciplina/cadastro-disciplina/CadastroDisciplina.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/disciplinas/visualizar/:id',
+    name: 'Visualização d Disciplina',
     component: () => import('../components/disciplina/cadastro-disciplina/CadastroDisciplina.vue'),
     meta: {
       requiresAuth: true,

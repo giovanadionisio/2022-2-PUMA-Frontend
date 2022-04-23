@@ -43,20 +43,6 @@
         </b-row>
         <b-row class="my-2">
             <b-col cols="4">
-                <span class="data-label">AUTOR(A):</span>
-                <span class="data-content">{{ form.user.fullname }}</span>
-            </b-col>
-            <b-col cols="4">
-                <span class="data-label">TELEFONE:</span>
-                <span class="data-content">{{ form.user.phonenumber }}</span>
-            </b-col>
-            <b-col cols="4">
-                <span class="data-label">E-MAIL:</span>
-                <span class="data-content">{{ form.user.email }}</span>
-            </b-col>
-        </b-row>
-        <b-row class="my-2">
-            <b-col cols="4">
                 <span class="data-label">STATUS:</span>
                 <span class="data-content">{{ form.statusdesc }}</span>
             </b-col>
@@ -137,7 +123,7 @@
                                             </div>
                                         </template>
                                         <span slot="maxElements">
-                                            Máximo de 3 opções selecionadas.
+                                            Máximo de 3 opções selecionadas. Remova ao menos uma palavra-chave.
                                         </span>
                                         <span slot="noResult">
                                             Nenhuma palavra-chave encontrada.

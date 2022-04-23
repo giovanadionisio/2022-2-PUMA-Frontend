@@ -3,8 +3,7 @@
     <b-row>
       <b-col cols="12">
         <div class='main-title'>
-          {{ operacao === 'visualizar' ? 'Visualizar Projeto': (operacao === 'alterar' ? 'Alterar Projeto' : 'Cadastrar
-          Projeto') }}
+          Cadastrar Projeto
         </div>
       </b-col>
     </b-row>
@@ -17,7 +16,7 @@
               <label for="descricao" class="input-label">PROBLEMA ENFRENTADO</label>
               <textarea id="descricao" placeholder="Descreva o desafio enfrentado usando, no mínimo, 200 caracteres."
                 maxlength="1000" rows="7" v-model="descricao" class="textarea-field"
-                v-bind:class="{ inputFieldRegisterProject: !v.errors.length && operacao !== 'visualizar' }"
+                v-bind:class="{ inputHover: !v.errors.length}"
                 v-bind:style="v.errors.length ? { borderColor: '#EB0600' } : {}">
                   </textarea>
               <span class="counter">({{descricao.length}}/1000)</span>
@@ -32,7 +31,7 @@
               <label for="resultado" class="input-label">RESULTADOS DESEJADOS</label>
               <textarea id="resultado" placeholder="Descreva os resultados desejados" rows="5" minlength="40"
                 maxlength="500" v-model="resultadoEsperado" class="textarea-field"
-                v-bind:class="{ inputFieldRegisterProject: !v.errors.length && operacao !== 'visualizar' }"
+                v-bind:class="{ inputHover: !v.errors.length}"
                 v-bind:style="v.errors.length ? { borderColor: '#EB0600' } : {}"></textarea>
               <span class="counter">({{resultadoEsperado.length}}/1000)</span>
               <span class="error-span" v-for="erro in v.errors">
@@ -45,18 +44,18 @@
             <div role="group">
               <label for="titulo" class="input-label">TÍTULO PARA O PROJETO</label>
               <div class="error-div">
-                <input type="text" id="titulo" maxlength="100" class="title-input-field"
+                <input type="text" id="titulo" maxlength="100" class="input-textfield"
                   placeholder="Crie um título que indique o objetivo do projeto" v-model="titulo"
-                  v-bind:class="{ inputFieldRegisterProject: !v.errors.length && operacao !== 'visualizar' }"
+                  v-bind:class="{ inputHover: !v.errors.length}"
                   v-bind:style="v.errors.length ? { borderColor: '#EB0600' } : {}">
                 <span class="error-span" v-for="erro in v.errors">
                   {{ erro }}
                 </span>
               </div>
-              <div v-if="operacao !== 'visualizar'" class="text-description">
+              <div class="text-description">
                 Opte por títulos que comecem com substantivos. Exemplo:
               </div>
-              <div v-if="operacao !== 'visualizar'" class="text-example">
+              <div class="text-example">
                 <i>Eliminação do despedício na produção de pães artesanais</i>
               </div>
             </div>
@@ -70,7 +69,8 @@
                 track-by="value" label="text" :searchable="true" :showLabels="true" :max="3" :closeOnSelect="false"
                 tagPosition="bottom" selectLabel="" deselectLabel="" selectedLabel=""
                 placeholder="Pesquise ou selecione uma palavra-chave" class="multiselect-custom"
-                :class="errors.length && 'multiselect-custom-error'" @input="handleChangeKeywords">
+                :class="errors.length ? 'multiselect-custom-error' : 'multiselect-custom-hover'"
+                @input="handleChangeKeywords">
                 <template slot="option" slot-scope="scope">
                   <div class="option__desc checkbox-label">
                     <input class="mx-2" type="checkbox" :checked="isChecked(scope.option)" @focus.prevent
@@ -91,7 +91,7 @@
           <div class="py-2" />
           <ValidationProvider vid="main-keyword" rules="required" v-slot="{errors}">
             <div role="group">
-              <span class="input-label">PALAVRA-CHAVE PRINCIPAL</span>
+              <label for="mainKeyword" class="input-label">PALAVRA-CHAVE PRINCIPAL</label>
               <b-form-select id="mainKeyword" v-model="mainKeyword" :options="selectedKeywords" size="md"
                 :state="errors.length ? false : null">
               </b-form-select>
@@ -100,15 +100,13 @@
           </ValidationProvider>
           <div class="py-2" />
           <div class="btn-toolbar">
-            <div v-if="operacao !== 'visualizar'">
+            <div>
               <b-row>
                 <b-col>
-                  <input :value="operacao === 'editar' ? 'Editar' : 'Enviar'" v-if="operacao !== 'visualizar'"
-                    type="submit" class="btn btn-warning" @click="onSubmit" />
+                  <input :value="'Enviar'" type="submit" class="btn btn-warning" @click="onSubmit" />
                 </b-col>
                 <b-col>
-                  <b-button v-if="operacao !== 'visualizar'" class="btn btn-warning"
-                    @click="$router.push({path: '/meus-projetos'}).catch(() => {})">
+                  <b-button class="btn btn-warning" @click="$router.push({path: '/meus-projetos'}).catch(() => {})">
                     CANCELAR
                   </b-button>
                 </b-col>

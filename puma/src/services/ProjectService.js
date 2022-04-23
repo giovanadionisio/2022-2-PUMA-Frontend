@@ -9,16 +9,6 @@ import axios from '../main.js';
 import store from '../store';
 
 export default class ProjectService {
-  async getAllocatedProjects(subjctId) {
-    const auth = store.getters.token;
-    const allocatedArray = await axios.get(`${global.URL_GATEWAY}/project/alocated/${subjctId}`, {
-      headers: {
-        auth,
-      },
-    });
-    return allocatedArray;
-  }
-
   async getMyProposals(user) {
     const auth = store.getters.token;
     const myProposals = await axios.get(`${global.URL_GATEWAY}/project/myProposals`, {
@@ -32,29 +22,13 @@ export default class ProjectService {
 
   async getProjById(projId) {
     const auth = store.getters.token;
-    const projInfos = await axios.get(`${global.URL_GATEWAY}/project/project/${projId}`, { headers: { auth } });
+    const projInfos = await axios.get(`${global.URL_GATEWAY}/project/get/${projId}`, { headers: { auth } });
     return projInfos;
   }
 
   async getAllSubjects() {
     const auth = store.getters.token;
     const subjects = await axios.get(`${global.URL_GATEWAY}/project/subject`, { headers: { auth } });
-    return subjects;
-  }
-
-  async putProposal(projectId, subjId) {
-    const auth = store.getters.token;
-    const subjects = await axios.put(`${global.URL_GATEWAY}/project/proposal/${projectId}`,
-      { subjectId: subjId },
-      { headers: { auth } });
-    return subjects;
-  }
-
-  async putProposalStatus(id, status) {
-    const auth = store.getters.token;
-    const subjects = await axios.put(`${global.URL_GATEWAY}/project/alocate/${id}/status`,
-      { proposal: { approved: status } },
-      { headers: { auth } });
     return subjects;
   }
 
@@ -230,6 +204,22 @@ export default class ProjectService {
         resolve(response);
       }).catch((response) => {
         reject(`Erro ao atualizar disciplina: ${response}`);
+      });
+    });
+  }
+
+  async getSubjects() {
+    const auth = store.getters.token;
+    const subjects = await axios.get(`${global.URL_GATEWAY}/project/subject`, { headers: { auth } });
+    return subjects;
+  }
+
+  deleteSubject(subjectId) {
+    return new Promise((resolve, reject) => {
+      axios.delete(`${global.URL_GATEWAY}/project/subject/${subjectId}`).then((response) => {
+        resolve(response.data);
+      }).catch((error) => {
+        reject(error);
       });
     });
   }

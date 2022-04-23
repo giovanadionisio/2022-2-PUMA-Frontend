@@ -95,7 +95,7 @@ export default {
                 this.$store.commit('CLOSE_LOADING_MODAL');
             } catch (error) {
                 this.$store.commit('CLOSE_LOADING_MODAL');
-                this.makeToast('Erro', 'Falha ao carregar os dados', 'danger');
+                this.makeToast('ERRO', 'Falha ao carregar os dados', 'danger');
             }
         },
         handleSubmit: async function () {
@@ -119,10 +119,10 @@ export default {
                 await projectService.updateProject(payload);
                 this.$store.commit('CLOSE_LOADING_MODAL');
                 await this.$router.push({ path: `/meus-projetos` });
-                this.makeToast('Sucesso', 'Operação realizada com sucesso', 'success');
+                this.makeToast('SUCESSO', 'Operação realizada com sucesso', 'success');
             } catch (error) {
                 this.$store.commit('CLOSE_LOADING_MODAL');
-                this.makeToast('Erro', 'Falha ao realizar operação', 'danger');
+                this.makeToast('ERRO', 'Falha ao realizar operação', 'danger');
             }
         },
         handleCancelEdit: function () {
@@ -137,10 +137,10 @@ export default {
                 await projectService.deleteProject(this.form.projectid);
                 this.$store.commit('CLOSE_LOADING_MODAL');
                 await this.$router.push({ path: `/meus-projetos` });
-                this.makeToast('Sucesso', 'Operação realizada com sucesso', 'success');
+                this.makeToast('SUCESSO', 'Operação realizada com sucesso', 'success');
             } catch (error) {
                 this.$store.commit('CLOSE_LOADING_MODAL');
-                this.makeToast('Erro', 'Falha ao realizar operação', 'danger');
+                this.makeToast('ERRO', 'Falha ao realizar operação', 'danger');
             }
         },
         handleDeleteProject: function () {

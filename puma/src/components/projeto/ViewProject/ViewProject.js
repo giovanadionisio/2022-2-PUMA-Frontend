@@ -132,10 +132,10 @@ export default {
                 }
                 this.$store.commit('CLOSE_LOADING_MODAL');
                 await this.$router.push({ path: `/projetos-disciplina` });
-                this.makeToast('Sucesso', 'Operação realizada com sucesso', 'success');
+                this.makeToast('SUCESSO', 'Operação realizada com sucesso', 'success');
             } catch (error) {
                 this.$store.commit('CLOSE_LOADING_MODAL');
-                this.makeToast('Erro', 'Falha ao realizar operação', 'danger');
+                this.makeToast('ERRO', 'Falha ao realizar operação', 'danger');
             }
         },
         handleEvaluate: function () {

@@ -12,14 +12,22 @@
   box-sizing: border-box;
 }
 
-.title-input-field {
+.input-label {
+  font-weight: bold;
+  color: #15355E;
+  text-transform: uppercase;
+  font-size: 20px;
+}
+
+.input-textfield {
   border:2px solid #15355e;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
   padding: 15px;
-  height: 6px;
+  height: 45px;
   width: 100%;
+  margin: 0px;
 }
 
 .textarea-field {
@@ -29,8 +37,8 @@
   display: flex;
   flex-direction: column;
   padding: 15px;
-  font-family: rubik, Sans-serif;
   font-weight: 300;
+  /* font-family: rubik, Sans-serif; */
 }
 
 .btn {
@@ -48,11 +56,6 @@
   width: 160px;
   letter-spacing: 0.03em;
   text-transform: uppercase;
-}
-
-.input-label {
-  font-weight: bold;
-  color: #15355E;
 }
 
 .counter {
@@ -84,7 +87,7 @@
   margin-top: 10px;
 }
 
-.inputFieldRegisterProject:hover{
+.inputHover:hover{
   border-radius: 7px;
   background-color: #ffffff;
   display: flex;
