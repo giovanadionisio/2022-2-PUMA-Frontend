@@ -1,8 +1,8 @@
-<template src="./cadastro-disciplina.html"></template>
+<template src="./ViewProject.html"></template>
 
-<script src="./cadastro-disciplina.js"></script>
+<script src="./ViewProject.js"></script>
 
-<style src="./cadastro-disciplina.css" scoped></style>
+<style src="./ViewProject.css" scoped></style>
 
 <style lang="css" scoped>
 .multiselect-custom >>> .multiselect__tag {
@@ -12,15 +12,11 @@
 }
 
 .multiselect-custom >>> .multiselect__tags {
-    border: 2px solid #15355e;
-}
-
-.multiselect-custom-hover >>> .multiselect__tags:hover {
-    border: 2px solid #f7db36;
+    border: 1px solid #ced4da;
 }
 
 .multiselect-custom-error >>> .multiselect__tags {
-    border: 2px solid #EB0600;
+    border: 1px solid #dc3545;
 }
 
 .multiselect-custom >>> .multiselect__tag-icon {

@@ -5,16 +5,24 @@
       rel='stylesheet'
     />
     <MenuLateral v-if='isAuthenticated' />
+    <ConfirmModal />
+    <LoadingModal />
     <router-view />
   </div>
 </template>
 
 <script>
+/* eslint-disable */
+// eslint-disable-next-line import/no-unresolved
+import ConfirmModal from '@/components/ConfirmModal/ConfirmModal.vue';
+import LoadingModal from '@/components/LoadingModal/LoadingModal.vue';
 import MenuLateral from './components/shared/menu-lateral/MenuLateral.vue';
 
 export default {
   components: {
     MenuLateral,
+    ConfirmModal,
+    LoadingModal,
   },
   methods: {
     updateSessionStatus() {
@@ -38,6 +46,8 @@ export default {
 };
 </script>
 
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
+
 <style>
 html, body {
   margin: 0;
@@ -48,8 +58,6 @@ html, body {
   font-family: Avenir, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* text-align: center; */
-  /* color: #15355e; */
   height:100%;
 }
 
@@ -61,7 +69,6 @@ html, body {
   margin-left: 250px;
   padding: 30px 10px;
   margin-bottom: 50px;
-  /* height: 100%; */
 }
 
 .input-field {

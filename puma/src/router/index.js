@@ -56,9 +56,33 @@ const routes = [
     },
   },
   {
+    path: '/projetos/visualizar/:id',
+    name: 'Visualizar Projeto',
+    component: () => import('../components/projeto/ViewProject/ViewProject.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
     path: '/projetos-disciplina',
     name: 'Projetos por Disciplina',
     component: () => import('../components/projeto/consulta-projeto/ConsultaProjeto.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/projetos-disciplina/visualizar/:id',
+    name: 'Consulta por Disciplina Visualizar',
+    component: () => import('../components/projeto/ViewProject/ViewProject.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/meus-projetos/cadastrar',
+    name: 'Cadastro de Projeto',
+    component: () => import('../components/projeto/cadastro-projeto/CadastroProjeto.vue'),
     meta: {
       requiresAuth: true,
     },
@@ -72,25 +96,9 @@ const routes = [
     },
   },
   {
-    path: '/projetos/visualizar/:id',
-    name: 'Visualização de Projeto',
-    component: () => import('../components/projeto/cadastro-projeto/CadastroProjeto.vue'),
-    meta: {
-      requiresAuth: true,
-    },
-  },
-  {
-    path: '/projetos/cadastrar',
-    name: 'Cadastro de Projeto',
-    component: () => import('../components/projeto/cadastro-projeto/CadastroProjeto.vue'),
-    meta: {
-      requiresAuth: true,
-    },
-  },
-  {
-    path: '/projetos/editar/:id',
-    name: 'Edição de Projeto',
-    component: () => import('../components/projeto/cadastro-projeto/CadastroProjeto.vue'),
+    path: '/meus-projetos/visualizar/:id',
+    name: 'Visualizar Meu Projeto',
+    component: () => import('../components/projeto/ViewMyProject/ViewMyProject.vue'),
     meta: {
       requiresAuth: true,
     },

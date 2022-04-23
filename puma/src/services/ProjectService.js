@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable prefer-promise-reject-errors */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable import/extensions */
@@ -25,23 +26,85 @@ export default class ProjectService {
     return projInfos;
   }
 
-  addProject(project) {
+  async getAllSubjects() {
+    const auth = store.getters.token;
+    const subjects = await axios.get(`${global.URL_GATEWAY}/project/subject`, { headers: { auth } });
+    return subjects;
+  }
+
+  getProject(projectId) {
+    const auth = store.getters.token;
     return new Promise((resolve, reject) => {
-      const auth = store.getters.token;
-      axios.post(`${global.URL_GATEWAY}/project/create`, project, { headers: { auth } }).then((response) => {
+      axios.get(`${global.URL_GATEWAY}/project/get/${projectId}`, { headers: { auth } }).then((response) => {
         resolve(response);
-      }).catch((response) => {
-        reject(`/projetos/cadastrar reject: ${response}`);
+      }).catch((error) => {
+        reject(error);
       });
     });
   }
 
-  deleteProject(idprojeto) {
+  addProject(project) {
+    const auth = store.getters.token;
     return new Promise((resolve, reject) => {
-      axios.post(`${global.URL_GATEWAY}/project/delete/${idprojeto}`).then((response) => {
+      axios.post(`${global.URL_GATEWAY}/project/create`, project, { headers: { auth } }).then((response) => {
         resolve(response);
-      }).catch(() => {
-        reject('erro na deleção do arquivo');
+      }).catch((error) => {
+        reject(error);
+      });
+    });
+  }
+
+  updateProject(payload) {
+    const auth = store.getters.token;
+    return new Promise((resolve, reject) => {
+      axios.put(`${global.URL_GATEWAY}/project/update`, payload, { headers: { auth } }).then((response) => {
+        resolve(response);
+      }).catch((error) => {
+        reject(error);
+      });
+    });
+  }
+
+  deleteProject(projectId) {
+    const auth = store.getters.token;
+    return new Promise((resolve, reject) => {
+      axios.delete(`${global.URL_GATEWAY}/project/delete/${projectId}`, { headers: { auth } }).then((response) => {
+        resolve(response);
+      }).catch((error) => {
+        reject(error);
+      });
+    });
+  }
+
+  evaluateProject(payload) {
+    const auth = store.getters.token;
+    return new Promise((resolve, reject) => {
+      axios.put(`${global.URL_GATEWAY}/project/evaluate`, payload, { headers: { auth } }).then((response) => {
+        resolve(response);
+      }).catch((error) => {
+        reject(error);
+      });
+    });
+  }
+
+  reallocateProject(payload) {
+    const auth = store.getters.token;
+    return new Promise((resolve, reject) => {
+      axios.put(`${global.URL_GATEWAY}/project/reallocate`, payload, { headers: { auth } }).then((response) => {
+        resolve(response);
+      }).catch((error) => {
+        reject(error);
+      });
+    });
+  }
+
+  addFile(file) {
+    return new Promise((resolve, reject) => {
+      const auth = store.getters.token;
+      axios.post(`${global.URL_GATEWAY}/project/upload`, file, { headers: { auth } }).then((response) => {
+        resolve(response);
+      }).catch((error) => {
+        reject(error);
       });
     });
   }
@@ -51,8 +114,27 @@ export default class ProjectService {
       axios.get(`${global.URL_GATEWAY}/project/palavra-chave`).then((response) => {
         resolve(response);
       }).catch((error) => {
-        alert(error);
         reject('Erro ao recuperar as palavras-chave');
+      });
+    });
+  }
+
+  getAvailableKeywordsToProject() {
+    return new Promise((resolve, reject) => {
+      axios.get(`${global.URL_GATEWAY}/project/keywords`).then((response) => {
+        resolve(response);
+      }).catch((error) => {
+        reject(error);
+      });
+    });
+  }
+
+  getKnowledgeAreas() {
+    return new Promise((resolve, reject) => {
+      axios.get(`${global.URL_GATEWAY}/areas-conhecimento`).then((response) => {
+        resolve(response);
+      }).catch((error) => {
+        reject(error);
       });
     });
   }
@@ -62,8 +144,7 @@ export default class ProjectService {
       axios.get(`${global.URL_GATEWAY}/project/subject/keywords`).then((response) => {
         resolve(response);
       }).catch((error) => {
-        alert(error);
-        reject('Erro ao recuperar as palavras-chave para disciplinaa');
+        reject('Erro ao recuperar as palavras-chave para disciplina');
       });
     });
   }
@@ -73,7 +154,6 @@ export default class ProjectService {
       axios.get(`${global.URL_GATEWAY}/project/subareas`).then((response) => {
         resolve(response);
       }).catch((error) => {
-        alert(error);
         reject('Erro ao recuperar as subareas');
       });
     });
@@ -84,7 +164,6 @@ export default class ProjectService {
       axios.get(`${global.URL_GATEWAY}/project/professors`).then((response) => {
         resolve(response);
       }).catch((error) => {
-        alert(error);
         reject('Erro ao recuperar os professores');
       });
     });
@@ -97,6 +176,17 @@ export default class ProjectService {
         resolve(response);
       }).catch((response) => {
         reject(`Erro ao cadastrar disciplina: ${response}`);
+      });
+    });
+  }
+
+  subjectList() {
+    return new Promise((resolve, reject) => {
+      const auth = store.getters.token;
+      axios.get(`${global.URL_GATEWAY}/project/subjectList`, { headers: { auth } }).then((response) => {
+        resolve(response);
+      }).catch((error) => {
+        reject(error);
       });
     });
   }
@@ -120,11 +210,7 @@ export default class ProjectService {
 
   async getSubjects() {
     const auth = store.getters.token;
-    const subjects = await axios.get(`${global.URL_GATEWAY}/project/subject`, {
-      headers: {
-        auth,
-      },
-    });
+    const subjects = await axios.get(`${global.URL_GATEWAY}/project/subject`, { headers: { auth } });
     return subjects;
   }
 

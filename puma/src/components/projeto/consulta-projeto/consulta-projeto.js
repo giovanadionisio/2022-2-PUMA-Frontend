@@ -90,8 +90,8 @@ export default {
         const row = project;
         row.etapa = project.status === 'IC' || project.status === 'EX' || project.status === 'EC' ? 'Projeto' : 'Proposta';
         row.status = statusProjetoEnum(project.status);
-        row.name = project.name.slice(0,20);
-        row.buttons = '<button name="visualizar" class="btn mr-2" id='+ project.projectid +'><i class="fa-solid fa-circle-info mr-2"></i>VER DETALHES</button>';
+        row.name = project.name.slice(0, 20);
+        row.buttons = '<button name="visualizar" class="btn cp-btn mr-2" id=' + project.projectid + '><i class="fa-solid fa-circle-info mr-2"></i>VER DETALHES</button>';
         this.data.rows.push(row);
       });
     },
@@ -135,12 +135,12 @@ export default {
     configAddProjectButton(searchInput) {
       if (!document.getElementById('btn-add-project') && this.operacao === 'meus-projetos') {
         const addProjectButton = document.createElement('button');
-        addProjectButton.classList.add('btn', 'mt-3', 'col-md-8');
+        addProjectButton.classList.add('btn', 'cp-btn', 'mt-3', 'col-md-8');
         addProjectButton.innerHTML = '<i class="fa-solid fa-plus-circle mr-2 add-project"></i>ADICIONAR PROJETO';
         addProjectButton.name = 'cadastrar';
         addProjectButton.id = 'btn-add-project';
         addProjectButton.addEventListener('click', () => {
-          this.$router.push({path: `/projetos/cadastrar`}).catch(() => {});
+          this.$router.push({ path: `/meus-projetos/cadastrar` }).catch(() => { });
         });
         searchInput.after(addProjectButton);
       }
@@ -152,20 +152,21 @@ export default {
       document.querySelector("#projects-table tbody").addEventListener("click", (event) => {
         const button = event.target;
         const operacao = button.name;
-        if (button.id && operacao !== 'excluir') {
-          this.$router.push({path: `/projetos/${operacao}/${button.id}`}).catch(() => {});
+        const path = this.$route.path.slice(1);
+        if (button.id) {
+          this.$router.push({ path: `/${path}/visualizar/${button.id}` }).catch(() => { });
         }
       });
     },
     markThsAsTouched() {
       if (document.getElementsByTagName('td')[0] && document.getElementsByTagName('td')[6]) {
-          const firstValue = Number(document.getElementsByTagName('td')[0].textContent);
-          const secondValue = Number(document.getElementsByTagName('td')[6].textContent);
-          if (firstValue > secondValue) {
-            document.getElementsByTagName('th')[0].dispatchEvent(new MouseEvent("dblclick"));
-          } else {
-            document.getElementsByTagName('th')[0].click();
-          }
+        const firstValue = Number(document.getElementsByTagName('td')[0].textContent);
+        const secondValue = Number(document.getElementsByTagName('td')[6].textContent);
+        if (firstValue > secondValue) {
+          document.getElementsByTagName('th')[0].dispatchEvent(new MouseEvent("dblclick"));
+        } else {
+          document.getElementsByTagName('th')[0].click();
+        }
       }
     },
     setSvgStyles() {

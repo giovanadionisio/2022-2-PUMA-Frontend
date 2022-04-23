@@ -12,67 +12,33 @@
   box-sizing: border-box;
 }
 
-.title-input-field {
-  /* font-size: 14px; */
+.input-label {
+  font-weight: bold;
+  color: #15355E;
+  text-transform: uppercase;
+  font-size: 20px;
+}
+
+.input-textfield {
   border:2px solid #15355e;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
   padding: 15px;
-  height: 6px;
+  height: 45px;
+  width: 100%;
+  margin: 0px;
 }
 
 .textarea-field {
-  /* font-size: 14px; */
-  border:2px solid #15355e;
+  width: 100%;
+  border: 2px solid #15355e;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
   padding: 15px;
-  font-family: rubik, Sans-serif;
   font-weight: 300;
-}
-
-.bubblesContainer {
-  max-width: 1000px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-
-}
-
-h3 {
-  font-size: 18px;
-  margin: 15px 0 3px 0;
-  position: relative;
-  display: inline-block;
-  font-weight: bold;
-}
-
-#categoryBubble {
-  cursor: pointer;
-  user-select: none;
-  margin-left: -8px;
-  border-radius: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-div#checklist {
-  display: inline-flex;
-  padding-left: 13px;
-  justify-content: space-between;
-}
-
-#checklistArea {
-  border: #15355e;
-  border-style: solid;
-  border-width: 2px;
-  border-radius: 8px;
-  margin: 10px 5px 15px 5px;
-  display: -webkit-inline-box;
-  position: relative;
-  padding-left: 8px;
+  /* font-family: rubik, Sans-serif; */
 }
 
 .btn {
@@ -82,14 +48,20 @@ div#checklist {
   color: #15355e;
   border: 2px solid #f7db36;
   border-radius: 5px;
-  padding: 5px;
-  font-size: 24px;
+  padding: 2px;
+  font-size: 20px;
   font-weight: 700;
   cursor: pointer;
   transition: 0.5s;
-  width: 196.7px;
+  width: 160px;
   letter-spacing: 0.03em;
   text-transform: uppercase;
+}
+
+.counter {
+  float: right;
+  font-size: 0.9rem;
+  color: #94A6BC;
 }
 
 .title-textarea {
@@ -115,34 +87,7 @@ div#checklist {
   margin-top: 10px;
 }
 
-.title-slot {
-  font-size: 24px;
-  text-align: left;
-  color: #15355E;
-  letter-spacing: 00.035em;
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 28px;
-  margin-top: 30px;
-  margin-bottom: -10px;
-}
-
-.title-keywords{
-  font-weight: bold;
-  color: #15355E;
-  font-size: 24px;
-  line-height: 28px;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-}
-
-.text-keywords{
-  font-size: 1.1em;
-  text-align: left;
-  color: #EB0600;
-}
-
-.inputFieldRegisterProject:hover{
+.inputHover:hover{
   border-radius: 7px;
   background-color: #ffffff;
   display: flex;
@@ -151,23 +96,9 @@ div#checklist {
 }
 
 .error-span {
-  display: flex;
-  margin-top: 10px;
-  text-align: left;
-  flex-direction: column;
   color: #EB0600;
-}
-
-.error-div {
-  display: flex;
-  flex-direction: column;
-  width: 100%
 }
 
 .checkbox-label {
   display: inline-block;
-}
-
-.multiselect.invalid .multiselect__tags {
-  border: 1px solid #f86c6b !important;
 }
