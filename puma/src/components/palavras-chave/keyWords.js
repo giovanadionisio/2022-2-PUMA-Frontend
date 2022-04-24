@@ -24,13 +24,17 @@ export default {
       editKeyword: '',
       idKeywordEdit: '',
       idSubjectEdit: '',
+      permission: '',
+      flag: false,
       subjects: [],
       subjectsForm: [],
       subjectsList: [],
       isLoadingKeywords: false,
       optionsSelected: [],
       keyWords: [],
+      keywordsInfo: {},
       tableKeywordSubject: [],
+      cont: 0,
       subjectsFields: [
         {
           key: 'id',
@@ -63,11 +67,85 @@ export default {
   },
 
   created() {
+    this.getKeywordsInfo();
     this.getKeyWords();
-    this.getSubjects();
+    this.setFieldsPermissions();
+    this.verifyPermission();
+    // console.log(this.$store.getters.user);
   },
 
   methods: {
+    verifyPermission() {
+      const { isAdmin, type } = this.$store.getters.user;
+      if (isAdmin || type === 'Professor') {
+        this.permission = true;
+      } else {
+        this.permission = false;
+      }
+    },
+
+    setFieldsPermissions() {
+      const { isAdmin } = this.$store.getters.user;
+
+      if (isAdmin) {
+        this.getSubjects();
+      } else {
+        this.getSubjectsProfessor();
+        this.getFilterProfessor();
+      }
+    },
+
+    async getKeywordsInfo() {
+      const { data } = await this.keywordService.getKeywords();
+      // console.log(data);
+      Object.keys(data).forEach((key) => {
+        // console.log('debug', data[key]);
+        this.keywordsInfo[data[key].keywordid] = data[key].array_agg;
+      });
+    },
+
+    async getSubjectsProfessor() {
+      const { userId } = this.$store.getters.user;
+      const { data } = await this.keywordService.getKeywords();
+      const subjectByKeywords = [];
+      Object.keys(data).forEach((key) => {
+        Object.values(data[key].array_agg).forEach((allowId) => {
+          if (allowId === userId) {
+            // console.log('Filtro', data[key]);
+            subjectByKeywords.push({ value: data[key].subjectid, text: data[key].subjectname });
+          }
+        });
+      });
+      this.subjectsForm = [...new Set(subjectByKeywords.map((o) => JSON.stringify(o)))].map((s) => (
+        JSON.parse(s)));
+      this.subjectsForm.unshift({ value: null, text: 'Escolha a disciplina', disabled: true });
+    },
+
+    async getFilterProfessor() {
+      const { data } = await this.keywordService.getSubjects();
+      this.subjects = JSON.parse(JSON.stringify(data));
+      this.subjects.unshift({ value: 0, text: 'Todas as Disciplinas' });
+      this.subjects.unshift({ value: null, text: 'Escolha a disciplina', disabled: true });
+    },
+
+    AllowEdit(keyword) {
+      const { isAdmin, userId } = this.$store.getters.user;
+      if (isAdmin) return true;
+
+      let flag = false;
+      // console.log('Ta chegando oq?', this.keywordsInfo[keyword.keywordid]);
+      Object.values(this.keywordsInfo[keyword.keywordid]).forEach((profId) => {
+        // console.log('ok', profId);
+        if (userId === profId) {
+          flag = true;
+        }
+      });
+      if (flag) {
+        return true;
+      }
+      return false;
+    },
+
     filter(discipline) {
       this.tableKeywordSubject = this.keyWords;
       if (discipline === 0) {
@@ -92,10 +170,9 @@ export default {
           this.newKeyword).then(async (response) => {
           const idKeywordUpdated = response.data[0].keywordid;
           this.keywordService.updateSubjectKeyword(idKeywordUpdated, this.selectedSubject);
+          this.getKeyWords();
           this.openModalEdit = false;
           this.makeToast('success', 'Palavra-Chave Editada com Sucesso!');
-
-          // document.location.reload(true);
           this.getKeyWords();
         }).catch((error) => {
           this.openModalEdit = false;
@@ -140,10 +217,6 @@ export default {
       }).catch((error) => {
         console.log('erro', error);
       });
-    },
-
-    getNewKeyword() {
-      console.log(this.inputKeyword.value);
     },
 
     kewordNameAlreadyExist() {
