@@ -35,7 +35,8 @@ export default {
     },
     async updatePassword() {
       const isValid = await this.$refs.observer.validate();
-      if (isValid && this.isEqualsToNewPassword && this.newPassword.length) {
+
+      if (isValid && this.isEqualsToNewPassword === true && this.newPassword.length > 0) {
         this.userService.updatePassword(this.email, this.newPassword, (res) => {
           if (res.status === 200) {
             this.passwordRedefined = true;
