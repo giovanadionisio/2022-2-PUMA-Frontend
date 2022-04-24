@@ -28,7 +28,7 @@ export default {
         if (!isFormValid) return;
 
         this.$store.commit('OPEN_LOADING_MODAL', { title: 'Cadastrando...' });
-
+        console.log({ main: this.mainKeyword })
         const project = {
           name: this.titulo,
           problem: this.descricao,
@@ -36,7 +36,7 @@ export default {
           status: 'SB',
           createdat: new Date().toISOString(),
           userid: this.$store.getters.user.userId,
-          keywords: this.selectedKeywords.map((k) => ({ keywordid: k.value, main: k.value === this.mainKeyword })),
+          keywords: this.selectedKeywords.map((k) => ({ keywordid: k.value, main: k.value === this.mainKeyword?.value })),
         };
 
         await this.projectService.addProject(project);
@@ -50,7 +50,7 @@ export default {
       }
     },
     handleChangeKeywords: function (value) {
-      if (!!!value.find((k) => k.value === this.mainKeyword)) {
+      if (!!!value.find((k) => k.value === this.mainKeyword?.value)) {
         this.mainKeyword = null;
       }
     },
