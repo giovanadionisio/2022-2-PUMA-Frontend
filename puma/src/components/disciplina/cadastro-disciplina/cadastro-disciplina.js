@@ -56,6 +56,7 @@ export default {
   methods: {
     async onSubmit() {
       try {
+        console.log('--->', this.subareasSelected);
         const isFormValid = await this.$refs.observer.validate();
         const isMultiselectValid = this.validateMultiselects();
         if (isFormValid && isMultiselectValid) {
@@ -102,10 +103,14 @@ export default {
     makeToast: function (title, message, variant) {
       this.$bvToast.toast(message, { title: title, variant: variant, solid: true });
     },
-    sortMultiselectLabels() {
+    removefn(a, b) {
+      console.log({ a, b });
+    },
+    sortKeywordMultiselectLabels() {
       this.keywordsSelected.sort((a, b) => b.keyword.length - a.keyword.length);
     },
     sortSubareaMultiselectLabels() {
+      console.log(this.subareasSelected)
       this.subareasSelected.sort((a, b) => b.description.length - a.description.length);
     },
     sortProfessorMultiselectLabels() {
@@ -165,10 +170,10 @@ export default {
     getSubareas() {
       this.isLoadingSubareas = true;
       return new Promise((resolve, reject) => {
-        this.projectService.getSubareas().then((response) => {
+        this.projectService.getKnowledgeAreas().then((response) => {
           this.subareas = response.data;
           this.isLoadingSubareas = false;
-          this.multiSelectPlaceholderSubarea = this.subareas.length ? 'Selecione as subárea do conhecimento que correspondam a disciplina' : 'Sem subáreas disponíveis';
+          this.multiSelectPlaceholderSubarea = this.subareas.length ? 'Selecione as subáreas do conhecimento que correspondam a disciplina' : 'Sem subáreas disponíveis';
           resolve();
         }).catch((error) => {
           this.isLoadingSubareas = false;

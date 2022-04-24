@@ -15,9 +15,8 @@
             <div role="group">
               <label for="name" class="input-label">Nome</label>
               <input type="text" id="name" maxlength="1020" class="input-textfield"
-                placeholder="Digite o nome para sua disciplina" v-model="name"
-                v-bind:class="{ inputHover: !v.errors.length && operacao !== 'visualizar' }"
-                v-bind:style="v.errors.length ? { borderColor: '#EB0600' } : {}" :disabled=isLoading>
+                placeholder="Digite o nome para sua disciplina" v-model="name" :disabled=isLoading
+                v-bind:class="{ 'input-focus': !v.errors.length && operacao !== 'visualizar', 'input-error': v.errors.length }">
               <span class="error-span" v-for="erro in v.errors">
                 {{ erro }}
               </span>
@@ -31,18 +30,18 @@
             <multiselect id="keywords" v-model="keywordsSelected" :options="keywords" track-by="keyword" label="keyword"
               :multiple="true" openDirection="bottom" :placeholder="multiSelectPlaceholderKeyword" :searchable="true"
               :showLabels="true" :closeOnSelect="false" :max-height="150" :max="6" :taggable=true @tag="addKeyword"
-              @input="sortMultiselectLabels()" selectLabel="" deselectLabel="" selectedLabel=""
+              @input="sortKeywordMultiselectLabels()" selectLabel="" deselectLabel="" selectedLabel=""
               @open="multiSelectPlaceholder = 'Pesquisar'" tag-placeholder="Criar palavra-chave"
               @close="isTouchedKeywords = true; multiSelectPlaceholder = 'Selecione'" :loading="isLoadingKeywords"
               class="multiselect-custom" :disabled="isLoadingKeywords || operacao === 'visualizar'"
-              :class="(isTouchedKeywords && !keywordsSelected.length) ? 'multiselect-custom-error' : 'multiselect-custom-hover'">
+              :class="(isTouchedKeywords && !keywordsSelected.length) ? 'multiselect-custom-error' : 'multiselect-custom-focus'">
               <template slot="option" slot-scope="scope">
                 <div v-if="!scope.option.isTag" class="option__desc checkbox-label">
                   <input class="mx-2" type="checkbox" :checked="isChecked(scope.option)" @focus.prevent
                     :key="scope.option.keyword" />
                   <span class="option__title">{{ scope.option.keyword }}</span>
                 </div>
-                <div v-if="scope.option.isTag" class="option__desc checkbox-label">
+                <div v-if="scope.option.isTag" class="option__desc">
                   <span class="option__title">{{ scope.option.label }}</span>
                 </div>
               </template>
@@ -60,21 +59,26 @@
           <div class="py-3" />
           <div role="group">
             <label for="subarea" class="input-label">
-              Subárea do conhecimento
+              Áreas e Subáreas do conhecimento
             </label>
             <multiselect id="subarea" v-model="subareasSelected" :options="subareas" track-by="subareaid"
               label="description" :multiple="true" openDirection="bottom" :placeholder="multiSelectPlaceholderSubarea"
-              :searchable="true" :showLabels="true" :closeOnSelect="false" :max-height="150"
-              @input="sortSubareaMultiselectLabels()" selectLabel="" deselectLabel="" selectedLabel=""
-              @open="multiSelectPlaceholder = 'Pesquisar'"
+              :searchable="true" :showLabels="true" :closeOnSelect="false" group-values="subareas"
+              group-label="knowledgearea" selectLabel="" deselectLabel="" selectedLabel=""
+              selectGroupLabel="Selecione todas as subáreas desta área"
+              deselectGroupLabel="Remova todas as subáreas desta área" @open="multiSelectPlaceholder = 'Pesquisar'"
+              @input="sortSubareaMultiselectLabels()"
               @close="isTouchedSubareas = true; multiSelectPlaceholder = 'Selecione'" :loading="isLoadingSubareas"
               class="multiselect-custom" :disabled="isLoadingSubareas || !subareas.length || operacao === 'visualizar'"
-              :class="(isTouchedSubareas && !subareasSelected.length) ? 'multiselect-custom-error' : 'multiselect-custom-hover'">
+              :class="(isTouchedSubareas && !subareasSelected.length) ? 'multiselect-custom-error' : 'multiselect-custom-focus'">
               <template slot="option" slot-scope="scope">
-                <div class="option__desc checkbox-label">
+                <div v-if="!scope.option['$isLabel']" class="option__desc checkbox-label">
                   <input class="mx-2" type="checkbox" :checked="isSubareaChecked(scope.option)" @focus.prevent
                     :key="scope.option.subareaid" />
                   <span class="option__title">{{ scope.option.description }}</span>
+                </div>
+                <div v-if="scope.option['$isLabel']" class="option__desc">
+                  <span class="option__title">{{ scope.option['$groupLabel'] }}</span>
                 </div>
               </template>
               <span slot="noResult">
@@ -98,7 +102,7 @@
               @open="multiSelectPlaceholder = 'Pesquisar'" :loading="isLoadingProfessors"
               @close="isTouchedProfessors = true; multiSelectPlaceholder = 'Selecione'" class="multiselect-custom"
               :disabled="isLoadingProfessors || !professors.length || operacao === 'visualizar'"
-              :class="(isTouchedProfessors && !professorsSelected.length) ? 'multiselect-custom-error' : 'multiselect-custom-hover'">
+              :class="(isTouchedProfessors && !professorsSelected.length) ? 'multiselect-custom-error' : 'multiselect-custom-focus'">
               <template slot="option" slot-scope="scope">
                 <div class="option__desc checkbox-label">
                   <input class="mx-2" type="checkbox" :checked="isProfessorChecked(scope.option)" @focus.prevent
@@ -119,9 +123,9 @@
             <div role="group">
               <label for="descricao" class="input-label">Ementa</label>
               <textarea id="descricao" placeholder="Descreva a ementa da disciplina usando, no mínimo, 200 caracteres."
-                maxlength="1000" rows="7" v-model="courseSyllabus" :disabled=isLoading class="textarea-field"
-                v-bind:class="{ inputHover: !v.errors.length && operacao !== 'visualizar' }"
-                v-bind:style="v.errors.length ? { borderColor: '#EB0600' } : {}"></textarea>
+                maxlength="1000" rows="10" v-model="courseSyllabus" :disabled=isLoading class="input-textarea"
+                v-bind:class="{ 'input-focus': !v.errors.length && operacao !== 'visualizar', 'input-error': v.errors.length }">
+              </textarea>
               <span class="counter">({{courseSyllabus.length}}/1000)</span>
               <span class="error-span" v-for="erro in v.errors">
                 {{ erro }}

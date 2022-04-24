@@ -131,20 +131,10 @@ export default class ProjectService {
 
   getKnowledgeAreas() {
     return new Promise((resolve, reject) => {
-      axios.get(`${global.URL_GATEWAY}/areas-conhecimento`).then((response) => {
+      axios.get(`${global.URL_GATEWAY}/project/knowledgeareas`).then((response) => {
         resolve(response);
       }).catch((error) => {
         reject(error);
-      });
-    });
-  }
-
-  getAvailableKeywordsToSubject() {
-    return new Promise((resolve, reject) => {
-      axios.get(`${global.URL_GATEWAY}/project/subject/keywords`).then((response) => {
-        resolve(response);
-      }).catch((error) => {
-        reject('Erro ao recuperar as palavras-chave para disciplina');
       });
     });
   }
@@ -155,6 +145,16 @@ export default class ProjectService {
         resolve(response);
       }).catch((error) => {
         reject('Erro ao recuperar as subareas');
+      });
+    });
+  }
+
+  getAvailableKeywordsToSubject() {
+    return new Promise((resolve, reject) => {
+      axios.get(`${global.URL_GATEWAY}/project/subject/keywords`).then((response) => {
+        resolve(response);
+      }).catch((error) => {
+        reject('Erro ao recuperar as palavras-chave para disciplina');
       });
     });
   }

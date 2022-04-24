@@ -19,26 +19,33 @@
   font-size: 20px;
 }
 
-.input-textfield {
-  border:2px solid #15355e;
-  border-radius: 5px;
-  display: flex;
+.input-textarea {
+  border: 2px solid #15355e;
   flex-direction: column;
+  display: flex;
+  border-radius: 5px;
   padding: 15px;
-  height: 45px;
   width: 100%;
-  margin: 0px;
+  outline: none;
 }
 
-.textarea-field {
-  width: 100%;
+.input-textfield {
   border: 2px solid #15355e;
-  border-radius: 5px;
-  display: flex;
   flex-direction: column;
+  display: flex;
+  border-radius: 5px;
   padding: 15px;
-  font-weight: 300;
-  /* font-family: rubik, Sans-serif; */
+  width: 100%;
+  height: 45px;
+  outline: none;
+}
+
+.input-focus:focus, .input-focus:hover {
+  border: 2px solid #f7db36 !important;
+}
+
+.input-error {
+  border: 2px solid #EB0600;
 }
 
 .btn {
@@ -87,14 +94,6 @@
   margin-top: 10px;
 }
 
-.inputHover:hover{
-  border-radius: 7px;
-  background-color: #ffffff;
-  display: flex;
-  flex-direction: column;
-  border:2px solid #f7db36;
-}
-
 .error-span {
   color: #EB0600;
 }
@@ -102,3 +101,60 @@
 .checkbox-label {
   display: inline-block;
 }
+
+/* Start Multiselect Styles */
+
+.multiselect-custom >>> .multiselect__tag {
+  background: #2c496e;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.multiselect-custom >>> .multiselect__tags {
+  border: 2px solid #15355e;
+  outline: none;
+}
+
+.multiselect-custom-focus >>> .multiselect__tags:hover {
+  border: 2px solid #f7db36;
+}
+
+.multiselect-custom-focus >>> .multiselect__tags:focus-within {
+  border: 2px solid #f7db36;
+}
+
+.multiselect-custom-error >>> .multiselect__tags {
+  border: 2px solid #EB0600;
+}
+
+.multiselect-custom >>> .multiselect__tag-icon {
+  background: #2c496e;
+  line-height: 25px;
+}
+
+.multiselect-custom >>> .multiselect__tag-icon:hover {
+  background: #15355e;
+}
+
+.multiselect-custom >>> .multiselect__tag-icon:after {
+  content: "\D7";
+  color: #ccc;
+  font-size: 16px;
+}
+
+.multiselect-custom >>> .multiselect__tag-icon:hover:after {
+  color: #fff;
+}
+
+.multiselect-custom >>> .multiselect__select {
+  background: transparent !important;
+}
+
+.multiselect-custom >>> .multiselect__option--disabled {
+  background: #ccc !important;
+  color: #35495e !important;
+  cursor: text;
+  pointer-events: none;
+}
+
+/* End Multiselect Styles */

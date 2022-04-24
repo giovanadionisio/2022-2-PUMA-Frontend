@@ -15,9 +15,8 @@
             <div role="group">
               <label for="descricao" class="input-label">PROBLEMA ENFRENTADO</label>
               <textarea id="descricao" placeholder="Descreva o desafio enfrentado usando, no mínimo, 200 caracteres."
-                maxlength="1000" rows="7" v-model="descricao" class="textarea-field"
-                v-bind:class="{ inputHover: !v.errors.length}"
-                v-bind:style="v.errors.length ? { borderColor: '#EB0600' } : {}">
+                maxlength="1000" rows="7" v-model="descricao" class="input-textarea"
+                v-bind:class="{ 'input-focus': !v.errors.length , 'input-error': v.errors.length }">
                   </textarea>
               <span class="counter">({{descricao.length}}/1000)</span>
               <span class="error-span" v-for="erro in v.errors">
@@ -30,9 +29,8 @@
             <div role="group">
               <label for="resultado" class="input-label">RESULTADOS DESEJADOS</label>
               <textarea id="resultado" placeholder="Descreva os resultados desejados" rows="5" minlength="40"
-                maxlength="500" v-model="resultadoEsperado" class="textarea-field"
-                v-bind:class="{ inputHover: !v.errors.length}"
-                v-bind:style="v.errors.length ? { borderColor: '#EB0600' } : {}"></textarea>
+                maxlength="500" v-model="resultadoEsperado" class="input-textarea"
+                v-bind:class="{ 'input-focus': !v.errors.length , 'input-error': v.errors.length }"></textarea>
               <span class="counter">({{resultadoEsperado.length}}/1000)</span>
               <span class="error-span" v-for="erro in v.errors">
                 {{ erro }}
@@ -46,8 +44,7 @@
               <div class="error-div">
                 <input type="text" id="titulo" maxlength="100" class="input-textfield"
                   placeholder="Crie um título que indique o objetivo do projeto" v-model="titulo"
-                  v-bind:class="{ inputHover: !v.errors.length}"
-                  v-bind:style="v.errors.length ? { borderColor: '#EB0600' } : {}">
+                  v-bind:class="{ 'input-focus': !v.errors.length , 'input-error': v.errors.length }">
                 <span class="error-span" v-for="erro in v.errors">
                   {{ erro }}
                 </span>
@@ -69,7 +66,7 @@
                 track-by="value" label="text" :searchable="true" :showLabels="true" :max="3" :closeOnSelect="false"
                 tagPosition="bottom" selectLabel="" deselectLabel="" selectedLabel=""
                 placeholder="Pesquise ou selecione uma palavra-chave" class="multiselect-custom"
-                :class="errors.length ? 'multiselect-custom-error' : 'multiselect-custom-hover'"
+                :class="errors.length ? 'multiselect-custom-error' : 'multiselect-custom-focus'"
                 @input="handleChangeKeywords">
                 <template slot="option" slot-scope="scope">
                   <div class="option__desc checkbox-label">
@@ -92,9 +89,14 @@
           <ValidationProvider vid="main-keyword" rules="required" v-slot="{errors}">
             <div role="group">
               <label for="mainKeyword" class="input-label">PALAVRA-CHAVE PRINCIPAL</label>
-              <b-form-select id="mainKeyword" v-model="mainKeyword" :options="selectedKeywords" size="md"
-                :state="errors.length ? false : null">
-              </b-form-select>
+              <multiselect id="mainKeyword" v-model="mainKeyword" :options="selectedKeywords" :multiple="false"
+                track-by="value" label="text" :searchable="true" :showLabels="true" tagPosition="bottom" selectLabel=""
+                deselectLabel="" selectedLabel="" placeholder="Selecione uma palavra-chave" class="multiselect-custom"
+                :class="errors.length ? 'multiselect-custom-error' : 'multiselect-custom-focus'">
+                <span slot="noResult">
+                  Nenhuma palavra-chave encontrada.
+                </span>
+              </multiselect>
               <span class="error-span">{{ errors[0] }}</span>
             </div>
           </ValidationProvider>
