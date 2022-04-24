@@ -11,8 +11,9 @@ export default class KeywordService {
   addKeyword(keyword) {
     return new Promise((resolve, reject) => {
       const auth = store.getters.token;
-      console.log('porra', `${global.URL_GATEWAY}/project/palavra-chave`);
-      axios.post(`${global.URL_GATEWAY}/project/palavra-chave`, { keyword: keyword }, { headers: { auth } }).then((response) => {
+      console.log('porra', `${global.URL_GATEWAY}/keywords/palavra-chave`);
+      console.log('porra2', keyword);
+      axios.post(`${global.URL_GATEWAY}/keywords/palavra-chave`, { keyword: keyword }, { headers: { auth } }).then((response) => {
         resolve(response);
       }).catch((response) => {
         reject(response);
@@ -23,8 +24,8 @@ export default class KeywordService {
   addKeywordToSubject(keywordid, subjectid) {
     return new Promise((resolve, reject) => {
       const auth = store.getters.token;
-      console.log(`${global.URL_GATEWAY}/project/palavra-chave`);
-      axios.post(`${global.URL_GATEWAY}/project/subject/keyword`, { keywordid: keywordid, subjectid: subjectid }, { headers: { auth } }).then((response) => {
+      console.log(`${global.URL_GATEWAY}/keywords/palavra-chave`);
+      axios.post(`${global.URL_GATEWAY}/keywords/subject/keyword`, { keywordid: keywordid, subjectid: subjectid }, { headers: { auth } }).then((response) => {
         resolve(response);
       }).catch((response) => {
         reject(response);
@@ -34,8 +35,8 @@ export default class KeywordService {
 
   getKeywords() {
     return new Promise((resolve, reject) => {
-      // console.log('Cheguei aqui');
-      axios.get(`${global.URL_GATEWAY}/project/palavra-chave2`).then((response) => {
+      // console.log('Cheguei aqui no keywords');
+      axios.get(`${global.URL_GATEWAY}/keywords/palavra-chave2`).then((response) => {
         resolve(response);
       }).catch((error) => {
         alert(error);
@@ -47,7 +48,7 @@ export default class KeywordService {
   getSubjects() {
     return new Promise((resolve, reject) => {
       // console.log('Cheguei aqui No Subjects');
-      axios.get(`${global.URL_GATEWAY}/project/subjects`).then((response) => {
+      axios.get(`${global.URL_GATEWAY}/keywords/subjects`).then((response) => {
         resolve(response);
       }).catch((error) => {
         alert(error);
@@ -60,7 +61,7 @@ export default class KeywordService {
     return new Promise((resolve, reject) => {
       const auth = store.getters.token;
       console.log('DEBUG UPDATE:', keywordid, newKeyword);
-      axios.put(`${global.URL_GATEWAY}/project/palavra-chave/edit`, { keywordid: keywordid, newKeyword: newKeyword }, { headers: { auth } }).then((response) => {
+      axios.put(`${global.URL_GATEWAY}/keywords/palavra-chave/edit`, { keywordid: keywordid, newKeyword: newKeyword }, { headers: { auth } }).then((response) => {
         resolve(response);
       }).catch((response) => {
         reject(response);
@@ -72,7 +73,7 @@ export default class KeywordService {
     return new Promise((resolve, reject) => {
       const auth = store.getters.token;
       console.log('DEBUG UPDATE SUBJECT:', keywordid, subjectid);
-      axios.put(`${global.URL_GATEWAY}/project/switch/subject`, { keywordid: keywordid, subjectid: subjectid }, { headers: { auth } }).then((response) => {
+      axios.put(`${global.URL_GATEWAY}/keywords/switch/subject`, { keywordid: keywordid, subjectid: subjectid }, { headers: { auth } }).then((response) => {
         resolve(response);
       }).catch((response) => {
         reject(response);
@@ -81,8 +82,8 @@ export default class KeywordService {
   }
 
   deleteKeyword(keywordid) {
-    const projectUrlDelete = `${global.URL_GATEWAY}/project/palavra-chave/${keywordid}/delete`;
-    console.log('UUUUUUU', projectUrlDelete);
+    const projectUrlDelete = `${global.URL_GATEWAY}/keywords/palavra-chave/${keywordid}/delete`;
+    console.log('SIUUU RECEBA', projectUrlDelete);
     return new Promise((resolve, reject) => {
       axios.put(projectUrlDelete).then((response) => {
         resolve(response);

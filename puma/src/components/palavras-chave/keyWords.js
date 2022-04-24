@@ -86,7 +86,6 @@ export default {
 
     setFieldsPermissions() {
       const { isAdmin } = this.$store.getters.user;
-
       if (isAdmin) {
         this.getSubjects();
       } else {
@@ -97,7 +96,6 @@ export default {
 
     async getKeywordsInfo() {
       const { data } = await this.keywordService.getKeywords();
-      // console.log(data);
       Object.keys(data).forEach((key) => {
         // console.log('debug', data[key]);
         this.keywordsInfo[data[key].keywordid] = data[key].array_agg;
@@ -108,6 +106,7 @@ export default {
       const { userId } = this.$store.getters.user;
       const { data } = await this.keywordService.getKeywords();
       const subjectByKeywords = [];
+      // console.log('data', data);
       Object.keys(data).forEach((key) => {
         Object.values(data[key].array_agg).forEach((allowId) => {
           if (allowId === userId) {
@@ -170,7 +169,6 @@ export default {
           this.newKeyword).then(async (response) => {
           const idKeywordUpdated = response.data[0].keywordid;
           this.keywordService.updateSubjectKeyword(idKeywordUpdated, this.selectedSubject);
-          this.getKeyWords();
           this.openModalEdit = false;
           this.makeToast('success', 'Palavra-Chave Editada com Sucesso!');
           this.getKeyWords();
@@ -236,7 +234,8 @@ export default {
 
       if (isFormValid && this.kwNameAlreadyExist === false) {
         this.keywordService.addKeyword(this.inputKeyword).then((response) => {
-          const currentKeywordid = response.data.response.response.keywordid;
+          // console.log('créu', response.data.response.keywordid);
+          const currentKeywordid = response.data.response.keywordid;
           const idSubject = this.selectedToRegister;
           this.keywordService.addKeywordToSubject(currentKeywordid, idSubject);
           this.openModalRegister = false;
