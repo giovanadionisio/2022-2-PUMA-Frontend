@@ -1,4 +1,6 @@
 /* eslint-disable */
+import { extend } from 'vee-validate';
+import { regex } from 'vee-validate/dist/rules';
 import Loading from '../../shared/loading/Loading.vue';
 import UserService from '../../../services/UserService';
 import VisitorNav from '../../../components/VisitorNav/VisitorNav.vue';
@@ -109,3 +111,9 @@ export default {
     },
   },
 };
+
+extend('regex', {
+  // eslint-disable-next-line camelcase
+  ...regex,
+  message: 'Precisa ter letras e números',
+});
