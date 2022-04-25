@@ -1,8 +1,8 @@
+/* eslint-disable*/
 import ProjectService from '../../../services/ProjectService';
 
 const statusProjetoEnum = require('../../../utils/enums/status-projeto.enum');
 
-/* eslint-disable*/
 export default {
   name: 'ConsultaProjetos',
   data() {
@@ -57,9 +57,6 @@ export default {
   beforeMount() {
     this.getProjects();
   },
-  mounted() {
-    document.title = 'PUMA | Consulta Projetos';
-  },
   methods: {
     getProjects() {
       this.isLoading = true;
@@ -91,7 +88,7 @@ export default {
         row.etapa = project.status === 'IC' || project.status === 'EX' || project.status === 'EC' ? 'Projeto' : 'Proposta';
         row.status = statusProjetoEnum(project.status);
         row.name = project.name.slice(0, 20);
-        row.buttons = '<button name="visualizar" class="btn cp-btn mr-2" id=' + project.projectid + '><i class="fa-solid fa-circle-info mr-2"></i>VER DETALHES</button>';
+        row.buttons = '<button name="visualizar" class="btn cp-btn mx-2" id=' + project.projectid + '><i class="fa-solid fa-circle-info mr-2 ml-0"></i>VER DETALHES</button>';
         this.data.rows.push(row);
       });
     },

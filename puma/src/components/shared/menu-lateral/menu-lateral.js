@@ -1,7 +1,6 @@
 /* eslint-disable */
 import ItemMenuLateral from "./item-menu-lateral/ItemMenuLateral.vue";
 import USER_CONST from '../../../utils/enums/users.enum.js';
-import NAV_CONST from '../../../utils/enums/navigations.enum.js';
 
 export default {
     name: 'MenuLateral',
@@ -14,43 +13,48 @@ export default {
             user: this.$store.getters.user,
             menuItems: {
                 adminProjects: {
-                    key: NAV_CONST.ADMIN_PROJECTS,
+                    basePath: '/projetos-plataforma',
                     title: 'Projetos',
                     iconUrl: require('@/assets/menu-2.svg'),
                     show: () => { return this.user.isAdmin },
                     onclick: () => {
-                        this.$store.commit('SET_CURRENT_NAVIGATION', NAV_CONST.ADMIN_PROJECTS);
-                        this.$router.push('/projetos').catch(() => {});
+                        this.$router.push({ path: '/projetos-plataforma' });
                     },
                 },
                 subjectProjects: {
-                    key: NAV_CONST.SUBJECT_PROJECTS,
+                    basePath: '/projetos-disciplina',
                     title: 'Projetos das Disciplinas',
                     iconUrl: require('@/assets/menu-2.svg'),
                     show: () => { return [USER_CONST.TYPES.PROFESSOR.KEY].some((type) => type === this.user.type); },
                     onclick: () => {
-                        this.$store.commit('SET_CURRENT_NAVIGATION', NAV_CONST.SUBJECT_PROJECTS);
-                        this.$router.push({path: '/projetos-disciplina'}).catch(() => {});
+                        this.$router.push({ path: '/projetos-disciplina' });
                     },
                 },
                 myProjects: {
-                    key: NAV_CONST.MY_PROJECTS.KEY,
+                    basePath: '/meus-projetos',
                     title: 'Meus Projetos',
                     iconUrl: require('@/assets/menu-1.png'),
-                    show: () => { return true },
+                    show: () => { return true; },
                     onclick: () => {
-                        this.$store.commit('SET_CURRENT_NAVIGATION', NAV_CONST.MY_PROJECTS.KEY);
-                        this.$router.push({ path: '/meus-projetos'}).catch(() => {});
+                        this.$router.push({ path: '/meus-projetos' });
                     },
                 },
                 subjects: {
-                    key: NAV_CONST.SUBJECTS.KEY,
+                    basePath: '/disciplinas',
                     title: 'Disciplinas',
                     iconUrl: require('@/assets/subjects.png'),
-                    show: () => { return true },
+                    show: () => { return [USER_CONST.TYPES.PROFESSOR.KEY].some((type) => type === this.user.type); },
                     onclick: () => {
-                        this.$store.commit('SET_CURRENT_NAVIGATION', NAV_CONST.SUBJECTS.KEY);
-                        this.$router.push({ path: '/disciplinas'}).catch(() => {});
+                        this.$router.push({ path: '/disciplinas' });
+                    },
+                },
+                keywords: {
+                    basePath: '/palavras-chave',
+                    title: 'Palavras-Chave',
+                    iconUrl: require('@/assets/menu-4.svg'),
+                    show: () => { return [USER_CONST.TYPES.PROFESSOR.KEY].some((type) => type === this.user.type); },
+                    onclick: () => {
+                        this.$router.push({ path: '/palavras-chave' });
                     },
                 },
                 logout: {
@@ -58,9 +62,8 @@ export default {
                     iconUrl: require('@/assets/menu-3.svg'),
                     show: () => { return true },
                     onclick: () => {
-                        this.$store.commit('RESET_NAVIGATION_STATE');
                         this.$store.commit('RESET_USER_STATE');
-                        this.$router.push({path: '/usuario/login'}).catch(() => {});
+                        this.$router.push({ path: '/usuario/login' });
                     },
                 }
             }
@@ -68,8 +71,7 @@ export default {
     },
     methods: {
         redirectToUserProjects() {
-            this.$store.commit('SET_CURRENT_NAVIGATION', NAV_CONST.MY_PROJECTS.KEY);
-            this.$router.push({ path: '/meus-projetos'}).catch(() => {});
+            this.$router.push({ path: '/meus-projetos' });
         }
     },
 };

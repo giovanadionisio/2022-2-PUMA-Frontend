@@ -28,7 +28,7 @@ export default {
         if (!isFormValid) return;
 
         this.$store.commit('OPEN_LOADING_MODAL', { title: 'Cadastrando...' });
-        console.log({ main: this.mainKeyword })
+
         const project = {
           name: this.titulo,
           problem: this.descricao,

@@ -3,7 +3,7 @@ import ModalAviso from '../../shared/modal-confirmacao/ModalConfirmacao.vue';
 /* eslint-disable*/
 export default {
   name: 'ConsultaDisciplinas',
-  components: {ModalAviso},
+  components: { ModalAviso },
   data() {
     return {
       data: {
@@ -71,7 +71,7 @@ export default {
     configTableRows() {
       this.subjects.forEach((subject) => {
         const row = subject;
-        row.buttons = '<button name="visualizar" class="btn mr-2" id=' + subject.subjectid + '><i class="fa-solid fa-circle-info mr-2"></i>VER DETALHES</button><button name="editar" class="btn mr-2" id=' + subject.subjectid + '><i class="fas fa-edit mr-2"></i>EDITAR</button><button name="excluir" class="btn mr-2" id=' + subject.subjectid + '><i class="fa-solid fa-trash mr-2"></i>EXCLUIR</button>';
+        row.buttons = '<button name="visualizar" class="btn cd-btn mx-2" id=' + subject.subjectid + '><i class="fa-solid fa-circle-info mr-2 ml-0"></i>VER DETALHES</button><button name="editar" class="btn cd-btn mx-2" id=' + subject.subjectid + '><i class="fas fa-edit mr-2 ml-0"></i>EDITAR</button><button name="excluir" class="btn cd-btn mx-2" id=' + subject.subjectid + '><i class="fa-solid fa-trash mr-2 ml-0"></i>EXCLUIR</button>';
         this.data.rows.push(row);
       });
     },
@@ -96,8 +96,8 @@ export default {
       const searchInput = document.getElementsByTagName('input')[0];
       searchInput.placeholder = 'Pesquise por item ou título';
       // add the below lines to initialize search input with some value.
-        // searchInput.setAttribute('value', 'math');
-        // searchInput.dispatchEvent(new Event('input'));
+      // searchInput.setAttribute('value', 'math');
+      // searchInput.dispatchEvent(new Event('input'));
       searchInput.classList.add('search-input');
       searchInput.style.width = '100%';
       return searchInput;
@@ -116,12 +116,12 @@ export default {
     configAddProjectButton(searchInput) {
       if (!document.getElementById('btn-add-subject')) {
         const addSubjectButton = document.createElement('button');
-        addSubjectButton.classList.add('btn', 'mt-3', 'col-md-8');
+        addSubjectButton.classList.add('btn', 'cd-btn', 'mt-3', 'col-md-8');
         addSubjectButton.innerHTML = '<i class="fa-solid fa-plus-circle mr-2 add-project"></i>ADICIONAR DISCIPLINA';
         addSubjectButton.name = 'cadastrar';
         addSubjectButton.id = 'btn-add-subject';
         addSubjectButton.addEventListener('click', () => {
-          this.$router.push({ path: `/disciplinas/cadastrar` }).catch(() => {});
+          this.$router.push({ path: `/disciplinas/cadastrar` }).catch(() => { });
         });
         searchInput.after(addSubjectButton);
       }
@@ -131,7 +131,7 @@ export default {
         const button = event.target;
         const operacao = button.name;
         if (button.id && operacao !== 'excluir') {
-          this.$router.push({path: `/disciplinas/${operacao}/${button.id}`}).catch(() => {});
+          this.$router.push({ path: `/disciplinas/${operacao}/${button.id}` }).catch(() => { });
         } else if (operacao === 'excluir') {
           this.currentSubject = { subjectid: button.id };
           this.$refs['modal-confirmacao-exclusao'].show();

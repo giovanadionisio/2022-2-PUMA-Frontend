@@ -25,7 +25,6 @@ const routes = [
   {
     path: '/usuario/cadastro',
     name: 'Cadastro Usuário',
-    // eslint-disable-next-line import/no-unresolved
     component: () => import('../components/usuario/cadastro-usuario/CadastroUsuario.vue'),
     meta: {
       guest: true,
@@ -48,7 +47,7 @@ const routes = [
     },
   },
   {
-    path: '/projetos',
+    path: '/projetos-plataforma',
     name: 'Consulta de Projetos',
     component: () => import('../components/projeto/consulta-projeto/ConsultaProjeto.vue'),
     meta: {
@@ -56,7 +55,7 @@ const routes = [
     },
   },
   {
-    path: '/projetos/visualizar/:id',
+    path: '/projetos-plataforma/visualizar/:id',
     name: 'Visualizar Projeto',
     component: () => import('../components/projeto/ViewProject/ViewProject.vue'),
     meta: {
@@ -80,17 +79,17 @@ const routes = [
     },
   },
   {
-    path: '/meus-projetos/cadastrar',
-    name: 'Cadastro de Projeto',
-    component: () => import('../components/projeto/cadastro-projeto/CadastroProjeto.vue'),
+    path: '/meus-projetos',
+    name: 'Meus Projetos',
+    component: () => import('../components/projeto/consulta-projeto/ConsultaProjeto.vue'),
     meta: {
       requiresAuth: true,
     },
   },
   {
-    path: '/meus-projetos',
-    name: 'Meus Projetos',
-    component: () => import('../components/projeto/consulta-projeto/ConsultaProjeto.vue'),
+    path: '/meus-projetos/cadastrar',
+    name: 'Cadastro de Projeto',
+    component: () => import('../components/projeto/cadastro-projeto/CadastroProjeto.vue'),
     meta: {
       requiresAuth: true,
     },
@@ -131,6 +130,14 @@ const routes = [
     path: '/disciplinas/visualizar/:id',
     name: 'Visualização d Disciplina',
     component: () => import('../components/disciplina/cadastro-disciplina/CadastroDisciplina.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/palavras-chave',
+    name: 'Palavras Chave',
+    component: () => import('../components/palavras-chave/KeyWords.vue'),
     meta: {
       requiresAuth: true,
     },

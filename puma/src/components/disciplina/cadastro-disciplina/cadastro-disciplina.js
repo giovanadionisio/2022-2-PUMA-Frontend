@@ -56,7 +56,6 @@ export default {
   methods: {
     async onSubmit() {
       try {
-        console.log('--->', this.subareasSelected);
         const isFormValid = await this.$refs.observer.validate();
         const isMultiselectValid = this.validateMultiselects();
         if (isFormValid && isMultiselectValid) {
@@ -103,14 +102,10 @@ export default {
     makeToast: function (title, message, variant) {
       this.$bvToast.toast(message, { title: title, variant: variant, solid: true });
     },
-    removefn(a, b) {
-      console.log({ a, b });
-    },
     sortKeywordMultiselectLabels() {
       this.keywordsSelected.sort((a, b) => b.keyword.length - a.keyword.length);
     },
     sortSubareaMultiselectLabels() {
-      console.log(this.subareasSelected)
       this.subareasSelected.sort((a, b) => b.description.length - a.description.length);
     },
     sortProfessorMultiselectLabels() {
