@@ -3,80 +3,53 @@
     font-weight: bold;
     font-size: 40px;
     text-transform: uppercase;
-  }
-  
-  .form {
+}
+
+.form {
     margin: 5px;
     background-color: #F2F2F2;
     border-radius: 5px;
     box-sizing: border-box;
-  }
-  
-  .title-input-field {
-    /* font-size: 14px; */
-    border:2px solid #15355e;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    padding: 15px;
-    height: 45px;
-  }
-  
-  .textarea-field {
-    /* font-size: 14px; */
-    border:2px solid #15355e;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    padding: 15px;
-    font-family: rubik, Sans-serif;
-    font-weight: 300;
-  }
-  
-  .bubblesContainer {
-    max-width: 1000px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  
-  }
-  
-  h3 {
-    font-size: 18px;
-    margin: 15px 0 3px 0;
-    position: relative;
-    display: inline-block;
+}
+
+.input-label {
     font-weight: bold;
-  }
-  
-  #categoryBubble {
-    cursor: pointer;
-    user-select: none;
-    margin-left: -8px;
-    border-radius: 6px;
-    padding-left: 5px;
-    padding-right: 5px;
-  }
-  
-  div#checklist {
-    display: inline-flex;
-    padding-left: 13px;
-    justify-content: space-between;
-  }
-  
-  #checklistArea {
-    border: #15355e;
-    border-style: solid;
-    border-width: 2px;
-    border-radius: 8px;
-    margin: 10px 5px 15px 5px;
-    display: -webkit-inline-box;
-    position: relative;
-    padding-left: 8px;
-  }
-  
-  .btn {
-    color: #15355E;;
+    color: #15355E;
+    text-transform: uppercase;
+    font-size: 20px;
+}
+
+.input-textarea {
+    border: 2px solid #15355e;
+    flex-direction: column;
+    display: flex;
+    border-radius: 5px;
+    padding: 15px;
+    width: 100%;
+    outline: none;
+}
+
+.input-textfield {
+    border: 2px solid #15355e;
+    flex-direction: column;
+    display: flex;
+    border-radius: 5px;
+    padding: 15px;
+    width: 100%;
+    height: 45px;
+    outline: none;
+}
+
+.input-focus:focus, .input-focus:hover {
+    border: 2px solid #f7db36 !important;
+}
+
+.input-error {
+    border: 2px solid #EB0600;
+}
+
+.btn {
+    color: #15355E;
     align-items: center;
     background-color: #f7db36;
     color: #15355e;
@@ -91,89 +64,81 @@
     letter-spacing: 0.03em;
     text-transform: uppercase;
     height: 40px;
-  }
+}
 
-  .cancel-btn {
+.cancel-btn {
     background-color: #ffffff;
-  }
-  
-  .title-textarea {
-    font-weight: bold;
-    color: #15355E;
-    font-size: 24px;
-    line-height: 28px;
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
-  }
-  
-  .text-description {
-    color:#15355e;
-    font-weight: 700;
-    font-size: 16px;
-    margin-top: 10px;
-  }
-  
-  .text-example {
-    color:#15355e;
-    font-weight: 700;
-    font-size: 18px;
-    margin-top: 10px;
-  }
-  
-  .title-slot {
-    font-size: 24px;
-    text-align: left;
-    color: #15355E;
-    letter-spacing: 00.035em;
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 28px;
-    margin-top: 30px;
-    margin-bottom: -10px;
-  }
-  
-  .title-keywords{
-    font-weight: bold;
-    color: #15355E;
-    font-size: 24px;
-    line-height: 28px;
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
-  }
-  
-  .text-keywords{
-    font-size: 1.1em;
+}
+
+.counter {
+    float: right;
+    font-size: 0.9rem;
+    color: #94A6BC;
+}
+
+.error-span {
     text-align: left;
     color: #EB0600;
-  }
-  
-  .inputFieldRegisterProject:hover{
-    border-radius: 7px;
-    background-color: #ffffff;
-    display: flex;
-    flex-direction: column;
-    border:2px solid #f7db36;
-  }
-  
-  .error-span {
-    display: flex;
-    margin-top: 10px;
-    text-align: left;
-    flex-direction: column;
-    color: #EB0600;
-  }
-  
-  .error-div {
-    display: flex;
-    flex-direction: column;
-    width: 100%
-  }
-  
-  .checkbox-label {
+}
+
+.checkbox-label {
     display: inline-block;
-  }
-  
-  .multiselect.invalid .multiselect__tags {
-    border: 1px solid #f86c6b !important;
-  }
-  
+}
+
+
+/* Start Multiselect Styles */
+
+.multiselect-custom >>> .multiselect__tag {
+    background: #2c496e;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.multiselect-custom >>> .multiselect__tags {
+    border: 2px solid #15355e;
+    outline: none;
+}
+
+.multiselect-custom-focus >>> .multiselect__tags:hover {
+    border: 2px solid #f7db36;
+}
+
+.multiselect-custom-focus >>> .multiselect__tags:focus-within {
+    border: 2px solid #f7db36;
+}
+
+.multiselect-custom-error >>> .multiselect__tags {
+    border: 2px solid #EB0600;
+}
+
+.multiselect-custom >>> .multiselect__tag-icon {
+    background: #2c496e;
+    line-height: 25px;
+}
+
+.multiselect-custom >>> .multiselect__tag-icon:hover {
+    background: #15355e;
+}
+
+.multiselect-custom >>> .multiselect__tag-icon:after {
+    content: "\D7";
+    color: #ccc;
+    font-size: 16px;
+}
+
+.multiselect-custom >>> .multiselect__tag-icon:hover:after {
+    color: #fff;
+}
+
+.multiselect-custom >>> .multiselect__select {
+    background: transparent !important;
+}
+
+.multiselect-custom >>> .multiselect__option--disabled {
+    background: #ccc !important;
+    color: #35495e !important;
+    cursor: text;
+    pointer-events: none;
+}
+
+/* End Multiselect Styles */

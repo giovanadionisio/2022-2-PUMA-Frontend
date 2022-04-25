@@ -1,12 +1,9 @@
-/*.table-striped>tbody>tr:nth-child(odd)>td,*/
-/*.table-striped>tbody>tr:nth-child(odd)>th {*/
-/*    background-color: red;*/
-/*}*/
+
 .hidden-scroll-bar {
   overflow-x: hidden;
 }
 
-thead{
+thead {
   font-size: 25px;
   color: #15355e;
 }
@@ -23,15 +20,6 @@ td {
 
 svg {
   cursor: pointer;
-}
-
-.btn {
-  padding: 4px;
-  font-size: 16px;
-  background-color: white;
-  color: #15355e;
-  border-color: #15355e;
-  font-weight: bold;
 }
 
 .sizes {
@@ -52,16 +40,9 @@ svg {
   padding-left: 30px;
 }
 
-.search-icon {
-  cursor: auto;
-  position: absolute;
-  z-index: 3;
-  margin-left: 10px;
-  padding-top: 12px;
-}
-
-.table {
+.keywords-table {
   margin-top: 30px;
+  border-collapse: collapse;
 }
 
 .no-results {
@@ -74,14 +55,14 @@ svg {
   margin-left: 0px !important;
 }
 
-.tittle {
+.kw-title {
   color: #15355E;
   font-weight: bold;
   font-size: 40px;
   text-transform: uppercase
 }
 
-.sub-tittle {
+.kw-sub-title {
   color: #15355E;
   font-size: 20px !important;
   font-weight: normal !important;
@@ -110,7 +91,16 @@ svg {
   justify-content: center;
 }
 
-.btn-crud {
+.kw-btn {
+  padding: 4px;
+  font-size: 16px;
+  background-color: white;
+  color: #15355e;
+  border-color: #15355e;
+  font-weight: bold;
+}
+
+.kw-btn-crud {
   align-items: center;
   background-color: #f7db36;
   color: #15355e;
@@ -125,19 +115,19 @@ svg {
   text-transform: uppercase;
 }
 
-.btn-crud:hover {
+.kw-btn-crud:hover {
   color: #15355e;
   background-color: #f7db36;
   border: 2px solid #f7db36;
 }
 
-.btn-crud:focus {
+.kw-btn-crud:focus {
   color: #15355e;
   background-color: #f7db36;
   border: 2px solid #f7db36;
 }
 
-.btn-crud:active {
+.kw-btn-crud:active {
   color: #15355e;
   background-color: #f7db36;
   border: 2px solid #f7db36;
@@ -152,7 +142,6 @@ svg {
   color: #15355e;
   background-color: #fcfcfc;
   border: 2px solid #f7db36;
-
 }
 
 .c-invert:focus {
@@ -165,7 +154,7 @@ svg {
   background-color: white;
 }
 
-.btn-delete {
+.kw-btn-delete {
   align-items: center;
   background-color: #EB0600;
   color: white;
@@ -180,13 +169,13 @@ svg {
   text-transform: uppercase;
 }
 
-.btn-delete:focus {
+.kw-btn-delete:focus {
   color: white;
   background-color: #EB0600;
   border: 2px solid #EB0600;
 }
 
-.btn-delete:active {
+.kw-btn-delete:active {
   color: white;
   background-color: #a30602;
   border: 2px solid #EB0600;
@@ -224,84 +213,13 @@ svg {
   color: #15355e;
   font-size: 17px;
 }
-.inputFieldKeyword:hover{
-  border-radius: 7px;
-  background-color: #ffffff;
-  display: flex;
-  flex-direction: column;
-  border:2px solid #f7db36;
-}
 
-.title-input-field {
-  /* font-size: 14px; */
-  border:2px solid #15355e;
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  margin-left:10%;
-  height: 26px;
-  width: 80%;
-  float: center;
-}
-
-.error-span {
-  display: flex;
-  margin-left: 10%;
-  margin-top: 10px;
-  text-align: left;
-  flex-direction: column;
-  color: #EB0600;
-}
-
-
-.textarea-field {
-  /* font-size: 14px; */
-  border:2px solid #15355e;
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  padding: 150px;
-  font-family: rubik, Sans-serif;
-  font-weight: 300;
-}
-
-
-.title-textarea {
-  font-weight: bold;
-  color: #15355E;
-  font-size: 24px;
-  line-height: 28px;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  margin-left:10%;
-
-}
-
-
-.error-span {
-  display: flex;
-  margin-top: 10px;
-  text-align: left;
-  flex-direction: column;
-  margin-left: 75px;
-  color: #EB0600;
-  font-weight: normal !important;
-}
-
-.error-div {
-  display: flex;
-  flex-direction: column;
-  width: 100%
-}
-
-.invalid {
+.kw-invalid {
   border: 2px solid #EB0600;
 }
 
-.error {
+.kw-error {
   display: flex;
-  /* margin-top: 6px; */
   text-align: left;
   flex-direction: column;
   font-weight: bold;

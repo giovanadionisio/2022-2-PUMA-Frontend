@@ -1,32 +1,34 @@
 <div class="main-content hidden-scroll-bar">
-  <div class="tittle ml-4">
-    Lista das Palavras-Chave
-  </div>
-  <div class="sub-tittle ml-4">
-    Nesta página você consegue ver todas as palavras-chave da plataforma 
-  </div>
-  <div class="ml-4 div-filter-and-button">
-    <b-form-select @input="filter" class="col-md-4 select" v-model="selected" :options="subjects"></b-form-select>
-    <button class="btn sizes mr-2" @click="openModalRegister=true" v-if="true">
-      <font-awesome-icon icon="fa-regular fa-plus-square" size="lg" />
-      CRIAR NOVA PALAVRA-CHAVE
-    </button>
-  </div>
-  <div>
-    <b-table class="table ml-4" :items="tableKeywordSubject" :fields="keyWordsFields">
-      <template #cell(actions)="data">
-        <div class="actions">
-          <button class="btn mr-2" @click="editKeyWord(data.item)" v-if="AllowEdit(data.item)">
-            <font-awesome-icon icon="fa-regular fa-edit" size="lg" />
-            EDITAR
-          </button>
-          <button class="btn mr-2" @click="deleteKeyWord(data.item)" v-if="AllowEdit(data.item)">
-            <font-awesome-icon icon="fa-regular fa-trash-can" size="lg"  />
-            EXCLUIR
-          </button>
-        </div>
-      </template>
-    </b-table>
+  <div class="mx-4">
+    <div class="kw-title">
+      Lista das Palavras-Chave
+    </div>
+    <div class="kw-sub-title">
+      Nesta página você consegue ver todas as palavras-chave da plataforma
+    </div>
+    <div class="div-filter-and-button">
+      <b-form-select @input="filter" class="col-md-4 select" v-model="selected" :options="subjects"></b-form-select>
+      <button class="kw-btn btn sizes mr-2" @click="addKeyword()" v-if="true">
+        <font-awesome-icon icon="fa-regular fa-plus-square" size="lg" />
+        CRIAR NOVA PALAVRA-CHAVE
+      </button>
+    </div>
+    <div>
+      <b-table class="keywords-table" :items="tableKeywordSubject" :fields="keyWordsFields">
+        <template #cell(actions)="data">
+          <div class="actions">
+            <button class="kw-btn btn mr-2" @click="editKeyword(data.item)" v-if="allowEdit(data.item)">
+              <font-awesome-icon icon="fa-regular fa-edit" size="lg" />
+              EDITAR
+            </button>
+            <button class="kw-btn btn mr-2" @click="deleteKeyword(data.item)" v-if="allowEdit(data.item)">
+              <font-awesome-icon icon="fa-regular fa-trash-can" size="lg" />
+              EXCLUIR
+            </button>
+          </div>
+        </template>
+      </b-table>
+    </div>
   </div>
 
   <b-modal hide-footer v-model="openModalRegister" centered size="lg" modal-class="myclass">
@@ -43,9 +45,11 @@
           </template>
 
           <validation-provider rules="required" v-slot="{ errors }">
-            <b-form-input @input="kewordNameAlreadyExist" type="text" placeholder="Escreva aqui sua nova palavra-chave" v-bind:class="{ invalid: errors.length }" class="custom-input" id="inputKeyword" v-model="inputKeyword"/>
-            <span class="error">{{ errors[0] }}</span>
-            <span v-if="kwNameAlreadyExist" class="error">Palavra-chave já existe, tente novamente.</span>
+            <b-form-input @input="keywordNameAlreadyExist" type="text" placeholder="Escreva aqui sua nova palavra-chave"
+              v-bind:class="{ 'kw-invalid': errors.length }" class="custom-input" id="inputKeyword"
+              v-model="form.keywordName" />
+            <span class="kw-error">{{ errors[0] }}</span>
+            <span v-if="kwNameAlreadyExist" class="kw-error">Palavra-chave já existe, tente novamente.</span>
           </validation-provider>
         </b-form-group>
 
@@ -55,21 +59,21 @@
           </template>
 
           <validation-provider rules="required" v-slot="{ errors }">
-            <b-select v-model="selectedToRegister" :options="subjectsForm"
-            v-bind:class="{ invalid: errors.length }" class="custom-input" />
-            <span class="error">{{ errors[0] }}</span>
+            <b-select v-model="form.selectedSubject" :options="subjectsForm"
+              v-bind:class="{ 'kw-invalid': errors.length }" class="custom-input" />
+            <span class="kw-error">{{ errors[0] }}</span>
           </validation-provider>
         </b-form-group>
 
       </div>
     </ValidationObserver>
-      
+
     <div class="divFooter">
-      <button class="btn-crud btn-warning" style="margin-right: 5%;" @click="addKeyword()" >
+      <button class="kw-btn-crud btn-warning" style="margin-right: 5%;" @click="handleAdd()">
         CRIAR
       </button>
 
-      <button class="btn-crud c-invert" @click="openModalRegister=false">
+      <button class="kw-btn-crud c-invert" @click="openModalRegister=false">
         CANCELAR
       </button>
     </div>
@@ -79,40 +83,40 @@
     <template #modal-header>
       EDITAR PALAVRA-CHAVE
     </template>
-   
+
     <ValidationObserver ref="observer" v-slot="{ invalid }">
       <div style="display: flex; flex-direction: column; align-items: center;">
-        
         <b-form-group class="col-md-9">
           <template #label>
             <span class="label-text">PALAVRA-CHAVE</span>
           </template>
-        
+
           <validation-provider rules="required" v-slot="{ errors }">
-            <b-form-input type="text" placeholder="Escreva aqui a palavra-chave" v-model="newKeyword"
-            v-bind:class="{ invalid: errors.length }" class="custom-input" />
-            <span class="error">{{ errors[0] }}</span>
+            <b-form-input type="text" placeholder="Escreva aqui a palavra-chave" v-model="form.keywordName"
+              v-bind:class="{ 'kw-invalid': errors.length }" class="custom-input" />
+            <span class="kw-error">{{ errors[0] }}</span>
           </validation-provider>
         </b-form-group>
-        
+
         <b-form-group class="col-md-9">
           <template #label>
             <span class="label-text">DISCIPLINA</span>
           </template>
 
           <validation-provider rules="required" v-slot="{ errors }">
-            <b-select v-model="selectedSubject" :options="subjectsForm" v-bind:class="{ invalid: errors.length }" class="custom-input"/>
-            <span class="error">{{ errors[0] }}</span>
+            <b-select v-model="form.selectedSubject" :options="subjectsForm"
+              v-bind:class="{ 'kw-invalid': errors.length }" class="custom-input" />
+            <span class="kw-error">{{ errors[0] }}</span>
           </validation-provider>
         </b-form-group>
       </div>
     </ValidationObserver>
 
     <div class="divFooter">
-      <button @click="editar" class="btn-crud btn-warning" style="margin-right: 5%;">
+      <button @click="handleEdit" class="kw-btn-crud btn-warning" style="margin-right: 5%;">
         EDITAR
       </button>
-      <button class="btn-crud c-invert" @click="openModalEdit=false">
+      <button class="kw-btn-crud c-invert" @click="openModalEdit=false">
         CANCELAR
       </button>
     </div>
@@ -123,17 +127,17 @@
     <template #modal-header>
       EXCLUIR PALAVRA-CHAVE
     </template>
-    
+
     <div style="display: flex; flex-direction: column; align-items: center;">
       <span class="text-delete">Voce tem certeza que deseja confirmar</span>
       <span class="text-delete">a exclusao da palavra-chave ?</span>
     </div>
 
     <div class="divFooter">
-      <button class="btn-delete" style="margin-right: 5%;" @click="deletar">
+      <button class="kw-btn-delete" style="margin-right: 5%;" @click="handleDelete">
         CONFIRMAR
       </button>
-      <button class="btn-delete d-invert" @click="openModalDelete=false">
+      <button class="kw-btn-delete d-invert" @click="openModalDelete=false">
         CANCELAR
       </button>
     </div>

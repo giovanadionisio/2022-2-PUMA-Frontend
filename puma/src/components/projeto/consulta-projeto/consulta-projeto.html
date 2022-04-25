@@ -5,7 +5,7 @@
   </div>
   <div v-if="!isLoading && projects.length" class="tittle sub-tittle ml-4">
     {{ 'Projetos ' + (operacao === 'meus-projetos' ? 'cadastrados pelo usuário' : (operacao === 'projetos' ?
-    'cadastrados na plataforma' : 'alocados para as disciplinas mininistradas pelo usuário')) }}
+    'cadastrados na plataforma' : 'alocados para as disciplinas ministradas pelo usuário')) }}
   </div>
   <div v-show="isLoading" style="margin-left: 38vw" class="mt-4">
     <i class="fa-solid fa-circle-notch fa-spin fa-3x"></i>
