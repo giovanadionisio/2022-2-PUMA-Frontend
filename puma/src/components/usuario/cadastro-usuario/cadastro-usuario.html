@@ -60,18 +60,18 @@
                       </div>
                     </ValidationProvider>
 
-                    <ValidationProvider rules="required" v-slot="v" :bails="false" v-show="isFirstPage">
+                    <ValidationProvider :rules="{required: true, min: 6, regex: /(?=.*[a-zA-Z])(?=.*[0-9])/ }" v-slot="v" :bails="false" v-show="isFirstPage">
                       <span class="label">Senha</span>
 
                       <div class="error-div">
                         <input :type="passwordTypeText ? 'text' : 'password'" v-model="password" id="senha"
-                          placeholder="Senha" :class="v.classes" class="input-field" />
+                          placeholder="Mínimo 6 caracteres com letras e números" :class="v.classes" class="input-field" />
                         <!-- <font-awesome-icon v-if="!passwordTypeText" @click="passwordTypeText = true"
                           icon="fa-solid fa-eye" size="lg" class="password-img"></font-awesome-icon>
                         <font-awesome-icon v-if="passwordTypeText" @click="passwordTypeText = false"
                           icon="fa-solid fa-eye-slash" size="lg" class="password-img"></font-awesome-icon> -->
-                        <span class="error-span" v-for="erro in v.errors">
-                          {{ erro }}
+                        <span class="error-span">
+                          {{ v.errors[0] }}
                         </span>
                       </div>
                     </ValidationProvider>
