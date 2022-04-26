@@ -18,7 +18,7 @@ export default {
                     iconUrl: require('@/assets/menu-2.svg'),
                     show: () => { return this.user.isAdmin },
                     onclick: () => {
-                        this.$router.push({ path: '/projetos-plataforma' });
+                        this.$router.push({ path: '/projetos-plataforma' }).catch(()=>{});
                     },
                 },
                 subjectProjects: {
@@ -27,7 +27,7 @@ export default {
                     iconUrl: require('@/assets/menu-2.svg'),
                     show: () => { return [USER_CONST.TYPES.PROFESSOR.KEY].some((type) => type === this.user.type); },
                     onclick: () => {
-                        this.$router.push({ path: '/projetos-disciplina' });
+                        this.$router.push({ path: '/projetos-disciplina' }).catch(()=>{});
                     },
                 },
                 myProjects: {
@@ -36,7 +36,7 @@ export default {
                     iconUrl: require('@/assets/menu-1.png'),
                     show: () => { return true; },
                     onclick: () => {
-                        this.$router.push({ path: '/meus-projetos' });
+                        this.$router.push({ path: '/meus-projetos' }).catch(()=>{});
                     },
                 },
                 subjects: {
@@ -45,7 +45,7 @@ export default {
                     iconUrl: require('@/assets/subjects.png'),
                     show: () => { return [USER_CONST.TYPES.PROFESSOR.KEY].some((type) => type === this.user.type); },
                     onclick: () => {
-                        this.$router.push({ path: '/disciplinas' });
+                        this.$router.push({ path: '/disciplinas' }).catch(()=>{});
                     },
                 },
                 keywords: {
@@ -54,7 +54,7 @@ export default {
                     iconUrl: require('@/assets/menu-4.svg'),
                     show: () => { return [USER_CONST.TYPES.PROFESSOR.KEY].some((type) => type === this.user.type); },
                     onclick: () => {
-                        this.$router.push({ path: '/palavras-chave' });
+                        this.$router.push({ path: '/palavras-chave' }).catch(()=>{});
                     },
                 },
                 logout: {
@@ -63,7 +63,7 @@ export default {
                     show: () => { return true },
                     onclick: () => {
                         this.$store.commit('RESET_USER_STATE');
-                        this.$router.push({ path: '/usuario/login' });
+                        this.$router.push({ path: '/usuario/login' }).catch(()=>{});
                     },
                 }
             }
@@ -71,7 +71,7 @@ export default {
     },
     methods: {
         redirectToUserProjects() {
-            this.$router.push({ path: '/meus-projetos' });
+            this.$router.push({ path: '/meus-projetos' }).catch(()=>{});
         }
     },
 };

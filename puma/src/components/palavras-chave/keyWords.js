@@ -165,13 +165,12 @@ export default {
       } catch (error) { }
     },
 
-    filter(discipline) {
+    filter(subjectId) {
       this.tableKeywordSubject = this.keyWords;
-      if (discipline === 0) {
+      if (subjectId === 0) {
         this.tableKeywordSubject = this.keyWords;
       } else {
-        const filter = this.tableKeywordSubject.filter((d) => d.subjectid === discipline);
-        this.tableKeywordSubject = filter;
+        this.tableKeywordSubject = this.tableKeywordSubject.filter((d) => d.subjectid === subjectId);
       }
     },
 
@@ -192,22 +191,18 @@ export default {
     },
 
     keywordNameAlreadyExist() {
-      const exist = this.tableKeywordSubject.find(
-        (k) => k.keyword.toLowerCase() === this.form.keywordName.toLowerCase(),
-      );
-      if (exist) {
-        this.kwNameAlreadyExist = true;
-      } else {
-        this.kwNameAlreadyExist = false;
-      }
+      const currentKeyword = this.form.keywordName;
+      this.kwNameAlreadyExist = this.tableKeywordSubject.some((k) => this.treatKeyword(k.keyword) === this.treatKeyword(this.form.keywordName),);
     },
+
+    treatKeyword(keyword) { return keyword.split(' ').join('').toLowerCase(); },
 
     async handleAdd() {
       try {
         this.keywordNameAlreadyExist();
         const isFormValid = await this.$refs.observer.validate();
 
-        if (isFormValid && this.kwNameAlreadyExist === false) {
+        if (isFormValid && !this.kwNameAlreadyExist) {
           this.$store.commit('OPEN_LOADING_MODAL', { title: 'Enviando...' });
           const response = await this.keywordService.addKeyword(this.form.keywordName);
           const currentKeywordid = response.data.response.keywordid;
@@ -252,7 +247,7 @@ export default {
         this.$store.commit('OPEN_LOADING_MODAL', { title: 'Enviando...' });
         await this.keywordService.deleteKeyword(this.keywordDelete);
         this.openModalDelete = false;
-        this.makeToast('success', 'Palavra-Chave excluída com sucesso!');
+        this.makeToast('success', 'Palavra-chave excluída com sucesso!');
         await this.getKeyWords();
         this.$store.commit('CLOSE_LOADING_MODAL');
       } catch (error) {

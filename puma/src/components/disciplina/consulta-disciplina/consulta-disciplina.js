@@ -28,7 +28,6 @@ export default {
       isLoading: false,
       wasLoaded: false,
       isDeletingSubject: false,
-      currentSubject: '',
       subjects: [],
       projectService: new ProjectService(),
     };
@@ -47,7 +46,7 @@ export default {
   },
   methods: {
     getSubjects() {
-      this.isLoading = true;
+      this.$store.commit('OPEN_LOADING_MODAL', { title: 'Carregando...' });
       this.projectService.getSubjects().then((response) => {
         this.subjects = response.data;
         if (!response.data.length) { delete this.data.columns[0][2]; }
@@ -62,11 +61,14 @@ export default {
         this.markThsAsTouched();
         this.setSvgStyles();
         this.configAddProjectButton(document.getElementsByTagName('input')[0]);
-        this.isLoading = false;
-      }).catch((error) => {
-        alert(error);
-        this.isLoading = false;
+        this.$store.commit('CLOSE_LOADING_MODAL');
+      }).catch(() => {
+        this.$store.commit('CLOSE_LOADING_MODAL');
+        this.makeToast('ERRO', 'Erro ao recuperar disciplinas', 'danger');
       });
+    },
+    makeToast: function (title, message, variant) {
+      this.$bvToast.toast(message, { title: title, variant: variant, solid: true });
     },
     configTableRows() {
       this.subjects.forEach((subject) => {
@@ -95,9 +97,9 @@ export default {
     configSearchInput() {
       const searchInput = document.getElementsByTagName('input')[0];
       searchInput.placeholder = 'Pesquise por item ou título';
-      // add the below lines to initialize search input with some value.
-      // searchInput.setAttribute('value', 'math');
-      // searchInput.dispatchEvent(new Event('input'));
+      // add the below lines to initialize search input with some value:
+        // searchInput.setAttribute('value', 'math');
+        // searchInput.dispatchEvent(new Event('input'));
       searchInput.classList.add('search-input');
       searchInput.style.width = '100%';
       return searchInput;
@@ -134,22 +136,37 @@ export default {
           this.$router.push({ path: `/disciplinas/${operacao}/${button.id}` }).catch(() => { });
         } else if (operacao === 'excluir') {
           this.currentSubject = { subjectid: button.id };
-          this.$refs['modal-confirmacao-exclusao'].show();
+          this.handleDeleteSubjectModal(button.id);
         }
       });
     },
-    deleteSubject(bvModalEvent) {
-      this.isDeletingSubject = true;
-      document.getElementsByClassName('close text-light')[0].remove();
-      bvModalEvent.preventDefault();
-      this.projectService.deleteSubject(this.currentSubject.subjectid).then(() => {
-        this.$refs['modal-confirmacao-exclusao'].hide();
-        this.isDeletingSubject = false;
-        this.getSubjects();
-      }).catch((error) => {
-        this.isDeletingSubject = false;
-        alert(error);
+    handleDeleteSubjectModal(subjectId) {
+      this.$store.commit('OPEN_CONFIRM_MODAL', {
+        title: 'Excluir Disciplina',
+        content: 'Confirmar exclusão da disciplina?',
+        okButton: {
+          text: 'Confirmar', variant: 'danger',
+          onClick: () => this.deleteSubject(subjectId),
+        },
+        cancelButton: {
+          text: 'Cancelar', variant: 'outline-danger',
+          onClick: () => this.$store.commit('CLOSE_CONFIRM_MODAL'),
+        },
       });
+    },
+    async deleteSubject(subjectId) {
+      try {
+        const projectService = new ProjectService();
+        this.$store.commit('CLOSE_CONFIRM_MODAL');
+        this.$store.commit('OPEN_LOADING_MODAL', { title: 'Excluindo...' });
+        await projectService.deleteSubject(subjectId);
+        await this.$router.push({ path: `/disciplinas` }).catch(() => {});
+        this.makeToast('SUCESSO', 'Disciplina excluída com sucesso!', 'success');
+        this.getSubjects();
+      } catch (error) {
+        this.$store.commit('CLOSE_LOADING_MODAL');
+        this.makeToast('ERRO', 'Falha ao excluir disciplina', 'danger');
+      }
     },
     markThsAsTouched() {
       if (document.getElementsByTagName('td')[0] && document.getElementsByTagName('td')[6]) {

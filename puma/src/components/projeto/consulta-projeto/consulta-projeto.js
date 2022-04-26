@@ -25,6 +25,11 @@ export default {
             sort: 'desc',
           },
           {
+            label: 'DATA CADASTRO',
+            field: 'createdat',
+            sort: 'desc',
+          },
+          {
             label: 'STATUS',
             field: 'status',
             sort: 'desc',
@@ -41,7 +46,6 @@ export default {
         ],
         rows: [],
       },
-      isLoading: false,
       wasLoaded: false,
       projects: [],
       projectService: new ProjectService(),
@@ -59,10 +63,10 @@ export default {
   },
   methods: {
     getProjects() {
-      this.isLoading = true;
       this.operacao = this.$route.path.slice(1);
       let user = this.$store.getters.user;
       user.operation = this.operacao;
+      this.$store.commit('OPEN_LOADING_MODAL', { title: 'Carregando...' });
       this.projectService.getMyProposals(user).then((response) => {
         this.projects = response.data;
         this.data.rows.splice(0);
@@ -76,11 +80,14 @@ export default {
         this.markThsAsTouched();
         this.setSvgStyles();
         this.configAddProjectButton(document.getElementsByTagName('input')[0]);
-        this.isLoading = false;
-      }).catch((error) => {
-        alert(`Infelizmente houve um erro ao recuperar os projetos: ${error}`);
-        this.isLoading = false;
+        this.$store.commit('CLOSE_LOADING_MODAL');
+      }).catch(() => {
+        this.$store.commit('CLOSE_LOADING_MODAL');
+        this.makeToast('ERRO', 'Erro ao recuperar projetos', 'danger');
       });
+    },
+    makeToast: function (title, message, variant) {
+      this.$bvToast.toast(message, { title: title, variant: variant, solid: true });
     },
     configTableRows() {
       this.projects.forEach((project) => {
@@ -88,6 +95,8 @@ export default {
         row.etapa = project.status === 'IC' || project.status === 'EX' || project.status === 'EC' ? 'Projeto' : 'Proposta';
         row.status = statusProjetoEnum(project.status);
         row.name = project.name.slice(0, 20);
+        const projectCreateDate = new Date(project.createdat);
+        row.createdat = projectCreateDate.getDate() + '/' +  (String(projectCreateDate.getMonth() + 1)).padStart(2, '0') + '/' +  projectCreateDate.getFullYear();
         row.buttons = '<button name="visualizar" class="btn cp-btn mx-2" id=' + project.projectid + '><i class="fa-solid fa-circle-info mr-2 ml-0"></i>VER DETALHES</button>';
         this.data.rows.push(row);
       });
