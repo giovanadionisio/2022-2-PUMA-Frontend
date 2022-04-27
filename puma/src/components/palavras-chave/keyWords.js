@@ -85,13 +85,14 @@ export default {
     },
 
     allowEdit(keyword) { // FIX ME !
-      return true;
+      // return true;
       const { isAdmin, userId } = this.$store.getters.user;
       if (isAdmin) return true;
 
       let flag = false;
-
+      console.log('Ta chegando oq?', this.keywordsInfo[keyword.keywordid]);
       Object.values(this.keywordsInfo[keyword.keywordid]).forEach((profId) => {
+        console.log('ok', profId);
         if (userId === profId) {
           flag = true;
         }
