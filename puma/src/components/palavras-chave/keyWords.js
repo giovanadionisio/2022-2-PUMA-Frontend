@@ -72,6 +72,7 @@ export default {
         this.$store.commit('CLOSE_LOADING_MODAL');
       } catch (error) {
         this.$store.commit('CLOSE_LOADING_MODAL');
+        this.makeToast('ERRO', 'Falha ao carregar os dados', 'danger');
       }
     },
 
@@ -84,15 +85,14 @@ export default {
       }
     },
 
-    allowEdit(keyword) { // FIX ME !
+    allowEdit(keyword) {
       // return true;
       const { isAdmin, userId } = this.$store.getters.user;
       if (isAdmin) return true;
 
       let flag = false;
-      console.log('Ta chegando oq?', this.keywordsInfo[keyword.keywordid]);
+
       Object.values(this.keywordsInfo[keyword.keywordid]).forEach((profId) => {
-        console.log('ok', profId);
         if (userId === profId) {
           flag = true;
         }
@@ -213,13 +213,13 @@ export default {
           await this.getKeyWords();
 
           this.openModalRegister = false;
-          this.makeToast('success', 'Cadastro realizado com sucesso!');
           this.$store.commit('CLOSE_LOADING_MODAL');
+          this.makeToast('SUCESSO', 'Cadastro realizado com sucesso!', 'success');
         }
       } catch (error) {
         this.openModalRegister = false;
         this.$store.commit('CLOSE_LOADING_MODAL');
-        this.makeToast('danger', `Infelizmente houve um erro ao tentar cadastrar: ${error}`);
+        this.makeToast('ERRO', 'Infelizmente houve um erro ao tentar cadastrar a palavra-chave', 'danger');
       }
     },
 
@@ -232,14 +232,14 @@ export default {
           const idKeywordUpdated = response.data[0].keywordid;
           this.keywordService.updateSubjectKeyword(idKeywordUpdated, this.form.selectedSubject);
           this.openModalEdit = false;
-          this.makeToast('success', 'Palavra-Chave editada com sucesso!');
           this.getKeyWords();
           this.$store.commit('CLOSE_LOADING_MODAL');
+          this.makeToast('SUCESSO', 'Palavra-Chave editada com sucesso!', 'success');
         }
       } catch (error) {
         this.openModalEdit = false;
         this.$store.commit('CLOSE_LOADING_MODAL');
-        this.makeToast('danger', `Infelizmente houve um erro ao tentar editar a palavra-chave: ${error}`);
+        this.makeToast('ERRO', 'Infelizmente houve um erro ao tentar editar a palavra-chave', 'danger');
       }
     },
 
@@ -248,23 +248,18 @@ export default {
         this.$store.commit('OPEN_LOADING_MODAL', { title: 'Enviando...' });
         await this.keywordService.deleteKeyword(this.keywordDelete);
         this.openModalDelete = false;
-        this.makeToast('success', 'Palavra-chave excluída com sucesso!');
         await this.getKeyWords();
         this.$store.commit('CLOSE_LOADING_MODAL');
+        this.makeToast('SUCESSO', 'Palavra-chave excluída com sucesso!', 'success');
       } catch (error) {
         this.openModalDelete = false;
         this.$store.commit('CLOSE_LOADING_MODAL');
-        this.makeToast('danger', `Infelizmente houve um erro ao tentar excluir a palavra-chave: ${error}`);
+        this.makeToast('ERRO', 'Infelizmente houve um erro ao tentar excluir a palavra-chave', 'danger');
       }
     },
 
-    makeToast(variant = null, text) {
-      this.$bvToast.toast(text, {
-        title: 'PALAVRA-CHAVE',
-        variant,
-        solid: true,
-        autoHideDelay: 2000,
-      });
+    makeToast(title, message, variant) {
+      this.$bvToast.toast(message, { title: title, variant: variant, solid: true, autoHideDelay: 2000, });
     },
   },
 };
