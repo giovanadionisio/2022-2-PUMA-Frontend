@@ -44,9 +44,7 @@ export default {
             email: response.data.email,
             type: response.data.type,
           });
-
           this.$store.commit('SET_TOKEN', response.data.token);
-          this.$store.commit('SET_CURRENT_NAVIGATION', NAV_CONST.MY_PROJECTS.KEY);
           this.$router.push('/meus-projetos').catch(()=>{});
         }).catch(() => {
           this.hasAuthError = true;

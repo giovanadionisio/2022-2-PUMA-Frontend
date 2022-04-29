@@ -71,6 +71,7 @@ export default {
                 this.$store.commit('OPEN_LOADING_MODAL', { title: 'Carregando...' });
 
                 const project = (await projectService.getProject(projectId)).data;
+
                 const allKeywords = (await projectService.getAvailableKeywordsToProject()).data;
 
                 const { Keywords, User, Subject, Semester, ...rest } = project;
@@ -146,7 +147,7 @@ export default {
         handleDeleteProject: function () {
             this.$store.commit('OPEN_CONFIRM_MODAL', {
                 title: 'Excluir Projeto',
-                content: 'Você tem certeza que deseja confirmar a exclusão do projeto ?',
+                content: 'Confirmar exclusão do projeto?',
                 okButton: {
                     text: 'Confirmar', variant: 'danger',
                     onClick: () => this.handleDelete(),

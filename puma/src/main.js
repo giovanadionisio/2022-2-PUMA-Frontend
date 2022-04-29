@@ -42,6 +42,7 @@ import {
 
 import pt from 'vee-validate/dist/locale/pt_BR.json';
 import dotenv from 'dotenv';
+import moment from 'moment';
 import App from './App.vue';
 import router from './router';
 import store from './store';
@@ -67,6 +68,7 @@ Vue.use(BootstrapVue);
 
 Vue.config.productionTip = false;
 Vue.prototype.$http = axios;
+Vue.prototype.moment = moment;
 
 environment.configUser();
 
@@ -154,6 +156,9 @@ extend('cpf', {
   },
   message: 'CPF inválido',
 });
+
+/* eslint-disable no-confusing-arrow */
+Vue.filter('defaultDatePipe', (value) => value ? moment(String(value)).format : '');
 
 new Vue({
   router,

@@ -1,41 +1,12 @@
 <div class="main-content hidden-scroll-bar">
-    <b-modal
-      centered
-      ref="modal-confirmacao-exclusao"
-      id="modal-confirm-delete"
-      size="sm"
-      :title="isDeletingSubject ? 'EXCLUINDO DISCIPLINA...' : 'CONFIRMAÇÃO'"
-      :no-close-on-backdrop="isDeletingSubject"
-      :hide-footer="isDeletingSubject"
-      :header-bg-variant="isDeletingSubject ? 'info' : 'danger'"
-      header-text-variant="light"
-      @ok="deleteSubject">
-      <div v-if="!isDeletingSubject">
-        Confirmar exclusão da disciplina?
-      </div>
-      <div style="text-align: center" v-if="isDeletingSubject">
-        <i class="fa-solid fa-circle-notch fa-spin fa-2x"></i>
-      </div>
-      <template #modal-footer="{ ok, cancel, hide }">
-        <b-button class="btn-confirm" :pressed="true" id="btn-delete-subject" variant="danger" size="sm" @click="ok()">
-          Confirmar
-        </b-button>
-        <b-button class="btn-cancel" id="btn-close-modal" size="sm" @click="hide()">
-          Cancelar
-        </b-button>
-      </template>
-    </b-modal>
   <div class="tittle ml-4">
     Disciplinas
   </div>
-  <div v-if="!isLoading && subjects.length" class="tittle sub-tittle ml-4">
+  <div v-if="subjects.length" class="tittle sub-tittle ml-4">
     Disciplinas cadastradas na plataforma
   </div>
-  <div v-show="isLoading" style="margin-left: 38vw" class="mt-4">
-    <i class="fa-solid fa-circle-notch fa-spin fa-3x"></i>
-  </div>
-  <mdbDatatable v-show="!isLoading" ref="table" borderless color="blue" :data="data" :pagination="false"/>
-  <div v-if="!isLoading && !subjects.length" class="no-results align-content-center mt-3">
+  <mdbDatatable ref="table" borderless color="blue" :data="data" :pagination="false"/>
+  <div v-if="!subjects.length" class="no-results align-content-center mt-3">
     Sem resultados disponíveis
   </div>
 </div>
