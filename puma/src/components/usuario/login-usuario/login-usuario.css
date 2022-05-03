@@ -15,10 +15,6 @@
     border: 2px solid #15355e;
     border-radius: 0px 0px 16px 16px;
     box-sizing: boder-box;
-    /* transition: all 0.3s ease-out; */
-    /*display: flex;
-    flex-direction: column;
-    justify-content: space-around;*/
 }
 
 .form {
@@ -47,7 +43,6 @@
     letter-spacing: 00.035em;
     font-weight: bold;
     line-height: 28px;
-    /* font-size: 24px; */
 }
 
 #register-form {
@@ -74,6 +69,25 @@ option {
     margin-bottom: 40px;
     cursor: pointer;
     transition: 0.5s;
+}
+
+.submit-btn {
+    align-items: center;
+    background-color: #f7db36;
+    color: #15355e;
+    border: 2px solid #f7db36;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    cursor: pointer;
+    transition: 0.5s;
+    width: 196.7px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
 }
 
 .submit-btn:hover {

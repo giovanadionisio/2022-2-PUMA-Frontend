@@ -1,7 +1,6 @@
 /* eslint-disable */
 /* eslint-disable prefer-destructuring */
-import ProjectService from '../../../services/ProjectService';
-import AlocateService from '../../../services/AlocateService';
+import SubjectService from '../../../services/SubjectService';
 
 export default {
   name: 'CadastroDisciplina',
@@ -12,8 +11,7 @@ export default {
       keywords: [],
       subareas: [],
       professors: [],
-      projectService: new ProjectService(),
-      alocateService: new AlocateService(),
+      subjectService: new SubjectService(),
       multiSelectPlaceholderKeyword: 'Carregando opções...',
       multiSelectPlaceholderSubarea: 'Carregando opções...',
       multiSelectPlaceholderProfessor: 'Carregando opções...',
@@ -70,7 +68,7 @@ export default {
             professors: this.professorsSelected,
           };
           if (this.operacao === 'cadastrar') {
-            this.projectService.addSubject(subject).then(async () => {
+            this.subjectService.addSubject(subject).then(async () => {
               this.isLoading = false;
               await this.$router.push({ name: 'Disciplinas' });
               this.makeToast('SUCESSO', 'Disciplina cadastrada com sucesso', 'success');
@@ -83,7 +81,7 @@ export default {
           } else if (this.operacao === 'editar') {
             subject.subject.subjectid = parseInt(this.$route.params.id, 10);
             subject.subject.coursesyllabus = this.courseSyllabus;
-            this.projectService.updateSubject(this.$route.params.id, subject).then(async () => {
+            this.subjectService.updateSubject(this.$route.params.id, subject).then(async () => {
               this.isLoading = false;
               await this.$router.push({ name: 'Disciplinas' });
               this.makeToast('SUCESSO', 'Disciplina atualizada com sucesso', 'success');
@@ -149,7 +147,7 @@ export default {
     getKeywords() {
       this.isLoadingKeywords = true;
       return new Promise((resolve, reject) => {
-        this.projectService.getAvailableKeywordsToSubject().then((response) => {
+        this.subjectService.getAvailableKeywordsToSubject().then((response) => {
           this.keywords = response.data;
           this.isLoadingKeywords = false;
           this.multiSelectPlaceholderKeyword = 'Crie ou selecione palavras-chave para sua disciplina';
@@ -165,7 +163,7 @@ export default {
     getSubareas() {
       this.isLoadingSubareas = true;
       return new Promise((resolve, reject) => {
-        this.projectService.getKnowledgeAreas().then((response) => {
+        this.subjectService.getKnowledgeAreas().then((response) => {
           this.subareas = response.data;
           this.isLoadingSubareas = false;
           this.multiSelectPlaceholderSubarea = this.subareas.length ? 'Selecione as subáreas do conhecimento que correspondam a disciplina' : 'Sem subáreas disponíveis';
@@ -181,7 +179,7 @@ export default {
     getProfessors() {
       this.isLoadingProfessors = true;
       return new Promise((resolve, reject) => {
-        this.projectService.getProfessors().then((response) => {
+        this.subjectService.getProfessors().then((response) => {
           this.professors = response.data;
           this.isLoadingProfessors = false;
           this.multiSelectPlaceholderProfessor = this.professors.length ? 'Selecione os professores que deseja adicionar' : 'Sem professores disponíveis';
@@ -196,7 +194,7 @@ export default {
     },
     getSubject(subjectid) {
       return new Promise((resolve, reject) => {
-        this.projectService.getSubjectById(subjectid).then((response) => {
+        this.subjectService.getSubjectById(subjectid).then((response) => {
           const subject = response.data;
           this.keywordsSelected = subject.keywords;
           this.subareasSelected = subject.subareas;

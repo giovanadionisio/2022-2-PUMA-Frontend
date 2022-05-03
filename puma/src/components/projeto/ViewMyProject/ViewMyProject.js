@@ -59,7 +59,7 @@ export default {
             this.$bvToast.toast(message, { title: title, variant: variant, solid: true });
         },
         handleChangeKeywords: function (value) {
-            if (!!!value.find((k) => k.value === this.form.mainKeyword)) {
+            if (!!!value.find((k) => k.value === this.form.mainKeyword?.value)) {
                 this.form.mainKeyword = null;
             }
         },
@@ -82,7 +82,7 @@ export default {
                     user: User,
                     subject: Subject,
                     semester: Semester,
-                    mainKeyword: mainKeyword?.keywordid,
+                    mainKeyword: mainKeyword && { value: mainKeyword.keywordid, text: mainKeyword.keyword },
                     selectedKeywords: Keywords.map((k) => ({ value: k.keywordid, text: k.keyword }))
                         .sort((a, b) => a.text.localeCompare(b.text)),
                 };
@@ -113,7 +113,7 @@ export default {
                     problem: this.form.problem,
                     expectedresult: this.form.expectedresult,
                     keywords: this.form.selectedKeywords.map((k) => ({
-                        keywordid: k.value, main: k.value === this.form.mainKeyword
+                        keywordid: k.value, main: k.value === this.form.mainKeyword.value
                     })),
                 };
 

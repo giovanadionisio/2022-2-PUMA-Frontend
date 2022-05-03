@@ -1,9 +1,8 @@
-import ProjectService from '../../../services/ProjectService';
-import ModalAviso from '../../shared/modal-confirmacao/ModalConfirmacao.vue';
+import SubjectService from '../../../services/SubjectService';
+
 /* eslint-disable*/
 export default {
   name: 'ConsultaDisciplinas',
-  components: { ModalAviso },
   data() {
     return {
       data: {
@@ -29,7 +28,7 @@ export default {
       wasLoaded: false,
       isDeletingSubject: false,
       subjects: [],
-      projectService: new ProjectService(),
+      subjectService: new SubjectService(),
     };
   },
   watch: {
@@ -41,13 +40,10 @@ export default {
   beforeMount() {
     this.getSubjects();
   },
-  mounted() {
-    document.title = 'PUMA | Consulta Disciplinas';
-  },
   methods: {
     getSubjects() {
       this.$store.commit('OPEN_LOADING_MODAL', { title: 'Carregando...' });
-      this.projectService.getSubjects().then((response) => {
+      this.subjectService.getSubjects().then((response) => {
         this.subjects = response.data;
         if (!response.data.length) { delete this.data.columns[0][2]; }
         this.data.rows.splice(0);
@@ -98,8 +94,8 @@ export default {
       const searchInput = document.getElementsByTagName('input')[0];
       searchInput.placeholder = 'Pesquise por item ou título';
       // add the below lines to initialize search input with some value:
-        // searchInput.setAttribute('value', 'math');
-        // searchInput.dispatchEvent(new Event('input'));
+      // searchInput.setAttribute('value', 'math');
+      // searchInput.dispatchEvent(new Event('input'));
       searchInput.classList.add('search-input');
       searchInput.style.width = '100%';
       return searchInput;
@@ -156,11 +152,11 @@ export default {
     },
     async deleteSubject(subjectId) {
       try {
-        const projectService = new ProjectService();
+        const subjectService = new SubjectService();
         this.$store.commit('CLOSE_CONFIRM_MODAL');
         this.$store.commit('OPEN_LOADING_MODAL', { title: 'Excluindo...' });
-        await projectService.deleteSubject(subjectId);
-        await this.$router.push({ path: `/disciplinas` }).catch(() => {});
+        await subjectService.deleteSubject(subjectId);
+        await this.$router.push({ path: `/disciplinas` }).catch(() => { });
         this.makeToast('SUCESSO', 'Disciplina excluída com sucesso!', 'success');
         this.getSubjects();
       } catch (error) {

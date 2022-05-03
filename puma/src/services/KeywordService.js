@@ -7,41 +7,20 @@ export default class KeywordService {
   addKeyword(keyword) {
     return new Promise((resolve, reject) => {
       const auth = store.getters.token;
-      axios.post(`${global.URL_GATEWAY}/keywords/palavra-chave`, { keyword: keyword }, { headers: { auth } }).then((response) => {
+      axios.post(`${global.URL_GATEWAY}/keyword`, { keyword: keyword }, { headers: { auth } }).then((response) => {
         resolve(response);
-      }).catch((response) => {
-        reject(response);
-      });
-    });
-  }
-
-  addKeywordToSubject(keywordid, subjectid) {
-    return new Promise((resolve, reject) => {
-      const auth = store.getters.token;
-      axios.post(`${global.URL_GATEWAY}/keywords/subject/keyword`, { keywordid: keywordid, subjectid: subjectid }, { headers: { auth } }).then((response) => {
-        resolve(response);
-      }).catch((response) => {
-        reject(response);
+      }).catch((error) => {
+        reject(error);
       });
     });
   }
 
   getKeywords() {
     return new Promise((resolve, reject) => {
-      axios.get(`${global.URL_GATEWAY}/keywords/palavra-chave2`).then((response) => {
+      axios.get(`${global.URL_GATEWAY}/keyword`).then((response) => {
         resolve(response);
       }).catch((error) => {
-        reject('Erro ao recuperar as palavras-chave');
-      });
-    });
-  }
-
-  getSubjects() {
-    return new Promise((resolve, reject) => {
-      axios.get(`${global.URL_GATEWAY}/keywords/subjects`).then((response) => {
-        resolve(response);
-      }).catch((error) => {
-        reject('Erro ao Recuperar o Subjects');
+        reject(error);
       });
     });
   }
@@ -49,10 +28,31 @@ export default class KeywordService {
   updateKeyword(keywordid, newKeyword) {
     return new Promise((resolve, reject) => {
       const auth = store.getters.token;
-      axios.put(`${global.URL_GATEWAY}/keywords/palavra-chave/edit`, { keywordid: keywordid, newKeyword: newKeyword }, { headers: { auth } }).then((response) => {
+      axios.put(`${global.URL_GATEWAY}/keyword`, { keywordid: keywordid, newKeyword: newKeyword }, { headers: { auth } }).then((response) => {
         resolve(response);
-      }).catch((response) => {
-        reject(response);
+      }).catch((error) => {
+        reject(error);
+      });
+    });
+  }
+
+  deleteKeyword(keywordid) {
+    return new Promise((resolve, reject) => {
+      axios.delete(`${global.URL_GATEWAY}/keyword/${keywordid}`).then((response) => {
+        resolve(response);
+      }).catch((error) => {
+        reject(error);
+      });
+    });
+  }
+
+  addKeywordToSubject(keywordid, subjectid) {
+    return new Promise((resolve, reject) => {
+      const auth = store.getters.token;
+      axios.post(`${global.URL_GATEWAY}/keyword/subject`, { keywordid: keywordid, subjectid: subjectid }, { headers: { auth } }).then((response) => {
+        resolve(response);
+      }).catch((error) => {
+        reject(error);
       });
     });
   }
@@ -60,18 +60,7 @@ export default class KeywordService {
   updateSubjectKeyword(keywordid, subjectid) {
     return new Promise((resolve, reject) => {
       const auth = store.getters.token;
-      axios.put(`${global.URL_GATEWAY}/keywords/switch/subject`, { keywordid: keywordid, subjectid: subjectid }, { headers: { auth } }).then((response) => {
-        resolve(response);
-      }).catch((response) => {
-        reject(response);
-      });
-    });
-  }
-
-  deleteKeyword(keywordid) {
-    const projectUrlDelete = `${global.URL_GATEWAY}/keywords/palavra-chave/${keywordid}/delete`;
-    return new Promise((resolve, reject) => {
-      axios.put(projectUrlDelete).then((response) => {
+      axios.put(`${global.URL_GATEWAY}/keyword/subject`, { keywordid: keywordid, subjectid: subjectid }, { headers: { auth } }).then((response) => {
         resolve(response);
       }).catch((error) => {
         reject(error);

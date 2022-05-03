@@ -13,7 +13,6 @@
 
 <script>
 /* eslint-disable */
-// eslint-disable-next-line import/no-unresolved
 import ConfirmModal from '@/components/ConfirmModal/ConfirmModal.vue';
 import LoadingModal from '@/components/LoadingModal/LoadingModal.vue';
 import MenuLateral from './components/shared/menu-lateral/MenuLateral.vue';
@@ -46,9 +45,8 @@ export default {
 };
 </script>
 
-<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
-
 <style>
+/* GLOBAL CSS */
 html, body {
   margin: 0;
   height: 100%;
@@ -71,6 +69,16 @@ html, body {
   margin-bottom: 50px;
 }
 
+.logo-puma {
+  width: 184px;
+  height: 56px;
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 56px;
+  letter-spacing: 0.3em;
+  color: #15355e;
+}
+
 .input-field {
   border-radius: 7px;
   font-size: 1.1em;
@@ -81,59 +89,5 @@ html, body {
   margin-left: 70px;
   margin-right: 70px;
   padding: 15px;
-}
-
-.submit-btn {
-  align-items: center;
-  background-color: #f7db36;
-  color: #15355e;
-  border: 2px solid #f7db36;
-  border-radius: 5px;
-  padding: 5px;
-  font-size: 24px;
-  font-weight: 700;
-  margin: 0 auto;
-  margin-top: 30px;
-  margin-bottom: 30px;
-  cursor: pointer;
-  transition: 0.5s;
-  width: 196.7px;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-}
-
-.column {
-  display: flex;
-  flex-direction: column;
-}
-
-.row {
-  display: flex;
-  flex-direction: row;
-}
-
-.flex1 {
-  flex: 1;
-}
-
-.title {
-  display: flex;
-  color: black;
-  font-family: rubik, Sans-serif;
-  font-weight: 300;
-  font-size: 2em;
-  justify-content: left;
-  margin-top: 1.7em;
-  margin-left: 3.5em;
-}
-
-.logo-puma {
-  width: 184px;
-  height: 56px;
-  font-weight: 600;
-  font-size: 48px;
-  line-height: 56px;
-  letter-spacing: 0.3em;
-  color: #15355e;
 }
 </style>
