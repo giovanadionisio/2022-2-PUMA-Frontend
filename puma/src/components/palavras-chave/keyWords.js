@@ -11,7 +11,6 @@ export default {
       subjectService: new SubjectService(),
       openModalRegister: false,
       openModalEdit: false,
-      openModalDelete: false,
       currentKeyWord: {},
       keywordDelete: null,
       selected: null,
@@ -165,7 +164,18 @@ export default {
     },
 
     deleteKeyword(keyWord) {
-      this.openModalDelete = true;
+      this.$store.commit('OPEN_CONFIRM_MODAL', {
+        title: 'EXCLUIR PALAVRA-CHAVE',
+        content: 'Confirmar exclusão da palavra-chave ?',
+        okButton: {
+          text: 'Confirmar', variant: 'danger',
+          onClick: () => { this.handleDelete(); this.$store.commit('CLOSE_CONFIRM_MODAL'); },
+        },
+        cancelButton: {
+          text: 'Cancelar', variant: 'outline-danger',
+          onClick: () => this.$store.commit('CLOSE_CONFIRM_MODAL'),
+        },
+      });
       this.keywordDelete = keyWord.keywordid;
     },
 
@@ -225,19 +235,17 @@ export default {
       try {
         this.$store.commit('OPEN_LOADING_MODAL', { title: 'Enviando...' });
         await this.keywordService.deleteKeyword(this.keywordDelete);
-        this.openModalDelete = false;
         await this.getKeywords();
         this.$store.commit('CLOSE_LOADING_MODAL');
         this.makeToast('SUCESSO', 'Palavra-chave excluída com sucesso!', 'success');
       } catch (error) {
-        this.openModalDelete = false;
         this.$store.commit('CLOSE_LOADING_MODAL');
         this.makeToast('ERRO', 'Infelizmente houve um erro ao tentar excluir a palavra-chave', 'danger');
       }
     },
 
     makeToast(title, message, variant) {
-      this.$bvToast.toast(message, { title: title, variant: variant, solid: true, autoHideDelay: 2000, });
+      this.$bvToast.toast(message, { title: title, variant: variant, solid: true, autoHideDelay: 4000, });
     },
   },
 };
