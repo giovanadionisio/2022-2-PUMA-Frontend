@@ -120,25 +120,5 @@
         CANCELAR
       </button>
     </div>
-
-  </b-modal>
-
-  <b-modal hide-footer v-model="openModalDelete" centered size="xs" modal-class="myclass">
-    <template #modal-header>
-      EXCLUIR PALAVRA-CHAVE
-    </template>
-
-    <div style="display: flex; flex-direction: column; align-items: center;">
-      <span class="text-delete">Confirmar exclusão da palavra-chave ?</span>
-    </div>
-
-    <div class="divFooter">
-      <button class="kw-btn-delete" style="margin-right: 5%;" @click="handleDelete">
-        CONFIRMAR
-      </button>
-      <button class="kw-btn-delete d-invert" @click="openModalDelete=false">
-        CANCELAR
-      </button>
-    </div>
   </b-modal>
 </div>
