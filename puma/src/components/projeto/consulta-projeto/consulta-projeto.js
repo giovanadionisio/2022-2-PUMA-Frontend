@@ -58,9 +58,6 @@ export default {
       immediate: true,
     }
   },
-  beforeMount() {
-    this.getProjects();
-  },
   methods: {
     getProjects() {
       this.operacao = this.$route.path.slice(1);
@@ -96,7 +93,7 @@ export default {
         row.status = statusProjetoEnum(project.status);
         row.name = project.name.slice(0, 20);
         const projectCreateDate = new Date(project.createdat);
-        row.createdat = projectCreateDate.getDate() + '/' +  (String(projectCreateDate.getMonth() + 1)).padStart(2, '0') + '/' +  projectCreateDate.getFullYear();
+        row.createdat = projectCreateDate.getDate() + '/' + (String(projectCreateDate.getMonth() + 1)).padStart(2, '0') + '/' + projectCreateDate.getFullYear();
         row.buttons = '<button name="visualizar" class="btn cp-btn mx-2" id=' + project.projectid + '><i class="fa-solid fa-circle-info mr-2 ml-0"></i>VER DETALHES</button>';
         this.data.rows.push(row);
       });

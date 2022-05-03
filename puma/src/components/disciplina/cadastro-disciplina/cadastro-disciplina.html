@@ -17,7 +17,7 @@
               <input type="text" id="name" maxlength="1020" class="input-textfield"
                 placeholder="Digite o nome para sua disciplina" v-model="name" :disabled=isLoading
                 v-bind:class="{ 'input-focus': !v.errors.length && operacao !== 'visualizar', 'input-error': v.errors.length }">
-              <span class="error-span" v-for="erro in v.errors">
+              <span class="input-error-span" v-for="erro in v.errors">
                 {{ erro }}
               </span>
             </div>
@@ -33,10 +33,10 @@
               @input="sortKeywordMultiselectLabels()" selectLabel="" deselectLabel="" selectedLabel=""
               @open="multiSelectPlaceholder = 'Pesquisar'" tag-placeholder="Criar palavra-chave"
               @close="isTouchedKeywords = true; multiSelectPlaceholder = 'Selecione'" :loading="isLoadingKeywords"
-              class="multiselect-custom" :disabled="isLoadingKeywords || operacao === 'visualizar'"
-              :class="(isTouchedKeywords && !keywordsSelected.length) ? 'multiselect-custom-error' : 'multiselect-custom-focus'">
+              class="input-multiselect" :disabled="isLoadingKeywords || operacao === 'visualizar'"
+              :class="(isTouchedKeywords && !keywordsSelected.length) ? 'input-multiselect-error' : 'input-multiselect-focus'">
               <template slot="option" slot-scope="scope">
-                <div v-if="!scope.option.isTag" class="option__desc checkbox-label">
+                <div v-if="!scope.option.isTag" class="option__desc">
                   <input class="mx-2" type="checkbox" :checked="isChecked(scope.option)" @focus.prevent
                     :key="scope.option.keyword" />
                   <span class="option__title">{{ scope.option.keyword }}</span>
@@ -52,7 +52,7 @@
                 Nenhuma palavra-chave encontrada.
               </span>
             </multiselect>
-            <span v-if="isTouchedKeywords && !keywordsSelected.length" class="error-span">
+            <span v-if="isTouchedKeywords && !keywordsSelected.length" class="input-error-span">
               Escolha no mínimo uma palavra-chave
             </span>
           </div>
@@ -69,10 +69,10 @@
               deselectGroupLabel="Remova todas as subáreas desta área" @open="multiSelectPlaceholder = 'Pesquisar'"
               @input="sortSubareaMultiselectLabels()"
               @close="isTouchedSubareas = true; multiSelectPlaceholder = 'Selecione'" :loading="isLoadingSubareas"
-              class="multiselect-custom" :disabled="isLoadingSubareas || !subareas.length || operacao === 'visualizar'"
-              :class="(isTouchedSubareas && !subareasSelected.length) ? 'multiselect-custom-error' : 'multiselect-custom-focus'">
+              class="input-multiselect" :disabled="isLoadingSubareas || !subareas.length || operacao === 'visualizar'"
+              :class="(isTouchedSubareas && !subareasSelected.length) ? 'input-multiselect-error' : 'input-multiselect-focus'">
               <template slot="option" slot-scope="scope">
-                <div v-if="!scope.option['$isLabel']" class="option__desc checkbox-label">
+                <div v-if="!scope.option['$isLabel']" class="option__desc">
                   <input class="mx-2" type="checkbox" :checked="isSubareaChecked(scope.option)" @focus.prevent
                     :key="scope.option.subareaid" />
                   <span class="option__title">{{ scope.option.description }}</span>
@@ -85,7 +85,7 @@
                 Nenhuma subárea encontrada.
               </span>
             </multiselect>
-            <span v-if="isTouchedSubareas && !subareasSelected.length" class="error-span">
+            <span v-if="isTouchedSubareas && !subareasSelected.length" class="input-error-span">
               Escolha no mínimo uma subárea
             </span>
           </div>
@@ -100,11 +100,11 @@
               :searchable="true" :showLabels="true" :closeOnSelect="false" :max-height="150"
               @input="sortProfessorMultiselectLabels()" selectLabel="" deselectLabel="" selectedLabel=""
               @open="multiSelectPlaceholder = 'Pesquisar'" :loading="isLoadingProfessors"
-              @close="isTouchedProfessors = true; multiSelectPlaceholder = 'Selecione'" class="multiselect-custom"
+              @close="isTouchedProfessors = true; multiSelectPlaceholder = 'Selecione'" class="input-multiselect"
               :disabled="isLoadingProfessors || !professors.length || operacao === 'visualizar'"
-              :class="(isTouchedProfessors && !professorsSelected.length) ? 'multiselect-custom-error' : 'multiselect-custom-focus'">
+              :class="(isTouchedProfessors && !professorsSelected.length) ? 'input-multiselect-error' : 'input-multiselect-focus'">
               <template slot="option" slot-scope="scope">
-                <div class="option__desc checkbox-label">
+                <div class="option__desc">
                   <input class="mx-2" type="checkbox" :checked="isProfessorChecked(scope.option)" @focus.prevent
                     :key="scope.option.userid" />
                   <span class="option__title">{{ scope.option.fullname }}</span>
@@ -114,7 +114,7 @@
                 Nenhum professor encontrado.
               </span>
             </multiselect>
-            <span v-if="isTouchedProfessors && !professorsSelected.length" class="error-span">
+            <span v-if="isTouchedProfessors && !professorsSelected.length" class="input-error-span">
               Escolha no mínimo um professor
             </span>
           </div>
@@ -126,8 +126,8 @@
                 maxlength="1000" rows="10" v-model="courseSyllabus" :disabled=isLoading class="input-textarea"
                 v-bind:class="{ 'input-focus': !v.errors.length && operacao !== 'visualizar', 'input-error': v.errors.length }">
               </textarea>
-              <span class="counter">({{courseSyllabus.length}}/1000)</span>
-              <span class="error-span" v-for="erro in v.errors">
+              <span class="input-counter">({{courseSyllabus.length}}/1000)</span>
+              <span class="input-error-span" v-for="erro in v.errors">
                 {{ erro }}
               </span>
             </div>

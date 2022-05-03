@@ -1,6 +1,5 @@
 /* eslint-disable */
 import ProjectService from '../../../services/ProjectService';
-import AlocateService from '../../../services/AlocateService';
 
 export default {
   name: 'CadastroProjeto',
@@ -14,7 +13,6 @@ export default {
       mainKeyword: null,
       selectedKeywords: [],
       projectService: new ProjectService(),
-      alocateService: new AlocateService(),
       multiSelectPlaceholder: 'Carregando opções...',
     };
   },
@@ -86,7 +84,7 @@ export default {
       }
     },
     getProject(projectId) {
-      this.projectService.getProjById(projectId).then((response) => {
+      this.projectService.getProject(projectId).then((response) => {
         const project = response.data;
         this.selectedKeywords = project.keywords;
         this.titulo = project.name;

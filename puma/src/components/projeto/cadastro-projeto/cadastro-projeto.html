@@ -18,8 +18,8 @@
                 maxlength="1000" rows="7" v-model="descricao" class="input-textarea"
                 v-bind:class="{ 'input-focus': !v.errors.length , 'input-error': v.errors.length }">
                   </textarea>
-              <span class="counter">({{descricao.length}}/1000)</span>
-              <span class="error-span" v-for="erro in v.errors">
+              <span class="input-counter">({{descricao.length}}/1000)</span>
+              <span class="input-error-span" v-for="erro in v.errors">
                 {{ erro }}
               </span>
             </div>
@@ -31,8 +31,8 @@
               <textarea id="resultado" placeholder="Descreva os resultados desejados" rows="5" minlength="40"
                 maxlength="1000" v-model="resultadoEsperado" class="input-textarea"
                 v-bind:class="{ 'input-focus': !v.errors.length , 'input-error': v.errors.length }"></textarea>
-              <span class="counter">({{resultadoEsperado.length}}/1000)</span>
-              <span class="error-span" v-for="erro in v.errors">
+              <span class="input-counter">({{resultadoEsperado.length}}/1000)</span>
+              <span class="input-error-span" v-for="erro in v.errors">
                 {{ erro }}
               </span>
             </div>
@@ -45,7 +45,7 @@
                 <input type="text" id="titulo" maxlength="100" class="input-textfield"
                   placeholder="Crie um título que indique o objetivo do projeto" v-model="titulo"
                   v-bind:class="{ 'input-focus': !v.errors.length , 'input-error': v.errors.length }">
-                <span class="error-span" v-for="erro in v.errors">
+                <span class="input-error-span" v-for="erro in v.errors">
                   {{ erro }}
                 </span>
               </div>
@@ -65,8 +65,8 @@
               <multiselect id="keywords" v-model="selectedKeywords" :options="keywords" :multiple="true"
                 track-by="value" label="text" :searchable="true" :showLabels="true" :max="3" :closeOnSelect="false"
                 tagPosition="bottom" selectLabel="" deselectLabel="" selectedLabel=""
-                placeholder="Pesquise ou selecione uma palavra-chave" class="multiselect-custom"
-                :class="errors.length ? 'multiselect-custom-error' : 'multiselect-custom-focus'"
+                placeholder="Pesquise ou selecione uma palavra-chave" class="input-multiselect"
+                :class="errors.length ? 'input-multiselect-error' : 'input-multiselect-focus'"
                 @input="handleChangeKeywords">
                 <template slot="option" slot-scope="scope">
                   <div class="option__desc checkbox-label">
@@ -82,7 +82,7 @@
                   Nenhuma palavra-chave encontrada.
                 </span>
               </multiselect>
-              <span class="error-span">{{ errors[0] && 'Escolha no mínimo uma palavra-chave' }}</span>
+              <span class="input-error-span">{{ errors[0] && 'Escolha no mínimo uma palavra-chave' }}</span>
             </div>
           </ValidationProvider>
           <div class="py-2" />
@@ -91,13 +91,13 @@
               <label for="mainKeyword" class="input-label">PALAVRA-CHAVE PRINCIPAL</label>
               <multiselect id="mainKeyword" v-model="mainKeyword" :options="selectedKeywords" :multiple="false"
                 track-by="value" label="text" :searchable="true" :showLabels="true" tagPosition="bottom" selectLabel=""
-                deselectLabel="" selectedLabel="" placeholder="Selecione uma palavra-chave" class="multiselect-custom"
-                :class="errors.length ? 'multiselect-custom-error' : 'multiselect-custom-focus'">
+                deselectLabel="" selectedLabel="" placeholder="Selecione uma palavra-chave" class="input-multiselect"
+                :class="errors.length ? 'input-multiselect-error' : 'input-multiselect-focus'">
                 <span slot="noResult">
                   Nenhuma palavra-chave encontrada.
                 </span>
               </multiselect>
-              <span class="error-span">{{ errors[0] }}</span>
+              <span class="input-error-span">{{ errors[0] }}</span>
             </div>
           </ValidationProvider>
           <div class="py-2" />

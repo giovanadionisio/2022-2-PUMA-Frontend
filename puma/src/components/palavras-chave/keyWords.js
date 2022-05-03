@@ -1,6 +1,6 @@
 /* eslint-disable*/
 import KeywordService from '../../services/KeywordService';
-import ProjectService from '../../services/ProjectService';
+import SubjectService from '../../services/SubjectService';
 
 export default {
   data() {
@@ -8,7 +8,7 @@ export default {
       kwNameAlreadyExist: false,
       multiSelectPlaceholder: 'Carregando opções...',
       keywordService: new KeywordService(),
-      projectService: new ProjectService(),
+      subjectService: new SubjectService(),
       openModalRegister: false,
       openModalEdit: false,
       openModalDelete: false,
@@ -18,7 +18,6 @@ export default {
       form: { keywordName: '', selectedSubject: null },
       idKeywordEdit: '',
       idSubjectEdit: '',
-      permission: '',
       flag: false,
       subjects: [],
       subjectsForm: [],
@@ -65,23 +64,18 @@ export default {
     async handleLoadData() {
       try {
         this.$store.commit('OPEN_LOADING_MODAL', { title: 'Carregando...' });
-        await this.getKeywordsInfo();
-        await this.getKeyWords();
-        await this.setFieldsPermissions();
-        this.verifyPermission();
+        const { isAdmin } = this.$store.getters.user;
+        await this.getKeywords();
+        if (isAdmin) {
+          await this.getSubjects();
+        } else {
+          await this.getSubjectsProfessor();
+          await this.getFilterProfessor();
+        }
         this.$store.commit('CLOSE_LOADING_MODAL');
       } catch (error) {
         this.$store.commit('CLOSE_LOADING_MODAL');
         this.makeToast('ERRO', 'Falha ao carregar os dados', 'danger');
-      }
-    },
-
-    verifyPermission() {
-      const { isAdmin, type } = this.$store.getters.user;
-      if (isAdmin || type === 'Professor') {
-        this.permission = true;
-      } else {
-        this.permission = false;
       }
     },
 
@@ -103,37 +97,23 @@ export default {
       return false;
     },
 
-    async setFieldsPermissions() {
-      const { isAdmin } = this.$store.getters.user;
-      if (isAdmin) {
-        await this.getSubjects();
-      } else {
-        await this.getSubjectsProfessor();
-        await this.getFilterProfessor();
-      }
-    },
-
-    async getKeywordsInfo() {
-      const { data } = await this.keywordService.getKeywords();
-      Object.keys(data).forEach((key) => {
-        this.keywordsInfo[data[key].keywordid] = data[key].array_agg;
-      });
-    },
-
-    async getKeyWords() {
+    async getKeywords() {
       try {
-        const response = await this.keywordService.getKeywords();
-        this.tableKeywordSubject = JSON.parse(JSON.stringify(response.data));
-        this.keyWords = response.data;
+        const { data } = await this.keywordService.getKeywords();
+        this.tableKeywordSubject = JSON.parse(JSON.stringify(data));
+        this.keyWords = data;
+        Object.keys(data).forEach((key) => {
+          this.keywordsInfo[data[key].keywordid] = data[key].array_agg;
+        });
       } catch (error) { }
     },
 
     async getSubjects() {
       try {
-        const response = this.keywordService.getSubjects();
-        this.subjectsForm = JSON.parse(JSON.stringify(response.data));
+        const allSubjects = (await this.subjectService.getSubjects()).data.map((s) => ({ value: s.subjectid, text: s.name }));
+        this.subjectsForm = JSON.parse(JSON.stringify(allSubjects));
         this.subjectsForm.unshift({ value: null, text: 'Escolha a disciplina', disabled: true });
-        this.subjects = JSON.parse(JSON.stringify(response.data));
+        this.subjects = JSON.parse(JSON.stringify(allSubjects));
         this.subjects.unshift({ value: 0, text: 'Todas as Disciplinas' });
         this.subjects.unshift({ value: null, text: 'Escolha a disciplina', disabled: true });
       } catch (error) { }
@@ -142,25 +122,23 @@ export default {
     async getSubjectsProfessor() {
       try {
         const { userId } = this.$store.getters.user;
-        const { data } = await this.keywordService.getKeywords();
         const subjectByKeywords = [];
-        Object.keys(data).forEach((key) => {
-          Object.values(data[key].array_agg).forEach((allowId) => {
+        Object.keys(this.keyWords).forEach((key) => {
+          Object.values(this.keyWords[key].array_agg).forEach((allowId) => {
             if (allowId === userId) {
-              subjectByKeywords.push({ value: data[key].subjectid, text: data[key].subjectname });
+              subjectByKeywords.push({ value: this.keyWords[key].subjectid, text: this.keyWords[key].subjectname });
             }
           });
         });
-        this.subjectsForm = [...new Set(subjectByKeywords.map((o) => JSON.stringify(o)))].map((s) => (
-          JSON.parse(s)));
+        this.subjectsForm = [...new Set(subjectByKeywords.map((o) => JSON.stringify(o)))].map((s) => (JSON.parse(s)));
         this.subjectsForm.unshift({ value: null, text: 'Escolha a disciplina', disabled: true });
       } catch (erro) { }
     },
 
     async getFilterProfessor() {
       try {
-        const { data } = await this.keywordService.getSubjects();
-        this.subjects = JSON.parse(JSON.stringify(data));
+        const allSubjects = (await this.subjectService.getSubjects()).data.map((s) => ({ value: s.subjectid, text: s.name }));
+        this.subjects = JSON.parse(JSON.stringify(allSubjects));
         this.subjects.unshift({ value: 0, text: 'Todas as Disciplinas' });
         this.subjects.unshift({ value: null, text: 'Escolha a disciplina', disabled: true });
       } catch (error) { }
@@ -206,11 +184,11 @@ export default {
         if (isFormValid && !this.kwNameAlreadyExist) {
           this.$store.commit('OPEN_LOADING_MODAL', { title: 'Enviando...' });
           const response = await this.keywordService.addKeyword(this.form.keywordName);
-          const currentKeywordid = response.data.response.keywordid;
+          const currentKeywordid = response.data.keywordid;
           const idSubject = this.form.selectedSubject;
 
           await this.keywordService.addKeywordToSubject(currentKeywordid, idSubject);
-          await this.getKeyWords();
+          await this.getKeywords();
 
           this.openModalRegister = false;
           this.$store.commit('CLOSE_LOADING_MODAL');
@@ -229,12 +207,12 @@ export default {
         if (isFormValid && this.kwNameAlreadyExist === false) {
           this.$store.commit('OPEN_LOADING_MODAL', { title: 'Enviando...' });
           const response = await this.keywordService.updateKeyword(this.idKeywordEdit, this.form.keywordName);
-          const idKeywordUpdated = response.data[0].keywordid;
-          this.keywordService.updateSubjectKeyword(idKeywordUpdated, this.form.selectedSubject);
+          const idKeywordUpdated = response.data.keywordid;
+          await this.keywordService.updateSubjectKeyword(idKeywordUpdated, this.form.selectedSubject);
           this.openModalEdit = false;
-          this.getKeyWords();
           this.$store.commit('CLOSE_LOADING_MODAL');
           this.makeToast('SUCESSO', 'Palavra-Chave editada com sucesso!', 'success');
+          this.getKeywords();
         }
       } catch (error) {
         this.openModalEdit = false;
@@ -248,7 +226,7 @@ export default {
         this.$store.commit('OPEN_LOADING_MODAL', { title: 'Enviando...' });
         await this.keywordService.deleteKeyword(this.keywordDelete);
         this.openModalDelete = false;
-        await this.getKeyWords();
+        await this.getKeywords();
         this.$store.commit('CLOSE_LOADING_MODAL');
         this.makeToast('SUCESSO', 'Palavra-chave excluída com sucesso!', 'success');
       } catch (error) {
