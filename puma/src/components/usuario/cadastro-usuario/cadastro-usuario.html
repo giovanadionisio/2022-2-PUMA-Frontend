@@ -47,7 +47,7 @@
                       </div>
                     </ValidationProvider>
 
-                    <ValidationProvider rules="required|min:14" v-slot="v" :bails="false" mode="eager" name="telefone" v-show="isFirstPage">
+                    <ValidationProvider :rules="{required: true, min: 14, phoneNumber:true}" v-slot="v" :bails="false" mode="eager" name="telefone" v-show="isFirstPage">
                       <span class="label">Telefone</span>
 
                       <div class="error-div">

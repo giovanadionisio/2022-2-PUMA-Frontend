@@ -48,7 +48,7 @@ import router from './router';
 import store from './store';
 import environment from './config/environment';
 
-import { validarCpf, validarCnpj } from './utils/validators-puma';
+import { validarCpf, validarCnpj, validarTelefone } from './utils/validators-puma';
 
 dotenv.config();
 
@@ -155,6 +155,16 @@ extend('cpf', {
     return '';
   },
   message: 'CPF inválido',
+});
+
+extend('phoneNumber', {
+  validate: (value) => {
+    if (value.length === 15 || value.length === 14) {
+      return validarTelefone(value);
+    }
+    return '';
+  },
+  message: 'Telefone inválido',
 });
 
 /* eslint-disable no-confusing-arrow */

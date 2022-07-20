@@ -1,4 +1,4 @@
-function clearMasks(maskedValue) {
+export function clearMasks(maskedValue) {
   return maskedValue.replace(/_|-|\(|\)|\.|\/|\s/g, '');
 }
 
@@ -96,4 +96,40 @@ export function validarCnpj(value) {
   cnpjCalc += dig === 10 || dig === 11 ? '0' : dig.toString();
 
   return cnpj === cnpjCalc;
+}
+
+export function validarTelefone(value) {
+  const phoneNumber = clearMasks(value);
+  const ddd = phoneNumber.substring(0, 2);
+  const dddInvalido = ['20', '23', '25', '26', '29', '30', '36', '39', '40', '50', '52', '56', '57', '58', '59', '60', '70', '72', '76', '78', ' 80', '90'];
+  if (dddInvalido.includes(ddd) || ddd < 11 || ddd > 99) {
+    return false;
+  }
+  const phoneNumberWithoutDDD = phoneNumber.substring(2);
+  const sameDigitsNumber = [
+    '00000000',
+    '000000000',
+    '111111111',
+    '1111111111',
+    '222222222',
+    '2222222222',
+    '333333333',
+    '3333333333',
+    '444444444',
+    '4444444444',
+    '555555555',
+    '5555555555',
+    '666666666',
+    '6666666666',
+    '777777777',
+    '7777777777',
+    '888888888',
+    '8888888888',
+    '999999999',
+    '9999999999',
+  ];
+  if (sameDigitsNumber.includes(phoneNumberWithoutDDD)) {
+    return false;
+  }
+  return true;
 }
