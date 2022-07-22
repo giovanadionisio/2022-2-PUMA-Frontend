@@ -135,7 +135,7 @@
           <div class="py-3" />
           <div class="btn-toolbar" style="justify-content: center">
             <div v-if="operacao !== 'visualizar'">
-              <input :value="operacao === 'editar' ? 'Editar' : 'Salvar'" v-if="!isLoading && operacao !== 'visualizar'"
+              <input :value="operacao === 'editar' ? 'Salvar' : 'Salvar'" v-if="!isLoading && operacao !== 'visualizar'"
                 type="submit" class="btn btn-warning" @click="onSubmit" />
             </div>
             <div class="m-4" />
