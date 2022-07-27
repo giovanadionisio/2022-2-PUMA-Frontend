@@ -99,7 +99,7 @@ export default {
     async getKeywords() {
       try {
         const { data } = await this.keywordService.getKeywords();
-        this.tableKeywordSubject = JSON.parse(JSON.stringify(data));
+        this.tableKeywordSubject = JSON.parse(JSON.stringify(data.reverse()));
         this.keyWords = data;
         Object.keys(data).forEach((key) => {
           this.keywordsInfo[data[key].keywordid] = data[key].array_agg;
