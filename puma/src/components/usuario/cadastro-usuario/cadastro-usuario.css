@@ -178,3 +178,8 @@ a {
   margin-left: 45px;
   margin-right: 20px;
 }
+
+.destaque {
+  animation: animate 1s linear infinite;
+}
+

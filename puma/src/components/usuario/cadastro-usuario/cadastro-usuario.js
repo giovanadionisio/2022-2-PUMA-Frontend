@@ -17,12 +17,12 @@ export default {
   data() {
     return {
       userService: new UserService(),
-      name: '',
-      email: '',
+      name: null,
+      email: null,
       phoneNumber: '',
       matricula: '',
-      password: '',
-      repeatPassword: '',
+      password: null,
+      repeatPassword: null,
       cnpj: '',
       companyName: '',
       socialReason: '',
@@ -38,6 +38,9 @@ export default {
       isPhysical: false,
       isExternalAgent: false,
       navs: [{ title: 'HOME' }, { title: 'CADASTRO' }],
+
+
+      showMessage: false,
     };
   },
   methods: {
@@ -109,6 +112,44 @@ export default {
     },
     clearMask(maskedValue) {
       return maskedValue.replace(/_|-|\(|\)|\.|\/|\s/g, '');
+    },
+
+
+    changePage(x) {
+      if (x === 1) {
+        let isOk = this.verificaPreenchimento();
+        if (isOk === true) {
+          this.isFirstPage = !this.isFirstPage;
+        } else {
+          this.showMessage = true;
+        }
+      } else if (x === 2) {
+        this.isFirstPage = !this.isFirstPage;
+      }
+    },
+    verificaPreenchimento() {
+      if (this.name && this.email) {
+
+        var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        let validEmail = re.test(this.email);
+        
+        if (validEmail === true) {
+          if (this.phoneNumber.length >= 14) {
+            if ((this.password === this.repeatPassword) && (this.password.length >= 6)) {
+              this.showMessage = false;
+              return true;
+            } else {
+              return false;
+            }
+          } else {
+            return false;
+          }
+        } else {
+          return false;
+        }
+      } else {
+        return false;
+      }
     },
   },
 };
