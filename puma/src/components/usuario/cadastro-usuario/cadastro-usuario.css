@@ -58,11 +58,6 @@ option {
   color: black;
 }
 
-.label {
-  font-weight: bold;
-  color: #222;
-}
-
 .loading {
   font-size: 16px;
   margin: 0 auto;
@@ -127,14 +122,15 @@ a {
   color: #EB0600;
 }
 
-.label{
+label{
   color: rgba(21,53,94,1);
-  display: flex;
   text-align: left;
   flex-direction: column;
   margin-left: 70px;
   margin-top: 20px;
   margin-bottom: -20px;
+  font-weight: bold;
+  float: left;
 }
 
 .error-div {
@@ -177,4 +173,10 @@ a {
 .nav-item {
   margin-left: 45px;
   margin-right: 20px;
+}
+
+label.required::after {
+  content: "*";
+  color: rgba(21,53,94,1);
+  font-weight: bolder;
 }

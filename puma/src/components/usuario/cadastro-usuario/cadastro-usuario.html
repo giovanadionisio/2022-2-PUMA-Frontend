@@ -25,7 +25,7 @@
                 <ValidationObserver ref="observer" v-slot="{invalid}" @submit.prevent="onSubmit()">
                   <form id="register-form">
                     <ValidationProvider rules="required|alpha_spaces" v-slot="v" :bails="false" name="nome" v-show="isFirstPage">
-                      <span class="label">Nome</span>
+                      <label class="required">Nome</label>
                       <div class="error-div">
                         <input v-on:change="verificaPreenchimento()" v-model.trim="name" placeholder="Nome Completo" type="text" id="name" :class="v.classes"
                           class="input-field" />
@@ -36,8 +36,7 @@
                     </ValidationProvider>
 
                     <ValidationProvider rules="required|email" v-slot="v" :bails="false" name="email" v-show="isFirstPage">
-                      <span class="label">E-mail</span>
-
+                      <label class="required">E-mail</label>
                       <div class="error-div">
                         <input v-on:change="verificaPreenchimento()" v-model.trim="email" type="text" id="email" placeholder="E-mail" :class="v.classes"
                           class="input-field" />
@@ -48,8 +47,7 @@
                     </ValidationProvider>
 
                     <ValidationProvider :rules="{required: true, min: 14, phoneNumber:true}" v-slot="v" :bails="false" mode="eager" name="telefone" v-show="isFirstPage">
-                      <span class="label">Telefone</span>
-
+                      <label class="required">Telefone</label>
                       <div class="error-div">
                         <input v-on:change="verificaPreenchimento()" v-mask=" phoneNumber.length <= 14 ? '(##) ####-####' : '(##) #####-####'"
                           v-model="phoneNumber" id="phoneNumber" placeholder="Telefone" :class="v.classes"
@@ -61,8 +59,7 @@
                     </ValidationProvider>
 
                     <ValidationProvider :rules="{required: true, min: 6, regex: /(?=.*[a-zA-Z])(?=.*[0-9])/ }" v-slot="v" :bails="false" v-show="isFirstPage">
-                      <span class="label">Senha</span>
-
+                      <label class="required">Senha</label>
                       <div class="error-div">
                         <input v-on:change="verificaPreenchimento()" :type="passwordTypeText ? 'text' : 'password'" v-model="password" id="senha"
                           placeholder="Mínimo 6 caracteres com letras e números" :class="v.classes" class="input-field" />
@@ -78,7 +75,7 @@
 
                     <ValidationProvider :rules="{required: true, confirmed: {target: password}}" v-slot="v"
                       :bails="false" v-show="isFirstPage">
-                      <span class="label">Repita sua senha</span>
+                      <label class="required">Repita sua senha</label>
 
                       <div class="error-div">
                         <input v-on:change="verificaPreenchimento()" :type="repeatPasswordTypeText ? 'text' : 'password'" v-model="repeatPassword"
@@ -95,7 +92,7 @@
                     </ValidationProvider>
 
                     <ValidationProvider rules="required" v-slot="v" :bails="false" v-show="!isFirstPage">
-                      <span class="label">Tipo de usuário</span>
+                      <label class="required">Tipo de usuário</label>
                       <div class="error-div">
                         <select v-on:change="alterarTipoUsuario()" :class="v.classes" v-model="type" name="tipo"
                           id="tipo" class="input-field">
@@ -115,7 +112,7 @@
                     <ValidationProvider v-show="hasMatricula && !isFirstPage"
                       :rules="{required: hasMatricula, min: { length: type === 'Aluno' ? 10 : 7 }}" v-slot="v"
                       validate-on="blur" :bails="false" name="matrícula">
-                      <span class="label">Matrícula</span>
+                      <label class="required">Matrícula</label>
                       <div class="error-div">
                         <input v-mask="type === 'Aluno' ? '##/#######' : '#######'" v-model="matricula"
                           :class="v.classes" id="matricula" placeholder="Digite sua matrícula" class="input-field" />
@@ -127,7 +124,7 @@
 
                     <ValidationProvider v-show="isExternalAgent && !isFirstPage" :rules="{required: isExternalAgent}"
                       v-slot="v" :bails="false">
-                      <span class="label">Tipo de Agente Externo</span>
+                      <label class="required">Tipo de Agente Externo</label>
                       <div class="error-div">
                         <select v-on:change="alterarTipoAgenteExterno()" v-model="externalAgentType" :class="v.classes"
                           class="input-field">
@@ -145,7 +142,7 @@
 
                     <ValidationProvider v-show="isJuridical && !isFirstPage" :rules="{required: isJuridical}" v-slot="v"
                       :bails="false">
-                      <span class="label">Noma da empresa</span>
+                      <label class="required">Noma da empresa</label>
                       <div class="error-div">
                         <input v-model.trim="companyName" :class="v.classes" name="nome da empresa" id="companyName"
                           type="name" placeholder="Digite o nome da empresa" class="input-field" />
@@ -157,7 +154,7 @@
 
                     <ValidationProvider v-show="isJuridical && !isFirstPage"
                       :rules="{required: isJuridical, min : {length: 18}, cnpj: true}" v-slot="v" :bails="false">
-                      <span class="label">CNPJ</span>
+                      <label class="required">CNPJ</label>
                       <div class="error-div">
                         <input v-mask="'##.###.###/####-##'" :class="v.classes" id="cnpj" v-model="cnpj"
                           placeholder="Digite o CNPJ da empresa" class="input-field" />
@@ -169,7 +166,7 @@
 
                     <ValidationProvider v-show="isJuridical && !isFirstPage" :rules="{required: isJuridical}" v-slot="v"
                       :bails="false">
-                      <span class="label">Razão social</span>
+                      <label class="required">Razão social</label>
                       <div class="error-div">
                         <input v-model.trim="socialReason" :class="v.classes" type="name" id="socialReason"
                           placeholder="Digite a razão social da empresa" class="input-field" />
@@ -181,7 +178,7 @@
 
                     <ValidationProvider v-show="isPhysical && !isFirstPage"
                       :rules="{required: isPhysical, min : {length: 14}, cpf: true}" v-slot="v" :bails="false">
-                      <span class="label">CPF</span>
+                      <label class="required">CPF</label>
                       <div class="error-div">
                         <input v-mask="'###.###.###-##'" :class="v.classes" v-model="cpf" id="cpf"
                           placeholder="Digite seu CPF" class="input-field" />
