@@ -170,7 +170,7 @@
                             <div v-if="!disabled && form.selectedEvaluation && form.selectedEvaluation.value === 0"
                                 role="group">
                                 <div class="my-3" />
-                                <ValidationProvider vid="feedback" rules="required" v-slot="{errors}" :bails="false"
+                                <ValidationProvider vid="feedback" :rules="{required: true, min: 10}" v-slot="{errors}" :bails="false"
                                     name="campo">
                                     <label for="feedback" class="input-label">
                                         FEEDBACK PARA AUTOR DA PROPOSTA DE PROJETO
@@ -187,7 +187,7 @@
                             <div v-if="!disabled && form.selectedEvaluation && form.selectedEvaluation.value === 1"
                                 role="group">
                                 <div class="my-3" />
-                                <ValidationProvider vid="feedback" rules="required" v-slot="{errors}" :bails="false"
+                                <ValidationProvider vid="feedback" :rules="{required: true, min: 10}" v-slot="{errors}" :bails="false"
                                     name="campo">
                                     <label for="feedback" class="input-label">MOTIVO DA REJEIÇÃO DA PROPOSTA</label>
                                     <textarea id="feedback" :disabled="disabled" v-model="form.feedback" rows="6"
@@ -202,7 +202,7 @@
                             <div v-if="!disabled && form.selectedEvaluation && form.selectedEvaluation.value === 2"
                                 role="group">
                                 <div class="my-3" />
-                                <ValidationProvider vid="subject" rules="required" v-slot="{errors}" :bails="false"
+                                <ValidationProvider vid="subject" :rules="{required: true, min: 10}" v-slot="{errors}" :bails="false"
                                     name="campo">
                                     <label for="subject" class="input-label">
                                         ESCOLHA DA DISCIPLINA PARA ENVIAR A PROPOSTA
@@ -223,7 +223,7 @@
                             <div v-if="!disabled && form.selectedEvaluation && form.selectedEvaluation.value === 2"
                                 role="group">
                                 <div class="my-3" />
-                                <ValidationProvider vid="feedback" rules="required" v-slot="{errors}" :bails="false"
+                                <ValidationProvider vid="feedback" :rules="{required: true, min: 10}" v-slot="{errors}" :bails="false"
                                     name="campo">
                                     <label for="feedback" class="input-label">
                                         MOTIVO DO ENCAMINHAMENTO DA PROPOSTA
@@ -240,7 +240,7 @@
                             <div v-if="!disabled && form.selectedEvaluation && form.selectedEvaluation.value === 3"
                                 role="group">
                                 <div class="my-3" />
-                                <ValidationProvider vid="feedback" rules="required" v-slot="{errors}" :bails="false"
+                                <ValidationProvider vid="feedback" :rules="{required: true, min: 10}" v-slot="{errors}" :bails="false"
                                     name="campo">
                                     <label for="feedback" class="input-label">
                                         MOTIVO DO ENCAMINHAMENTO DA PROPOSTA
