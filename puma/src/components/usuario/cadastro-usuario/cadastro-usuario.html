@@ -27,7 +27,7 @@
                     <ValidationProvider rules="required|alpha_spaces" v-slot="v" :bails="false" name="nome" v-show="isFirstPage">
                       <span class="label">Nome</span>
                       <div class="error-div">
-                        <input v-model.trim="name" placeholder="Nome Completo" type="text" id="name" :class="v.classes"
+                        <input v-on:change="verificaPreenchimento()" v-model.trim="name" placeholder="Nome Completo" type="text" id="name" :class="v.classes"
                           class="input-field" />
                         <span class="error-span" for="name" v-for="erro in v.errors">
                           {{ erro }}
@@ -39,7 +39,7 @@
                       <span class="label">E-mail</span>
 
                       <div class="error-div">
-                        <input v-model.trim="email" type="text" id="email" placeholder="E-mail" :class="v.classes"
+                        <input v-on:change="verificaPreenchimento()" v-model.trim="email" type="text" id="email" placeholder="E-mail" :class="v.classes"
                           class="input-field" />
                         <span class="error-span" v-for="erro in v.errors">
                           {{ erro }}
@@ -51,7 +51,7 @@
                       <span class="label">Telefone</span>
 
                       <div class="error-div">
-                        <input v-mask=" phoneNumber.length <= 14 ? '(##) ####-####' : '(##) #####-####'"
+                        <input v-on:change="verificaPreenchimento()" v-mask=" phoneNumber.length <= 14 ? '(##) ####-####' : '(##) #####-####'"
                           v-model="phoneNumber" id="phoneNumber" placeholder="Telefone" :class="v.classes"
                           class="input-field" />
                         <span class="error-span" v-for="erro in v.errors">
@@ -64,7 +64,7 @@
                       <span class="label">Senha</span>
 
                       <div class="error-div">
-                        <input :type="passwordTypeText ? 'text' : 'password'" v-model="password" id="senha"
+                        <input v-on:change="verificaPreenchimento()" :type="passwordTypeText ? 'text' : 'password'" v-model="password" id="senha"
                           placeholder="Mínimo 6 caracteres com letras e números" :class="v.classes" class="input-field" />
                         <!-- <font-awesome-icon v-if="!passwordTypeText" @click="passwordTypeText = true"
                           icon="fa-solid fa-eye" size="lg" class="password-img"></font-awesome-icon>
@@ -81,7 +81,7 @@
                       <span class="label">Repita sua senha</span>
 
                       <div class="error-div">
-                        <input :type="repeatPasswordTypeText ? 'text' : 'password'" v-model="repeatPassword"
+                        <input v-on:change="verificaPreenchimento()" :type="repeatPasswordTypeText ? 'text' : 'password'" v-model="repeatPassword"
                           name="repita sua senha" type="password" id="repeatPassword" placeholder="Repita sua senha"
                           :class="v.classes" class="password-input" />
                         <!-- <font-awesome-icon v-if="!repeatPasswordTypeText" @click="repeatPasswordTypeText = true"
@@ -167,7 +167,6 @@
                       </div>
                     </ValidationProvider>
 
-
                     <ValidationProvider v-show="isJuridical && !isFirstPage" :rules="{required: isJuridical}" v-slot="v"
                       :bails="false">
                       <span class="label">Razão social</span>
@@ -192,6 +191,10 @@
                       </div>
                     </ValidationProvider>
 
+                    <span v-show="showMessage && isFirstPage" class="error-span">
+                      Preencha corretamente todos os campos.
+                    </span>
+
                     <b-container fluid v-show="isFirstPage" style="padding:10px;">
                       <b-row>
                         <b-col />
@@ -199,14 +202,14 @@
                           <b-row align-h="center">
                             <font-awesome-icon icon="fa-solid fa-circle" size="2x" style="margin: 10px;">
                             </font-awesome-icon>
-                            <font-awesome-icon @click="isFirstPage = false" style="margin: 10px;cursor: pointer;"
+                            <font-awesome-icon style="margin: 10px;"
                               icon="fa-regular fa-circle" size="2x" class=""></font-awesome-icon>
                           </b-row>
                         </b-col>
                         <b-col>
                           <b-row align-h="center">
-                            <i style="cursor: pointer" @click="isFirstPage = false">
-                              <font-awesome-icon icon="fa-solid fa-angle-right" size="2x" style="margin: 10px;">
+                            <i style="cursor: pointer" @click="changePage(1)">
+                              <font-awesome-icon  icon="fa-solid fa-angle-right" size="2x" style="margin: 10px;">
                               </font-awesome-icon>
                             </i>
                           </b-row>
@@ -218,7 +221,7 @@
                       <b-row>
                         <b-col>
                           <b-row align-h="center">
-                            <i style="cursor: pointer" @click="isFirstPage = true">
+                            <i style="cursor: pointer" @click="changePage(2)">
                               <font-awesome-icon icon="fa-solid fa-angle-left" size="2x" style="margin: 10px;">
                               </font-awesome-icon>
                             </i>
@@ -227,7 +230,7 @@
                         <b-col cols="8">
                           <b-row align-h="center">
                             <i>
-                              <font-awesome-icon @click="isFirstPage = true" style="margin: 10px;cursor: pointer;"
+                              <font-awesome-icon style="margin: 10px;"
                                 icon="fa-regular fa-circle" size="2x" class=""></font-awesome-icon>
                             </i>
                             <font-awesome-icon icon="fa-solid fa-circle" size="2x" style="margin: 10px;">

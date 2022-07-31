@@ -4,6 +4,7 @@ import { regex } from 'vee-validate/dist/rules';
 import Loading from '../../shared/loading/Loading.vue';
 import UserService from '../../../services/UserService';
 import VisitorNav from '../../../components/VisitorNav/VisitorNav.vue';
+import { validarTelefone, clearMasks } from '../../../utils/validators-puma';
 
 export default {
   name: 'CadastroUsuario',
@@ -17,12 +18,12 @@ export default {
   data() {
     return {
       userService: new UserService(),
-      name: '',
-      email: '',
+      name: null,
+      email: null,
       phoneNumber: '',
       matricula: '',
-      password: '',
-      repeatPassword: '',
+      password: null,
+      repeatPassword: null,
       cnpj: '',
       companyName: '',
       socialReason: '',
@@ -38,6 +39,7 @@ export default {
       isPhysical: false,
       isExternalAgent: false,
       navs: [{ title: 'HOME' }, { title: 'CADASTRO' }],
+      showMessage: false,
     };
   },
   methods: {
@@ -109,6 +111,60 @@ export default {
     },
     clearMask(maskedValue) {
       return maskedValue.replace(/_|-|\(|\)|\.|\/|\s/g, '');
+    },
+    changePage(x) {
+      if (x === 1) {
+        let isOk = this.verificaPreenchimento();
+        if (isOk === true) {
+          this.isFirstPage = !this.isFirstPage;
+        } else {
+          this.showMessage = true;
+        }
+      } else if (x === 2) {
+        this.isFirstPage = !this.isFirstPage;
+      }
+    },
+    verificaPreenchimento() {
+      if (this.name && this.email) {
+        var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        let validEmail = re.test(this.email);
+        if (validEmail === true) {
+          if (this.phoneNumber) {
+            let validTelephone = validarTelefone(this.phoneNumber);
+            if (validTelephone === true) {
+              let validPassword = this.verificaSenha(this.password, this.repeatPassword);
+              if (validPassword === true) {
+                this.showMessage = false;
+                return true;
+              } else {
+                return false;
+              }
+            } else {
+              return false;
+            }
+          } else {
+            return false;
+          }     
+        } else {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    },
+    verificaSenha(senha, repitaSenha) {
+      var letrasMaiusculas = /[A-Z]/;
+      var letrasMinusculas = /[a-z]/; 
+      var numeros = /[0-9]/;
+      if ((senha === repitaSenha) && (senha.length >= 6)) {
+        if ((letrasMaiusculas.test(senha) || letrasMinusculas.test(senha)) && numeros.test(senha)) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return false;
+      }
     },
   },
 };

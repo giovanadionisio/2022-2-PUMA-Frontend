@@ -105,6 +105,9 @@ export function validarTelefone(value) {
   if (dddInvalido.includes(ddd) || ddd < 11 || ddd > 99) {
     return false;
   }
+  if ((phoneNumber.length) <= 9) {
+    return false;
+  }
   const phoneNumberWithoutDDD = phoneNumber.substring(2);
   const sameDigitsNumber = [
     '00000000',
