@@ -10,11 +10,6 @@ export default {
       data: {
         columns: [
           {
-            label: 'ITEM',
-            field: 'projectid',
-            sort: 'asc',
-          },
-          {
             label: 'TÍTULO',
             field: 'name',
             sort: 'desc',
@@ -25,7 +20,7 @@ export default {
             sort: 'desc',
           },
           {
-            label: 'DATA CADASTRO',
+            label: 'CRIAÇÃO',
             field: 'createdat',
             sort: 'desc',
           },
