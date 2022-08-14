@@ -17,9 +17,9 @@
               <input type="text" id="name" maxlength="1020" class="input-textfield"
                 placeholder="Digite o nome para sua disciplina" v-model="name" :disabled=isLoading
                 v-bind:class="{ 'input-focus': !v.errors.length && operacao !== 'visualizar', 'input-error': v.errors.length }">
-              <span class="input-error-span" v-for="erro in v.errors">
-                {{ erro }}
-              </span>
+              <!-- <span class="input-error-span" v-for="erro in v.errors">
+                {{ erro }},
+              </span> -->
             </div>
           </ValidationProvider>
           <div class="py-3" />
