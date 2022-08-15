@@ -99,7 +99,7 @@ extend('min', {
   },
   params: ['length'],
   /* eslint-disable max-len */
-  message: (fieldName, placeholders) => (fieldName.slice(-1).toLowerCase() === 'a' ? `A ${fieldName} deve ter ao menos ${placeholders.length} caracteres` : `O ${fieldName} deve ter ao menos ${placeholders.length} caracteres`),
+  message: (fieldName, placeholders) => `${fieldName} deve ter ao menos ${placeholders.length} caracteres`,
 });
 
 extend('min_array', {
