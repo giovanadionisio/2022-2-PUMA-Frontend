@@ -11,15 +11,15 @@
     <ValidationObserver ref="observer" v-slot="{invalid}" @submit.prevent="onSubmit()">
       <b-row class="form m-0 p-4">
         <b-col cols="6">
-          <ValidationProvider rules="required|min:10" v-slot="v" :bails="false" name="nome da disciplina">
+          <ValidationProvider rules="required|min:10" v-slot="v" :bails="false" name="Nome da disciplina">
             <div role="group">
               <label for="name" class="input-label">Nome</label>
               <input type="text" id="name" maxlength="1020" class="input-textfield"
                 placeholder="Digite o nome para sua disciplina" v-model="name" :disabled=isLoading
                 v-bind:class="{ 'input-focus': !v.errors.length && operacao !== 'visualizar', 'input-error': v.errors.length }">
-              <!-- <span class="input-error-span" v-for="erro in v.errors">
+              <span class="input-error-span" v-for="erro in v.errors">
                 {{ erro }},
-              </span> -->
+              </span>
             </div>
           </ValidationProvider>
           <div class="py-3" />
@@ -119,7 +119,7 @@
             </span>
           </div>
           <div class="py-3" />
-          <ValidationProvider rules="required|min:200" v-slot="v" :bails="false" name="desafio enfrentado">
+          <ValidationProvider rules="required|min:200" v-slot="v" :bails="false" name="Desafio enfrentado">
             <div role="group">
               <label for="descricao" class="input-label">Ementa</label>
               <textarea id="descricao" placeholder="Descreva a ementa da disciplina usando, no mínimo, 200 caracteres."
