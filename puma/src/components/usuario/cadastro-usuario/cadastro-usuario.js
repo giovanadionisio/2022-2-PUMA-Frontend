@@ -166,6 +166,22 @@ export default {
         return false;
       }
     },
+    mostrarOcultarSenha() {
+      let senha = document.getElementById('senha');
+      if(senha.type === 'password') {
+        senha.type = 'text';
+      } else {
+        senha.type = 'password'
+      }
+    },
+    mostrarOcultarRepetirSenha() {
+      let Rsenha = document.getElementById('repeatPassword');
+      if(Rsenha.type === 'password') {
+        Rsenha.type = 'text';
+      } else {
+        Rsenha.type = 'password'
+      }
+    },
   },
 };
 

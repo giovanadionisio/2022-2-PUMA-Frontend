@@ -12,6 +12,11 @@ export default {
     Loading,
     VisitorNav,
   },
+  computed: {
+    isPassword() {
+        return this.inputType === 'password';
+    },
+},
   data() {
     return {
       password: '',
@@ -50,6 +55,14 @@ export default {
           this.hasAuthError = true;
           this.isLoading = false;
         });
+      }
+    },
+    mostrarOcultarSenha() {
+      let senha = document.getElementById('senha');
+      if(senha.type === 'password') {
+        senha.type = 'text';
+      } else {
+        senha.type = 'password'
       }
     },
   },
