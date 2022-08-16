@@ -30,7 +30,7 @@
                         <div class="error-div">
                           <div class="password-div" v-bind:class="{ invalid: v.errors.length }">
                             <input class="password-input" type="password" id="senha" v-model="password" placeholder="Senha"/>
-                            <div class="eye-option" @click='mostrarOcultarSenha()'>
+                            <div class="eye-option" @click='mostrarOcultarSenha('senha')'>
                                 <font-awesome-icon icon="fa-solid fa-eye" ></font-awesome-icon>
                             </div>
                           </div>
