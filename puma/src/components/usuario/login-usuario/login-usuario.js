@@ -12,11 +12,6 @@ export default {
     Loading,
     VisitorNav,
   },
-  computed: {
-    isPassword() {
-        return this.inputType === 'password';
-    },
-},
   data() {
     return {
       password: '',
