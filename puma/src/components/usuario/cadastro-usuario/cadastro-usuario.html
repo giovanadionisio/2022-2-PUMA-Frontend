@@ -64,7 +64,7 @@
                         <div class="password-div" v-bind:class="{ invalid: v.errors.length }">
                           <input v-on:change="verificaPreenchimento()" :type="passwordTypeText ? 'text' : 'password'" v-model="password" id="senha"
                           placeholder="Mínimo 6 caracteres com letras e números" :class="v.classes" class="password-input" />
-                          <div class="eye-option" @click='mostrarOcultarSenha()'>
+                          <div class="eye-option" @click='mostrarOcultarSenha('senha')'>
                               <font-awesome-icon icon="fa-solid fa-eye" ></font-awesome-icon>
                           </div>
                         </div>
@@ -82,7 +82,7 @@
                           <input v-on:change="verificaPreenchimento()" :type="repeatPasswordTypeText ? 'text' : 'password'" v-model="repeatPassword"
                           name="repita sua senha" type="password" id="repeatPassword" placeholder="Repita sua senha"
                           :class="v.classes" class="password-input" />
-                          <div class="eye-option" @click='mostrarOcultarRepetirSenha()'>
+                          <div class="eye-option" @click='mostrarOcultarSenha('repeatPassword')'>
                               <font-awesome-icon icon="fa-solid fa-eye" ></font-awesome-icon>
                           </div>
                         </div>
