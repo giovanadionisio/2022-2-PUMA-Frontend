@@ -166,6 +166,14 @@ export default {
         return false;
       }
     },
+    mostrarOcultarSenha(element) {
+      let senha = document.getElementById(element);
+      if(senha.type === 'password') {
+        senha.type = 'text';
+      } else {
+        senha.type = 'password'
+      }
+    },
   },
 };
 

@@ -28,8 +28,14 @@
                       <ValidationProvider rules="required" v-slot="v" :bails="false">
                         <div class="title-slot">Senha</div>
                         <div class="error-div">
-                          <input v-bind:class="{ invalid: v.errors.length }" type="password" id="senha"
-                            class="input-field" v-model="password" placeholder="Senha" />
+                          <div class="password-div" v-bind:class="{ invalid: v.errors.length }">
+                            <input class="password-input" type="password" id="senha" v-model="password" placeholder="Senha"/>
+                            <div class="eye-option" @click='mostrarOcultarSenha()'>
+                                <font-awesome-icon icon="fa-solid fa-eye" ></font-awesome-icon>
+                            </div>
+                          </div>
+                           
+                        
                           <span class="error-span" v-for="erro in v.errors">
                             {{ erro }}
                           </span>
