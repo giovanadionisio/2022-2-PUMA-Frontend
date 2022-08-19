@@ -1,4 +1,6 @@
-import { mount } from '@vue/test-utils'
+import {createLocalVue } from '@vue/test-utils'
+import CompAPI from '@vue/composition-api'
+
 import NavBar from '../../../../src/components/shared/nav-bar/NavBar.vue'
 
 describe('Mounted NavBar', () => {
