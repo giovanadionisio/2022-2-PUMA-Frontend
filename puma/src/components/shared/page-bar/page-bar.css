@@ -1,3 +1,7 @@
+.page-bar {
+    margin-top: 40px;
+  }
+  
 .title {
     color: #15355E;
     font-weight: bold;
@@ -9,9 +13,11 @@
     font-size: 20px !important;
     font-weight: normal !important;
 }
+
 .user {
     float: right;
 }
+
 
 /* TODO: Espaçamento topo 40px;
         Nomes em capslock(?);
