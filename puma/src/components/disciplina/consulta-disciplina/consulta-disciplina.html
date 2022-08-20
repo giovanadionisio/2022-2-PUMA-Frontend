@@ -1,10 +1,9 @@
 <div class="main-content hidden-scroll-bar">
-  <div class="tittle ml-4">
-    Disciplinas
-  </div>
-  <div v-if="subjects.length" class="tittle sub-tittle ml-4">
-    Disciplinas cadastradas na plataforma
-  </div>
+  <PageBar 
+    username = "String", 
+    title = "Disciplinas", 
+    subtitle = "Disciplinas cadastradas na plataforma",
+    usertype = "String"/>
   <mdbDatatable ref="table" borderless color="blue" :data="data" :pagination="false"/>
   <div v-if="!subjects.length" class="no-results align-content-center mt-3">
     Sem resultados disponíveis

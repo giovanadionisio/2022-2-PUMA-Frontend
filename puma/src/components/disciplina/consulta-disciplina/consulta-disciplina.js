@@ -1,8 +1,10 @@
 import SubjectService from '../../../services/SubjectService';
+import PageBar from '../../shared/page-bar/PageBar.vue';
 
 /* eslint-disable*/
 export default {
   name: 'ConsultaDisciplinas',
+  component: {PageBar},
   data() {
     return {
       data: {
