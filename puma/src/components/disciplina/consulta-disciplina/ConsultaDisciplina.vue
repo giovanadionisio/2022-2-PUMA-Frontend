@@ -12,12 +12,15 @@
             <button
                 class="btn cd-btn ml-4 my-3"
                 onclick="window.location.href = '/disciplinas/cadastrar'">
-                    <i class="fa-solid fa-plus-circle mr-2 add-project"></i>Criar Disciplina
+                <i class="fa-solid fa-plus-square mr-2 add-project"></i>Criar Disciplina
             </button>
         </div>
 
-        <ListagemConsultaDisciplinaComponent :title="'Minhas Disciplinas'" :list="mySubjects"/>
-        <ListagemConsultaDisciplinaComponent :title="'Demais Disciplinas'" :list="auxsubjects"/>
+        <div class="tabelas">
+          <ListagemConsultaDisciplinaComponent class="minhasDisciplinas" :list="mySubjects"/>
+          <hr class="mb-0 mt-5">
+          <ListagemConsultaDisciplinaComponent class="demaisDisciplinas" :list="subjects"/>
+        </div>
     </div>
 </template>
 
@@ -40,74 +43,6 @@ export default {
     isDeletingSubject: false,
     subjects: [],
     mySubjects: [],
-    auxsubjects: [
-      {
-        name: 'Calculo23',
-        subjectid: 91,
-        professors: [
-          {
-            email: 'giovannabbottino@gmail.com',
-            fullname: 'Giovanna Borges Bottino',
-            regnumber: '1700112',
-            userid: 60,
-          },
-          {
-            email: 'giovannabbottino@gmail.com',
-            fullname: 'Giovanna Borges Bottino',
-            regnumber: '1700112',
-            userid: 61,
-          },
-        ],
-      },
-      {
-        name: 'Calculo34',
-        subjectid: 92,
-        professors: [
-          {
-            email: 'giovannabbottino@gmail.com',
-            fullname: 'Giovanna Borges Bottino',
-            regnumber: '1700112',
-            userid: 62,
-          },
-        ],
-      },
-      {
-        name: 'Calculo4',
-        subjectid: 93,
-        professors: [
-          {
-            email: 'giovannabbottino@gmail.com',
-            fullname: 'Giovanna Borges Bottino',
-            regnumber: '1700112',
-            userid: 4,
-          },
-        ],
-      },
-      {
-        name: 'Calculo3',
-        subjectid: 94,
-        professors: [
-          {
-            email: 'giovannabbottino@gmail.com',
-            fullname: 'Giovanna Borges Bottino',
-            regnumber: '1700112',
-            userid: 4,
-          },
-        ],
-      },
-      {
-        name: 'Calculo2',
-        subjectid: 95,
-        professors: [
-          {
-            email: 'giovannabbottino@gmail.com',
-            fullname: 'Giovanna Borges Bottino',
-            regnumber: '1700112',
-            userid: 4,
-          },
-        ],
-      },
-    ],
     subjectService: new SubjectService(),
   }),
 
@@ -124,12 +59,12 @@ export default {
       });
     },
     separateSubjects() {
-      this.auxsubjects.map((sub) => {
+      this.subjects.map((sub) => {
         sub.professors.map((prof) => {
           console.log(prof.userid, this.$store.getters.user.userId);
           if (prof.userid === this.$store.getters.user.userId) {
             this.mySubjects.push(sub);
-            this.auxsubjects = this.auxsubjects.filter((item) => (
+            this.subjects = this.subjects.filter((item) => (
               item.subjectid !== sub.subjectid));
           }
           return prof;
