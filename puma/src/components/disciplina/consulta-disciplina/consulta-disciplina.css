@@ -8,7 +8,9 @@ thead{
 }
 
 table {
-    border-spacing: 30px;
+    width: 100%;
+    max-width: 1500px;
+    border-spacing: 25px;
     border-collapse: separate;
 }
 
@@ -24,6 +26,7 @@ svg {
     background-color: white;
     color: #15355e;
     border-color: #15355e;
+    padding: 10px 20px;
 }
 
 .search-input {
@@ -57,7 +60,6 @@ svg {
     color: #15355E;
     font-weight: bold;
     font-size: 40px;
-    text-transform: uppercase
 }
 
 .sub-tittle {
@@ -81,4 +83,9 @@ header {
 
 .modal-tittle {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
+
+.separate_tables {
+    border-top: 1px solid black;
+    background-color: red;
 }
