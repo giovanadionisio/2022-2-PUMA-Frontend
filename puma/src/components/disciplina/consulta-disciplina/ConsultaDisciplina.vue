@@ -4,7 +4,7 @@
       Disciplinas
     </h1>
 
-    <div class="tittle sub-tittle ml-4">
+    <div class="tittle sub-tittle ml-4 mb-4">
       Disciplinas Cadastradas na Plataforma
     </div>
 
@@ -84,9 +84,6 @@ export default {
         });
         return null;
       });
-    },
-    goToSubject(subjectid) {
-      this.$router.push({ path: `/disciplinas/visualizar/${subjectid}` });
     },
   },
 };
