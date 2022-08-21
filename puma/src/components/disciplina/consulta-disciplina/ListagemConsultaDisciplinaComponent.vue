@@ -35,7 +35,7 @@ export default {
     list: Array,
   },
   goToSubject(id) {
-      this.$router.push({ path: `/disciplinas/visualizar/${id}` });
+    this.$router.push({ path: `/disciplinas/visualizar/${id}` });
   },
 };
 </script>
