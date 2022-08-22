@@ -16,9 +16,9 @@
         class="search-input"
         placeholder="Pesquise por uma disciplina">
       <i class="fas fa-search input-group-prepend search-icon"></i>
-      <div v-if="!subjects.length" class="no-results align-content-center mt-3">
+      <!-- <div v-if="!subjects.length" class="no-results align-content-center mt-3">
         Sem resultados disponíveis
-      </div>
+      </div> -->
     </div>
 
     <div>

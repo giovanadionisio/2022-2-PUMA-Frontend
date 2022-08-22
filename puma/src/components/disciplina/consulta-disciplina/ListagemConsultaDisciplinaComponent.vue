@@ -18,9 +18,9 @@
                 </td>
                 <td class="botao">
                     <button
-                    class="btn cd-btn"
-                    @click="goToSubject(subject.subjectid)">
-                    <i class="fa-solid fa-circle-info mr-2 ml-0"></i>Ver Detalhes
+                        class="btn cd-btn"
+                        @click="goToSubject(subject.subjectid)">
+                        <i class="fa-solid fa-circle-info mr-2 ml-0"></i>Ver Detalhes
                     </button>
                 </td>
             </tr>
@@ -34,8 +34,10 @@ export default {
     title: String,
     list: Array,
   },
-  goToSubject(id) {
-    this.$router.push({ path: `/disciplinas/visualizar/${id}` });
+  methods: {
+    goToSubject(id) {
+      this.$router.push({ path: `/disciplinas/visualizar/${id}` });
+    },
   },
 };
 </script>
