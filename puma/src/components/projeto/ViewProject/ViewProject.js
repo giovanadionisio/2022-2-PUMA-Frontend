@@ -2,10 +2,14 @@
 import ProjectService from '../../../services/ProjectService';
 import SubjectService from '../../../services/SubjectService';
 import getProjectStatus from '../../../utils/enums/status-projeto.enum';
+import ReturnButton from '../../shared/return-button/return-button.vue';
 
 export default {
     name: 'ViewProject',
     props: {},
+    components: {
+        ReturnButton,
+      },
     data() {
         return {
             editable: false,
