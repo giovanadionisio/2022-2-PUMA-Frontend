@@ -37,3 +37,7 @@
 .input-multiselect >>> .multiselect__option--highlight:after {
     background-color:  #15355E;
 }
+
+.input-multiselect >>> .multiselect__option--highlight {
+    background-color:  #15355E;
+}
