@@ -1,6 +1,7 @@
 <template>
     <div class="mt-4">
         <h2 class="tittle sub-tittle ml-4">{{ title }}</h2>
+
         <table>
             <thead>
                 <tr>
@@ -9,7 +10,8 @@
                     <td></td>
                 </tr>
             </thead>
-            <tr v-for="subject in list" :key="subject.subjectid">
+
+            <tr v-for="subject in listSubjects" :key="subject.subjectid">
                 <td>{{subject.name}}</td>
                 <td>
                     <div v-for="professor in subject.professors" :key="professor.userid">
@@ -24,6 +26,10 @@
                     </button>
                 </td>
             </tr>
+
+            <div v-if="!listSubjects.length" class="no-results align-content-center mt-3">
+                Sem Resultados Disponíveis
+            </div>
         </table>
     </div>
 </template>
@@ -32,8 +38,29 @@
 export default {
   props: {
     title: String,
-    list: Array,
+    dataSubjects: Array,
+    subjectSearch: String,
   },
+
+  data: () => ({
+    listSubjects: [],
+  }),
+
+  watch: {
+    dataSubjects() {
+      this.listSubjects = this.dataSubjects;
+    },
+
+    subjectSearch() {
+      if (this.subjectSearch) {
+        this.listSubjects = this.dataSubjects.filter((item) => (
+          item.name.toLowerCase().includes(this.subjectSearch.toLowerCase())));
+      } else {
+        this.listSubjects = this.dataSubjects;
+      }
+    },
+  },
+
   methods: {
     goToSubject(id) {
       this.$router.push({ path: `/disciplinas/visualizar/${id}` });

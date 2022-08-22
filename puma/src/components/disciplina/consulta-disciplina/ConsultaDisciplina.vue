@@ -10,15 +10,12 @@
 
     <div class="ml-4 input-group">
       <input
-        onclick="pesquisar(this.value)"
+        v-model="subjectSearch"
         type="text"
         id="caixaPesquisa"
         class="search-input"
         placeholder="Pesquise por uma disciplina">
       <i class="fas fa-search input-group-prepend search-icon"></i>
-      <!-- <div v-if="!subjects.length" class="no-results align-content-center mt-3">
-        Sem resultados disponíveis
-      </div> -->
     </div>
 
     <div>
@@ -30,9 +27,15 @@
     </div>
 
     <div class="tabelas">
-      <ListagemConsultaDisciplinaComponent class="minhasDisciplinas" :list="mySubjects" />
+      <ListagemConsultaDisciplinaComponent class="minhasDisciplinas"
+        :dataSubjects="mySubjects"
+        :subjectSearch="subjectSearch"/>
+
       <hr class="mb-0 mt-5">
-      <ListagemConsultaDisciplinaComponent class="demaisDisciplinas" :list="subjects" />
+
+      <ListagemConsultaDisciplinaComponent class="demaisDisciplinas"
+      :dataSubjects="subjects"
+      :subjectSearch="subjectSearch"/>
     </div>
   </div>
 </template>
@@ -51,6 +54,7 @@ export default {
   },
 
   data: () => ({
+    subjectSearch: null,
     isLoading: false,
     wasLoaded: false,
     isDeletingSubject: false,
@@ -74,7 +78,6 @@ export default {
     separateSubjects() {
       this.subjects.map((sub) => {
         sub.professors.map((prof) => {
-          console.log(prof.userid, this.$store.getters.user.userId);
           if (prof.userid === this.$store.getters.user.userId) {
             this.mySubjects.push(sub);
             this.subjects = this.subjects.filter((item) => (
@@ -83,6 +86,11 @@ export default {
           return prof;
         });
         return null;
+      });
+    },
+    makeToast(toastTitle, toastMessage, toastVariant) {
+      this.$bvToast.toast(toastMessage, {
+        title: toastTitle, variant: toastVariant, solid: true, autoHideDelay: 4000,
       });
     },
   },
