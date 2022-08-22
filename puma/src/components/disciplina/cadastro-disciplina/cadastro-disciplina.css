@@ -33,3 +33,7 @@
 .cancel-btn {
     background-color: #ffffff;
 }
+
+.input-multiselect >>> .multiselect__option--highlight:after {
+    background-color:  #15355E;
+}
