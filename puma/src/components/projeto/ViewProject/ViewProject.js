@@ -2,7 +2,7 @@
 import ProjectService from '../../../services/ProjectService';
 import SubjectService from '../../../services/SubjectService';
 import getProjectStatus from '../../../utils/enums/status-projeto.enum';
-import ReturnButton from '../../shared/return-button/return-button.vue';
+import ReturnButton from '../../shared/ReturnButton/ReturnButton.vue';
 
 export default {
     name: 'ViewProject',
