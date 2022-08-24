@@ -17,6 +17,9 @@
                     <div v-for="professor in subject.professors" :key="professor.userid">
                         {{professor.fullname}}
                     </div>
+                    <div v-if="!subject.professors.length">
+                        -
+                    </div>
                 </td>
                 <td class="botao">
                     <button
