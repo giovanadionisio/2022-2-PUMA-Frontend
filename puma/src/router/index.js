@@ -6,6 +6,7 @@ import store from '../store';
 Vue.use(VueRouter);
 
 const routes = [
+
   {
     path: '/',
     name: 'Home',
@@ -141,6 +142,11 @@ const routes = [
     meta: {
       requiresAuth: true,
     },
+  },
+  {
+    path: '/contato',
+    name: 'Contato',
+    component: () => import('../components/Contato/contato.vue'),
   },
 ];
 
