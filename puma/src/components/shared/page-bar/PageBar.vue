@@ -1,4 +1,4 @@
-<template scr="./page-bar.html"></template>
+<template src="./page-bar.html"></template>
 
 <script src="./page-bar.js"></script>
 

@@ -1,9 +1,5 @@
 <div class="main-content hidden-scroll-bar">
-  <PageBar 
-    username = "String", 
-    title = "Disciplinas", 
-    subtitle = "Disciplinas cadastradas na plataforma",
-    usertype = "String"/>
+  <PageBar username:string></PageBar>
   <mdbDatatable ref="table" borderless color="blue" :data="data" :pagination="false"/>
   <div v-if="!subjects.length" class="no-results align-content-center mt-3">
     Sem resultados disponíveis

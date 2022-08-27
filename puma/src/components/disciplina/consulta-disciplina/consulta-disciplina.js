@@ -4,7 +4,7 @@ import PageBar from '../../shared/page-bar/PageBar.vue';
 /* eslint-disable*/
 export default {
   name: 'ConsultaDisciplinas',
-  component: {PageBar},
+  components: {PageBar},
   data() {
     return {
       data: {
