@@ -144,9 +144,9 @@ const routes = [
     },
   },
   {
-    path: '/contato',
+    path: '/Contato',
     name: 'Contato',
-    component: () => import('../components/Contato/contato.vue'),
+    component: () => import('../components/Contato/Contato.vue'),
   },
 ];
 
