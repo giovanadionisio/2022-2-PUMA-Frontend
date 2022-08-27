@@ -8,3 +8,16 @@ section {
     width: 100%;
     padding: 0 150px;
 }
+
+h1{
+    color: #021021CC;
+    padding: 2vw 2vw 0vw 0vw;
+    font-size:2vw;
+    font-weight: bold;
+}
+  
+p{
+    color: #021021CC;
+    font-size:1vw;
+}
+  
