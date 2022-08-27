@@ -14,23 +14,30 @@
 .descricao-conteudo {
     font-size: 18px;
     line-height: 36px;
-}
-
-.teste {
-    border: 2px solid green;
+    font-weight: 400;
+    letter-spacing: 0.08em;
 }
 
 .p-sobre-ul {
-    width: max-content;
+    width: auto;
     margin: 0;
-    list-style: square;
+    list-style: inside;
     display: block;
     align-items: flex-start;
 }
 
 .p-sobre-li {
     margin: 0;
-    width: fit-content;
+    word-wrap: break-word;
+}
+
+.p-sobre-lista {
+    height: 50px;
+    text-align: start;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 28px;
+    border-bottom: 2px solid #15355E;
 }
 
 h1 {
@@ -55,4 +62,4 @@ p {
     border-radius: 8px;
     width: 430px;
     height: 280px;
-} 
+}
