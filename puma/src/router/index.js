@@ -170,7 +170,7 @@ const routes = [
   {
     path: '/Contato',
     name: 'Contato',
-    component: () => import('../components/Contato/Contato.vue'),
+    component: () => import('../components/AreaExterna/Contato/Contato.vue'),
   },
 ];
 
