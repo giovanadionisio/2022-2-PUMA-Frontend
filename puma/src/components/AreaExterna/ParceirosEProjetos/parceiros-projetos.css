@@ -21,10 +21,10 @@ p{
 }
 
 .icons-parceiros{
-    display: inline-block;
-    white-space: pre-line;
-    flex-direction: row;
-    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-items: center;
+    justify-content: center;
 }
 
 .icon-parceiro{
@@ -37,10 +37,14 @@ input[type=radio]{
 
 input[type=radio] + label>img{
     display: inline;
-    width: 18em;
+    width: 15em;
     height: 6em;
     border-radius: 1em;
-    margin: 0.5em 0.5em;
+    margin: 1em 1em;
+}
+
+input[type=radio] + label>img:hover {
+    cursor: pointer;
 }
 
 input[type=radio]:checked + label>img{
