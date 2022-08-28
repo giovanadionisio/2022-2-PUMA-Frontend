@@ -10,14 +10,12 @@ export default {
       data: {
         columns: [
           {
-            label: 'ITEM',
-            field: 'subjectid',
-            sort: 'asc',
+            label: 'Nome',
+            field: 'name',
           },
           {
-            label: 'TÍTULO',
-            field: 'name',
-            sort: 'desc',
+            label: 'Professores',
+            field: '',
           },
           {
             label: '',
@@ -71,7 +69,8 @@ export default {
     configTableRows() {
       this.subjects.forEach((subject) => {
         const row = subject;
-        row.buttons = '<button name="visualizar" class="btn cd-btn mx-2" id=' + subject.subjectid + '><i class="fa-solid fa-circle-info mr-2 ml-0"></i>VER DETALHES</button><button name="editar" class="btn cd-btn mx-2" id=' + subject.subjectid + '><i class="fas fa-edit mr-2 ml-0"></i>EDITAR</button><button name="excluir" class="btn cd-btn mx-2" id=' + subject.subjectid + '><i class="fa-solid fa-trash mr-2 ml-0"></i>EXCLUIR</button>';
+        row.buttons = '<button name="visualizar" class="btn cd-btn mx-2" id=' + subject.subjectid + '><i class="fa-solid fa-circle-info mr-2 ml-0"></i>VER DETALHES</button><button name="editar" class="btn cd-btn mx-2" id=';
+        row.professors = subject.professors[0].fullname;
         this.data.rows.push(row);
       });
     },

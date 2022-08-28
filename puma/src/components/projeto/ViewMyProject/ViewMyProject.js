@@ -1,10 +1,14 @@
 /* eslint-disable */
 import ProjectService from '../../../services/ProjectService';
 import getProjectStatus from '../../../utils/enums/status-projeto.enum';
+import ReturnButton from '../../shared/ReturnButton/ReturnButton.vue';
 
 export default {
     name: 'ViewMyProject',
     props: {},
+    components: {
+        ReturnButton,
+      },
     data() {
         return {
             disabled: true,

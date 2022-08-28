@@ -1,8 +1,12 @@
 /* eslint-disable */
 import ProjectService from '../../../services/ProjectService';
+import ReturnButton from '../../shared/ReturnButton/ReturnButton.vue';
 
 export default {
   name: 'CadastroProjeto',
+  components: {
+    ReturnButton,
+  },
   data() {
     return {
       titulo: '',

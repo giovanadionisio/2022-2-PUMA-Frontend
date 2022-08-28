@@ -2,14 +2,57 @@
     overflow-x: hidden;
 }
 
-thead{
+thead {
     font-size: 25px;
     color: #15355e;
+    font-weight: bold;
+}
+
+.minhasDisciplinas thead::after {
+    content: "Suas disciplinas";
+    font-size: 18px;
+}
+
+.demaisDisciplinas thead::after {
+    content: "Outras disciplinas";
+    font-size: 18px;
+}
+
+.demaisDisciplinas thead {
+    font-size: 0px;
+    padding: 0px;
+    margin: 0px;
+}
+
+.tabelas {
+    max-width: 1300px;
+    width: 100%;
+    align-content: flex-start;
+    padding-left: 20px;
+}
+
+.tabelas hr {
+    width: 100%;
+    max-width: 1300px;
+    display: inline-block;
+    border-bottom: 1px solid #94A6BC;
 }
 
 table {
-    border-spacing: 30px;
+    width: 100%;
+    max-width: 1500px;
+    border-spacing: 10px;
     border-collapse: separate;
+}
+
+td {
+    max-width: 1500px;
+    width: 30%;
+    text-align: start;
+}
+
+.botao {
+    text-align: end;
 }
 
 tr {
@@ -24,6 +67,7 @@ svg {
     background-color: white;
     color: #15355e;
     border-color: #15355e;
+    padding: 10px 20px;
 }
 
 .search-input {
@@ -39,37 +83,23 @@ svg {
     padding-top: 12px;
 }
 
-.table-div {
-    display: inline-table;
-}
-
 .no-results {
     color: #15355e;
-    margin-left: 30vw;
     font-size: 20px;
-}
-
-.add-project {
-    margin-left: 0px !important;
 }
 
 .tittle {
     color: #15355E;
     font-weight: bold;
     font-size: 40px;
-    text-transform: uppercase
 }
 
 .sub-tittle {
-    font-size: 20px !important;
-    font-weight: normal !important;
+    font-size: 20px;
+    font-weight: normal;
 }
 
-header {
-    justify-content: center !important;
-}
-
-.btn-confirm {
+/* .btn-confirm {
     background-color: #dc3545 !important;
 }
 
@@ -77,7 +107,7 @@ header {
     border-color: #15355e !important;
     color: #15355e !important;
     background-color: white !important;
-}
+} */
 
 .modal-tittle {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
