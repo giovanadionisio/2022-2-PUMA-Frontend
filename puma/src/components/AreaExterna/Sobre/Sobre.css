@@ -6,9 +6,13 @@
 }
 
 .descricao-titulo {
+    left: -337px;
     font-weight: 700;
     font-size: 32px;
     letter-spacing: -0.02em;
+    display: block;
+    position: relative;
+    height: 38px;
 }
 
 .descricao-conteudo {
@@ -19,11 +23,58 @@
 }
 
 .p-sobre-ul {
-    width: auto;
-    margin: 0;
+    margin-top: 24px;
     list-style: inside;
     display: block;
     align-items: flex-start;
+    position: relative;
+    left: -337px;
+    width: 891px;
+    height: 324px;
+}
+.metodologia-titulo {
+    font-weight: 700;
+    font-size: 32px;
+    letter-spacing: -0.02em;
+    display: block;
+    position: relative;
+    height: 38px;
+}
+
+.metodologia-conteudo {
+    font-size: 18px;
+    line-height: 36px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    position: relative;
+    margin-top: 24px;
+}
+
+.colaboracao-titulo {
+    left: -337px;
+    font-weight: 700;
+    font-size: 32px;
+    letter-spacing: -0.02em;
+    display: block;
+    position: relative;
+    height: 38px;
+}
+
+.colaboracao-conteudo {
+    font-size: 18px;
+    line-height: 36px;
+    letter-spacing: 0.08em;
+    left: -337px;
+    margin-top: 24px;
+    position: relative;
+    width: 891px;
+}
+
+.mais-informacoes{
+    position: relative;
+    font-weight: 700;
+    font-size: 32px;
+    letter-spacing: -0.02em;
 }
 
 .p-sobre-li {
