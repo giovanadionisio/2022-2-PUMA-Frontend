@@ -59,6 +59,16 @@ p {
 .img-sobre {
     background-color: #D9D9D9;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 10px 10px 0px rgba(21, 53, 94, 1);
+    border-radius: 8px;
+    width: 430px;
+    height: 280px;
+}
+
+.img-sobre-oposta {
+    background-color: #D9D9D9;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: -10px 10px 0px rgba(21, 53, 94, 1);
     border-radius: 8px;
     width: 430px;
     height: 280px;
