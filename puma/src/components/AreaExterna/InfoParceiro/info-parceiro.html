@@ -2,8 +2,8 @@
   <h2>{{info.name}}</h2>
   <b-row>
     <b-col cols="9">
-      <p>
-        {{info.description}}  
+      <p v-for="description in info.description">
+        {{description}}  
       </p>
       <p>
         <a :href="info.website" target="_blank">{{info.website}}</a>
@@ -14,7 +14,7 @@
     </b-col>
   </b-row>
   <h2>Escopo do Projeto</h2>
-  <p>{{info.projectScope}}</p>
+  <p v-for="scope in info.projectScope">{{scope}}</p>
   <h2>Principais resultados do projeto</h2>
-  <p>{{info.projectKeyResults}}</p>
+  <p v-for="projectKeyResult in info.projectKeyResults">{{projectKeyResult}}</p>
 </div>

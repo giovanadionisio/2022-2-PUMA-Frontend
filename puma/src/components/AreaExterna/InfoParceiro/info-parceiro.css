@@ -1,6 +1,7 @@
 h2 {
   color: #021021CC;
-  padding: 1em 0em;
+  margin-top: 2.5em;
+  margin-bottom: 1.5em;
   font-size:2em;
   font-weight: bold;
 }
@@ -8,6 +9,7 @@ h2 {
 p{
   color: #021021CC;
   font-size:1.5em;
+  margin-bottom: 2em;
 }
 
 a{
