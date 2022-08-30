@@ -8,6 +8,7 @@
 ## Issue
 <!--- cole a TAG da issue -->
 <!--- Apenas referencie a issue para rastrebilidade, não a feche sem validação -->
+<!--- Refers: link -->
 
 ## Principais Implementações
 <!--- se for de código, descreva altreações relevantes -->
