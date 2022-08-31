@@ -3,9 +3,17 @@
   overflow-x: hidden;
 }
 
+table {
+  width: 100%;
+  max-width: 1500px;
+  border-spacing: 10px;
+  border-collapse: separate;
+}
+
 thead {
   font-size: 25px;
   color: #15355e;
+  font-weight: bold;
 }
 
 tr {
@@ -13,9 +21,9 @@ tr {
 }
 
 td {
-  color: #15355e;
-  font-weight: bold;
-  font-size: 15px;
+  max-width: 1500px;
+  width: 25%;
+  text-align: start;
 }
 
 svg {
@@ -224,4 +232,13 @@ svg {
   flex-direction: column;
   font-weight: bold;
   color: #EB0600;
+}
+
+.cd-btn {
+  padding: 10px;
+  font-size: 16px;
+  background-color: white;
+  color: #15355e;
+  border-color: #15355e;
+  font-weight: bold;
 }
