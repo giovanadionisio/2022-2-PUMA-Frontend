@@ -2,7 +2,7 @@ import SubjectService from '../../../../services/SubjectService';
 
 export default {
   props: {
-    disciplinaAtual: Object,
+    idDisciplina: Object,
   },
 
   beforeMount() {
@@ -19,7 +19,7 @@ export default {
   },
 
   watch: {
-    disciplinaAtual() {
+    idDisciplina() {
       this.getSubject();
     },
   },
@@ -28,7 +28,7 @@ export default {
     async getSubject() {
       this.loading = true;
 
-      this.subjectService.getSubjectById(this.disciplinaAtual.subjectid).then((response) => {
+      this.subjectService.getSubjectById(this.idDisciplina).then((response) => {
         this.disciplina = response.data;
 
         this.loading = false;
