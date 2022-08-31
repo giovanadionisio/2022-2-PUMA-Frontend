@@ -1,5 +1,9 @@
 <div class="main-content hidden-scroll-bar">
-  <PageBar username:string></PageBar>
+  <div class="tittle ml-4">
+  </div>
+  <div v-if="subjects.length" class="tittle sub-tittle ml-4">
+    Disciplinas cadastradas na plataforma
+  </div>
   <mdbDatatable ref="table" borderless color="blue" :data="data" :pagination="false"/>
   <div v-if="!subjects.length" class="no-results align-content-center mt-3">
     Sem resultados disponíveis
