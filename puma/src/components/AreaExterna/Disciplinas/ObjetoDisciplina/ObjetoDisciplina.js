@@ -2,7 +2,7 @@ import SubjectService from '../../../../services/SubjectService';
 
 export default {
   props: {
-    idDisciplina: Object,
+    idDisciplina: Number,
   },
 
   beforeMount() {
