@@ -1,21 +1,10 @@
 <section>
-    <div class="tabela">     
-        <div class="psp0">PSP1</div>
-        <div class="psp">PSP2</div>
-        <div class="psp">PSP3</div>
-        <div class="psp">PSP4</div>
-        <div class="psp">PSP5</div>
-        <div class="psp">PSP6</div>
-        <div class="psp">PSP7</div>
-        <div class="psp2">PSP8</div> 
-    </div>
-
     <div class="detalhe-projeto">
         <div class="imagem-projeto">
             <p>imagem</p>
         </div>
         <div class="titulo-projeto">
-            <h5>Projeto de Sistema de produção N</h5>
+            <h5>{{disciplinaAtual.subject.name}}</h5>
             <div class="">
                 lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero 
             </div>
@@ -23,9 +12,10 @@
     </div>
     <div class="tema">
         <h6>Temas</h6>
-        <div>
-            Palavra-chave N
-        </div>
+        
+        <span v-for="keyword in disciplinaAtual.keywords" :key="keyword.keywordid">
+            {{keyword.keyword}},
+        </span>
     </div>
     <div class="titulo-objetivo">
         <h6>Principais objetivos</h6>
@@ -85,14 +75,7 @@
     </div>
     <div class="texto-ementa">
         <div class="texto">
-            lero lero lero lero lero lero lero lero lero lero lero lero lero lero o lero lero lero lero lero lero lero o lero lero lero lero lero lero lero o lero lero lero lero lero lero lero o lero lero lero lero lero lero lero o lero lero lero lero lero lero lero o lero lero lero lero lero lero lero o lero lero lero lero lero lero lero o lero lero lero lero lero lero lero o lero lero lero lero lero lero lero o lero lero lero lero lero lero lero o lero lero lero lero lero lero lero 
-            lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero 
-            lero lero 
-            lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero 
-            lero lero lero lero lero lero lero lero lero lero lero lero lero lero 
-            lero lero lero lero lero lero lero lero lero lero lero lero 
-            lero lero lero lero lero lero lero lero lero lero lero lero lero lero 
-            lero lero lero lero lero lero lero lero lero lero lero lero lero lero 
+            {{disciplinaAtual.subject.coursesyllabus}}
         </div>
     </div>
 </section>

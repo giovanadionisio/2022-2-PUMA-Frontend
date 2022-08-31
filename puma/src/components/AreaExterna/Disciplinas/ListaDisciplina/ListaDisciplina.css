@@ -1,0 +1,19 @@
+.tabela {
+    width: 100%;
+    display: flex;
+    max-width: 1000px;
+}
+
+.item-tabela {
+    flex: 1;
+    margin: 0;
+    text-align: center;
+    cursor: pointer;
+    padding: 10px;
+    border: 1px solid #15355e;
+}
+
+.item-tabela:first-child { 
+    background-color: #15355e;
+    color: #ffffff;
+ }

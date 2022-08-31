@@ -1,0 +1,9 @@
+<section>
+    <ul id="tabela-listagem-disciplina" class="tabela">
+        <li class="item-tabela" @click="alterarShowSelectDisciplina($event, disciplina)" v-for="disciplina in listaDisciplinas" :key="disciplina.subject.name">
+            {{disciplina.subject.name}}
+        </li>
+    </ul>
+
+    <ObjetoDisciplina :disciplinaAtual="disciplinaAtual"/>
+</section>
