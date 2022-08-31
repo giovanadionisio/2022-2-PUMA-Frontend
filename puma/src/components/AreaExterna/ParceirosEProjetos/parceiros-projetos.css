@@ -1,0 +1,52 @@
+section {
+    width: 100%;
+    height: auto;
+}
+
+.area-externa-section {
+    height: 100%;
+    width: 100%;
+    padding: 0 15em;
+}
+
+h1{
+    color: #021021CC;
+    padding: 0.5em 0em;
+    font-size:2.5em;
+}
+  
+p{
+    color: #021021CC;
+    font-size:1.5em;
+}
+
+.icons-parceiros{
+    display: flex;
+    flex-wrap: wrap;
+    justify-items: center;
+    justify-content: center;
+}
+
+.icon-parceiro{
+    display: inline-block;
+}
+
+input[type=radio]{
+    display:none;
+}
+
+input[type=radio] + label>img{
+    display: inline;
+    width: 15em;
+    height: 6em;
+    border-radius: 1em;
+    margin: 1em 1em;
+}
+
+input[type=radio] + label>img:hover {
+    cursor: pointer;
+}
+
+input[type=radio]:checked + label>img{
+    box-shadow: 0em 0.2em #153763;
+}

@@ -33,8 +33,8 @@ const routes = [
   },
   {
     path: '/home/parceiros',
-    name: 'Home ParceitosEProjetos',
-    component: () => import('../components/AreaExterna/ParceirosEProjetos/ParceitosEProjetos.vue'),
+    name: 'Home ParceirosProjetos',
+    component: () => import('../components/AreaExterna/ParceirosEProjetos/ParceirosProjetos.vue'),
     meta: {
       guest: true,
     },
