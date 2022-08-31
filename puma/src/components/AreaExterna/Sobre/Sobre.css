@@ -126,6 +126,15 @@ h1 {
   }
 
 @media (max-width: 1000px) {
+    .paragrafo-sobre {
+        font-size: 18px;
+        text-align: left;
+    }
+
+    .descricao-conteudo {
+        text-align: left;
+    }
+
     .div-img-sobre {
         width: 100%;
         max-width: none;
