@@ -1,81 +1,29 @@
 <section>
-    <div class="detalhe-projeto">
-        <div class="imagem-projeto">
-            <p>imagem</p>
-        </div>
-        <div class="titulo-projeto">
-            <h5>{{disciplinaAtual.subject.name}}</h5>
-            <div class="">
-                lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero 
+    <div v-if="loading" class="loading"></div>
+    <div v-else>
+        <div class="div-img-descricao">
+            <div class="div-img-sobre">
+                <img class="img-sobre">
+            </div>
+            <div class="div-descricao">
+                <h3 class="descricao-titulo">{{disciplina.subject.name}}</h3>
+                <p class="descricao-conteudo">
+                    {{disciplina.subject.coursesyllabus}}
+                </p>
             </div>
         </div>
-    </div>
-    <div class="tema">
-        <h6>Temas</h6>
-        
-        <span v-for="keyword in disciplinaAtual.keywords" :key="keyword.keywordid">
-            {{keyword.keyword}},
-        </span>
-    </div>
-    <div class="titulo-objetivo">
-        <h6>Principais objetivos</h6>
-    </div>
-    <div class="objetivos">
-        <div class="objetivo">
-          <h4> Objetivo 1</h4>
-          <p>explicação em ate duas linhas</p>
-        </div>
-        <div class="objetivo">
-            Objetivo 2
-        </div>
-        <div class="objetivo">
-            Objetivo 3
-        </div>
-    </div>
-    <div class="titulo-desenvolvidos">
-        <h6>Projetos desenvolvidos</h6>
-    </div>
-    <div class="container-desenvolvidos">
-        <div class="desenvolvido">
-            <img src="../../../../assets/image.svg"/>
-            <div class="desenvolvido-card">
-                <h3>Projeto Mapa</h3>
-                <h2>Explicação de ate 2 linhas</h2>
-                <b-button class="btn btn-light" >
-                    SAIBA MAIS
-                </b-button>
+
+        <div class="div-img-descricao">
+            <div class="div-descricao">
+                <h3 class="descricao-titulo">Temas</h3>
+                <p class="descricao-conteudo">
+                    <span v-for="keyword in disciplina.keywords" :key="keyword.keywordid">
+                        {{keyword.keyword}},
+                    </span>
+
+                    <span v-if="disciplina.keywords.length == 0">Sem Temas Cadastados</span>
+                </p>
             </div>
-        </div>
-        <div class="desenvolvido">
-            <img src="../../../../assets/image.svg"/>
-            <div class="desenvolvido-card">
-                <h3>Projeto Mapa</h3>
-                <h2>Explicação de ate 2 linhas</h2>
-                <b-button class="btn btn-light" >
-                    SAIBA MAIS
-                </b-button>
-            </div>
-        </div>
-        <div class="desenvolvido">
-            <img src="../../../../assets/image.svg"/>
-            <div class="desenvolvido-card">
-                <h3>Projeto Mapa</h3>
-                <h2>Explicação de ate 2 linhas</h2>
-                <b-button class="btn btn-light" >
-                    SAIBA MAIS
-                </b-button>
-            </div>
-        </div>
-    </div>
-    <div class="ementa">
-        <h6>Ementa completa</h6>
-        <div class="seta">
-            <i class="fa-solid fa-angle-down"></i>
-        </div>
-    </div>
-    <div class="texto-ementa">
-        <div class="texto">
-            {{disciplinaAtual.subject.coursesyllabus}}
         </div>
     </div>
 </section>

@@ -1,28 +1,41 @@
 import ObjetoDisciplina from '../ObjetoDisciplina/ObjetoDisciplina.vue';
 
+import SubjectService from '../../../../services/SubjectService';
+
 export default {
   components: {
     ObjetoDisciplina,
   },
 
-  props: {
-    listaDisciplinas: Array,
-    loading: Boolean,
-    error: String,
-  },
-
   data() {
     return {
       disciplinaAtual: {},
+      listaDisciplinas: [],
+      loading: false,
+      error: null,
+      subjectService: new SubjectService(),
     };
   },
 
   beforeMount() {
-    const disciplina = this.listaDisciplinas[0];
-    this.disciplinaAtual = disciplina;
+    this.getSubjects();
   },
 
   methods: {
+    async getSubjects() {
+      this.loading = true;
+      this.subjectService.getSubjects().then((response) => {
+        this.listaDisciplinas = response.data;
+
+        const disciplina = this.listaDisciplinas[0];
+        this.disciplinaAtual = disciplina;
+
+        this.loading = false;
+      }).catch((error) => {
+        this.error = error;
+        this.loading = false;
+      });
+    },
     alterarShowSelectDisciplina(event, disciplina) {
       const li = event.target;
       const filhos = document.querySelectorAll('#tabela-listagem-disciplina > *');
