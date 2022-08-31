@@ -7,6 +7,8 @@ export default {
 
   props: {
     listaDisciplinas: Array,
+    loading: Boolean,
+    error: String,
   },
 
   data() {

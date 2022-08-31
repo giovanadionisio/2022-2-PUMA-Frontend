@@ -1,9 +1,12 @@
 <section>
     <ul id="tabela-listagem-disciplina" class="tabela">
-        <li class="item-tabela" @click="alterarShowSelectDisciplina($event, disciplina)" v-for="disciplina in listaDisciplinas" :key="disciplina.subject.name">
-            {{disciplina.subject.name}}
+        <div v-if="loading" class="loading"></div>
+
+        <li class="item-tabela" @click="alterarShowSelectDisciplina($event, disciplina)" v-for="disciplina in listaDisciplinas" :key="disciplina.name">
+            {{ disciplina.name }}
         </li>
     </ul>
 
-    <ObjetoDisciplina :disciplinaAtual="disciplinaAtual"/>
+    <div v-if="error">{{ error }}</div>
+    <!-- <ObjetoDisciplina :disciplinaAtual="disciplinaAtual"/> -->
 </section>

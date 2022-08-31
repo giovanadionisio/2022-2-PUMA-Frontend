@@ -1,6 +1,8 @@
 import AreaExternaHeader from '../AreaExternaHeader/AreaExternaHeader.vue';
 import ListaDisciplina from './ListaDisciplina/ListaDisciplina.vue';
 
+import SubjectService from '../../../services/SubjectService';
+
 export default {
   components: {
     AreaExternaHeader,
@@ -10,6 +12,9 @@ export default {
   data() {
     return {
       paginaAtual: '/home/disciplinas',
+      subjects: [],
+      loadingGetSubjects: false,
+      erroGetSubjects: null,
       listaDisciplinas: [
         {
           subject: {
@@ -108,6 +113,24 @@ export default {
           ],
         },
       ],
+      subjectService: new SubjectService(),
     };
+  },
+
+  beforeMount() {
+    this.getSubjects();
+  },
+
+  methods: {
+    getSubjects() {
+      this.loadingGetSubjects = true;
+      this.subjectService.getSubjects().then((response) => {
+        this.subjects = response.data;
+        this.loadingGetSubjects = false;
+      }).catch((error) => {
+        this.erroGetSubjects = error;
+        this.loadingGetSubjects = false;
+      });
+    },
   },
 };
