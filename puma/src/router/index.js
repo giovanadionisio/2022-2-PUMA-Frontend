@@ -6,6 +6,7 @@ import store from '../store';
 Vue.use(VueRouter);
 
 const routes = [
+
   {
     path: '/',
     name: 'Home Page',
@@ -165,6 +166,11 @@ const routes = [
     meta: {
       requiresAuth: true,
     },
+  },
+  {
+    path: '/Contato',
+    name: 'Contato',
+    component: () => import('../components/AreaExterna/Contato/Contato.vue'),
   },
 ];
 

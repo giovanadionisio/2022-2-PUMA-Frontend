@@ -14,5 +14,6 @@
     "plugins": [
         "vue"
     ],
-    "rules": {}
+    "rules": {
+    }
 }

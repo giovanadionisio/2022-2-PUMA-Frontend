@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.contato-wrapper{
+    width: 100vw;
+    padding-left: 9rem;
+    padding-top: 4rem;
+}
+
+.contato{
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    font-family: 'Roboto';
+    color: rgba(2, 16, 33, 0.8);
+}
+
+h1{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 56px;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+}
+
+h2{
+    font-weight: 700;
+    opacity: .8;
+}
+
+p{
+    font-weight: 400;
+}
+
+.email{
+    display: flex;
+    flex-direction: row;
+}
+
+#email-puma{
+    transition: all 1s;
+    color: #316CB8CC;
+    opacity: .5;
+}
+
+#email-puma:hover{
+    opacity: 1;
+    text-decoration: underline;
+    cursor: pointer;
+}
