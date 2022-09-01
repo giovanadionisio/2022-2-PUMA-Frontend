@@ -1,20 +1,31 @@
 <div>
-  <h2>{{info.name}}</h2>
-  <b-row>
-    <b-col cols="9">
-      <p v-for="description in info.description">
-        {{description}}  
-      </p>
-      <p>
-        <a :href="info.website" target="_blank">{{info.website}}</a>
-      </p>
-    </b-col>
-    <b-col cols="3">
-      <img :src="info.logo" alt="Logo do Projeto">
-    </b-col>
-  </b-row>
-  <h2>Escopo do Projeto</h2>
-  <p v-for="scope in info.projectScope">{{scope}}</p>
-  <h2>Principais resultados do projeto</h2>
-  <p v-for="projectKeyResult in info.projectKeyResults">{{projectKeyResult}}</p>
+  <div class="div-img-descricao">
+    <div class="div-descricao">
+        <h3 class="descricao-titulo">{{info.name}}</h3>
+        <p class="descricao-conteudo" v-for="description in info.description">
+          {{description}}  
+        </p>
+    </div>            
+    <div class="div-img-sobre-oposta">
+        <img :src="info.logo" alt="Logo do Projeto" class="img-sobre-oposta">
+    </div>
+  </div>
+
+  <div class="div-img-descricao">
+    <div class="div-descricao">
+        <h3 class="descricao-titulo">Escopo do Projeto</h3>
+        <p class="descricao-conteudo" v-for="scope in info.projectScope">
+          {{scope}}
+        </p>
+    </div>
+  </div>
+
+  <div class="div-img-descricao">
+    <div class="div-descricao">
+        <h3 class="descricao-titulo">Principais Resultados do Projeto</h3>
+        <p class="descricao-conteudo" v-for="projectKeyResult in info.projectKeyResults">
+          {{projectKeyResult}}
+        </p>
+    </div>
+  </div>
 </div>
