@@ -1,50 +1,42 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-
-.contato-wrapper{
-    width: 100vw;
-    padding-left: 9rem;
-    padding-top: 4rem;
-}
-
-.contato{
-    font-family: 'Roboto', sans-serif;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    font-family: 'Roboto';
+.corpo {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin: 3% 10%;
     color: rgba(2, 16, 33, 0.8);
 }
 
-h1{
-    font-style: normal;
-    font-weight: 700;
+h1 {
     font-size: 48px;
-    line-height: 56px;
-    letter-spacing: -0.02em;
-    font-weight: 700;
-}
-
-h2{
-    font-weight: 700;
-    opacity: .8;
-}
-
-p{
     font-weight: 400;
+    letter-spacing: -0.02em;
+    margin: 0px;
+    color: rgba(2, 16, 33, 0.8);
 }
 
-.email{
-    display: flex;
-    flex-direction: row;
+.contato-titulo {
+    font-weight: 700;
+    font-size: 32px;
+    letter-spacing: -0.02em;
+    margin-bottom: 15px;
 }
 
-#email-puma{
-    transition: all 1s;
-    color: #316CB8CC;
-    opacity: .5;
+.div-contato {
+    margin-top: 40px;
 }
 
-#email-puma:hover{
+.contato-email {
+    margin-bottom: 10px;
+}
+
+.contato-topico {
+    font-weight: bold;
+}
+
+.email-puma{
+    color: #15355E;
+    opacity: .7;
+}
+
+.email-puma:hover{
     opacity: 1;
     text-decoration: underline;
     cursor: pointer;
