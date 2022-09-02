@@ -20,6 +20,10 @@ tr {
   border-top: hidden;
 }
 
+tr > :first-child {
+  width: 10% !important;
+}
+
 td {
   max-width: 1500px;
   width: 25%;
@@ -235,7 +239,7 @@ svg {
 }
 
 .cd-btn {
-  padding: 10px;
+  padding: 5px;
   font-size: 16px;
   background-color: white;
   color: #15355e;
