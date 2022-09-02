@@ -6,10 +6,35 @@ import store from '../store';
 Vue.use(VueRouter);
 
 const routes = [
+
   {
     path: '/',
-    name: 'Home',
-    component: () => import('../components/usuario/login-usuario/LoginUsuario.vue'),
+    name: 'Home Page',
+    component: () => import('../components/AreaExterna/HomePage.vue'),
+    meta: {
+      guest: true,
+    },
+  },
+  {
+    path: '/home/disciplinas',
+    name: 'Home Disciplinas',
+    component: () => import('../components/AreaExterna/Disciplinas/Disciplina.vue'),
+    meta: {
+      guest: true,
+    },
+  },
+  {
+    path: '/home/sobre',
+    name: 'Home Sobre',
+    component: () => import('../components/AreaExterna/Sobre/Sobre.vue'),
+    meta: {
+      guest: true,
+    },
+  },
+  {
+    path: '/home/parceiros',
+    name: 'Home ParceirosProjetos',
+    component: () => import('../components/AreaExterna/ParceirosEProjetos/ParceirosProjetos.vue'),
     meta: {
       guest: true,
     },
@@ -141,6 +166,11 @@ const routes = [
     meta: {
       requiresAuth: true,
     },
+  },
+  {
+    path: '/Contato',
+    name: 'Contato',
+    component: () => import('../components/AreaExterna/Contato/Contato.vue'),
   },
 ];
 
