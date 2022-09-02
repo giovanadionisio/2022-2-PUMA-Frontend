@@ -4,6 +4,14 @@
     color: rgba(2, 16, 33, 0.8);
 }
 
+h1 {
+    font-size: 48px;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin: 0px;
+    color: rgba(2, 16, 33, 0.8);
+}
+
 .paragrafo-sobre {
     text-align: justify;
     letter-spacing: 0.08em;
