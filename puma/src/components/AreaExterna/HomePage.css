@@ -5,22 +5,13 @@ section {
 }
 
 .area-externa-section {
-    background-color: blue;
     height: 100%;
     width: 100%;
     padding: 0 150px;
 }
 
-h1 {
-    background-color: red;
-}
-
 @media (max-width: 700px) {
   .area-externa-section {
     margin: 0 40px;
-  }
-
-  h1 {
-    background-color: yellow;
   }
 }
