@@ -1,7 +1,7 @@
 <template>
     <div class="mt-4 ml-4">
         <table>
-            <thead>
+            <thead class="mb-10">
                 <tr>
                     <td>ITEM</td>
                     <td>PALAVRA-CHAVE</td>
@@ -22,7 +22,7 @@
                     EDITAR
                   </button>
                   <button
-                    class="btn cd-btn mx-2"
+                    class="btn cd-btn"
                   >
                     <font-awesome-icon icon="fa-solid fa-trash" size="lg" />
                     EXCLUIR
@@ -60,7 +60,6 @@ export default {
     },
 
     subjectSearch() {
-      console.log(this.filteredKeyWords);
       this.listKeyWords = this.filteredKeyWords;
     },
   },
