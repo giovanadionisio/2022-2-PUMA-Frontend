@@ -52,6 +52,7 @@ svg {
 
 .select {
   margin-right: 20px;
+  cursor: pointer;
 }
 
 .search-input {
@@ -78,7 +79,6 @@ svg {
   color: #15355E;
   font-weight: bold;
   font-size: 40px;
-  text-transform: uppercase
 }
 
 .kw-sub-title {
@@ -94,6 +94,7 @@ svg {
 
 .myclass > .modal-dialog > .modal-content > .modal-header {
   display: flex;
+  width: 100%;
   justify-content: center;
   align-items: center;
   background-color: #15355E !important;
@@ -119,58 +120,68 @@ svg {
   font-weight: bold;
 }
 
-.kw-btn-crud {
+.kw-btn-confirm {
   align-items: center;
   background-color: #f7db36;
-  color: #15355e;
   border: 2px solid #f7db36;
+  color: #15355e;
   border-radius: 5px;
   padding: 5px;
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 700;
   transition: 0.1s;
   width: 196.7px;
   letter-spacing: 0.03em;
-  text-transform: uppercase;
 }
 
-.kw-btn-crud:hover {
-  color: #15355e;
-  background-color: #f7db36;
+.kw-btn-confirm:hover {
+  transition: 0.2s;
+  color: #245ba3;
+  filter: brightness(105%);
+}
+
+.kw-btn-confirm:focus {
+  transition: 0.2s;
+  color: #245ba3;
+  filter: brightness(105%);
+}
+
+.kw-btn-confirm:active {
+  transition: 0.2s;
+  color: #245ba3;
+  filter: brightness(105%);
+}
+
+.kw-btn-crud-cancel {
+  align-items: center;
   border: 2px solid #f7db36;
-}
-
-.kw-btn-crud:focus {
-  color: #15355e;
-  background-color: #f7db36;
-  border: 2px solid #f7db36;
-}
-
-.kw-btn-crud:active {
-  color: #15355e;
-  background-color: #f7db36;
-  border: 2px solid #f7db36;
-}
-
-.c-invert {
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 22px;
+  font-weight: 700;
+  transition: 0.1s;
+  width: 196.7px;
+  letter-spacing: 0.03em;
   color: #15355e;
   background-color: white;
 }
 
-.c-invert:active {
-  color: #15355e;
-  background-color: #fcfcfc;
-  border: 2px solid #f7db36;
+.kw-btn-crud-cancel:active {
+  transition: 0.2s;
+  color: #245ba3;
+  filter: brightness(105%);
 }
 
-.c-invert:focus {
-  color: #15355e;
-  background-color: #fcfcfc;
+.kw-btn-crud-cancel:focus {
+  transition: 0.2s;
+  color: #245ba3;
+  filter: brightness(105%);
 }
 
-.c-invert:hover {
-  color: #15355e;
-  background-color: white;
+.kw-btn-crud-cancel:hover {
+  transition: 0.2s;
+  color: #245ba3;
+  filter: brightness(105%);
 }
 
 .kw-btn-delete {
@@ -254,4 +265,9 @@ svg {
   color: #15355e;
   border-color: #15355e;
   font-weight: bold;
+}
+
+.cd-btn:hover {
+  color: #17519c;
+  border-color: #17519c;
 }

@@ -1,31 +1,96 @@
 <template>
-  <div class="main-content hidden-scroll-bar">
-    <h1 class="kw-title ml-4">
-      Palavras-Chave
-    </h1>
+  <div>
+    <div class="main-content hidden-scroll-bar">
+      <h1 class="kw-title ml-4">
+        Palavras-Chave
+      </h1>
 
-    <div class="kw-sub-title ml-4">
-      PALAVRAS-CHAVE CADASTRADAS NA PLATAFORMA
+      <div class="kw-sub-title ml-4">
+        Palavras-chave cadastradas na plataforma
+      </div>
+
+      <div class="div-filter-and-button ml-4">
+        <b-form-select
+          @input="filter"
+          class="col-md-4 select"
+          v-model="selected"
+          :options="subjects"
+        >
+        </b-form-select>
+        <button class="kw-btn btn sizes mr-2" @click="addKeyword()">
+          <i class="fa-solid fa-plus-circle ml-3 add-project"></i>
+          ADICIONAR PALAVRA-CHAVE
+        </button>
+      </div>
+
+      <div class="tabelas">
+        <ListagemConsultaKeyWords :dataKeyWords="keyWords" :filteredKeyWords="tableKeywordSubject"/>
+
+      </div>
     </div>
 
-    <div class="div-filter-and-button ml-4">
-      <b-form-select
-        @input="filter"
-        class="col-md-4 select"
-        v-model="selected"
-        :options="subjects"
-      >
-      </b-form-select>
-      <button class="kw-btn btn sizes mr-2" >
-        <i class="fa-solid fa-plus-circle ml-3 add-project"></i>
-        ADICIONAR PALAVRA-CHAVE
-      </button>
-    </div>
+    <b-modal hide-footer v-model="openModalRegister" centered size="md" modal-class="myclass">
+      <template #modal-header>
+        Criar Nova Palavra Chave
+      </template>
 
-    <div class="tabelas">
-      <ListagemConsultaKeyWords :dataKeyWords="keyWords" :filteredKeyWords="tableKeywordSubject"/>
+      <ValidationObserver ref="observer">
+        <div style="display: flex; flex-direction: column;  align-items: center;">
 
-    </div>
+          <b-form-group class="col-md-9">
+            <template #label>
+              <span class="label-text">Palavra-chave</span>
+            </template>
+
+            <validation-provider rules="required" v-slot="{ errors }">
+              <b-form-input
+                @input="keywordNameAlreadyExist"
+                type="text"
+                placeholder="Escreva aqui sua nova palavra-chave"
+                v-bind:class="{ 'kw-invalid': errors.length }"
+                class="custom-input"
+                id="inputKeyword"
+                v-model.trim="form.keywordName"
+              />
+              <span class="kw-error">{{ errors[0] }}</span>
+              <span
+                v-if="kwNameAlreadyExist"
+                class="kw-error"
+              >
+                Palavra-chave já existe, tente novamente.
+              </span>
+            </validation-provider>
+          </b-form-group>
+
+          <b-form-group class="col-md-9">
+            <template #label>
+              <span class="label-text">Disciplina</span>
+            </template>
+
+            <validation-provider rules="required" v-slot="{ errors }">
+              <b-select v-model="form.selectedSubject" :options="subjectsForm"
+                v-bind:class="{ 'kw-invalid': errors.length }" class="custom-input select" />
+              <span class="kw-error">{{ errors[0] }}</span>
+            </validation-provider>
+          </b-form-group>
+
+        </div>
+      </ValidationObserver>
+
+      <div class="divFooter">
+        <button
+          class="kw-btn-crud-cancel"
+          style="margin-right: 5%;"
+          @click="openModalRegister=false"
+        >
+          Cancelar
+        </button>
+
+        <button class="kw-btn-confirm" @click="handleAdd()">
+          Criar
+        </button>
+      </div>
+    </b-modal>
   </div>
 </template>
 
