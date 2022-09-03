@@ -10,6 +10,47 @@
     height: 10%;
 }
 
+img {
+    cursor: pointer;
+}
+
 .menu-container {
     height: 90%;
+}
+
+.menu-responsivo {
+    background-color: #15355E;
+    text-align: start;
+    position: fixed top;
+}
+
+.menu-responsivo li {
+    text-align: left;
+    list-style: none;
+    margin-left: -2.42em;
+    padding: none;
+}
+
+.menu-responsivo img {
+    margin: 1.5em 1em;
+}
+
+.navbar-icon {
+    background-color: white;
+}
+
+.topo {
+    justify-content: space-between;
+}
+
+@media screen and (min-width: 700px) {
+    .menu-responsivo {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .menu-padrao {
+        display: none;
+    }
 }
