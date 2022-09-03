@@ -3,9 +3,9 @@
         <table>
             <thead class="mb-10">
                 <tr>
-                    <td>ITEM</td>
-                    <td>PALAVRA-CHAVE</td>
-                    <td>DISCIPLINA</td>
+                    <td>Item</td>
+                    <td>Palavra-chave</td>
+                    <td>Disciplina</td>
                     <td></td>
                 </tr>
             </thead>

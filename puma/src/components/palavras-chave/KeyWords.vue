@@ -19,7 +19,7 @@
         </b-form-select>
         <button class="kw-btn btn sizes mr-2" @click="addKeyword()">
           <i class="fa-solid fa-plus-circle ml-3 add-project"></i>
-          ADICIONAR PALAVRA-CHAVE
+          Adicionar palavra-chave
         </button>
       </div>
 
@@ -140,15 +140,15 @@ export default {
       keyWordsFields: [
         {
           key: 'keywordid',
-          label: 'ITEM',
+          label: 'Item',
         },
         {
           key: 'keyword',
-          label: 'PALAVRA-CHAVE',
+          label: 'Palavra-chave',
         },
         {
           key: 'subjectname',
-          label: 'DISCIPLINA',
+          label: 'Disciplina',
         },
         {
           key: 'actions',
