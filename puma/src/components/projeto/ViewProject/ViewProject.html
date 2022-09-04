@@ -7,19 +7,19 @@
                     VER DETALHES DO PROJETO
                 </span>
             </b-col>
-            <b-col cols="6">
+            <b-col cols="5">
                 <b-row align-h="end">
-                    <b-col cols="2" v-if="editable && disabled" class="m-2">
+                    <b-col cols="4 m-4" v-if="editable && disabled">
                         <b-button variant="outline-primary" class="button" v-on:click="handleEvaluate()">
                             Avaliar
                         </b-button>
                     </b-col>
-                    <b-col cols="2" v-if="!disabled" class="m-2">
+                    <b-col cols="4 m-4" v-if="!disabled" >
                         <b-button variant="outline-primary" class="button" v-on:click="handleSubmit()">
                             Enviar
                         </b-button>
                     </b-col>
-                    <b-col cols="2" v-if="!disabled" class="m-2">
+                    <b-col cols="4 m-4" v-if="!disabled" >
                         <b-button variant="outline-primary" class="button" v-on:click="handleCancelEvaluate()">
                             Cancelar
                         </b-button>
