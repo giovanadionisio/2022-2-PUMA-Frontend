@@ -11,11 +11,13 @@ thead {
 .minhasDisciplinas thead::after {
     content: "Suas disciplinas";
     font-size: 18px;
+    margin-left: 0.6em;
 }
 
 .demaisDisciplinas thead::after {
     content: "Outras disciplinas";
     font-size: 18px;
+    margin-left: 0.6em;
 }
 
 .demaisDisciplinas thead {
@@ -74,6 +76,7 @@ svg {
 .search-input {
     height: 40px;
     padding-left: 30px;
+    width: 60%;
 }
 
 .search-icon {
@@ -86,7 +89,8 @@ svg {
 
 .no-results {
     color: #15355e;
-    font-size: 20px;
+    font-size: 16px;
+    margin-left: 0.6em;
 }
 
 .tittle {
@@ -129,6 +133,7 @@ svg {
 
     .search-input {
         height: 30px;
+        width: 90%;
     }
 
     .search-icon {
@@ -140,14 +145,26 @@ svg {
     }
 
     tr td {
-        font-size: 13px;
+        font-size: 15px;
     }
 
     thead tr td {
-        font-size: 20px;
+        font-size: 25px;
     }
 
     mensagem {
         font-size: 15px;
+    }
+
+    .no-results {
+        font-size: 14px;
+    }
+
+    .minhasDisciplinas thead::after {
+        font-size: 18px;
+    }
+    
+    .demaisDisciplinas thead::after {
+        font-size: 18px;
     }
 }

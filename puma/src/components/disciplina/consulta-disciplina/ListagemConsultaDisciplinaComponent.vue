@@ -1,8 +1,8 @@
 <template>
-    <div class="mt-4">
+    <div class="mt-4 table-responsive">
         <h2 class="tittle sub-tittle ml-4">{{ title }}</h2>
 
-        <table>
+        <table class="table table-borderless">
             <thead>
                 <tr>
                     <td>Nome</td>
