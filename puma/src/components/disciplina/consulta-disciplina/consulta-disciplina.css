@@ -49,6 +49,7 @@ td {
     max-width: 1500px;
     width: 30%;
     text-align: start;
+    min-width: 200px;
 }
 
 .botao {
@@ -117,5 +118,36 @@ svg {
     .search-input {
         height: 37px;
         max-width: 275px;
-      }
+    }
+    .tittle {
+        font-size: 35px;
+    }
+
+    .sub-tittle {
+        font-size: 18px;
+    }
+
+    .search-input {
+        height: 30px;
+    }
+
+    .search-icon {
+        margin-top: -5px;
+    }
+
+    button {
+        margin: none;
+    }
+
+    tr td {
+        font-size: 13px;
+    }
+
+    thead tr td {
+        font-size: 20px;
+    }
+
+    mensagem {
+        font-size: 15px;
+    }
 }

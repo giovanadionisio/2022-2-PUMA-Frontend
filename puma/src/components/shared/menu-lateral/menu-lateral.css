@@ -22,6 +22,7 @@ img {
     background-color: #15355E;
     text-align: start;
     position: fixed top;
+    min-width: 350px;
 }
 
 .menu-responsivo li {
@@ -29,6 +30,7 @@ img {
     list-style: none;
     margin-left: -2.42em;
     padding: none;
+    max-width: 350px;
 }
 
 .menu-responsivo img {
@@ -55,5 +57,8 @@ img {
 @media screen and (max-width: 700px) {
     .menu-padrao {
         display: none;
+    }
+    .root {
+        min-width: 350px;
     }
 }
