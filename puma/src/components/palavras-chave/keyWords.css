@@ -120,6 +120,12 @@ svg {
   font-weight: bold;
 }
 
+.kw-btn:hover {
+  transition: 0.2s;
+  color: #17519c;
+  border-color: #17519c;
+}
+
 .kw-btn-confirm {
   align-items: center;
   background-color: #f7db36;
@@ -257,6 +263,7 @@ svg {
 }
 
 .cd-btn {
+  overflow: hidden;
   width: 30%;
   height: 70%;
   padding: 5px;
@@ -268,6 +275,7 @@ svg {
 }
 
 .cd-btn:hover {
+  transition: 0.2s;
   color: #17519c;
   border-color: #17519c;
 }
