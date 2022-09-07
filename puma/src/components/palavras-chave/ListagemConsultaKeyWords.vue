@@ -27,6 +27,7 @@
                       <button
                         class="btn cd-btn"
                         v-if="allowEdit(keyWord.keywordid)"
+                        @click="deleteKeyword(keyWord)"
                       >
                         <font-awesome-icon icon="fa-solid fa-trash" size="lg" />
                         Excluir
@@ -113,6 +114,7 @@ export default {
     kwNameAlreadyExist: false,
     newKeyWords: [],
     idKeywordEdit: '',
+    keywordDelete: null,
   }),
 
   watch: {
@@ -213,6 +215,37 @@ export default {
         this.openModalEdit = false;
         this.$store.commit('CLOSE_LOADING_MODAL');
         this.makeToast('ERRO', 'Infelizmente houve um erro ao tentar editar a palavra-chave', 'danger');
+      }
+    },
+
+    deleteKeyword(keyWord) {
+      this.$store.commit('OPEN_CONFIRM_MODAL', {
+        title: 'EXCLUIR PALAVRA-CHAVE',
+        content: 'Confirmar exclusão da palavra-chave ?',
+        cancelButton: {
+          text: 'Cancelar',
+          variant: 'outline-danger',
+          onClick: () => this.$store.commit('CLOSE_CONFIRM_MODAL'),
+        },
+        okButton: {
+          text: 'Confirmar',
+          variant: 'danger',
+          onClick: () => { this.handleDelete(); this.$store.commit('CLOSE_CONFIRM_MODAL'); },
+        },
+      });
+      this.keywordDelete = keyWord.keywordid;
+    },
+
+    async handleDelete() {
+      try {
+        this.$store.commit('OPEN_LOADING_MODAL', { title: 'Enviando...' });
+        await this.keywordService.deleteKeyword(this.keywordDelete);
+        this.listKeyWords = this.listKeyWords.filter((kw) => kw.keywordid !== this.keywordDelete);
+        this.$store.commit('CLOSE_LOADING_MODAL');
+        this.makeToast('SUCESSO', 'Palavra-chave excluída com sucesso!', 'success');
+      } catch (error) {
+        this.$store.commit('CLOSE_LOADING_MODAL');
+        this.makeToast('ERRO', 'Infelizmente houve um erro ao tentar excluir a palavra-chave', 'danger');
       }
     },
   },
