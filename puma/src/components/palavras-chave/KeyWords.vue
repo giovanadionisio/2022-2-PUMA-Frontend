@@ -17,9 +17,18 @@
           :options="subjects"
         >
         </b-form-select>
-        <button class="kw-btn btn sizes mr-2" @click="addKeyword()">
-          <i class="fa-solid fa-plus-circle ml-3 add-project"></i>
-          Adicionar palavra-chave
+        <button class="btn kw-btn" style="width: 25% !important" @click="addKeyword()">
+          <div
+            style="
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              justify-content: space-around
+            "
+          >
+            <i class="fa-solid fa-plus-circle add-project"></i>
+            Adicionar Palavra-Chave
+          </div>
         </button>
       </div>
 

@@ -18,7 +18,6 @@ thead {
 
 table > :first-child {
   height: 80px;
-  border-bottom: 3px solid #15355e !important;
   vertical-align: middle;
 }
 

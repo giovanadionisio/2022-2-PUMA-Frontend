@@ -215,7 +215,7 @@ export default {
 
     deleteKeyword(keyWord) {
       this.$store.commit('OPEN_CONFIRM_MODAL', {
-        title: 'EXCLUIR PALAVRA-CHAVE',
+        title: 'Excluir Palavra-Chave',
         content: 'Confirmar exclusão da palavra-chave ?',
         cancelButton: {
           text: 'Cancelar',
