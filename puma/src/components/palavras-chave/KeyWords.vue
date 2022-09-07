@@ -26,7 +26,6 @@
       <div class="tabelas">
         <ListagemConsultaKeyWords
           :keywordsInfo="keywordsInfo"
-          :dataKeyWords="keyWords"
           :tableKeywordSubject="tableKeywordSubject"
           :subjectsForm="subjectsForm"
           :form_prop.sync="form"
@@ -121,7 +120,6 @@ export default {
       openModalRegister: false,
       openModalEdit: false,
       currentKeyWord: {},
-      keywordDelete: null,
       selected: null,
       form: { keywordName: '', selectedSubject: null },
       idKeywordEdit: '',
@@ -139,11 +137,6 @@ export default {
   },
   created() {
     this.handleLoadData();
-  },
-  watch: {
-    dataKeyWords() {
-      console.log(this.selected);
-    },
   },
   methods: {
     async handleLoadData() {
@@ -242,26 +235,8 @@ export default {
 
     addKeyword() {
       this.openModalRegister = true;
+      this.getKeywords();
       this.form = { keywordName: '', selectedSubject: null };
-    },
-
-    deleteKeyword(keyWord) {
-      this.$store.commit('OPEN_CONFIRM_MODAL', {
-        title: 'EXCLUIR PALAVRA-CHAVE',
-        content: 'Confirmar exclusão da palavra-chave ?',
-        okButton: {
-          text:
-            'Confirmar',
-          variant: 'danger',
-          onClick: () => { this.handleDelete(); this.$store.commit('CLOSE_CONFIRM_MODAL'); },
-        },
-        cancelButton: {
-          text: 'Cancelar',
-          variant: 'outline-danger',
-          onClick: () => this.$store.commit('CLOSE_CONFIRM_MODAL'),
-        },
-      });
-      this.keywordDelete = keyWord.keywordid;
     },
 
     keywordNameAlreadyExist() {
@@ -295,19 +270,6 @@ export default {
         this.openModalRegister = false;
         this.$store.commit('CLOSE_LOADING_MODAL');
         this.makeToast('ERRO', 'Infelizmente houve um erro ao tentar cadastrar a palavra-chave', 'danger');
-      }
-    },
-
-    async handleDelete() {
-      try {
-        this.$store.commit('OPEN_LOADING_MODAL', { title: 'Enviando...' });
-        await this.keywordService.deleteKeyword(this.keywordDelete);
-        await this.getKeywords();
-        this.$store.commit('CLOSE_LOADING_MODAL');
-        this.makeToast('SUCESSO', 'Palavra-Chave excluída com sucesso!', 'success');
-      } catch (error) {
-        this.$store.commit('CLOSE_LOADING_MODAL');
-        this.makeToast('ERRO', 'Infelizmente houve um erro ao tentar excluir a palavra-chave', 'danger');
       }
     },
 

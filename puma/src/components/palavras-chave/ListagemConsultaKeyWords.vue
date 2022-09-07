@@ -99,7 +99,6 @@ import KeywordService from '../../services/KeywordService';
 
 export default {
   props: {
-    dataKeyWords: Array,
     tableKeywordSubject: Array,
     keywordsInfo: {},
     subjectsForm: [],
@@ -118,10 +117,6 @@ export default {
   }),
 
   watch: {
-    dataKeyWords() {
-      this.listKeyWords = this.dataKeyWords;
-    },
-
     tableKeywordSubject() {
       this.listKeyWords = this.tableKeywordSubject;
     },
