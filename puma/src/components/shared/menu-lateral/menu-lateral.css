@@ -10,6 +10,55 @@
     height: 10%;
 }
 
+img {
+    cursor: pointer;
+}
+
 .menu-container {
     height: 90%;
+}
+
+.menu-responsivo {
+    background-color: #15355E;
+    text-align: start;
+    position: fixed top;
+    min-width: 350px;
+}
+
+.menu-responsivo li {
+    text-align: left;
+    list-style: none;
+    margin-left: -2.42em;
+    padding: none;
+    max-width: 350px;
+}
+
+.menu-responsivo img {
+    margin: 1.5em 1em;
+}
+
+.navbar-icon {
+    max-width: 100%;
+    height: 20px;
+}
+
+.topo {
+    justify-content: space-between;
+    display: flex;
+    padding: 0 10px;
+}
+
+@media screen and (min-width: 700px) {
+    .menu-responsivo {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .menu-padrao {
+        display: none;
+    }
+    .root {
+        min-width: 350px;
+    }
 }

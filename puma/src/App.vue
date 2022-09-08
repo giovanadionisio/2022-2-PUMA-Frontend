@@ -67,6 +67,19 @@ html, body {
   margin-left: 250px;
   padding: 30px 10px;
   margin-bottom: 50px;
+  min-width: 350px;
+}
+
+@media screen and (max-width: 700px) {
+  .main-content {
+    display: block;
+    position: relative;
+    top: 0;
+    width: 90%;
+    margin-left: 1em;
+    padding: 30px 10px;
+    margin-bottom: 50px;
+  }
 }
 
 .logo-puma {

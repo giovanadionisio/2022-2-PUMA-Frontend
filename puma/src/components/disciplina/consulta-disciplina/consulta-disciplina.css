@@ -11,11 +11,13 @@ thead {
 .minhasDisciplinas thead::after {
     content: "Suas disciplinas";
     font-size: 18px;
+    margin-left: 0.6em;
 }
 
 .demaisDisciplinas thead::after {
     content: "Outras disciplinas";
     font-size: 18px;
+    margin-left: 0.6em;
 }
 
 .demaisDisciplinas thead {
@@ -49,6 +51,7 @@ td {
     max-width: 1500px;
     width: 30%;
     text-align: start;
+    min-width: 200px;
 }
 
 .botao {
@@ -73,6 +76,7 @@ svg {
 .search-input {
     height: 40px;
     padding-left: 30px;
+    width: 60%;
 }
 
 .search-icon {
@@ -85,7 +89,8 @@ svg {
 
 .no-results {
     color: #15355e;
-    font-size: 20px;
+    font-size: 16px;
+    margin-left: 0.6em;
 }
 
 .tittle {
@@ -111,4 +116,55 @@ svg {
 
 .modal-tittle {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
+
+@media screen and (max-width: 700px) {
+    .search-input {
+        height: 37px;
+        max-width: 275px;
+    }
+    .tittle {
+        font-size: 35px;
+    }
+
+    .sub-tittle {
+        font-size: 18px;
+    }
+
+    .search-input {
+        height: 30px;
+        width: 90%;
+    }
+
+    .search-icon {
+        margin-top: -5px;
+    }
+
+    button {
+        margin: none;
+    }
+
+    tr td {
+        font-size: 15px;
+    }
+
+    thead tr td {
+        font-size: 25px;
+    }
+
+    mensagem {
+        font-size: 15px;
+    }
+
+    .no-results {
+        font-size: 14px;
+    }
+
+    .minhasDisciplinas thead::after {
+        font-size: 18px;
+    }
+    
+    .demaisDisciplinas thead::after {
+        font-size: 18px;
+    }
 }
