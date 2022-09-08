@@ -40,17 +40,17 @@ const routes = [
     },
   },
   {
-    path: '/usuario/login',
-    name: 'Entrar',
-    component: () => import('../components/usuario/login-usuario/LoginUsuario.vue'),
+    path: '/login',
+    name: 'Login',
+    component: () => import('../components/usuario/autenticacao/Cadastro-Login.vue'),
     meta: {
       guest: true,
     },
   },
   {
-    path: '/usuario/cadastro',
-    name: 'Cadastro Usuário',
-    component: () => import('../components/usuario/cadastro-usuario/CadastroUsuario.vue'),
+    path: '/cadastro',
+    name: 'Cadastro',
+    component: () => import('../components/usuario/autenticacao/Cadastro-Login.vue'),
     meta: {
       guest: true,
     },
