@@ -18,23 +18,29 @@ img {
     height: 90%;
 }
 
-.menu-responsivo {
+.menu-hamburger {
     background-color: #15355E;
     text-align: start;
     position: fixed top;
     min-width: 350px;
 }
 
-.menu-responsivo li {
-    text-align: left;
-    list-style: none;
-    margin-left: -2.42em;
-    padding: none;
-    max-width: 350px;
+ul {
+    padding: 0px;
 }
 
-.menu-responsivo img {
-    margin: 1.5em 1em;
+.menu-hamburger li {
+    text-align: left;
+    list-style: none;
+    padding: none;
+}
+
+.menu-hamburger img {
+    margin: 1.5em 0;
+}
+
+#menu {
+    display: none;
 }
 
 .navbar-icon {
@@ -45,16 +51,20 @@ img {
 .topo {
     justify-content: space-between;
     display: flex;
-    padding: 0 10px;
+    margin: 0px 50px;
 }
 
-@media screen and (min-width: 700px) {
-    .menu-responsivo {
+.topo img {
+    height: 20px;
+}
+
+@media screen and (min-width: 800px) {
+    .menu-hamburger {
         display: none;
     }
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 800px) {
     .menu-padrao {
         display: none;
     }

@@ -73,7 +73,7 @@ export default {
         redirectToUserProjects() {
             this.$router.push({ path: '/meus-projetos' }).catch(()=>{});
         },
-        showInformacao(element) {
+        showMenuHamburger(element) {
             const content = document.getElementById(element);
       
             if (!content.style.display) {
