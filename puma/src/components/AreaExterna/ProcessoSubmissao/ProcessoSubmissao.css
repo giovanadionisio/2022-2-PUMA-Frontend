@@ -12,10 +12,85 @@ h1 {
     color: rgba(2, 16, 33, 0.8);
 }
 
-.paragrafo-sobre {
+.paragrafo-submissao {
     text-align: justify;
     letter-spacing: 0.08em;
     font-size: 24px;
     font-weight: 400;
     margin: 40px 0px 80px 0px;
 }
+
+.necessario-titulo {
+    font-weight: 700;
+    font-size: 32px;
+    letter-spacing: -0.02em;
+    margin-bottom: 15px;
+}
+
+.p-submissao-ul {
+    width: 100%;
+    margin: 0;
+    list-style: inside;
+    display: block;
+    align-items: flex-start;
+}
+
+.p-submissao-li {
+    margin: 0px 0px 10px 0px;
+    width: 100%;
+}
+
+.informacao-titulo {
+    font-weight: 700;
+    font-size: 32px;
+    letter-spacing: -0.02em;
+    margin-bottom: 15px;
+}
+
+.p-informacao-ul {
+    width: 100%;
+    margin: 0;
+    list-style: inside;
+    display: block;
+    align-items: flex-start;
+}
+
+.p-informacao-li {
+    margin: 0px 0px 10px 0px;
+    width: 100%;
+}
+
+.p-informacao {
+    margin: 0px 0px 10px 0px;
+    width: 100%;
+}
+
+.div-informacao {
+    padding-top: 80px;
+}
+
+.como-titulo {
+    font-weight: 700;
+    font-size: 32px;
+    letter-spacing: -0.02em;
+    margin-bottom: 15px;
+}
+
+.p-como-ul {
+    width: 100%;
+    margin: 0;
+    list-style: inside;
+    display: block;
+    align-items: flex-start;
+}
+
+.p-como {
+    margin: 0px 0px 10px 0px;
+    width: 100%;
+    padding-bottom: 40px;
+}
+
+.div-como {
+    padding-top: 80px;
+}
+
