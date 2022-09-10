@@ -25,7 +25,7 @@
                     <button
                         class="btn cd-btn"
                         @click="goToSubject(subject.subjectid)">
-                        <i class="fa-solid fa-circle-info mr-2 ml-0"></i>Ver Detalhes
+                        <em class="fa-solid fa-circle-info mr-2 ml-0"></em>Ver Detalhes
                     </button>
                 </td>
             </tr>

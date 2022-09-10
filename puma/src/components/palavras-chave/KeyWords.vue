@@ -26,7 +26,7 @@
               justify-content: space-around
             "
           >
-            <i class="fa-solid fa-plus-circle add-project"></i>
+            <em class="fa-solid fa-plus-circle add-project"></em>
             Adicionar Palavra-Chave
           </div>
         </button>
