@@ -96,6 +96,7 @@ export default {
     configTable() {
       const table = document.getElementsByTagName('table')[0];
       table.deleteTFoot();
+      table.classList.add('table-responsive');
       table.id = 'projects-table';
 
       const headerDiv = document.getElementsByClassName('col-sm-6 col-md-8')[0];
