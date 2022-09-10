@@ -36,10 +36,10 @@
       </b-container>
     </div>
   </div>
-  <div class="menu-responsivo">
+  <div class="menu-hamburger">
     <div class="topo">
       <img @click="redirectToUserProjects" src="../../../assets/logo-white.svg" draggable="false">
-      <img src="../../../assets/menu-white.svg" class="navbar-icon" @click="showInformacao('menu')">
+      <img src="../../../assets/menu-white.svg" class="navbar-icon" @click="showMenuHamburger('menu')">
     </div>
   
     <div id="menu">
@@ -55,6 +55,9 @@
         </li>
         <li>
           <ItemMenuLateral :props="menuItems.adminProjects" />
+        </li>
+        <li>
+          <ItemMenuLateral :props="menuItems.myProjects" />
         </li>
         <li>
           <ItemMenuLateral :props="menuItems.logout" />
