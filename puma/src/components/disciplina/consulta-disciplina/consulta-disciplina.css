@@ -8,24 +8,6 @@ thead {
     font-weight: bold;
 }
 
-.minhasDisciplinas thead::after {
-    content: "Suas disciplinas";
-    font-size: 18px;
-    margin-left: 0.6em;
-}
-
-.demaisDisciplinas thead::after {
-    content: "Outras disciplinas";
-    font-size: 18px;
-    margin-left: 0.6em;
-}
-
-.demaisDisciplinas thead {
-    font-size: 0px;
-    padding: 0px;
-    margin: 0px;
-}
-
 .tabelas {
     max-width: 1300px;
     width: 100%;
@@ -55,10 +37,6 @@ td {
 
 .botao {
     text-align: end;
-}
-
-tr {
-    border-top: hidden;
 }
 
 svg {
@@ -92,66 +70,18 @@ svg {
     margin-left: 0.6em;
 }
 
-.tittle {
-    color: #15355E;
-    font-weight: bold;
-    font-size: 40px;
-}
-
 .sub-tittle {
     font-size: 20px;
     font-weight: normal;
 }
-
-/* .btn-confirm {
-    background-color: #dc3545 !important;
-}
-
-.btn-cancel {
-    border-color: #15355e !important;
-    color: #15355e !important;
-    background-color: white !important;
-} */
 
 .modal-tittle {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
 }
 
 @media screen and (max-width: 800px) {
-    .tittle {
-        font-size: 35px;
-    }
-
-    .sub-tittle {
-        font-size: 18px;
-    }
-
     .search-input {
         width: 90%;
         max-width: 300px;
-    }
-
-    button {
-        margin: none;
-    }
-
-    tr td {
-        font-size: 15px;
-    }
-
-    thead tr td {
-        font-size: 25px;
-    }
-
-    .no-results {
-        font-size: 14px;
-    }
-
-    .minhasDisciplinas thead::after {
-        font-size: 18px;
-    }
-    
-    .demaisDisciplinas thead::after {
-        font-size: 18px;
     }
 }

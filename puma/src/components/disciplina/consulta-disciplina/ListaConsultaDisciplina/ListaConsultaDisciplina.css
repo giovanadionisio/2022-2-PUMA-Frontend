@@ -29,6 +29,10 @@ td {
     min-width: 200px;
 }
 
+tr {
+    border-top: hidden;
+}
+
 .title-list {
     font-size: 18px;
     margin-left: 0.6em;
