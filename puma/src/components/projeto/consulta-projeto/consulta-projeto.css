@@ -36,24 +36,6 @@ svg {
     padding-left: 30px;
 }
 
-@media screen and (max-width: 800px) {
-    .search-input{
-        width: 85% !important;
-        height: 80px;
-    }
-    .search-icon{
-        margin-top: 18px;
-    }
-    thead {
-        font-size: 20px;
-        color: #15355e;
-    }
-    table {
-        font-size: 14px;
-        margin-top: 20px;
-    }
-}
-
 
 .search-icon {
     cursor: auto;
@@ -81,7 +63,7 @@ svg {
     color: #15355E;
     font-weight: bold;
     font-size: 40px;
-    text-transform: uppercase
+    text-transform: uppercase;
 }
 
 .sub-tittle {
@@ -89,5 +71,20 @@ svg {
     font-weight: normal !important;
 }
 
-
-
+@media screen and (max-width: 800px) {
+    .search-input{
+        width: 85% !important;
+        height: 80px;
+    }
+    .search-icon{
+        margin-top: 18px;
+    }
+    thead {
+        font-size: 20px;
+        color: #15355e;
+    }
+    table {
+        font-size: 14px;
+        margin-top: 20px;
+    }
+}

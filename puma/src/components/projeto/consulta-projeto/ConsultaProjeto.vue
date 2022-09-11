@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main-content hidden-scroll-bar">
     <div class="tittle ml-4">
       {{
         operacao === 'meus-projetos' ?
