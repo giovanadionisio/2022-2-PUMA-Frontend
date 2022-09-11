@@ -33,6 +33,7 @@ h1 {
     list-style: inside;
     display: block;
     align-items: flex-start;
+    padding-left: 20px;
 }
 
 .p-submissao-li {
@@ -53,6 +54,7 @@ h1 {
     list-style: inside;
     display: block;
     align-items: flex-start;
+    padding-left: 20px;
 }
 
 .p-informacao-li {
@@ -66,7 +68,7 @@ h1 {
 }
 
 .div-informacao {
-    padding-top: 80px;
+    margin-top: 60px;
 }
 
 .como-titulo {
@@ -91,6 +93,6 @@ h1 {
 }
 
 .div-como {
-    padding-top: 80px;
+    margin-top: 60px;
 }
 
