@@ -38,27 +38,27 @@ export default {
       data: {
         columns: [
           {
-            label: 'TÍTULO',
+            label: 'Título',
             field: 'name',
             sort: 'desc',
           },
           {
-            label: 'AUTOR',
+            label: 'Autor',
             field: 'fullname',
             sort: 'desc',
           },
           {
-            label: 'CRIAÇÃO',
+            label: 'Criação',
             field: 'createdat',
             sort: 'desc',
           },
           {
-            label: 'STATUS',
+            label: 'Status',
             field: 'status',
             sort: 'desc',
           },
           {
-            label: 'DISCIPLINA',
+            label: 'Disciplina',
             field: 'subject',
             sort: 'desc',
           },
