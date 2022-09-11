@@ -13,10 +13,9 @@
             'cadastrados na plataforma' : 'alocados para as disciplinas ministradas pelo usuário'))
       }}
     </div>
-    <mdbDatatable ref="table" borderless color="blue" :data="data" :pagination="false" />
-    <div v-if="!projects.length" class="no-results align-content-center mt-3">
-      Sem resultados disponíveis
-    </div>
+    <ListagemConsultaProjetoComponent class="minhasDisciplinas"
+        :data="data"
+        :projects="projects"/>
   </div>
 </template>
 
@@ -29,6 +28,11 @@ const statusProjetoEnum = require('../../../utils/enums/status-projeto.enum');
 
 export default {
   name: 'ConsultaProjetos',
+
+  components: {
+    ListagemConsultaProjetoComponent,
+  },
+
   data() {
     return {
       data: {
