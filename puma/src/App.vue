@@ -75,9 +75,9 @@ html, body {
     display: block;
     position: relative;
     top: 0;
-    width: 90%;
-    margin-left: 1em;
-    padding: 30px 10px;
+    width: 100%;
+    margin-left: 0em;
+    padding: 30px 10px 30px 0px;
     margin-bottom: 50px;
   }
 }
