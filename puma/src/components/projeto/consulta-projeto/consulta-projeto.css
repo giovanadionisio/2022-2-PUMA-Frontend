@@ -63,7 +63,7 @@ svg {
     color: #15355E;
     font-weight: bold;
     font-size: 40px;
-    text-transform: uppercase;
+    text-transform: capitalize;
 }
 
 .sub-tittle {
