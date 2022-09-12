@@ -146,5 +146,9 @@ export default {
         this.makeToast('ERRO', 'Infelizmente houve um erro ao tentar excluir a palavra-chave', 'danger');
       }
     },
+
+    fecharModal() {
+      this.openModalEdit = false;
+    },
   },
 };

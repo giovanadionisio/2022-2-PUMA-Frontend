@@ -33,21 +33,22 @@
         :keywordService_prop="keywordService"
         :subjects="subjects"
       />
-
     </div>
   </div>
 
   <b-modal hide-footer v-model="openModalRegister" centered size="md" modal-class="myclass">
+    
     <template #modal-header>
-      Criar Nova Palavra-Chave
+      <h4 class="mod-title">Criar Nova Palavra-Chave</h4>
+      <button type="button" aria-label="Close" class="close" @click="fecharModal">×</button>
     </template>
 
     <ValidationObserver ref="observer">
       <div style="display: flex; flex-direction: column;  align-items: center;">
 
         <b-form-group class="col-md-9">
-          <template #label>
-            <span class="label-text">Palavra-Chave</span>
+          <template>
+            <label class="label-text">Palavra-Chave</label>
           </template>
 
           <validation-provider rules="required" v-slot="{ errors }">
