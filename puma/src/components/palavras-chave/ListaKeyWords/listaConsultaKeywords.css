@@ -5,7 +5,7 @@ table {
 	border-collapse: separate;
 }
   
-thead {
+th {
 	font-size: 25px;
 	color: #15355e;
 	font-weight: bold;
@@ -217,4 +217,11 @@ tr > :first-child {
 	width: 100%;
 	display: flex;
 	justify-content: center;
+}
+
+.no-results {
+  color: #15355e;
+  font-size: 16px;
+  margin-left: 0.6em;
+  width: max-content;
 }

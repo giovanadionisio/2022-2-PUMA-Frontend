@@ -16,7 +16,7 @@ table {
     border-collapse: separate;
 }
 
-thead {
+th {
     font-size: 25px;
     color: #15355e;
     font-weight: bold;

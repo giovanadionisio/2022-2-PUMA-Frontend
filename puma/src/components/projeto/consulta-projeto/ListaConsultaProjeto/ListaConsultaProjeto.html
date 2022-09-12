@@ -1,15 +1,13 @@
 <div class="mt-4 table-responsive">
     <table class="table table-borderless">
-        <thead>
-            <tr>
-                <td>Título</td>
-                <td>Autor</td>
-                <td>Criação</td>
-                <td>Status</td>
-                <td>Disciplina</td>
-                <td></td>
-            </tr>
-        </thead>
+        <tr>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Criação</th>
+            <th>Status</th>
+            <th>Disciplina</th>
+            <th></th>
+        </tr>
 
         <tr v-for="project in listProjects" :key="project.projectid">
             <td>{{project.name}}</td>

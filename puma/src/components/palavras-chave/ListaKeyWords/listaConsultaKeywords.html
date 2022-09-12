@@ -1,12 +1,10 @@
 <div class="mt-4 table-responsive">
     <table class="table table-borderless">
-        <thead class="mb-10">
-            <tr>
-                <td>Palavra-chave</td>
-                <td>Disciplina</td>
-                <td></td>
-            </tr>
-        </thead>
+        <tr>
+          <th>Palavra-Chave</th>
+          <th>Disciplina</th>
+          <th></th>
+        </tr>
 
         <tr v-for="(keyWord, index) in listKeyWords" :key="index">
             <td>{{keyWord.keyword}}</td>
@@ -32,6 +30,10 @@
                 </div>
             </td>
         </tr>
+
+        <div v-if="!listKeyWords.length" class="no-results align-content-center mt-3">
+          Sem Resultados Disponíveis
+        </div>
     </table>
 
     <b-modal hide-footer v-model="openModalEdit" centered size="md" modal-class="myclass">

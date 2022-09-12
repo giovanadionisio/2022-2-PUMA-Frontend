@@ -2,12 +2,6 @@
     overflow-x: hidden;
 }
 
-thead {
-    font-size: 25px;
-    color: #15355e;
-    font-weight: bold;
-}
-
 .title {
     color: #15355E;
     font-weight: bold;
@@ -17,41 +11,6 @@ thead {
 .sub-title {
     font-size: 20px;
     font-weight: normal;
-}
-
-.tabelas {
-    max-width: 1300px;
-    width: 100%;
-    align-content: flex-start;
-}
-
-.tabelas hr {
-    width: 100%;
-    max-width: 1300px;
-    display: inline-block;
-    border-bottom: 1px solid #94A6BC;
-}
-
-table {
-    width: 100%;
-    max-width: 1500px;
-    border-spacing: 10px;
-    border-collapse: separate;
-}
-
-td {
-    max-width: 1500px;
-    width: 30%;
-    text-align: start;
-    min-width: 200px;
-}
-
-.botao {
-    text-align: end;
-}
-
-svg {
-    cursor: pointer;
 }
 
 .cd-btn {
@@ -79,17 +38,6 @@ svg {
     z-index: 3;
     margin-left: 20px;
     padding-top: 12px;
-}
-
-.no-results {
-    color: #15355e;
-    font-size: 16px;
-    margin-left: 0.6em;
-}
-
-.sub-title {
-    font-size: 20px;
-    font-weight: normal;
 }
 
 .modal-title {
