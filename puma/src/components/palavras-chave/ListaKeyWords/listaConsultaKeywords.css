@@ -1,0 +1,66 @@
+table {
+    width: 100%;
+    max-width: 1500px;
+    border-spacing: 10px;
+    border-collapse: separate;
+}
+  
+thead {
+    font-size: 25px;
+    color: #15355e;
+    font-weight: bold;
+}
+
+td {
+    max-width: 1500px;
+    width: 30%;
+    text-align: start;
+    min-width: 200px;
+}
+  
+  table > :first-child {
+    height: 80px;
+    vertical-align: middle;
+  }
+  
+  tr > :last-child {
+    width: 25%;
+  }
+  
+  tr > :first-child {
+    width: 10% !important;
+  }
+
+.cd-btn {
+    background-color: white;
+    color: #15355e;
+    border-color: #15355e;
+}
+  
+.cd-btn:hover {
+    transition: 0.2s;
+    color: #17519c;
+    border-color: #17519c;
+}
+
+.actions {
+    display: flex;
+    width: 250px;
+    height: 46px;
+}
+
+.actions button {
+    flex: 1;
+}
+
+.myclass > .modal-dialog > .modal-content > .modal-header {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: #15355E !important;
+    color: white;
+    font-weight: bold;
+    font-size: 28px;
+    height: 50px;
+}

@@ -1,39 +1,5 @@
-
 .hidden-scroll-bar {
   overflow-x: hidden;
-}
-
-table {
-  width: 95%;
-  max-width: 1500px;
-  border-spacing: 10px;
-  border-collapse: collapse;
-}
-
-thead {
-  font-size: 25px;
-  color: #15355e;
-  font-weight: bold;
-}
-
-table > :first-child {
-  height: 80px;
-  vertical-align: middle;
-}
-
-tr > :last-child {
-  width: 25%;
-}
-
-tr > :first-child {
-  width: 10% !important;
-}
-
-td {
-  height: 80px;
-  max-width: 1500px;
-  width: 25%;
-  text-align: start;
 }
 
 svg {
@@ -46,7 +12,7 @@ svg {
 }
 
 .div-filter-and-button {
-  margin-top: 35px;
+  margin-top: 23px;
 }
 
 .select {
@@ -56,7 +22,9 @@ svg {
 
 .search-input {
   height: 40px;
-  padding-left: 30px;
+  padding-left: 20px;
+  width: 300px;
+  border-color: #15355E;
 }
 
 .keywords-table {
@@ -86,11 +54,6 @@ svg {
   font-weight: normal !important;
 }
 
-.actions {
-  display: flex;
-  width: 100%;
-}
-
 .myclass > .modal-dialog > .modal-content > .modal-header {
   display: flex;
   width: 100%;
@@ -117,6 +80,7 @@ svg {
   color: #15355e;
   border-color: #15355e;
   font-weight: bold;
+  width: 300px;
 }
 
 .kw-btn:hover {
@@ -262,15 +226,10 @@ svg {
 }
 
 .cd-btn {
-  overflow: hidden;
-  width: 30%;
-  height: 70%;
-  padding: 5px;
-  font-size: 14px;
   background-color: white;
   color: #15355e;
   border-color: #15355e;
-  font-weight: bold;
+  padding: 10px 20px;
 }
 
 .cd-btn:hover {

@@ -8,6 +8,17 @@ thead {
     font-weight: bold;
 }
 
+.tittle {
+    color: #15355E;
+    font-weight: bold;
+    font-size: 40px;
+}
+
+.sub-tittle {
+    font-size: 20px;
+    font-weight: normal;
+}
+
 .tabelas {
     max-width: 1300px;
     width: 100%;
@@ -48,6 +59,12 @@ svg {
     color: #15355e;
     border-color: #15355e;
     padding: 10px 20px;
+}
+
+.cd-btn:hover {
+    transition: 0.2s;
+    color: #17519c;
+    border-color: #17519c;
 }
 
 .search-input {
