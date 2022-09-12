@@ -1,90 +1,104 @@
-/*.table-striped>tbody>tr:nth-child(odd)>td,*/
-/*.table-striped>tbody>tr:nth-child(odd)>th {*/
-/*    background-color: red;*/
-/*}*/
 .hidden-scroll-bar {
     overflow-x: hidden;
 }
 
-
 thead {
-    font-size: 15px;
+    font-size: 25px;
     color: #15355e;
+    font-weight: bold;
+}
+
+.title {
+    color: #15355E;
+    font-weight: bold;
+    font-size: 40px;
+}
+
+.sub-title {
+    font-size: 20px;
+    font-weight: normal;
+}
+
+.tabelas {
+    max-width: 1300px;
+    width: 100%;
+    align-content: flex-start;
+}
+
+.tabelas hr {
+    width: 100%;
+    max-width: 1300px;
+    display: inline-block;
+    border-bottom: 1px solid #94A6BC;
 }
 
 table {
+    width: 100%;
+    max-width: 1500px;
     border-spacing: 10px;
     border-collapse: separate;
 }
 
-tr {
-    border-top: hidden;
+td {
+    max-width: 1500px;
+    width: 30%;
+    text-align: start;
+    min-width: 200px;
+}
+
+.botao {
+    text-align: end;
 }
 
 svg {
     cursor: pointer;
 }
 
-.cp-btn {
+.cd-btn {
     background-color: white;
     color: #15355e;
     border-color: #15355e;
+    padding: 10px 20px;
+}
+
+.cd-btn:hover {
+    transition: 0.2s;
+    color: #17519c;
+    border-color: #17519c;
 }
 
 .search-input {
     height: 40px;
-    padding-left: 30px;
+    padding-left: 40px;
+    width: 300px;
 }
-
 
 .search-icon {
     cursor: auto;
     position: absolute;
     z-index: 3;
-    margin-left: 10px;
+    margin-left: 20px;
     padding-top: 12px;
-}
-
-.table-div {
-    display: inline-table;
 }
 
 .no-results {
     color: #15355e;
-    margin-left: 30vw;
+    font-size: 16px;
+    margin-left: 0.6em;
+}
+
+.sub-title {
     font-size: 20px;
+    font-weight: normal;
 }
 
-.add-project {
-    margin-left: 0px !important;
-}
-
-.tittle {
-    color: #15355E;
-    font-weight: bold;
-    font-size: 40px;
-    text-transform: capitalize;
-}
-
-.sub-tittle {
-    font-size: 20px !important;
-    font-weight: normal !important;
+.modal-title {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
 }
 
 @media screen and (max-width: 800px) {
-    .search-input{
-        width: 85% !important;
-        height: 80px;
-    }
-    .search-icon{
-        margin-top: 18px;
-    }
-    thead {
-        font-size: 20px;
-        color: #15355e;
-    }
-    table {
-        font-size: 14px;
-        margin-top: 20px;
+    .search-input {
+        width: 90%;
+        max-width: 300px;
     }
 }
