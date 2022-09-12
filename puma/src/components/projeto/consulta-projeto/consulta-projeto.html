@@ -5,7 +5,7 @@
           'Meus projetos' : (operacao === 'projetos' ? 'Projetos' : 'Projetos das Disciplinas')
       }}
     </div>
-    
+
     <div v-if="projects.length" class="title sub-title ml-4 mb-4">
       {{
         'Projetos ' + (operacao === 'meus-projetos' ?
@@ -22,13 +22,13 @@
             class="search-input"
             placeholder="Pesquise por uma disciplina">
         <em class="fas fa-search input-group-prepend search-icon"></em>
-        </div>
+    </div>
     
-        <div>
+    <div v-if="operacao === 'meus-projetos'">
         <button
             class="btn cd-btn ml-4 my-3"
             onclick="window.location.href = '/disciplinas/cadastrar'">
-            <em class="fa-solid fa-plus-square mr-2 add-project"></em>Criar Disciplina
+            <em class="fa-solid fa-plus-square mr-2 add-project"></em>Criar Projeto
         </button>
     </div>
 
