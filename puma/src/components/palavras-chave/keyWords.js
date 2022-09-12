@@ -180,5 +180,9 @@ export default {
         },
       );
     },
+
+    fecharModal() {
+      this.openModalRegister = false;
+    },
   },
 };
