@@ -69,10 +69,10 @@ option {
 
 .submit-btn {
   align-items: center;
-  background-color: #f7db36;
-  color: #15355e;
-  border: 2px solid #f7db36;
-  border-radius: 5px;
+  background-color: #15355e;
+  color: #ffffff;
+  border: none;
+  border-radius: 7px;
   padding: 5px;
   font-size: 24px;
   font-weight: 700;
@@ -83,12 +83,10 @@ option {
   transition: 0.5s;
   width: 196.7px;
   letter-spacing: 0.03em;
-  text-transform: uppercase;
 }
 
 .submit-btn:hover {
-  background-color: transparent;
-  color: #f5871f;
+  background-color: #6E97CC;
 }
 
 a {
