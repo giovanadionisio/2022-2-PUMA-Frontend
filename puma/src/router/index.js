@@ -42,7 +42,7 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: () => import('../components/usuario/autenticacao/Cadastro-Login.vue'),
+    component: () => import('../components/usuario/Autenticacao/Login/Login.vue'),
     meta: {
       guest: true,
     },
@@ -50,7 +50,7 @@ const routes = [
   {
     path: '/cadastro',
     name: 'Cadastro',
-    component: () => import('../components/usuario/autenticacao/Cadastro-Login.vue'),
+    component: () => import('../components/usuario/Autenticacao/Cadastro/Cadastro.vue'),
     meta: {
       guest: true,
     },
