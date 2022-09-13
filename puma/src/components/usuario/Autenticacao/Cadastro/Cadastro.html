@@ -1,24 +1,24 @@
 <div class="root">
-  <div style="height: 10%;">
+  <div class="div-visitor-nav">
     <VisitorNav :navs="navs" />
   </div>
-  <div class="w-100" style="height: 90%;">
+  <div class="w-100 div-form">
     <b-container fluid class="h-100">
       <b-row class="h-100">
-        <b-col cols="3" class="h-100">
+        <b-col cols="3">
           <b-row align-h="end" align-v="end" class="h-100">
             <div id='moca_img_div'>
-              <img class='nav-item' id='moca_img' src='../../../../assets/vetor-cadastro.svg' alt='PUMA'
+              <img class="image-page-cadastro" id='moca_img' src='../../../../assets/vetor-cadastro.svg' alt='PUMA'
                 draggable="false" />
             </div>
           </b-row>
         </b-col>
-        <b-col cols="6">
+        <b-col class="row-centro" cols="6">
           <b-row align-h="center">
             <div class="card">
               <div class="title-box">
                 <b-row align-h="center">
-                  CADASTRO DE USUÁRIO
+                  Cadastro de Usuário
                 </b-row>
               </div>
               <div class="border-card">
@@ -76,7 +76,7 @@
 
                     <ValidationProvider :rules="{required: true, confirmed: {target: password}}" v-slot="v"
                       :bails="false" v-show="isFirstPage">
-                      <label class="required">Repita sua senha</label>
+                      <label class="required label-repeat-password">Repita sua senha</label>
                       <div class="error-div">
                         <div class="password-div" v-bind:class="{ invalid: v.errors.length }">
                           <input v-on:change="verificaPreenchimento()" :type="repeatPasswordTypeText ? 'text' : 'password'" v-model="repeatPassword"
@@ -195,10 +195,10 @@
                     </ValidationProvider>
 
                     <span v-show="showMessage && isFirstPage" class="error-span">
-                      Preencha corretamente todos os campos.
+                      Preencha Todos os Campos
                     </span>
 
-                    <b-container fluid v-show="isFirstPage" style="padding:10px;">
+                    <b-container class="div-troca-pagina" fluid v-show="isFirstPage">
                       <b-row>
                         <b-col />
                         <b-col cols="8">
@@ -212,7 +212,7 @@
                         <b-col>
                           <b-row align-h="center">
                             <i style="cursor: pointer" @click="changePage(1)">
-                              <font-awesome-icon  icon="fa-solid fa-angle-right" size="2x" style="margin: 10px;">
+                              <font-awesome-icon  icon="fa-solid fa-angle-right" size="2x" style="margin: 10px 0px;">
                               </font-awesome-icon>
                             </i>
                           </b-row>

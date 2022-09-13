@@ -82,11 +82,11 @@ html, body {
 .input-field {
   border: 1px solid #15355e;
   border-radius: 7px;
-  font-size: 1.1em;
+  font-size: 14px;
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
+  margin-top: 25px;
   margin-left: 70px;
   margin-right: 70px;
   padding: 15px;
