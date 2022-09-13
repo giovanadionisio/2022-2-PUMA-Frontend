@@ -136,7 +136,6 @@ export default {
     },
 
     keywordNameAlreadyExist() {
-      // const currentKeyword = this.form.keywordName;
       this.kwNameAlreadyExist = this.tableKeywordSubject.some(
         (k) => this.treatKeyword(k.keyword) === this.treatKeyword(this.form.keywordName),
       );
