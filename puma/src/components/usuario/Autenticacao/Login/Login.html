@@ -1,15 +1,15 @@
 <div class="root">
-  <div style="height: 10%;">
+  <div class="div-visitor-nav">
     <VisitorNav :navs="navs" />
   </div>
-  <div class="w-100" style="height: 90%;">
+  <div class="w-100 div-form">
     <b-container fluid class="h-100">
       <b-row class="h-100">
         <b-col cols="3" />
-        <b-col cols="6">
+        <b-col class="row-centro" cols="6">
           <b-row align-h="center">
             <div class="form">
-              <b-col class="title-box"> BEM-VINDO(A) AO PUMA! </b-col>
+              <b-col class="title-box"> Bem Vindo(a) a PUMA! </b-col>
               <b-col class="card">
                 <div>
                   <ValidationObserver ref="observer" v-slot="{invalid}" @submit.prevent="logar()">
@@ -44,19 +44,19 @@
 
                       <div class="error" v-if='hasAuthError'>
                         <span class="error-span">
-                          Email ou senha incorretos
+                          Email ou Senha Incorretos
                         </span>
                       </div>
 
-                      <div class="clickable-text-left">
+                      <div class="clickable-text-left forgot-password">
                         <router-link to="/usuario/recuperacao-senha">
-                          Esqueci minha senha
+                          Esqueci Minha Senha
                         </router-link>
                       </div>
 
-                      <div class="clickable-text-left">
+                      <div class="clickable-text-left create-account">
                         <router-link to="/cadastro">
-                          Primeiro acesso? Clique aqui
+                          Primeiro Acesso? <strong>Clique Aqui</strong>
                         </router-link>
                       </div>
 
@@ -72,7 +72,7 @@
         </b-col>
         <b-col cols="3" class="h-100">
           <b-row align-h="start" align-v="end" class="h-100">
-            <img src="../../../../assets/vetor-login.png" draggable="false" />
+            <img class="image-page-login" src="../../../../assets/vetor-login.png" draggable="false" />
           </b-row>
         </b-col>
       </b-row>

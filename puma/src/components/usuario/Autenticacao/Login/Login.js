@@ -19,7 +19,7 @@ export default {
       userService: new UserService(),
       isLoading: false,
       hasAuthError: false,
-      navs: [{ title: 'HOME' }, { title: 'LOGIN' }],
+      navs: [{ title: 'Home' }, { title: 'Login' }],
     };
   },
   mounted() {

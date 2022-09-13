@@ -38,7 +38,7 @@ export default {
       isJuridical: false,
       isPhysical: false,
       isExternalAgent: false,
-      navs: [{ title: 'HOME' }, { title: 'CADASTRO' }],
+      navs: [{ title: 'Home' }, { title: 'Login' }, { title: 'Cadastro' }],
       showMessage: false,
     };
   },
