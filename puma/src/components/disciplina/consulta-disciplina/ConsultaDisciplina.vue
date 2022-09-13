@@ -15,14 +15,14 @@
         id="caixaPesquisa"
         class="search-input"
         placeholder="Pesquise por uma disciplina">
-      <i class="fas fa-search input-group-prepend search-icon"></i>
+      <em class="fas fa-search input-group-prepend search-icon"></em>
     </div>
 
     <div>
       <button
         class="btn cd-btn ml-4 my-3"
         onclick="window.location.href = '/disciplinas/cadastrar'">
-        <i class="fa-solid fa-plus-square mr-2 add-project"></i>Criar Disciplina
+        <em class="fa-solid fa-plus-square mr-2 add-project"></em>Criar Disciplina
       </button>
     </div>
 

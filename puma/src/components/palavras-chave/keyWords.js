@@ -167,13 +167,13 @@ export default {
       this.$store.commit('OPEN_CONFIRM_MODAL', {
         title: 'EXCLUIR PALAVRA-CHAVE',
         content: 'Confirmar exclusão da palavra-chave ?',
-        okButton: {
-          text: 'Confirmar', variant: 'danger',
-          onClick: () => { this.handleDelete(); this.$store.commit('CLOSE_CONFIRM_MODAL'); },
-        },
         cancelButton: {
           text: 'Cancelar', variant: 'outline-danger',
           onClick: () => this.$store.commit('CLOSE_CONFIRM_MODAL'),
+        },
+        okButton: {
+          text: 'Confirmar', variant: 'danger',
+          onClick: () => { this.handleDelete(); this.$store.commit('CLOSE_CONFIRM_MODAL'); },
         },
       });
       this.keywordDelete = keyWord.keywordid;

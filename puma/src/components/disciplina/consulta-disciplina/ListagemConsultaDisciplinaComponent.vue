@@ -1,8 +1,8 @@
 <template>
-    <div class="mt-4">
+    <div class="mt-4 table-responsive">
         <h2 class="tittle sub-tittle ml-4">{{ title }}</h2>
 
-        <table>
+        <table class="table table-borderless">
             <thead>
                 <tr>
                     <td>Nome</td>
@@ -25,7 +25,7 @@
                     <button
                         class="btn cd-btn"
                         @click="goToSubject(subject.subjectid)">
-                        <i class="fa-solid fa-circle-info mr-2 ml-0"></i>Ver Detalhes
+                        <em class="fa-solid fa-circle-info mr-2 ml-0"></em>Ver Detalhes
                     </button>
                 </td>
             </tr>
