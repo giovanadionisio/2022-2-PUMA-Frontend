@@ -40,6 +40,14 @@ const routes = [
     },
   },
   {
+    path: '/home/processo-submissao',
+    name: 'Home ProcessoSubmissao',
+    component: () => import('../components/AreaExterna/ProcessoSubmissao/ProcessoSubmissao.vue'),
+    meta: {
+      guest: true,
+    },
+  },
+  {
     path: '/login',
     name: 'Login',
     component: () => import('../components/usuario/Autenticacao/Login/Login.vue'),
