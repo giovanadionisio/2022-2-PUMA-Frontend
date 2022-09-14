@@ -119,7 +119,7 @@ extend('confirmed', {
     return '';
   },
   params: ['target'],
-  message: 'Os campos devem coincidir',
+  message: 'As senhas devem coincidirem',
 });
 
 extend('email', {

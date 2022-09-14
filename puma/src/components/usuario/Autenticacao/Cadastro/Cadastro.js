@@ -1,10 +1,10 @@
 /* eslint-disable */
 import { extend } from 'vee-validate';
 import { regex } from 'vee-validate/dist/rules';
-import Loading from '../../shared/loading/Loading.vue';
-import UserService from '../../../services/UserService';
-import VisitorNav from '../../../components/VisitorNav/VisitorNav.vue';
-import { validarTelefone, clearMasks } from '../../../utils/validators-puma';
+import Loading from '../../../shared/loading/Loading.vue';
+import UserService from '../../../../services/UserService';
+import VisitorNav from '../../../../components/VisitorNav/VisitorNav.vue';
+import { validarTelefone, clearMasks } from '../../../../utils/validators-puma';
 
 export default {
   name: 'CadastroUsuario',
@@ -38,7 +38,7 @@ export default {
       isJuridical: false,
       isPhysical: false,
       isExternalAgent: false,
-      navs: [{ title: 'HOME' }, { title: 'CADASTRO' }],
+      navs: [{ title: 'Home' }, { title: 'Login' }, { title: 'Cadastro' }],
       showMessage: false,
     };
   },
