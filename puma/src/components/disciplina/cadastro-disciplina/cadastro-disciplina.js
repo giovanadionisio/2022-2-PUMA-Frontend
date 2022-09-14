@@ -49,7 +49,6 @@ export default {
       }
       this.keywords.sort((a, b) => a.keyword.localeCompare(b.keyword));
       this.professors.sort((a, b) => a.fullname.localeCompare(b.fullname));
-      // this.subareas.sort((a, b) => a.description.localeCompare(b.description));
       this.$store.commit('CLOSE_LOADING_MODAL');
     } catch (error) {
       this.$store.commit('CLOSE_LOADING_MODAL');

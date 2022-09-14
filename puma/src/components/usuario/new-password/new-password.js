@@ -22,7 +22,7 @@ export default {
       isLoading: false,
       isEqualsToNewPassword: true,
       passwordRedefined: false,
-      navs: [{ title: 'HOME' }, { title: 'RECUPERAÇÃO DE SENHA' }],
+      navs: [{ title: 'Home' }, { title: 'Recuperação de Senha' }],
     };
   },
   created() {

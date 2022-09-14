@@ -153,9 +153,9 @@ export default {
       }
     },
     verificaSenha(senha, repitaSenha) {
-      var letrasMaiusculas = /[A-Z]/;
-      var letrasMinusculas = /[a-z]/; 
-      var numeros = /[0-9]/;
+      const letrasMaiusculas = /[A-Z]/;
+      const letrasMinusculas = /[a-z]/; 
+      const numeros = /[0-9]/;
       if ((senha === repitaSenha) && (senha.length >= 6)) {
         if ((letrasMaiusculas.test(senha) || letrasMinusculas.test(senha)) && numeros.test(senha)) {
           return true;

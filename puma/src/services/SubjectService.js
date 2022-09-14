@@ -85,6 +85,6 @@ export default class SubjectService {
             }).catch((error) => {
                 reject(error);
             });
-        });
+        })
     }
 };

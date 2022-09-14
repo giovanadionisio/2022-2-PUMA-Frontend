@@ -52,8 +52,8 @@ export default {
                 { value: 2, text: 'Encaminhar proposta para outra disciplina' },
                 { value: 3, text: 'Eu não sei para qual disciplina encaminhar' }
             ],
-            keywords: [], // { value, text }[]
-            subjects: [], // { value, text }[]
+            keywords: [],
+            subjects: [],
         };
     },
     async created() {

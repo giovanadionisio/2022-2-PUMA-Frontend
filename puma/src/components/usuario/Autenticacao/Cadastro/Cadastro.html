@@ -87,10 +87,6 @@
                           </div>
                         </div>
                         
-                        <!-- <font-awesome-icon v-if="!repeatPasswordTypeText" @click="repeatPasswordTypeText = true"
-                          icon="fa-solid fa-eye" size="lg" class="password-img"></font-awesome-icon>
-                        <font-awesome-icon v-if="repeatPasswordTypeText" @click="repeatPasswordTypeText = false"
-                          icon="fa-solid fa-eye-slash" size="lg" class="password-img"></font-awesome-icon> -->
                         <span class="error-span" v-for="erro in v.errors">
                           {{ erro }}
                         </span>
@@ -211,10 +207,10 @@
                         </b-col>
                         <b-col>
                           <b-row align-h="center">
-                            <i style="cursor: pointer" @click="changePage(1)">
+                            <em style="cursor: pointer" @click="changePage(1)">
                               <font-awesome-icon  icon="fa-solid fa-angle-right" size="2x" style="margin: 10px 0px;">
                               </font-awesome-icon>
-                            </i>
+                            </em>
                           </b-row>
                         </b-col>
                       </b-row>
@@ -232,10 +228,10 @@
                         </b-col>
                         <b-col cols="8">
                           <b-row align-h="center">
-                            <i>
+                            <em>
                               <font-awesome-icon style="margin: 10px;"
                                 icon="fa-regular fa-circle" size="2x" class=""></font-awesome-icon>
-                            </i>
+                            </em>
                             <font-awesome-icon icon="fa-solid fa-circle" size="2x" style="margin: 10px;">
                             </font-awesome-icon>
                           </b-row>

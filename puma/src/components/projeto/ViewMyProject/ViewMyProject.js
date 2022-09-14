@@ -42,7 +42,7 @@ export default {
                 },
             },
             form: {},
-            keywords: [],  // { value, text }[]
+            keywords: [],
         };
     },
     async created() {

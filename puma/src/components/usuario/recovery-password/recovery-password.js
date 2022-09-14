@@ -20,7 +20,7 @@ export default {
       emailWrongFormat: false,
       emailNotfound: false,
       userService: new UserService(),
-      navs: [{ title: 'HOME' }, { title: 'RECUPERAÇÃO DE SENHA' }],
+      navs: [{ title: 'Home' }, { title: 'Recuperação de Senha' }],
     };
   },
   created() {

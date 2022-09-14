@@ -31,11 +31,9 @@ export default {
       if (isValid) {
         const user = { email: this.email, password: this.password };
         this.isLoading = true;
-        // this.hasAuthError = false;
 
         this.userService.logUserIn(user).then((response) => {
           this.isLoading = false;
-          // this.hasAuthError = false;
 
           this.$store.commit('LOGIN_USER', {
             userId: response.data.userId,
