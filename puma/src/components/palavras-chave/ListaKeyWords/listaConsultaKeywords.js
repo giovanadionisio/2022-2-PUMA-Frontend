@@ -1,101 +1,4 @@
-<template>
-    <div class="mt-4 ml-4">
-        <table>
-            <thead class="mb-10">
-                <tr>
-                    <td>Item</td>
-                    <td>Palavra-chave</td>
-                    <td>Disciplina</td>
-                    <td></td>
-                </tr>
-            </thead>
-
-            <tr v-for="(keyWord, index) in listKeyWords" :key="index">
-                <td>{{keyWord.keywordid}}</td>
-                <td>{{keyWord.keyword}}</td>
-                <td>{{keyWord.subjectname}}</td>
-                <td>
-                    <div class="actions">
-                      <button
-                        class="btn cd-btn mx-2"
-                        @click="editKeyword(keyWord)"
-                        v-if="allowEdit(keyWord.keywordid)"
-                      >
-                        <font-awesome-icon icon="fas fa-edit" size="lg" />
-                        Editar
-                      </button>
-                      <button
-                        class="btn cd-btn"
-                        v-if="allowEdit(keyWord.keywordid)"
-                        @click="deleteKeyword(keyWord)"
-                      >
-                        <font-awesome-icon icon="fa-solid fa-trash" size="lg" />
-                        Excluir
-                      </button>
-                    </div>
-                </td>
-            </tr>
-        </table>
-
-        <b-modal hide-footer v-model="openModalEdit" centered size="md" modal-class="myclass">
-          <template #modal-header>
-            Editar Palavra-Chave
-          </template>
-
-          <ValidationObserver ref="observer">
-            <div style="display: flex; flex-direction: column; align-items: center;">
-              <b-form-group class="col-md-9">
-                <template #label>
-                  <span class="label-text">Palavra-Chave</span>
-                </template>
-
-                <validation-provider rules="required" v-slot="{ errors }">
-                  <b-form-input
-                    type="text"
-                    placeholder="Escreva aqui a palavra-chave"
-                    v-model="form.keywordName"
-                    v-bind:class="{ 'kw-invalid': errors.length }"
-                    class="custom-input"
-                  />
-                  <span class="kw-error">{{ errors[0] }}</span>
-                </validation-provider>
-              </b-form-group>
-
-              <b-form-group class="col-md-9">
-                <template #label>
-                  <span class="label-text">Disciplina</span>
-                </template>
-
-                <validation-provider rules="required" v-slot="{ errors }">
-                  <b-select v-model="form.selectedSubject" :options="subjectsForm"
-                    v-bind:class="{ 'kw-invalid': errors.length }" class="custom-input" />
-                  <span class="kw-error">{{ errors[0] }}</span>
-                </validation-provider>
-              </b-form-group>
-            </div>
-          </ValidationObserver>
-
-          <div class="divFooter">
-            <button
-              class="kw-btn-crud-cancel"
-              @click="openModalEdit=false"
-              style="margin-right: 5%;"
-            >
-              Cancelar
-            </button>
-            <button
-              class="kw-btn-confirm"
-              @click="handleEdit"
-            >
-              Editar
-            </button>
-          </div>
-        </b-modal>
-    </div>
-</template>
-
-<script>
-import KeywordService from '../../services/KeywordService';
+import KeywordService from '../../../services/KeywordService';
 
 export default {
   props: {
@@ -132,14 +35,12 @@ export default {
     },
 
     keywordNameAlreadyExist() {
-      // const currentKeyword = this.form.keywordName;
       this.kwNameAlreadyExist = this.tableKeywordSubject.some(
         (k) => this.treatKeyword(k.keyword) === this.treatKeyword(this.form.keywordName),
       );
     },
 
     allowEdit(keywordId) {
-      // return true;
       const { isAdmin, userId } = this.$store.getters.user;
       if (isAdmin) return true;
 
@@ -243,6 +144,9 @@ export default {
         this.makeToast('ERRO', 'Infelizmente houve um erro ao tentar excluir a palavra-chave', 'danger');
       }
     },
+
+    fecharModal() {
+      this.openModalEdit = false;
+    },
   },
 };
-</script>
