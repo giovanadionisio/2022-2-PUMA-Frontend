@@ -96,3 +96,21 @@ h1 {
     margin-top: 60px;
 }
 
+.acesso {
+    width: 250px;
+    display: flex;
+    flex-wrap: nowrap;
+    height: 41px;
+}
+
+button {
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.acessar {
+    background-color: #f7db36;
+    color: #15355e;
+}
