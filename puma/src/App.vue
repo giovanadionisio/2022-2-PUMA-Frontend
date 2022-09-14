@@ -75,9 +75,9 @@ html, body {
     display: block;
     position: relative;
     top: 0;
-    width: 90%;
-    margin-left: 1em;
-    padding: 30px 10px;
+    width: 100%;
+    margin-left: 0em;
+    padding: 30px 10px 30px 0px;
     margin-bottom: 50px;
   }
 }
@@ -93,14 +93,20 @@ html, body {
 }
 
 .input-field {
+  border: 1px solid #15355e;
   border-radius: 7px;
-  font-size: 1.1em;
+  font-size: 14px;
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
-  margin-top: 30px;
+  margin-top: 25px;
   margin-left: 70px;
   margin-right: 70px;
   padding: 15px;
+}
+
+.input-field:focus {
+    outline: 0;
+    border: 1px solid #15355E;
 }
 </style>

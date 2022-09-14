@@ -1,12 +1,13 @@
 /* eslint-disable */
 import ProjectService from '../../../services/ProjectService';
 import SubjectService from '../../../services/SubjectService';
-import getProjectStatus from '../../../utils/enums/status-projeto.enum';
+import statusProjetoEnum from '../../../utils/enums/status-projeto.enum';
 import ReturnButton from '../../shared/ReturnButton/ReturnButton.vue';
 
 export default {
     name: 'ViewProject',
     props: {},
+    mixins: [statusProjetoEnum],
     components: {
         ReturnButton,
       },
@@ -98,7 +99,7 @@ export default {
                     ...rest,
                     createdat,
                     feedback: project.feedback || '',
-                    statusdesc: getProjectStatus(project.status),
+                    statusdesc: this.getDescricao(project.status),
                     user: User,
                     subject: Subject,
                     semester: Semester,

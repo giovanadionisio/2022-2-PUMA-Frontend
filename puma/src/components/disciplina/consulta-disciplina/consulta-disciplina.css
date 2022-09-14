@@ -2,35 +2,21 @@
     overflow-x: hidden;
 }
 
-thead {
-    font-size: 25px;
-    color: #15355e;
+.tittle {
+    color: #15355E;
     font-weight: bold;
+    font-size: 40px;
 }
 
-.minhasDisciplinas thead::after {
-    content: "Suas disciplinas";
-    font-size: 18px;
-    margin-left: 0.6em;
-}
-
-.demaisDisciplinas thead::after {
-    content: "Outras disciplinas";
-    font-size: 18px;
-    margin-left: 0.6em;
-}
-
-.demaisDisciplinas thead {
-    font-size: 0px;
-    padding: 0px;
-    margin: 0px;
+.sub-tittle {
+    font-size: 20px;
+    font-weight: normal;
 }
 
 .tabelas {
     max-width: 1300px;
     width: 100%;
     align-content: flex-start;
-    padding-left: 20px;
 }
 
 .tabelas hr {
@@ -58,10 +44,6 @@ td {
     text-align: end;
 }
 
-tr {
-    border-top: hidden;
-}
-
 svg {
     cursor: pointer;
 }
@@ -73,17 +55,23 @@ svg {
     padding: 10px 20px;
 }
 
+.cd-btn:hover {
+    transition: 0.2s;
+    color: #17519c;
+    border-color: #17519c;
+}
+
 .search-input {
     height: 40px;
-    padding-left: 30px;
-    width: 60%;
+    padding-left: 40px;
+    width: 300px;
 }
 
 .search-icon {
     cursor: auto;
     position: absolute;
     z-index: 3;
-    margin-left: 10px;
+    margin-left: 20px;
     padding-top: 12px;
 }
 
@@ -93,78 +81,18 @@ svg {
     margin-left: 0.6em;
 }
 
-.tittle {
-    color: #15355E;
-    font-weight: bold;
-    font-size: 40px;
-}
-
 .sub-tittle {
     font-size: 20px;
     font-weight: normal;
 }
 
-/* .btn-confirm {
-    background-color: #dc3545 !important;
-}
-
-.btn-cancel {
-    border-color: #15355e !important;
-    color: #15355e !important;
-    background-color: white !important;
-} */
-
 .modal-tittle {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 800px) {
     .search-input {
-        height: 37px;
-        max-width: 275px;
-    }
-    .tittle {
-        font-size: 35px;
-    }
-
-    .sub-tittle {
-        font-size: 18px;
-    }
-
-    .search-input {
-        height: 30px;
         width: 90%;
-    }
-
-    .search-icon {
-        margin-top: -5px;
-    }
-
-    button {
-        margin: none;
-    }
-
-    tr td {
-        font-size: 15px;
-    }
-
-    thead tr td {
-        font-size: 25px;
-    }
-
-    mensagem {
-        font-size: 15px;
-    }
-
-    .no-results {
-        font-size: 14px;
-    }
-
-    .minhasDisciplinas thead::after {
-        font-size: 18px;
-    }
-    
-    .demaisDisciplinas thead::after {
-        font-size: 18px;
+        max-width: 300px;
     }
 }

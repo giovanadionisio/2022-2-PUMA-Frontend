@@ -1,10 +1,11 @@
 /* eslint-disable */
 import ProjectService from '../../../services/ProjectService';
-import getProjectStatus from '../../../utils/enums/status-projeto.enum';
+import statusProjetoEnum from '../../../utils/enums/status-projeto.enum';
 import ReturnButton from '../../shared/ReturnButton/ReturnButton.vue';
 
 export default {
     name: 'ViewMyProject',
+    mixins: [statusProjetoEnum],
     props: {},
     components: {
         ReturnButton,
@@ -82,7 +83,7 @@ export default {
                 const mainKeyword = Keywords.filter((k) => k.main)[0];
                 const createdat = (new Date(project.createdat)).toLocaleString();
                 const formData = {
-                    ...rest, createdat, statusdesc: getProjectStatus(project.status),
+                    ...rest, createdat, statusdesc: this.getDescricao(project.status),
                     user: User,
                     subject: Subject,
                     semester: Semester,

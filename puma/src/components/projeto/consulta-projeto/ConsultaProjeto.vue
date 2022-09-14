@@ -2,4 +2,4 @@
 
 <script src="./consulta-projeto.js"></script>
 
-<style src="./consulta-projeto.css"></style>
+<style src="./consulta-projeto.css" scoped></style>
