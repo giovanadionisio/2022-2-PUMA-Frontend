@@ -1,5 +1,5 @@
-<template src="./ProcessoSubmissao.html"></template>
+<template src="./processo-submissao.html"></template>
 
-<style src="./ProcessoSubmissao.css" scoped></style>
+<style src="./processo-submissao.css" scoped></style>
 
-<script src="./ProcessoSubmissao.js"></script>
+<script src="./processo-submissao.js"></script>
