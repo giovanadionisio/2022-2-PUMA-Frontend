@@ -1,7 +1,6 @@
 table {
 	width: 100%;
 	max-width: 1500px;
-	border-spacing: 10px;
 	border-collapse: separate;
 }
   
@@ -9,6 +8,7 @@ th {
 	font-size: 25px;
 	color: #15355e;
 	font-weight: bold;
+	padding: 0px 0.75rem 0.75rem 0px;
 }
 
 td {
@@ -16,6 +16,7 @@ td {
 	width: 30%;
 	text-align: start;
 	min-width: 200px;
+	padding: 0.75rem 0.75rem 0.75rem 0px;
 }
   
 table > :first-child {
@@ -221,6 +222,5 @@ tr > :first-child {
 .no-results {
   color: #15355e;
   font-size: 16px;
-  margin-left: 0.6em;
   width: max-content;
 }

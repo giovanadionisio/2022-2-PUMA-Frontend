@@ -14,6 +14,7 @@
 }
 
 .tabelas {
+    margin-top: 50px;
     max-width: 1300px;
     width: 100%;
     align-content: flex-start;
@@ -73,12 +74,6 @@ svg {
     z-index: 3;
     margin-left: 20px;
     padding-top: 12px;
-}
-
-.no-results {
-    color: #15355e;
-    font-size: 16px;
-    margin-left: 0.6em;
 }
 
 .sub-tittle {

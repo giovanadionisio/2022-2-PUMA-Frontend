@@ -246,3 +246,10 @@ svg {
 	font-weight: bolder;
 	color: #15355E;
 }
+
+.tabelas {
+    margin-top: 50px;
+    max-width: 1300px;
+    width: 100%;
+    align-content: flex-start;
+}
