@@ -29,6 +29,19 @@
     height: 40px;
 }
 
+.alert {
+    font-size: 13px;
+    width: 65%;
+}
+
+.label-flex-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px;
+}
+
 .cancel-btn {
     background-color: #ffffff;
 }

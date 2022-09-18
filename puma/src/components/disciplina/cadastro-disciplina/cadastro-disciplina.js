@@ -15,6 +15,7 @@ export default {
       keywords: [],
       subareas: [],
       professors: [],
+      professorAlertShow: false,
       subjectService: new SubjectService(),
       multiSelectPlaceholderKeyword: 'Carregando opções...',
       multiSelectPlaceholderSubarea: 'Carregando opções...',
@@ -109,7 +110,11 @@ export default {
     sortSubareaMultiselectLabels() {
       this.subareasSelected.sort((a, b) => b.description.length - a.description.length);
     },
-    sortProfessorMultiselectLabels() {
+    sortProfessorMultiselectLabels(value) {
+      if(value.filter((professor) => professor.userid === this.$store.getters.user.userId).length == 0){
+        value.push(this.professors.filter((professor) => professor.userid === this.$store.getters.user.userId)[0]);
+        console.log(this.professorsSelected);
+      }
       this.professorsSelected.sort((a, b) => b.fullname.length - a.fullname.length);
     },
     validateMultiselects() {
@@ -184,6 +189,7 @@ export default {
       return new Promise((resolve, reject) => {
         this.subjectService.getProfessors().then((response) => {
           this.professors = response.data;
+          this.professorsSelected = response.data.filter((professor) => professor.userid === this.$store.getters.user.userId);
           this.isLoadingProfessors = false;
           this.multiSelectPlaceholderProfessor = this.professors.length ? 'Selecione os professores que deseja adicionar' : 'Sem professores disponíveis';
           resolve();
