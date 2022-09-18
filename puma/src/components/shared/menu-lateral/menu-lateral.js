@@ -63,7 +63,7 @@ export default {
                     show: () => { return true },
                     onclick: () => {
                         this.$store.commit('RESET_USER_STATE');
-                        this.$router.push({ path: '/usuario/login' }).catch(()=>{});
+                        this.$router.push({ path: '/login' }).catch(()=>{});
                     },
                 }
             }
