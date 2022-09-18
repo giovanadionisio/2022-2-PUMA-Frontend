@@ -32,7 +32,7 @@
 }
   
 .input-focus:focus, .input-focus:hover {
-    border: 1px solid #f7db36 !important;
+    border: 1px solid #6E97CC !important;
 }
   
 .input-error {
@@ -62,11 +62,11 @@
 }
   
 .input-multiselect-focus >>> .multiselect__tags:hover {
-    border: 1px solid #f7db36;
+    border: 1px solid #6E97CC;
 }
   
 .input-multiselect-focus >>> .multiselect__tags:focus-within {
-    border: 1px solid #f7db36;
+    border: 1px solid #6E97CC;
 }
   
 .input-multiselect-error >>> .multiselect__tags {
