@@ -25,6 +25,39 @@
           </ValidationProvider>
           <div class="py-3" />
           <div role="group">
+            <label for="subarea" class="input-label">
+              Áreas e Subáreas do conhecimento
+            </label>
+            <multiselect id="subarea" v-model="subareasSelected" :options="subareas" track-by="subareaid"
+              label="description" :multiple="true" openDirection="bottom" :placeholder="multiSelectPlaceholderSubarea"
+              :searchable="true" :showLabels="true" :closeOnSelect="false" group-values="subareas"
+              group-label="knowledgearea" selectLabel="" deselectLabel="" selectedLabel=""
+              selectGroupLabel="Selecione todas as subáreas desta área"
+              deselectGroupLabel="Remova todas as subáreas desta área" @open="multiSelectPlaceholder = 'Pesquisar'"
+              @input="sortSubareaMultiselectLabels()"
+              @close="isTouchedSubareas = true; multiSelectPlaceholder = 'Selecione'" :loading="isLoadingSubareas"
+              class="input-multiselect" :disabled="isLoadingSubareas || !subareas.length || operacao === 'visualizar'"
+              :class="(isTouchedSubareas && !subareasSelected.length) ? 'input-multiselect-error' : 'input-multiselect-focus'">
+              <template slot="option" slot-scope="scope">
+                <div v-if="!scope.option['$isLabel']" class="option__desc">
+                  <input class="mx-2" type="checkbox" :checked="isSubareaChecked(scope.option)" @focus.prevent
+                    :key="scope.option.subareaid" />
+                  <span class="option__title">{{ scope.option.description }}</span>
+                </div>
+                <div v-if="scope.option['$isLabel']" class="option__desc">
+                  <span class="option__title">{{ scope.option['$groupLabel'] }}</span>
+                </div>
+              </template>
+              <span slot="noResult">
+                Nenhuma subárea encontrada.
+              </span>
+            </multiselect>
+            <span v-if="isTouchedSubareas && !subareasSelected.length" class="input-error-span">
+              Escolha no mínimo uma subárea
+            </span>
+          </div>          
+          <div class="py-3" />
+          <div role="group">
             <label for="keywords" class="input-label">
               Palavras-chave
             </label>
@@ -56,40 +89,7 @@
             <span v-if="isTouchedKeywords && !keywordsSelected.length" class="input-error-span">
               Escolha no mínimo uma palavra-chave
             </span>
-          </div>
-          <div class="py-3" />
-          <div role="group">
-            <label for="subarea" class="input-label">
-              Áreas e Subáreas do conhecimento
-            </label>
-            <multiselect id="subarea" v-model="subareasSelected" :options="subareas" track-by="subareaid"
-              label="description" :multiple="true" openDirection="bottom" :placeholder="multiSelectPlaceholderSubarea"
-              :searchable="true" :showLabels="true" :closeOnSelect="false" group-values="subareas"
-              group-label="knowledgearea" selectLabel="" deselectLabel="" selectedLabel=""
-              selectGroupLabel="Selecione todas as subáreas desta área"
-              deselectGroupLabel="Remova todas as subáreas desta área" @open="multiSelectPlaceholder = 'Pesquisar'"
-              @input="sortSubareaMultiselectLabels()"
-              @close="isTouchedSubareas = true; multiSelectPlaceholder = 'Selecione'" :loading="isLoadingSubareas"
-              class="input-multiselect" :disabled="isLoadingSubareas || !subareas.length || operacao === 'visualizar'"
-              :class="(isTouchedSubareas && !subareasSelected.length) ? 'input-multiselect-error' : 'input-multiselect-focus'">
-              <template slot="option" slot-scope="scope">
-                <div v-if="!scope.option['$isLabel']" class="option__desc">
-                  <input class="mx-2" type="checkbox" :checked="isSubareaChecked(scope.option)" @focus.prevent
-                    :key="scope.option.subareaid" />
-                  <span class="option__title">{{ scope.option.description }}</span>
-                </div>
-                <div v-if="scope.option['$isLabel']" class="option__desc">
-                  <span class="option__title">{{ scope.option['$groupLabel'] }}</span>
-                </div>
-              </template>
-              <span slot="noResult">
-                Nenhuma subárea encontrada.
-              </span>
-            </multiselect>
-            <span v-if="isTouchedSubareas && !subareasSelected.length" class="input-error-span">
-              Escolha no mínimo uma subárea
-            </span>
-          </div>
+          </div>          
         </b-col>
         <b-col cols="6">
           <div role="group">
