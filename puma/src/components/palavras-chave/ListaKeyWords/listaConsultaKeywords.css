@@ -197,7 +197,6 @@ tr > :first-child {
 	transition: 0.1s;
 	width: 196.7px;
 	letter-spacing: 0.03em;
-	text-transform: uppercase;
 }
 
 .kw-btn-delete:focus {

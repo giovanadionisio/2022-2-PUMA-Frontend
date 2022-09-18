@@ -2,7 +2,6 @@
   color: #15355E;
   font-weight: bold;
   font-size: 40px;
-  text-transform: uppercase;
 }
 
 .form {
@@ -25,7 +24,6 @@
   transition: 0.5s;
   width: 160px;
   letter-spacing: 0.03em;
-  text-transform: uppercase;
 }
 
 .text-description {
