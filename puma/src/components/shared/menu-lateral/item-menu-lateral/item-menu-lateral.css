@@ -30,3 +30,13 @@
     width: 100%;
     margin: 20px 0px;
 }
+
+@media screen and (max-width: 800px) {
+    .item-menu {
+        padding-left: 25px;
+        flex-direction: row;
+    }
+    .item-title {
+        margin-left: 10px;
+    }
+}

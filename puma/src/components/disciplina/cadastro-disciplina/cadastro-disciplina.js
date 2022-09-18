@@ -113,7 +113,6 @@ export default {
     sortProfessorMultiselectLabels(value) {
       if(value.filter((professor) => professor.userid === this.$store.getters.user.userId).length == 0){
         value.push(this.professors.filter((professor) => professor.userid === this.$store.getters.user.userId)[0]);
-        console.log(this.professorsSelected);
       }
       this.professorsSelected.sort((a, b) => b.fullname.length - a.fullname.length);
     },

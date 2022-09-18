@@ -10,9 +10,13 @@
     </div>
     <div class="menu-container">
       <b-container fluid class="h-100">
+        <div class="usuario-logado">
+          <span>Olá {{this.$store.getters.user.type}}(a)</span>
+          <h5 class="font-weight-bold">{{this.$store.getters.user.fullName}}</h5>
+        </div>
+
         <b-row align-v="start" align-h="center" class="h-100">
           <b-col cols="12">
-            <b-row class="m-4" />
             <b-row align-h="center">
               <ItemMenuLateral :props="menuItems.subjects" />
             </b-row>
@@ -45,6 +49,11 @@
     </div>
   
     <div id="menu">
+      <div class="usuario-logado">
+        <span>Olá {{this.$store.getters.user.type}}(a)</span>
+        <h5 class="font-weight-bold">{{this.$store.getters.user.fullName}}</h5>
+      </div>
+
       <ul>
         <li>
           <ItemMenuLateral :props="menuItems.subjects" />
