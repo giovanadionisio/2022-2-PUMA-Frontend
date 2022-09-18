@@ -93,13 +93,18 @@
         </b-col>
         <b-col cols="6">
           <div role="group">
-            <label for="professor" class="input-label">
-              Professores da Disciplina
-            </label>
+            <div class=label-flex-box>
+              <label for="professor" class="input-label">
+                Professores <font-awesome-icon icon="fa-solid fa-circle-info" role="button" v-on:click="professorAlertShow = !professorAlertShow"/>
+              </label>
+              <b-alert dismissible :show="professorAlertShow" variant="warning">
+                Adicione outros professores que farão parte da disciplina
+              </b-alert>
+            </div>
             <multiselect id="professor" v-model="professorsSelected" :options="professors" track-by="userid"
               label="fullname" :multiple="true" openDirection="bottom" :placeholder="multiSelectPlaceholderProfessor"
               :searchable="true" :showLabels="true" :closeOnSelect="false" :max-height="150"
-              @input="sortProfessorMultiselectLabels()" selectLabel="" deselectLabel="" selectedLabel=""
+              @input="sortProfessorMultiselectLabels" selectLabel="" deselectLabel="" selectedLabel=""
               @open="multiSelectPlaceholder = 'Pesquisar'" :loading="isLoadingProfessors"
               @close="isTouchedProfessors = true; multiSelectPlaceholder = 'Selecione'" class="input-multiselect"
               :disabled="isLoadingProfessors || !professors.length || operacao === 'visualizar'"
