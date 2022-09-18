@@ -6,7 +6,7 @@
 }
   
 .input-textarea {
-    border: 2px solid #15355e;
+    border: 1px solid #15355e;
     flex-direction: column;
     display: flex;
     border-radius: 5px;
@@ -16,7 +16,7 @@
 }
   
 .input-textfield {
-    border: 2px solid #15355e;
+    border: 1px solid #15355e;
     flex-direction: column;
     display: flex;
     border-radius: 5px;
@@ -32,11 +32,11 @@
 }
   
 .input-focus:focus, .input-focus:hover {
-    border: 2px solid #f7db36 !important;
+    border: 1px solid #f7db36 !important;
 }
   
 .input-error {
-    border: 2px solid #EB0600;
+    border: 1px solid #EB0600;
 }
   
 .input-error-span {
@@ -57,20 +57,20 @@
 }
   
 .input-multiselect >>> .multiselect__tags {
-    border: 2px solid #15355e;
+    border: 1px solid #15355e;
     outline: none;
 }
   
 .input-multiselect-focus >>> .multiselect__tags:hover {
-    border: 2px solid #f7db36;
+    border: 1px solid #f7db36;
 }
   
 .input-multiselect-focus >>> .multiselect__tags:focus-within {
-    border: 2px solid #f7db36;
+    border: 1px solid #f7db36;
 }
   
 .input-multiselect-error >>> .multiselect__tags {
-    border: 2px solid #EB0600;
+    border: 1px solid #EB0600;
 }
   
 .input-multiselect >>> .multiselect__tag-icon {
