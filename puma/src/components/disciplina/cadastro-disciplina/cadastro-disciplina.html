@@ -141,12 +141,12 @@
           <div class="py-3" />
           <div class="btn-toolbar" style="justify-content: center">
             <div v-if="operacao !== 'visualizar'">
-              <input :value="operacao === 'editar' ? 'Salvar' : 'Salvar'" v-if="!isLoading && operacao !== 'visualizar'"
+              <input :value="operacao === 'editar' ? 'Criar' : 'Criar' " v-if="!isLoading && operacao!== 'visualizar' "
                 type="submit" class="btn btn-warning" @click="onSubmit" />
             </div>
             <div class="m-4" />
             <b-button class="btn btn-warning cancel-btn" @click="$router.push({path: '/disciplinas'}).catch(() => {})">
-              VOLTAR
+              Cancelar
             </b-button>
           </div>
         </b-col>

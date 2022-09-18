@@ -13,19 +13,19 @@
 }
 
 .btn {
-    color: #15355E;
+    color: #fff;
     align-items: center;
-    background-color: #f7db36;
-    border: 2px solid #f7db36;
+    background-color: #15355E;
+    border: 2px solid #15355E;
     border-radius: 5px;
     padding: 5px;
     font-size: 18px;
     font-weight: 700;
     cursor: pointer;
     transition: 0.5s;
-    width: '196.7px';
+    width: 100px;
     letter-spacing: 0.03em;
-    text-transform: uppercase;
+    text-transform: capitalize;
     height: 40px;
 }
 
@@ -43,6 +43,7 @@
 }
 
 .cancel-btn {
+    color: #15355E;
     background-color: #ffffff;
 }
 
