@@ -2,4 +2,4 @@
 
 <script src="./ReturnButton.js"></script>
 
-<style src="./ReturnButton.css"></style>
+<style src="./ReturnButton.css" scoped></style>
