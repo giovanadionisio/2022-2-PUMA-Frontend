@@ -54,3 +54,8 @@
 .input-multiselect >>> .multiselect__option--highlight {
     background-color:  #15355E;
 }
+
+.popupAlert {
+    display: inline-block;
+    margin-left: 2em;
+}

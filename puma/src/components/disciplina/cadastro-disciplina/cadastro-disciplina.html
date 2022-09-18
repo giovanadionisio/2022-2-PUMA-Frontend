@@ -14,7 +14,7 @@
         <b-col cols="6">
           <ValidationProvider rules="required|min:10" v-slot="v" :bails="false" name="Nome da disciplina">
             <div role="group">
-              <label for="name" class="input-label">Nome</label>
+              <label for="name" class="input-label">Nome da disciplina</label>
               <input type="text" id="name" maxlength="1020" class="input-textfield"
                 placeholder="Digite o nome para sua disciplina" v-model="name" :disabled=isLoading
                 v-bind:class="{ 'input-focus': !v.errors.length && operacao !== 'visualizar', 'input-error': v.errors.length }">
@@ -26,7 +26,7 @@
           <div class="py-3" />
           <div role="group">
             <label for="subarea" class="input-label">
-              Áreas e Subáreas do conhecimento
+              Área e Subáreas do conhecimento
             </label>
             <multiselect id="subarea" v-model="subareasSelected" :options="subareas" track-by="subareaid"
               label="description" :multiple="true" openDirection="bottom" :placeholder="multiSelectPlaceholderSubarea"
@@ -58,9 +58,15 @@
           </div>          
           <div class="py-3" />
           <div role="group">
-            <label for="keywords" class="input-label">
-              Palavras-chave
-            </label>
+            <div class="label-flex-box">
+              <label for="keywords" class="input-label">
+                Palavras-chave <font-awesome-icon icon="fa-solid fa-circle-info" role="button" v-on:click="keywordAlertShow = !keywordAlertShow"/>
+              </label>
+              <b-alert dismissible :show="keywordAlertShow" variant="warning">
+                Palavras-chave conectam sua disciplina ao público externo.
+                Por isso, utilize termos simples e de fácil entendimento.
+              </b-alert>
+            </div>
             <multiselect id="keywords" v-model="keywordsSelected" :options="keywords" track-by="keyword" label="keyword"
               :multiple="true" openDirection="bottom" :placeholder="multiSelectPlaceholderKeyword" :searchable="true"
               :showLabels="true" :closeOnSelect="false" :max-height="150" :max="6" :taggable=true @tag="addKeyword"
