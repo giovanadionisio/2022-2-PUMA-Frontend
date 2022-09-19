@@ -1,7 +1,19 @@
+.cabecalho {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+    max-width: 1000px;
+}
+
 .main-title {
+    flex: 1;
     color: #15355E;
     font-weight: bold;
     font-size: 40px;
+}
+
+.buttons-options {
+    display: flex;
 }
 
 .data-label {
@@ -31,4 +43,77 @@
 .button:hover {
     color: #fff;
     background-color: #15355E;
+}
+
+.form {
+  margin: 5px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  max-width: 1000px;
+}
+
+.form-col {
+  flex: 1;
+}
+
+.group {
+  margin-bottom: 30px;
+}
+
+.detalhes-button {
+  margin-left: 20px;
+  align-items: center;
+  border-radius: 7px;
+  padding: 5px;
+  font-size: 24px;
+  font-weight: 700;
+  cursor: pointer;
+  width: 150px;
+  transition: 0.5s;
+  letter-spacing: 0.03em;
+  text-align: center;
+}
+
+.detalhes-button-normal {
+  background-color: #ffffff;
+  border: 1px solid #15355e;
+  color: #15355e;
+}
+
+.detalhes-button-normal:hover {
+  border: 1px solid #6E97CC;
+  color: #ffffff;
+  background-color: #6E97CC;
+}
+
+.detalhes-button-acao {
+  background-color: #15355e;
+  border: none;
+  color: #ffffff;
+}
+
+.detalhes-button-acao:hover {
+  background-color: #6E97CC;
+}
+
+.detalhes-button-excluir {
+  color: #15355e;
+  background-color: #ffffff;
+  border: 1px solid #EB0600;
+}
+
+.detalhes-button-excluir:hover {
+  color: #ffffff;
+  background-color: #EB0600;
+}
+@media screen and (max-width: 1200px) {
+  .cabecalho {
+    flex-direction: column;
+  }
+
+  .detalhes-button-acao {
+    margin-left: 0px;
+  }
 }
