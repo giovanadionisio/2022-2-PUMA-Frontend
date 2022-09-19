@@ -75,7 +75,7 @@
   background-color: #15355e;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1200px) {
   .form {
       flex-direction: column;
   }
