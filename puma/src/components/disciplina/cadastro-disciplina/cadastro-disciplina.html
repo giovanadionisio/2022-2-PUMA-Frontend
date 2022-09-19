@@ -21,42 +21,8 @@
           </ValidationProvider>
           
           <div role="group" class="group">
-            <label for="keywords" class="input-label">
-              Palavras-chave
-            </label>
-            <multiselect id="keywords" v-model="keywordsSelected" :options="keywords" track-by="keyword" label="keyword"
-              :multiple="true" openDirection="bottom" :placeholder="multiSelectPlaceholderKeyword" :searchable="true"
-              :showLabels="true" :closeOnSelect="false" :max-height="150" :max="6" :taggable=true @tag="addKeyword"
-              @input="sortKeywordMultiselectLabels()" selectLabel="" deselectLabel="" selectedLabel=""
-              @open="multiSelectPlaceholder = 'Pesquisar'" tag-placeholder="Criar palavra-chave"
-              @close="isTouchedKeywords = true; multiSelectPlaceholder = 'Selecione'" :loading="isLoadingKeywords"
-              class="input-multiselect" :disabled="isLoadingKeywords || operacao === 'visualizar'"
-              :class="(isTouchedKeywords && !keywordsSelected.length) ? 'input-multiselect-error' : 'input-multiselect-focus'">
-              <template slot="option" slot-scope="scope">
-                <div v-if="!scope.option.isTag" class="option__desc">
-                  <input class="mx-2" type="checkbox" :checked="isChecked(scope.option)" @focus.prevent
-                    :key="scope.option.keyword" />
-                  <span class="option__title">{{ scope.option.keyword }}</span>
-                </div>
-                <div v-if="scope.option.isTag" class="option__desc">
-                  <span class="option__title">{{ scope.option.label }}</span>
-                </div>
-              </template>
-              <span slot="maxElements">
-                Máximo de 6 opções selecionadas. Remova ao menos uma palavra-chave.
-              </span>
-              <span slot="noResult">
-                Nenhuma palavra-chave encontrada.
-              </span>
-            </multiselect>
-            <span v-if="isTouchedKeywords && !keywordsSelected.length" class="input-error-span">
-              Escolha no mínimo uma palavra-chave
-            </span>
-          </div>
-          
-          <div role="group" class="group">
             <label for="subarea" class="input-label">
-              Áreas e Subáreas do conhecimento
+              Área e Subáreas do conhecimento
             </label>
             <multiselect id="subarea" v-model="subareasSelected" :options="subareas" track-by="subareaid"
               label="description" :multiple="true" openDirection="bottom" :placeholder="multiSelectPlaceholderSubarea"
@@ -85,8 +51,49 @@
             <span v-if="isTouchedSubareas && !subareasSelected.length" class="input-error-span">
               Escolha no mínimo uma subárea
             </span>
-          </div>
+          </div>          
+
+          <div role="group" class="group">
+            <div class="label-flex-box">
+              <label for="keywords" class="input-label">
+                Palavras-chave <font-awesome-icon icon="fa-solid fa-circle-info" role="button" v-on:click="keywordAlertShow = !keywordAlertShow"/>
+              </label>
+              <b-alert dismissible :show="keywordAlertShow" variant="warning">
+                Palavras-chave conectam sua disciplina ao público externo.
+                Por isso, utilize termos simples e de fácil entendimento.
+              </b-alert>
+            </div>
+            <multiselect id="keywords" v-model="keywordsSelected" :options="keywords" track-by="keyword" label="keyword"
+              :multiple="true" openDirection="bottom" :placeholder="multiSelectPlaceholderKeyword" :searchable="true"
+              :showLabels="true" :closeOnSelect="false" :max-height="150" :max="6" :taggable=true @tag="addKeyword"
+              @input="sortKeywordMultiselectLabels()" selectLabel="" deselectLabel="" selectedLabel=""
+              @open="multiSelectPlaceholder = 'Pesquisar'" tag-placeholder="Criar palavra-chave"
+              @close="isTouchedKeywords = true; multiSelectPlaceholder = 'Selecione'" :loading="isLoadingKeywords"
+              class="input-multiselect" :disabled="isLoadingKeywords || operacao === 'visualizar'"
+              :class="(isTouchedKeywords && !keywordsSelected.length) ? 'input-multiselect-error' : 'input-multiselect-focus'">
+              <template slot="option" slot-scope="scope">
+                <div v-if="!scope.option.isTag" class="option__desc">
+                  <input class="mx-2" type="checkbox" :checked="isChecked(scope.option)" @focus.prevent
+                    :key="scope.option.keyword" />
+                  <span class="option__title">{{ scope.option.keyword }}</span>
+                </div>
+                <div v-if="scope.option.isTag" class="option__desc">
+                  <span class="option__title">{{ scope.option.label }}</span>
+                </div>
+              </template>
+              <span slot="maxElements">
+                Máximo de 6 opções selecionadas. Remova ao menos uma palavra-chave.
+              </span>
+              <span slot="noResult">
+                Nenhuma palavra-chave encontrada.
+              </span>
+            </multiselect>
+            <span v-if="isTouchedKeywords && !keywordsSelected.length" class="input-error-span">
+              Escolha no mínimo uma palavra-chave
+            </span>
+          </div>          
         </div>
+
         <div class="form-col-2">
           <div role="group" class="group">
             <div class=label-flex-box>
