@@ -27,6 +27,7 @@ export default {
       isTouchedKeywords: false,
       isTouchedProfessors: false,
       isTouchedSubareas: false,
+      keywordAlertShow: false,
       operacao: this.$route.path.split('/', 3)[2],
       keywordsSelected: [],
       subareasSelected: [],
