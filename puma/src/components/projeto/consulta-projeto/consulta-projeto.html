@@ -1,12 +1,12 @@
 <div class="main-content hidden-scroll-bar">
-    <div class="title ml-4">
+    <div class="title">
       {{
         operacao === 'meus-projetos' ?
           'Meus Projetos' : (operacao === 'projetos' ? 'Projetos' : 'Projetos das Disciplinas')
       }}
     </div>
 
-    <div v-if="projects.length" class="title sub-title ml-4 mb-4">
+    <div v-if="projects.length" class="title sub-title mb-4">
       {{
         'Projetos ' + (operacao === 'meus-projetos' ?
           'cadastrados pelo usuário' : (operacao === 'projetos' ?
@@ -14,7 +14,7 @@
       }}
     </div>
 
-    <div class="ml-4 input-group">
+    <div class="input-group">
         <input
             v-model="projectSearch"
             type="text"
@@ -26,14 +26,16 @@
     
     <div v-if="operacao === 'meus-projetos'">
         <button
-            class="btn cd-btn ml-4 my-3"
+            class="btn cd-btn my-3"
             onclick="window.location.href = '/meus-projetos/cadastrar'">
             <em class="fa-solid fa-plus-square mr-2 add-project"></em>Criar Projeto
         </button>
     </div>
 
-    <ListaConsultaProjeto
+    <div class="tabelas">
+      <ListaConsultaProjeto
         :operacao="operacao"
         :dataProjects="projects"
         :projectSearch="projectSearch"/>
+    </div>
 </div>

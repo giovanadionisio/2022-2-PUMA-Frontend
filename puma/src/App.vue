@@ -65,7 +65,7 @@ html, body {
   top: 0;
   width: calc(100% - 250px);
   margin-left: 250px;
-  padding: 30px 10px;
+  padding: 30px 25px;
   margin-bottom: 50px;
   min-width: 350px;
 }
@@ -76,8 +76,7 @@ html, body {
     position: relative;
     top: 0;
     width: 100%;
-    margin-left: 0em;
-    padding: 30px 10px 30px 0px;
+    margin-left: 0px;
     margin-bottom: 50px;
   }
 }

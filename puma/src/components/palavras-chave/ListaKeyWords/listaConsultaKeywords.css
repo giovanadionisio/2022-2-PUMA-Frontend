@@ -1,7 +1,6 @@
 table {
 	width: 100%;
 	max-width: 1500px;
-	border-spacing: 10px;
 	border-collapse: separate;
 }
   
@@ -9,6 +8,7 @@ th {
 	font-size: 25px;
 	color: #15355e;
 	font-weight: bold;
+	padding: 0px 0.75rem 0.75rem 0px;
 }
 
 td {
@@ -16,6 +16,7 @@ td {
 	width: 30%;
 	text-align: start;
 	min-width: 200px;
+	padding: 0.75rem 0.75rem 0.75rem 0px;
 }
   
 table > :first-child {
@@ -77,7 +78,7 @@ tr > :first-child {
 }
 
 .kw-invalid {
-	border: 2px solid #EB0600;
+	border: 1px solid #EB0600;
 }
 
 .kw-error {
@@ -100,7 +101,7 @@ tr > :first-child {
 }
 
 .custom-input {
-	border: 2px solid #15355E;
+	border: 1px solid #15355E;
 	height: 42px;
 }
 
@@ -124,7 +125,7 @@ tr > :first-child {
 .kw-btn-confirm {
 	align-items: center;
 	background-color: #f7db36;
-	border: 2px solid #f7db36;
+	border: 1px solid #f7db36;
 	color: #15355e;
 	border-radius: 5px;
 	padding: 5px;
@@ -155,7 +156,7 @@ tr > :first-child {
 
 .kw-btn-crud-cancel {
 	align-items: center;
-	border: 2px solid #f7db36;
+	border: 1px solid #f7db36;
 	border-radius: 5px;
 	padding: 5px;
 	font-size: 22px;
@@ -189,7 +190,7 @@ tr > :first-child {
 	align-items: center;
 	background-color: #EB0600;
 	color: white;
-	border: 2px solid #EB0600;
+	border: 1px solid #EB0600;
 	border-radius: 5px;
 	padding: 5px;
 	font-size: 24px;
@@ -197,19 +198,18 @@ tr > :first-child {
 	transition: 0.1s;
 	width: 196.7px;
 	letter-spacing: 0.03em;
-	text-transform: uppercase;
 }
 
 .kw-btn-delete:focus {
 	color: white;
 	background-color: #EB0600;
-	border: 2px solid #EB0600;
+	border: 1px solid #EB0600;
 }
 
 .kw-btn-delete:active {
 	color: white;
 	background-color: #a30602;
-	border: 2px solid #EB0600;
+	border: 1px solid #EB0600;
 }
 
 .divFooter {
@@ -222,6 +222,5 @@ tr > :first-child {
 .no-results {
   color: #15355e;
   font-size: 16px;
-  margin-left: 0.6em;
   width: max-content;
 }
