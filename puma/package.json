@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "start": "npm run serve"
+    "serve": "export NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service serve",
+    "build": "export NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service build",
+    "lint": "export NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service lint",
+    "start": "sudo npm run serve"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.1.1",
@@ -18,6 +18,7 @@
     "axios": "^0.21.4",
     "bootstrap": "^4.5.3",
     "bootstrap-vue": "^2.21.2",
+    "caniuse-lite": "^1.0.30001439",
     "core-js": "^3.6.5",
     "dotenv": "^10.0.0",
     "font-awesome": "^4.7.0",
